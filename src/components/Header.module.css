@@ -1,4 +1,4 @@
-.app-header {
+.app_header {
     grid-column-start: 1;
     grid-column-end: 3;
     padding: 20px;
@@ -6,7 +6,7 @@
     margin-top: 10px;
   }
   
-  .app-header img {
+  .app_header img {
     filter: brightness(20);
   }
   
