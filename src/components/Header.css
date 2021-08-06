@@ -1,0 +1,12 @@
+.app-header {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding: 20px;
+    background-color: #4c6dc1;
+    margin-top: 10px;
+  }
+  
+  .app-header img {
+    filter: brightness(20);
+  }
+  

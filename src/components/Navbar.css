@@ -1,0 +1,28 @@
+.app-navbar {
+    padding: 20px;
+    background-color: #4c6dc1;
+    min-height: 80vh;
+  }
+  
+  .app-navbar ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .app-navbar li {
+    display: block;
+    margin: 3px 0;
+  }
+  
+  .app-navbar a {
+    display: block;
+    padding: 5px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  
+  .app-navbar a:hover {
+    text-decoration: underline;
+  }
+  
