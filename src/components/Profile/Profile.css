@@ -1,0 +1,45 @@
+.main-image img {
+  width: 100%;
+  object-fit: cover; 
+  margin-top: -50px;
+}
+
+.main-image {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+
+
+.user-profile__img {
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+
+  margin-top: 10px;
+}
+
+.user-profile__info {
+  list-style: none;
+  font-size: 16px;
+}
+
+.user-profile__info li {
+  margin: 10px 0;
+}
+
+.user-info__name {
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  margin: 10px 0 20px;
+  margin-left: 20px;
+}
+

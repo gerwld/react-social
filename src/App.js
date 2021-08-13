@@ -1,19 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header';
-import Navbar from './components/Navbar';
-import Profile from './components/Profile';
+import Header from './components/Header/Header';
+import Navbar from './components/Navbar/Navbar';
+import Profile from './components/Profile/Profile';
+import Dialogs from './components/Dialogs/Dialogs';
+import { Route, BrowserRouter } from 'react-router-dom';
 
-const App = () => {
+
+const App = (props) => {
+  
   return (
+    <BrowserRouter>
     <div className="app-wrapper">
       <Header />
       <Navbar />
       <div className="app-content">
-       <Profile />
+        <Route path="/dialogs" render={ () => <Dialogs users={props.dialogsData} messages={props.dialMessData} />} />
+        <Route path="/profile" render={ () => <Profile data={props.profileData} />} />
       </div>
     </div>
+    </BrowserRouter>
   );
 }
 

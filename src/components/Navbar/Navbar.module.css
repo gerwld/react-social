@@ -1,0 +1,49 @@
+.app_navbar {
+    padding: 20px;
+    padding-left: 15px;
+    background-color: #4c6dc1;
+    height: 600px;
+    border-radius: 5px;
+  }
+  
+  .app_navbar ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .app_navbar li {
+    display: inline-block;
+    display: block;
+    margin: 7px 0;
+  }
+  
+  .app_navbar a {
+    display: block;
+    position: relative;
+    padding: 5px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .app_navbar a:hover {
+    opacity: 0.87;
+  }
+  
+  .app_navbar .current::before {
+    display: inline-block;
+}
+
+.app_navbar a::before {
+  content: '';
+  position: absolute;
+  display: none;
+  width: 5px;
+  height: 5px;
+  bottom: 11px;
+  left: -5px;
+  background-color: #e3e3e3;
+  opacity: 30%;
+  border-radius: 50%;
+}
