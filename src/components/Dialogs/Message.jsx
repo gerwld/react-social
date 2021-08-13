@@ -2,9 +2,11 @@ import s from './Dialogs.module.css';
 import avatar from '../../img/avatar.jpg';
 import avatar2 from '../../img/avatar-2.jpg';
 
+let avatars = [avatar, avatar2];
+
 const Message = (props) => {
-    let userPic = props.userid == 1 ? avatar2 : avatar;
-    const userdata = props.userdata ? props.userdata : "John Doe";
+    let userPic = avatars[props.userid];
+    const userdata = props.userdata ? props.userdata : "Anatoly K";
     return (
         <div className={s.message}>
             <img src={userPic}></img>

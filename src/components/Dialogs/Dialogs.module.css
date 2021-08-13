@@ -40,11 +40,18 @@ span.title {
     border-right: 2px solid #dcdbdb;
 }
 
-.userlist li {
+.userlist li a {
+    display: block;
     position: relative;
     padding: 30px;
     padding-left: 65px;
-    cursor: pointer;
+    color: black;
+    text-decoration: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.userlist li {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
@@ -53,7 +60,7 @@ span.title {
     background-color: #f7f7f7;
 }
 
-.userlist li::before {
+.userlist a::before {
     content: '';
     display: block;
     position: absolute;
@@ -79,6 +86,10 @@ width: 45px;
     margin-bottom: 30px;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+.message:last-of-type {
+    padding-bottom:40px;
 }
 
 .message_content {

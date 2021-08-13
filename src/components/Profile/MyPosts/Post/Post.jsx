@@ -1,6 +1,7 @@
 import s from './Post.module.css';
 import avatar from '../../../../img/avatar.jpg';
 
+
 const Post = (props) => {
     // likes counter check
     let likes = props.likes ? props.likes : "0";

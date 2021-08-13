@@ -38,8 +38,9 @@
 }
 
 .app-wrapper {
-  max-width: 1200px;
-  padding: 0 50px;
+  width: 1200px;
+  padding: 0 20px;
+  padding-left: calc(100vw - 100% + 20px);
   margin: 0 auto;
   box-sizing: content-box;
   display: grid;
@@ -48,5 +49,5 @@
 }
 
 .app-content {
-  /* margin-top: 10px; */
+  
 }
