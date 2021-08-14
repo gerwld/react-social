@@ -1,6 +1,7 @@
 import s from './Dialogs.module.css';
 import Message from './Message';
 import { NavLink } from 'react-router-dom';
+import React from 'react';
 
 const DialogItem = (props) => {
     return (
@@ -12,6 +13,12 @@ const Dialogs = (props) => {
 
     let dialogItems = props.users.map(user => <DialogItem name={user.name} id={user.id} />);
     let messageItems = props.messages.map(m => <Message content={m.m} userdata={m.userdata} userid={m.userid} />);
+
+    let currentMessage = React.createRef();
+    let sendMessage = (e) => {
+        e.preventDefault();
+        alert(currentMessage.current.value);
+    };
 
     return (
         <div>
@@ -26,8 +33,8 @@ const Dialogs = (props) => {
                         {messageItems}
                     </div>
                     <form className={s.messageInput}>
-                        <textarea></textarea>
-                        <input type="submit" value="Send"></input>
+                        <textarea ref={currentMessage}></textarea>
+                        <input onClick={sendMessage} type="submit" value="Send"></input>
                     </form>
                 </div>
             </div>
