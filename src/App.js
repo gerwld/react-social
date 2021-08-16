@@ -8,14 +8,14 @@ import { Route } from 'react-router-dom';
 
 
 const App = (props) => {
-  console.log(props.appState.dialMessData);
   return (
     <div className="app-wrapper">
       <Header />
       <Navbar />
       <div className="app-content">
-        <Route path="/dialogs" render={() => <Dialogs users={props.appState.messagePage.dialogsData} messages={props.appState.messagePage.messagesData} />} />
-        <Route path="/profile" render={() => <Profile data={props.appState.profilePage.postData} />} />
+        <Route path="/dialogs" render={() => <Dialogs messagePage={props.state.messagePage}/>} />
+        <Route path="/profile" render={() => <Profile profilePage={props.state.profilePage}
+                                                      dispatch={props.dispatch}/>} />
       </div>
     </div>
   );

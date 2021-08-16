@@ -10,9 +10,9 @@ const DialogItem = (props) => {
 };
 
 const Dialogs = (props) => {
-
-    let dialogItems = props.users.map(user => <DialogItem name={user.name} id={user.id} />);
-    let messageItems = props.messages.map(m => <Message content={m.m} userdata={m.userdata} userid={m.userid} />);
+    let messageData = props.messagePage;
+    let dialogItems = messageData.dialogsData.map(user => <DialogItem name={user.name} id={user.id} />);
+    let messageItems = messageData.messagesData.map(m => <Message content={m.m} userdata={m.userdata} userid={m.userid} />);
 
     let currentMessage = React.createRef();
     let sendMessage = (e) => {

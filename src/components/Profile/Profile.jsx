@@ -8,7 +8,7 @@ import avatar from '../../img/avatar.jpg';
 const Profile = (props) => {
   return (
     <div className="profile-page">
-      <div  className="main-image">
+      <div className="main-image">
         <img src={main_image}></img>
       </div>
       <div className="user-profile">
@@ -21,7 +21,7 @@ const Profile = (props) => {
           <li className="user-info__data">Web-site: habr.ru</li>
         </ul>
       </div>
-      <MyPosts data={props.data}/>
+      <MyPosts profilePage={props.profilePage} dispatch={props.dispatch} />
     </div>
   );
 };
