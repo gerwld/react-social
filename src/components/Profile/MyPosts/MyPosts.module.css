@@ -9,6 +9,10 @@
   font-weight: bold;
 }
 
+.new_post_input {
+  margin-bottom: 15px;
+}
+
 .new_post_input textarea{
   max-width: 900px;
   min-width: 900px;
@@ -22,6 +26,10 @@
   box-sizing: border-box;
   border: none;
   background-color:#f0f0f0;
+}
+
+.new_post_input textarea::placeholder {
+  font-size: 16px;
 }
 
 .new_post_input input[type="submit"] {
@@ -38,5 +46,5 @@
 .user_posts__last {
   display: flex;
   flex-direction: column-reverse;
+  overflow-wrap: break-word;
 }
-

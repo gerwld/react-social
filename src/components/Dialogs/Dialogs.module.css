@@ -88,8 +88,8 @@ width: 45px;
     align-items: flex-start;
 }
 
-.message:last-of-type {
-    padding-bottom:40px;
+.end_dial {
+    padding-top: 10px;
 }
 
 .message_content {
@@ -154,4 +154,8 @@ width: 45px;
 .messageInput textarea:focus {
     background-color: #ffffff;
     outline: none;
+}
+
+.messageInput textarea::placeholder {
+    font-size: 16px;
 }
