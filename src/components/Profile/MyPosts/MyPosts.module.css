@@ -9,6 +9,10 @@
   font-weight: bold;
 }
 
+.new_post_input {
+  margin-bottom: 15px;
+}
+
 .new_post_input textarea{
   max-width: 900px;
   min-width: 900px;
@@ -38,5 +42,5 @@
 .user_posts__last {
   display: flex;
   flex-direction: column-reverse;
+  overflow-wrap: break-word;
 }
-

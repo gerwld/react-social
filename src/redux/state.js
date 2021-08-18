@@ -1,3 +1,8 @@
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_POST = 'ADD-POST';
+const NEW_MESSAGE_STATE = 'NEW-MESSAGE-STATE';
+const SEND_MESSAGE = 'SEND-MESSAGE';
+
 let store = {
     _state: {
         profilePage: {
@@ -33,8 +38,8 @@ let store = {
                 { m: "Right.", userid: "0" },
                 { m: "I'm playing in it for like ~30 hours without even one break.", userid: "0" },
                 { m: "And i guess its the best game i've ever seen", userid: "0" },
-
-            ]
+            ],
+            newMessageText: ''
         }
     },
     dispatch(action) {
@@ -50,8 +55,20 @@ let store = {
             this._state.profilePage.newPostText = action.newText;
             this._callRendSubscriber(this._state);
         }
+        else if (action.type === 'NEW-MESSAGE-STATE') {
+            this._state.messagePage.newMessageText = action.currentValue;
+        }
+        else if (action.type = 'SEND-MESSAGE') {
+            let message = this._state.messagePage.newMessageText;
+            if (message !== '' && message !== ' ') {
+                let allDialog = this._state.messagePage.messagesData;
+                let newMessage = { m: message, userid: action.userID }
+                allDialog.push(newMessage);
+                this._state.messagePage.newMessageText = '';
+                this._callRendSubscriber(this._state);
+            }
+        }
     },
-
     getState() {
         return this._state;
     },
@@ -63,10 +80,18 @@ let store = {
     }
 }
 
+export const updateTextActionCreator = (newText) => ({ type: UPDATE_NEW_POST_TEXT, newText: newText });
+
+export const addPostActionCreator = () => ({ type: ADD_POST })
+
+export const dialogsTextActionCreator = (value) => ({ type: NEW_MESSAGE_STATE, currentValue: value });
+
+export const sendMessageActionCreator = (userID) => ({ type: SEND_MESSAGE, userID: userID });
+
 window.state = store._state;
 
 // subscribe(observer) -
-//функция колбек чтобы не создавать циклических импортов (с state в index)
+//функция колбек чтобы не создавать циклических импортов (со state в index)
 //задай в параметр новое значение для renderEntireTree файла state.js
 
 

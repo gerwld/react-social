@@ -45,3 +45,8 @@
     filter: saturate(0)
             brightness(1.5);
   }
+
+
+.post_content span:first-of-type {
+  line-height: 140%;
+}
