@@ -27,8 +27,8 @@ const Dialogs = (props) => {
         currentMessage.current.value = '';
     };
 
-    let newMessageStateSaver = () => {
-        let text = currentMessage.current.value;
+    let newMessageStateSaver = (e) => {
+        let text = e.target.value;
         props.dispatch(dialogsTextActionCreator(text));
     };
 
@@ -53,7 +53,7 @@ const Dialogs = (props) => {
                         <div ref={dialogBox} className={s.end_dial}/>
                     </div>
                     <form className={s.messageInput}>
-                        <textarea ref={currentMessage} onChange={newMessageStateSaver}></textarea>
+                        <textarea ref={currentMessage} onChange={newMessageStateSaver} placeholder="Enter your message..."></textarea>
                         <input onClick={sendMessage} type="submit" value="Send"></input>
                     </form>
                 </div>

@@ -11,9 +11,11 @@ const MyPosts = (props) => {
   let addPost = (e) => {
     e.preventDefault();
     props.dispatch(addPostActionCreator());
+    currentPost.current.value = '';
   }
-  let onPostChange = () => {
-    props.dispatch(updateTextActionCreator(currentPost.current.value));
+  let onPostChange = (e) => {
+    let postText = e.target.value;
+    props.dispatch(updateTextActionCreator(postText));
     console.log("I re-render dat stuff rn bruh");
   }
 
@@ -21,8 +23,8 @@ const MyPosts = (props) => {
     <div className={s.user_posts}>
       <span className={s.title}>My Posts</span>
       <form className={s.new_post_input}>
-        <textarea ref={currentPost} value={postsData.newPostText}
-          onChange={onPostChange}></textarea>
+        <textarea ref={currentPost}
+          onChange={onPostChange} placeholder="What's happening?"></textarea>
         <input onClick={addPost} type="submit" value="Send"></input>
       </form>
       <div className={s.user_posts__last}>

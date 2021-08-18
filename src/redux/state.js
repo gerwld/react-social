@@ -11,7 +11,7 @@ let store = {
                 { id: 1, cont: "Deez nuts... Today everything is fine, just vibing with my famity #coolday", likes: 28 },
                 { id: 0, cont: "Hi there!! 2007 is rock!", likes: 23 }
             ],
-            newPostText: "What's happening?"
+            newPostText: ""
         },
 
         messagePage: {
@@ -60,7 +60,7 @@ let store = {
         }
         else if (action.type = 'SEND-MESSAGE') {
             let message = this._state.messagePage.newMessageText;
-            if (message !== '' && message !== ' ') {
+            if (message !== '' && message !== '\n' && message !== '\n\n') {
                 let allDialog = this._state.messagePage.messagesData;
                 let newMessage = { m: message, userid: action.userID }
                 allDialog.push(newMessage);

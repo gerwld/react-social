@@ -28,6 +28,10 @@
   background-color:#f0f0f0;
 }
 
+.new_post_input textarea::placeholder {
+  font-size: 16px;
+}
+
 .new_post_input input[type="submit"] {
   display: block;
   padding: 15px;
