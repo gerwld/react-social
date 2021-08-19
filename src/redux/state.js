@@ -1,7 +1,11 @@
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_POST = 'ADD-POST';
+import profileReducer from "./profile-reducer";
+import dialogsReducer from './dialogs-reducer';
+import sidebarReducer from './navbar-reducer';
+
 const NEW_MESSAGE_STATE = 'NEW-MESSAGE-STATE';
 const SEND_MESSAGE = 'SEND-MESSAGE';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_POST = 'ADD-POST';
 
 let store = {
     _state: {
@@ -40,34 +44,15 @@ let store = {
                 { m: "And i guess its the best game i've ever seen", userid: "0" },
             ],
             newMessageText: ''
-        }
+        },
+        sidebar: {}
     },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let allPosts = this._state.profilePage.postData;
-            let newPost = { id: allPosts.length++, cont: this._state.profilePage.newPostText, likes: 0 };
-            allPosts.push(newPost);
-            this._state.profilePage.newPostText = "";
-            //Re-render
-            this._callRendSubscriber(this._state);
-        }
-        else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._callRendSubscriber(this._state);
-        }
-        else if (action.type === 'NEW-MESSAGE-STATE') {
-            this._state.messagePage.newMessageText = action.currentValue;
-        }
-        else if (action.type = 'SEND-MESSAGE') {
-            let message = this._state.messagePage.newMessageText;
-            if (message !== '' && message !== '\n' && message !== '\n\n') {
-                let allDialog = this._state.messagePage.messagesData;
-                let newMessage = { m: message, userid: action.userID }
-                allDialog.push(newMessage);
-                this._state.messagePage.newMessageText = '';
-                this._callRendSubscriber(this._state);
-            }
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.messagePage = dialogsReducer(this._state.messagePage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+
+        this._callRendSubscriber(this._state);
     },
     getState() {
         return this._state;
