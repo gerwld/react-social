@@ -16,7 +16,6 @@ const MyPosts = (props) => {
   let onPostChange = (e) => {
     let postText = e.target.value;
     props.dispatch(updateTextActionCreator(postText));
-    console.log("I re-render dat stuff rn bruh");
   }
 
   return (
