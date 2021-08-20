@@ -1,60 +1,35 @@
 import s from './Dialogs.module.css';
-import Message from './Message';
-import { NavLink } from 'react-router-dom';
-import React, { useEffect, useRef } from 'react';
-import { dialogsTextActionCreator, sendMessageActionCreator } from '../../redux/state';
+import React, { useEffect } from 'react';
 
-
-//микрокомпонента для отрисовки 1 юзера
-const DialogItem = (props) => {
-    return <li key="1"><NavLink to={"/dialogs/id" + props.id} activeClassName={s.selected_item}>{props.name}</NavLink></li>
-};
 
 const Dialogs = (props) => {
-    //часть даты ответственная за dialogs
-    let messageData = props.messagePage;
-
-    // маппинг даты со стейта в компоненты
-    let dialogItems = messageData.dialogsData.map(user => <DialogItem name={user.name} id={user.id} />);
-    let messageItems = messageData.messagesData.map(m => <Message content={m.m} userdata={m.userdata} userid={m.userid} />);
 
     //реф на textarea
     let currentMessage = React.createRef();
-
-    let sendMessage = (e) => {
-        e.preventDefault();
-        props.dispatch(sendMessageActionCreator('0'));
-        currentMessage.current.value = '';
-    };
-
-    let newMessageStateSaver = (e) => {
-        let text = e.target.value;
-        props.dispatch(dialogsTextActionCreator(text));
-    };
+    let endDial = React.createRef();
 
     //скролл вниз при отправке месседжа
-    let dialogBox = React.useRef(null);
     const scrollToBottom = () => {
-        dialogBox.current.scrollIntoView({ behavior: "smooth" })
-      }
-    useEffect(scrollToBottom, [messageItems]);
+        endDial.current.scrollIntoView({ behavior: "smooth" })
+    }
+    useEffect(scrollToBottom, [props.dialogMap]);
 
     return (
         <div>
             <span className={s.title}>Dialogs</span>
             <div className={s.dialogs_frame}>
                 <ul className={s.userlist}>
-                    {dialogItems}
+                    {props.usersMap}
 
                 </ul>
                 <div className={s.dialog_window}>
                     <div>
-                        {messageItems}
-                        <div ref={dialogBox} className={s.end_dial}/>
+                        {props.dialogMap}
+                        <div ref={endDial} className={s.end_dial} />
                     </div>
                     <form className={s.messageInput}>
-                        <textarea ref={currentMessage} onChange={newMessageStateSaver} placeholder="Enter your message..."></textarea>
-                        <input onClick={sendMessage} type="submit" value="Send"></input>
+                        <textarea ref={currentMessage} onChange={e => props.onInputValue(e)} placeholder="Enter your message..."></textarea>
+                        <input onClick={(e) => { props.onSend(e, currentMessage) }} type="submit" value="Send"></input>
                     </form>
                 </div>
             </div>
