@@ -21,7 +21,7 @@ const Profile = (props) => {
           <li className="user-info__data">Web-site: habr.ru</li>
         </ul>
       </div>
-      <MyPostsContainer store={props.store}/>
+      <MyPostsContainer />
     </div>
   );
 };
