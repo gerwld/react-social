@@ -7,16 +7,14 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import { Route } from 'react-router-dom';
 
 
-
 const App = (props) => {
   return (
     <div className="app-wrapper">
       <Header />
       <Navbar />
       <div className="app-content">
-        <Route path="/dialogs" render={() => <DialogsContainer store={props.store} messagePage={props.state.messagePage}
-                                                      dispatch={props.dispatch}/>} />
-        <Route path="/profile" render={() => <Profile store={props.store}/>} />
+        <Route path="/dialogs" render={() => <DialogsContainer />} />
+        <Route path="/profile" render={() => <Profile />} />
       </div>
     </div>
   );
