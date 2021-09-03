@@ -26,3 +26,7 @@ const MyPosts = (props) => {
 }
 
 export default MyPosts;
+
+// "What's happening?"
+
+// value={props.inputValue}
