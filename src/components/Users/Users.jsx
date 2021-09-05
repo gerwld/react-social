@@ -8,7 +8,7 @@ const Users = (props) => {
             <span className={s.title}>Friends</span>
             <div className={s.users_section}>
                 {props.users.map(u => <div key={u.id} className={s.user_block}>
-                    <div className={s.user_avatar}><img src="/img1.png"></img></div>
+                    <div className={s.user_avatar}><img src={`/images/avatars/avatar-${u.avaHash}.png`}></img></div>
                     <div class={s.user_mainInfo}>
                         <div className={s.user_name}>{u.name}</div>
                         <div className={s.user_status}>{u.status}</div>

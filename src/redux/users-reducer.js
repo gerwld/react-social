@@ -2,9 +2,9 @@ import React from 'react';
 
 let initialState = {
     users: [
-        { id: 0, followed: true, name: 'Dmitry K.', loc: 'Minsk, Belarus', status: 'Im looking for someone...' },
-        { id: 1, followed: true, name: 'Artem B.', loc: 'Ukraine, Kiev', status: 'Im looking for someone...' },
-        { id: 2, followed: true, name: 'Patryk J.', loc: 'Poland, Warsaw', status: 'Im looking for someone...' }
+        { id: 0, followed: true, name: 'Dmitry K.', loc: 'Minsk, Belarus', status: 'Im looking for someone...', avaHash: 'm14' },
+        { id: 1, followed: true, name: 'Artem B.', loc: 'Ukraine, Kiev', status: 'Im looking for someone...', avaHash: 'm15' },
+        { id: 2, followed: true, name: 'Patryk J.', loc: 'Poland, Warsaw', status: 'Im looking for someone...', avaHash: 'm1' }
     ]
 }
 

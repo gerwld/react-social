@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 let mapStateToProps = (state) => {
     return {
         usersMap: state.messagePage.dialogsData.map(user =>
-            <li key="1"><NavLink to={"/dialogs/id" + user.id} activeClassName={s.selected_item}>{user.name}</NavLink></li>),
+            <li key={user.id}><NavLink to={"/dialogs/id" + user.id} activeClassName={s.selected_item}><img src={`/images/avatars/avatar-${user.avaHash}.png`} />{user.name}</NavLink></li>),
         dialogMap: state.messagePage.messagesData.map(m =>
             <Message content={m.m} userdata={m.userdata} userid={m.userid} />)
     }

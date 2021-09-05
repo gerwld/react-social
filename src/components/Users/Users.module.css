@@ -28,6 +28,13 @@ span.title {
     height: 70px;
     background-color: #979797;
     border-radius: 5%;
+    overflow: hidden;
+   
+}
+
+.user_avatar img {
+    max-width: 100%;
+    transform: scale(1.1);
 }
 
 .user_mainInfo {
