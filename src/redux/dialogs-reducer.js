@@ -8,17 +8,21 @@ export const sendMessageActionCreator = (userID) => ({ type: SEND_MESSAGE, userI
 
 let initialState = {
     dialogsData: [
-        { id: "0", name: "Andrew K" },
-        { id: "1", name: "Anton B" },
-        { id: "2", name: "Richard M" },
-        { id: "3", name: "Sergey K" },
-        { id: "4", name: "Patrick J" },
-        { id: "5", name: "Evgenii K" },
-        { id: "6", name: "Somebody O" },
-        { id: "7", name: "Anastasia I" },
-        { id: "8", name: "Svetlana W" },
-        { id: "9", name: "Andrew K" },
-        { id: "10", name: "Andrew K" }
+        { id: "0", name: "Andrew K", avaHash: 'm1' },
+        { id: "1", name: "Anton B", avaHash: '2' },
+        { id: "2", name: "Richard M", avaHash: 'm3' },
+        { id: "3", name: "Sergey K", avaHash: 'm4' },
+        { id: "4", name: "Patrick J", avaHash: 'm5' },
+        { id: "5", name: "Evgenii K", avaHash: 'm6' },
+        { id: "6", name: "Somebody O", avaHash: 'm7' },
+        { id: "7", name: "Anastasia I", avaHash: 'f8' },
+        { id: "8", name: "Svetlana W", avaHash: 'f9' },
+        { id: "9", name: "Andrew K", avaHash: 'm10' },
+        { id: "10", name: "Cordie F", avaHash: 'f11' },
+        { id: "11", name: "Robbie M", avaHash: 'm12' },
+        { id: "12", name: "Maxime B", avaHash: 'f12' },
+        { id: "13", name: "Valentine R", avaHash: 'f13' },
+        { id: "14", name: "Linda L", avaHash: 'f14' }
     ],
     messagesData: [
         { m: "Hi there", userdata: "Anton B", userid: "1" },
