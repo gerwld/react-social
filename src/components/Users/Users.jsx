@@ -5,23 +5,20 @@ import * as axios from 'axios';
 
 const Users = (props) => {
 
-    axios.get('https://social-network.samuraijs.com/api/1.0/users')
 
-    if(props.users.length === 3) {
-    props.setUsers([
-        { id: 3, followed: true, name: 'Dmitry K.', loc: 'Minsk, Belarus', status: 'Im looking for someone...', avaHash: 'm14' },
-        { id: 4, followed: true, name: 'Artem B.', loc: 'Ukraine, Kiev', status: 'O, hi Mark', avaHash: 'm15' },
-        { id: 5, followed: true, name: 'Patryk J.', loc: 'Poland, Warsaw', status: 'Uqwemubwem Osas', avaHash: 'm1' },
-        { id: 6, followed: true, name: 'Patryk J.', loc: 'Poland, Warsaw', status: 'Uqwemubwem Osas', avaHash: 'm4' }
-    ]);
-}
+    var usersLength = props.users.length;
+    axios.get('https://social-network.samuraijs.com/api/1.0/users?count=7&page=1').then(response => {
+        if(usersLength < 10) {
+        props.setUsers(response.data.items);
+        }
+    });
 
     return (
         <div>
             <span className={s.title}>Friends</span>
             <div className={s.users_section}>
                 {props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub}`}>
-                    <div className={s.user_avatar}><img src={`/images/avatars/avatar-${u.avaHash}.png`}></img></div>
+                    <div className={s.user_avatar}><img src={u.avaHash ? (`/images/avatars/avatar-${u.avaHash}.png`) : (`/images/avatars/def-avatar.png`)}></img></div>
                     <div class={s.user_mainInfo}>
                         <div className={s.user_name}>{u.name}</div>
                         <div className={s.user_status}>{u.status}</div>
