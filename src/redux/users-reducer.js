@@ -3,7 +3,7 @@ import React from 'react';
 let initialState = {
     users: [
         { id: 0, followed: true, name: 'Dmitry K.', loc: 'Minsk, Belarus', status: 'Im looking for someone...', avaHash: 'm14' },
-        { id: 1, followed: true, name: 'Artem B.', loc: 'Ukraine, Kiev', status: 'O, hi Mark', avaHash: 'm15' },
+        { id: 1, followed: true, name: 'Anton B.', loc: 'Ukraine, Kiev', status: 'O, hi Mark', avaHash: '2' },
         { id: 2, followed: true, name: 'Patryk J.', loc: 'Poland, Warsaw', status: 'Uqwemubwem Osas', avaHash: 'm1' }
     ]
 }

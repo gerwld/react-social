@@ -1,7 +1,11 @@
 import React from 'react';
 import s from './Users.module.css';
+import { NavLink } from 'react-router-dom';
+import * as axios from 'axios';
 
 const Users = (props) => {
+
+    axios.get('https://social-network.samuraijs.com/api/1.0/users')
 
     if(props.users.length === 3) {
     props.setUsers([
@@ -21,7 +25,7 @@ const Users = (props) => {
                     <div class={s.user_mainInfo}>
                         <div className={s.user_name}>{u.name}</div>
                         <div className={s.user_status}>{u.status}</div>
-                        <div className={`${s.action_buttons} ${s.main_actions}`}><a>Write a message</a> | <a>Call</a></div>
+                        <div className={`${s.action_buttons} ${s.main_actions}`}><NavLink to={`/dialogs/id${u.id}`}>Write a message</NavLink> | <a>Call</a></div>
                     </div>
                     <div className={s.user_location}>{u.loc}</div>
                     <div className={`${s.action_buttons} ${s.action_user_btn}`}>
