@@ -18,7 +18,11 @@ let initialState = {
         { id: "7", name: "Anastasia I", avaHash: 'f8' },
         { id: "8", name: "Svetlana W", avaHash: 'f9' },
         { id: "9", name: "Andrew K", avaHash: 'm10' },
-        { id: "10", name: "Andrew M", avaHash: 'm11' }
+        { id: "10", name: "Cordie F", avaHash: 'f11' },
+        { id: "11", name: "Robbie M", avaHash: 'm12' },
+        { id: "12", name: "Maxime B", avaHash: 'f12' },
+        { id: "13", name: "Valentine R", avaHash: 'f13' },
+        { id: "14", name: "Linda L", avaHash: 'f14' }
     ],
     messagesData: [
         { m: "Hi there", userdata: "Anton B", userid: "1" },
