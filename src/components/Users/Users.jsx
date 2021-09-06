@@ -5,13 +5,12 @@ import * as axios from 'axios';
 
 const Users = (props) => {
 
-
-    var usersLength = props.users.length;
-    axios.get('https://social-network.samuraijs.com/api/1.0/users?count=7&page=1').then(response => {
-        if(usersLength < 10) {
-        props.setUsers(response.data.items);
-        }
-    });
+    var loadUsers = () => {
+        var usersLength = props.users.length;
+        axios.get('https://social-network.samuraijs.com/api/1.0/users?count=4&page=1').then(response => {
+                props.setUsers(response.data.items);
+        });
+    }
 
     return (
         <div>
@@ -28,8 +27,9 @@ const Users = (props) => {
                     <div className={`${s.action_buttons} ${s.action_user_btn}`}>
                         <a onClick={() => props.unfollowUser(u.id)}>{u.followed ? "Unsubscribe" : "Subscribe"}</a>
                         <a>Block user</a><a>Add to list</a></div>
-                    
+
                 </div>)}
+                <button onClick={loadUsers} className={s.btn_load}>Load more...</button>
             </div>
         </div>
     )
