@@ -5,7 +5,14 @@ import * as axios from 'axios';
 
 class Users extends React.Component {
 
-    getUsers = () => {
+    constructor(props) {
+        super(props);
+        if(props.users.length < 4) {
+           this.getUsers();
+        }
+    }
+
+    getUsers() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users?count=4&page=1').then(response => {
             this.props.setUsers(response.data.items);
         });
