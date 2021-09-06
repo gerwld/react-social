@@ -4,7 +4,7 @@ let initialState = {
     users: [
         { id: 0, followed: true, name: 'Andrew K.', loc: 'Minsk, Belarus', status: 'Im looking for someone...', avaHash: 'm1' },
         { id: 1, followed: true, name: 'Anton B.', loc: 'Ukraine, Kiev', status: 'O, hi Mark', avaHash: '2' },
-        { id: 2, followed: true, name: 'Anton B.', loc: 'Poland, Warsaw', status: 'Uqwemubwem Osas', avaHash: 'm6' }
+        { id: 2, followed: true, name: 'Richard M.', loc: 'Poland, Warsaw', status: 'Uqwemubwem Osas', avaHash: 'm6' }
     ]
 }
 
