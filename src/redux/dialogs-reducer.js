@@ -10,7 +10,7 @@ let initialState = {
     dialogsData: [
         { id: "0", name: "Andrew K", avaHash: 'm1' },
         { id: "1", name: "Anton B", avaHash: '2' },
-        { id: "2", name: "Richard M", avaHash: 'm3' },
+        { id: "2", name: "Richard M", avaHash: 'm6' },
         { id: "3", name: "Sergey K", avaHash: 'm4' },
         { id: "4", name: "Patrick J", avaHash: 'm5' },
         { id: "5", name: "Evgenii K", avaHash: 'm6' },
