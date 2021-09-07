@@ -5,7 +5,8 @@ let initialState = {
         { id: 0, followed: true, name: 'Andrew K.', loc: 'Minsk, Belarus', status: 'Im looking for someone...', avaHash: 'm1' },
         { id: 1, followed: true, name: 'Anton B.', loc: 'Ukraine, Kiev', status: 'O, hi Mark', avaHash: '2' },
         { id: 2, followed: true, name: 'Richard M.', loc: 'Poland, Warsaw', status: 'Uqwemubwem Osas', avaHash: 'm6' }
-    ]
+    ],
+    totalUsers: 3
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -28,6 +29,12 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: [...state.users, ...action.users] 
             }
+        case TOTAL_COUNT: 
+            return {
+                ...state,
+                totalUsers: (state.totalUsers + action.totalCount - 14000)
+            }
+
         default:
             return state;
     }
@@ -35,9 +42,11 @@ const usersReducer = (state = initialState, action) => {
 
 const FOLLOW = 'FOLLOW';
 const SET_USERS = 'SET_USERS';
+const TOTAL_COUNT = 'TOTAL_COUNT';
 
 export const unfollowAC = (id) => ({ type: FOLLOW, userId: id });
 export const setUsersAC = (users) => ({ type: SET_USERS, users });
+export const totalCountAC = (totalCount) => ({type: TOTAL_COUNT, totalCount});
 
 
 export default usersReducer;

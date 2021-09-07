@@ -7,21 +7,22 @@ class Users extends React.Component {
 
     constructor(props) {
         super(props);
-        if(props.users.length < 4) {
-           this.getUsers();
+        if (props.users.length < 4) {
+            this.getUsers();
         }
     }
 
     getUsers = () => {
         axios.get('https://social-network.samuraijs.com/api/1.0/users?count=4').then(response => {
             this.props.setUsers(response.data.items);
+            this.props.countOfUsers(response.data.totalCount);
         });
     }
 
     render() {
         return (
             <div>
-                <span className={s.title}>Friends</span>
+                <span className={s.title}>Friends({this.props.totalUsers})</span>
                 <div className={s.users_section}>
                     {this.props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub}`}>
                         <div className={s.user_avatar}><img src={u.avaHash ? (`/images/avatars/avatar-${u.avaHash}.png`) : (`/images/avatars/def-avatar.png`)}></img></div>
