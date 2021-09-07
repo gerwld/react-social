@@ -149,12 +149,14 @@ span.title {
     display: block;
     margin: 0 auto;
     list-style: none;
+    user-select: none;
 }
 
 .pagination li {
     display: inline-block;
     margin: 0 5px;
     cursor: pointer;
+    user-select: none;
 }
 
 .currentPage {
