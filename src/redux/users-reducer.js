@@ -32,7 +32,7 @@ const usersReducer = (state = initialState, action) => {
         case TOTAL_COUNT: 
             return {
                 ...state,
-                totalUsers: (state.totalUsers + action.totalCount - 14000)
+                totalUsers: (3 + action.totalCount - 14000)
             }
 
         default:
