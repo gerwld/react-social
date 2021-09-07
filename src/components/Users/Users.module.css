@@ -139,3 +139,24 @@ span.title {
 .btn_load:hover {
     background-color: #4461ac;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination ul {
+    display: block;
+    margin: 0 auto;
+    list-style: none;
+}
+
+.pagination li {
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.currentPage {
+    font-weight: bold;
+}

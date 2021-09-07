@@ -12,14 +12,29 @@ class Users extends React.Component {
         }
     }
 
+    onPageChanged = (pageNumber) => {
+        this.props.setPage(pageNumber);
+         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`).then(response => {
+            this.props.setUsers(response.data.items);
+    });
+    }
+
     getUsers = () => {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users?count=4').then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`).then(response => {
             this.props.setUsers(response.data.items);
             this.props.countOfUsers(response.data.totalCount);
         });
     }
 
     render() {
+
+        let pagesCount = Math.ceil(this.props.totalUsers / this.props.pageSize);
+        let pages = [];
+        for(let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+         }
+
+         
         return (
             <div>
                 <span className={s.title}>Friends({this.props.totalUsers})</span>
@@ -37,7 +52,12 @@ class Users extends React.Component {
                             <a>Block user</a><a>Add to list</a></div>
 
                     </div>)}
-                    <button onClick={this.getUsers} className={s.btn_load}>Load more...</button>
+                    <div className={s.pagination}>
+                        <ul>
+                        {pages.map( p => <li onClick={(e) => this.onPageChanged(p)} className={this.props.currentPage === p && s.currentPage}>{p}</li>)}
+                        </ul>
+                    </div>
+                    {/* <button onClick={this.getUsers} className={s.btn_load}>Load more...</button> */}
                 </div>
             </div>
         )
