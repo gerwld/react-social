@@ -34,6 +34,7 @@
 .user-info__name {
   font-size: 23px;
   font-weight: bold;
+  text-transform: capitalize;
 }
 
 .user-profile {
@@ -43,3 +44,16 @@
   margin-left: 20px;
 }
 
+.user-info__data {
+  color: rgb(82, 82, 82);
+}
+
+.user-info__data a{
+  color: rgb(82, 82, 82);
+  text-decoration: none;
+}
+
+.user-info__data a:hover {
+  color: rgb(82, 82, 82);
+  text-decoration: underline;
+}

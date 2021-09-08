@@ -4,7 +4,7 @@ import React from 'react';
 
 
 const MyPosts = (props) => {
-  let userPosts = props.postData.map(post => <UserPost likes={post.likes} value={post.cont} />);
+  let userPosts = props.postData.map(post => <UserPost likes={post.likes} value={post.cont} profile={props.profile}/>);
   let currentPost = React.createRef();
 
   return (
