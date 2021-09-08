@@ -58,6 +58,7 @@ span.title {
     font-size: 18px;
     margin-bottom: 3px;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 .user_name a {
