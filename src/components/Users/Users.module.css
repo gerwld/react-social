@@ -60,6 +60,16 @@ span.title {
     font-weight: bold;
 }
 
+.user_name a {
+    text-decoration: none;
+    color: #000;
+}
+
+.user_name a:hover {
+    text-decoration: none;
+}
+
+
 .action_buttons {
     font-size: 14px;
     font-weight: 500;

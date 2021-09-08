@@ -6,7 +6,8 @@ import { onInputValue, onAddPost } from '../../../redux/profile-reducer';
 const mapStateToProps = (state) => {
   return {
     postData: state.profilePage.postData,
-    inputValue: state.profilePage.newPostText
+    inputValue: state.profilePage.newPostText,
+    profile: state.profilePage.profile
   }
 }
 
