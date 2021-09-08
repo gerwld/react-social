@@ -3,8 +3,8 @@ const ADD_POST = 'ADD-POST';
 
 
 //Action Creators
-export const updateTextActionCreator = (newText) => ({ type: UPDATE_NEW_POST_TEXT, newText: newText });
-export const addPostActionCreator = () => ({ type: ADD_POST })
+export const onInputValue = (newText) => ({ type: UPDATE_NEW_POST_TEXT, newText: newText });
+export const onAddPost = () => ({ type: ADD_POST })
 
 let initialState = {
     postData: [

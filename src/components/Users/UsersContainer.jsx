@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
-import { setIsFetchingAC, setPageAC, setUsersAC, totalCountAC, unfollowAC } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import { unfollowUser, setUsers, countOfUsers, setPage, toggleIsFetching} from '../../redux/users-reducer';
 
 class UsersAPIComponent extends React.Component {
 
@@ -53,26 +53,29 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        unfollowUser: (id) => {
-            dispatch(unfollowAC(id));
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users));
-        },
-        countOfUsers: (count) => {
-            dispatch(totalCountAC(count));
-        },
-        setPage: (page) => {
-            dispatch(setPageAC(page));
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(setIsFetchingAC(isFetching));
-        }
-    } 
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         unfollowUser: (id) => {
+//             dispatch(unfollowAC(id));
+//         },
+//         setUsers: (users) => {
+//             dispatch(setUsersAC(users));
+//         },
+//         countOfUsers: (count) => {
+//             dispatch(totalCountAC(count));
+//         },
+//         setPage: (page) => {
+//             dispatch(setPageAC(page));
+//         },
+//         toggleIsFetching: (isFetching) => {
+//             dispatch(setIsFetchingAC(isFetching));
+//         }
+//     } 
+// }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+// Reminder: (unfollowUser: unfollowUser) === (unfollowUser) in object
+
+
+const UsersContainer = connect(mapStateToProps, {unfollowUser, setUsers, countOfUsers, setPage, toggleIsFetching})(UsersAPIComponent);
 
 export default UsersContainer;

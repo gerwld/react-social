@@ -2,9 +2,9 @@ import s from './Dialogs.module.css';
 import Message from './Message';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
-import { dialogsTextActionCreator, sendMessageActionCreator } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
+import { onInputValue, onSend } from '../../redux/dialogs-reducer';
 
 
 let mapStateToProps = (state) => {
@@ -20,20 +20,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        onInputValue: (e) => {
-            let text = e.target.value;
-            dispatch(dialogsTextActionCreator(text));
-        },
-        onSend: (e, textInput) => {
-            e.preventDefault();
-            dispatch(sendMessageActionCreator('0'));
-            textInput.current.value = '';
-        }
-    }
-}
-
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(mapStateToProps, {onInputValue, onSend})(Dialogs);
 
 export default DialogsContainer;
