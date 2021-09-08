@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addPostActionCreator, updateTextActionCreator } from '../../../redux/profile-reducer';
 import MyPosts from './MyPosts';
+import { onInputValue, onAddPost } from '../../../redux/profile-reducer';
 
 const mapStateToProps = (state) => {
   return {
@@ -10,19 +10,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onInputValue: (text) => {
-      dispatch(updateTextActionCreator(text));
-    },
-    onAddPost: (e, textInput) => {
-      e.preventDefault();
-      dispatch(addPostActionCreator());
-      textInput.current.value = '';
-    }
-  }
-}
-
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, { onInputValue, onAddPost })(MyPosts);
 
 export default MyPostsContainer;

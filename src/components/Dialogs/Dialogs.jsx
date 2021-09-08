@@ -28,8 +28,11 @@ const Dialogs = (props) => {
                         <div ref={endDial} className={s.end_dial} />
                     </div>
                     <form className={s.messageInput}>
-                        <textarea ref={currentMessage} onChange={e => props.onInputValue(e)} placeholder="Enter your message..."></textarea>
-                        <input onClick={(e) => { props.onSend(e, currentMessage) }} type="submit" value="Send"></input>
+                        <textarea ref={currentMessage} onChange={e => props.onInputValue(e.target.value)} placeholder="Enter your message..."></textarea>
+                        <input onClick={e => {
+                            e.preventDefault();
+                            props.onSend(0);
+                            currentMessage.current.value = '';}} type="submit" value="Send"></input>
                     </form>
                 </div>
             </div>

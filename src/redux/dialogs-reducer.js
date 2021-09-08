@@ -3,8 +3,8 @@ const SEND_MESSAGE = 'SEND-MESSAGE';
 
 
 //Action Creators
-export const dialogsTextActionCreator = (value) => ({ type: NEW_MESSAGE_STATE, currentValue: value });
-export const sendMessageActionCreator = (userID) => ({ type: SEND_MESSAGE, userID: userID });
+export const onInputValue = (value) => ({ type: NEW_MESSAGE_STATE, currentValue: value });
+export const onSend = (userID) => ({ type: SEND_MESSAGE, userID });
 
 let initialState = {
     dialogsData: [
@@ -40,24 +40,24 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case NEW_MESSAGE_STATE: 
-            return { 
+        case NEW_MESSAGE_STATE:
+            return {
                 ...state,
                 newMessageText: action.currentValue
-             };
-             
-        case SEND_MESSAGE: {
-            let stateCopy = { ...state };
-            var message = stateCopy.newMessageText;
+            };
 
+        case SEND_MESSAGE: {
+            var message = state.newMessageText;
             if (message !== '' && message !== '\n' && message !== '\n\n') {
-                stateCopy.messagesData = [ ...state.messagesData, 
-                                        { m: message, userid: action.userID }];
-                stateCopy.newMessageText = '';
+                return {
+                    ...state,
+                    messagesData: [...state.messagesData,
+                        { m: message, userid: action.userID }],
+                    newMessageText: ''
+                }
             }
-            return stateCopy;
         }
-        default: 
+        default:
             return state;
     }
 }

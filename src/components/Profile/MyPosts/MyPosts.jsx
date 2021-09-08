@@ -13,7 +13,7 @@ const MyPosts = (props) => {
       <form className={s.new_post_input}>
         <textarea ref={currentPost}
           onChange={e => props.onInputValue(e.target.value)} placeholder="What's happening?"></textarea>
-        <input onClick={e => props.onAddPost(e, currentPost)} type="submit" value="Send"></input>
+        <input onClick={e => {e.preventDefault(); props.onAddPost(); currentPost.current.value = '';}} type="submit" value="Send"></input>
       </form>
       <div className={s.user_posts__last}>
 
