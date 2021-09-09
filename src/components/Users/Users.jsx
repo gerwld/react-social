@@ -4,34 +4,6 @@ import { NavLink } from 'react-router-dom';
 import axios from "axios";
 
 let Users = (props) => {
-    let pagesCount = Math.ceil(props.totalUsers / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
-
-    let followUser = (user) => {
-        if (!user.followed) {
-            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, null, {
-                withCredentials: true,
-                headers: { "API-KEY": "e9327719-2998-4837-bc53-8a9b2225f057" }
-            }).then(r => {
-                if (r.data.resultCode === 0) {
-                    props.unfollowUser(user.id);
-                }
-            })
-        } else {
-            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-                withCredentials: true,
-                headers: { "API-KEY": "e9327719-2998-4837-bc53-8a9b2225f057" }
-            }).then(r => {
-                if (r.data.resultCode === 0) {
-                    props.unfollowUser(user.id);
-                }
-            })
-        }
-
-    }
 
         return (
             <div>
@@ -51,14 +23,14 @@ let Users = (props) => {
                             </div>
                             <div className={s.user_location}>{u.loc}</div>
                             <div className={`${s.action_buttons} ${s.action_user_btn}`}>
-                                <a onClick={() => followUser(u)}>{u.followed ? "Unsubscribe" : "Subscribe"}</a>
+                                <a onClick={() => props.followUser(u)}>{u.followed ? "Unsubscribe" : "Subscribe"}</a>
                                 <a>Block user</a><a>Add to list</a></div>
 
                         </div>)
                     }
                     <div className={s.pagination}>
                         <ul>
-                            {pages.map(p => <li onClick={() => props.onPageChanged(p)} className={props.currentPage === p && s.currentPage}>{p}</li>)}
+                            {props.getPages().map(p => <li onClick={() => props.onPageChanged(p)} className={props.currentPage === p && s.currentPage}>{p}</li>)}
                         </ul>
                     </div>
                     {/* <button onClick={getUsers} className={s.btn_load}>Load more...</button> */}

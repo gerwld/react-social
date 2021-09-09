@@ -4,16 +4,17 @@ import { connect } from 'react-redux';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import { unfollowUser, setUsers, countOfUsers, setPage, toggleIsFetching} from '../../redux/users-reducer';
+import { usersAPI } from '../../api/api';
 
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
-        if (this.props.users.length < 4) {
+        if (this.props.users.length < this.props.pageSize) {
             this.props.toggleIsFetching(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`).then(response => {
+            usersAPI.getUsers(this.props.pageSize, this.props.currentPage).then(data => {
                 this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.items);
-                this.props.countOfUsers(response.data.totalCount);
+                this.props.setUsers(data.items);
+                this.props.countOfUsers(data.totalCount);
             });
         }
     }
@@ -21,23 +22,44 @@ class UsersAPIComponent extends React.Component {
     onPageChanged = (pageNumber) => {
         this.props.setPage(pageNumber);
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`).then(response => {
+        usersAPI.getUsers(this.props.pageSize, pageNumber).then(data => {
             this.props.toggleIsFetching(false);
-            this.props.setUsers(response.data.items);
+            this.props.setUsers(data.items);
         });
+    }
+
+    followUser = (user) => {
+        if (!user.followed) {
+            usersAPI.followUserRequest(user.id).then(r => {
+                r.resultCode === 0 && this.props.unfollowUser(user.id);
+            })
+        } else {
+            usersAPI.unfollowUserRequest(user.id).then(r => {
+                r.resultCode === 0 && this.props.unfollowUser(user.id);
+            })
+        }
+
+    }
+
+    getPages = () => {
+        let pagesCount = Math.ceil(this.props.totalUsers / this.props.pageSize);
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+        return pages;
     }
 
     render() {
         return (
             <>
             {this.props.isFetching && <Preloader />}
-            <Users totalUsers={this.props.totalUsers}
-                pageSize={this.props.pageSize}
+            {!this.props.isFetching && <Users totalUsers={this.props.totalUsers}
                 currentPage={this.props.currentPage}
                 onPageChanged={this.onPageChanged}
                 users={this.props.users}
-                unfollowUser={this.props.unfollowUser}
-                isFetching={this.props.isFetching} />
+                followUser={this.followUser}
+                getPages={this.getPages} />}
             </>
         )
     }
@@ -52,28 +74,6 @@ const mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching
     }
 }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         unfollowUser: (id) => {
-//             dispatch(unfollowAC(id));
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsersAC(users));
-//         },
-//         countOfUsers: (count) => {
-//             dispatch(totalCountAC(count));
-//         },
-//         setPage: (page) => {
-//             dispatch(setPageAC(page));
-//         },
-//         toggleIsFetching: (isFetching) => {
-//             dispatch(setIsFetchingAC(isFetching));
-//         }
-//     } 
-// }
-
-// Reminder: (unfollowUser: unfollowUser) === (unfollowUser) in object
 
 
 const UsersContainer = connect(mapStateToProps, {unfollowUser, setUsers, countOfUsers, setPage, toggleIsFetching})(UsersAPIComponent);
