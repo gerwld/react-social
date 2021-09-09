@@ -173,3 +173,7 @@ span.title {
 .currentPage {
     font-weight: bold;
 }
+
+.disabled_link {
+    pointer-events: none;
+}

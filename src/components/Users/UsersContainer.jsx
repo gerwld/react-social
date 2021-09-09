@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
-import Users from './Users';
-import Preloader from '../common/Preloader/Preloader';
-import { unfollowUser, setUsers, countOfUsers, setPage, toggleIsFetching} from '../../redux/users-reducer';
 import { usersAPI } from '../../api/api';
+import { countOfUsers, setPage, setUsers, toggleIsFetching, toggleIsFollowing, unfollowUser } from '../../redux/users-reducer';
+import Preloader from '../common/Preloader/Preloader';
+import Users from './Users';
 
 class UsersAPIComponent extends React.Component {
 
@@ -29,13 +28,16 @@ class UsersAPIComponent extends React.Component {
     }
 
     followUser = (user) => {
+        this.props.toggleIsFollowing(true, user.id);
         if (!user.followed) {
             usersAPI.followUserRequest(user.id).then(r => {
                 r.resultCode === 0 && this.props.unfollowUser(user.id);
+                this.props.toggleIsFollowing(false, user.id);
             })
         } else {
             usersAPI.unfollowUserRequest(user.id).then(r => {
                 r.resultCode === 0 && this.props.unfollowUser(user.id);
+                this.props.toggleIsFollowing(false, user.id);
             })
         }
 
@@ -59,7 +61,8 @@ class UsersAPIComponent extends React.Component {
                 onPageChanged={this.onPageChanged}
                 users={this.props.users}
                 followUser={this.followUser}
-                getPages={this.getPages} />}
+                getPages={this.getPages}
+                isFollowing={this.props.isFollowing} />}
             </>
         )
     }
@@ -71,11 +74,11 @@ const mapStateToProps = (state) => {
         totalUsers: state.usersPage.totalUsers,
         pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        isFollowing: state.usersPage.isFollowing
     }
 }
 
-
-const UsersContainer = connect(mapStateToProps, {unfollowUser, setUsers, countOfUsers, setPage, toggleIsFetching})(UsersAPIComponent);
+const UsersContainer = connect(mapStateToProps, {unfollowUser, setUsers, countOfUsers, setPage, toggleIsFetching, toggleIsFollowing})(UsersAPIComponent);
 
 export default UsersContainer;

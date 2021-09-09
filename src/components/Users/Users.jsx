@@ -1,10 +1,8 @@
 import React from "react";
 import s from './Users.module.css';
 import { NavLink } from 'react-router-dom';
-import axios from "axios";
 
 let Users = (props) => {
-
         return (
             <div>
                 <span className={s.title}>Friends({props.totalUsers})</span>
@@ -23,7 +21,7 @@ let Users = (props) => {
                             </div>
                             <div className={s.user_location}>{u.loc}</div>
                             <div className={`${s.action_buttons} ${s.action_user_btn}`}>
-                                <a onClick={() => props.followUser(u)}>{u.followed ? "Unsubscribe" : "Subscribe"}</a>
+                                <a className={props.isFollowing.some(id => id === u.id) && s.disabled_link} onClick={() => props.followUser(u)}>{u.followed ? "Unsubscribe" : "Subscribe"}</a>
                                 <a>Block user</a><a>Add to list</a></div>
 
                         </div>)
@@ -33,7 +31,6 @@ let Users = (props) => {
                             {props.getPages().map(p => <li onClick={() => props.onPageChanged(p)} className={props.currentPage === p && s.currentPage}>{p}</li>)}
                         </ul>
                     </div>
-                    {/* <button onClick={getUsers} className={s.btn_load}>Load more...</button> */}
                 </div>
             </div>
         )
