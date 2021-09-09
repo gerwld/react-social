@@ -28,7 +28,7 @@ let Users = (props) => {
                     }
                     <div className={s.pagination}>
                         <ul>
-                            {props.getPages().map(p => <li onClick={() => props.onPageChanged(p)} className={props.currentPage === p && s.currentPage}>{p}</li>)}
+                            {props.getPages().map(p => <li onClick={() => props.onPageChanged(p)} className={`${s.pag_element} ${props.currentPage === p ? s.currentPage : ''}`}>{p}</li>)}
                         </ul>
                     </div>
                 </div>
