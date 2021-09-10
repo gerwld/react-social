@@ -13,6 +13,7 @@
     width: 34px;
     max-width: 34px;
     height:auto;
+    max-height: 20px;
     filter: brightness(20);
   }
   

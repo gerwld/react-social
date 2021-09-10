@@ -43,8 +43,8 @@ class UsersAPIComponent extends React.Component {
 
     }
 
-    getPages = () => {
-        let pagesCount = Math.ceil(this.props.totalUsers / this.props.pageSize);
+    //with argument creates array of buttons to show, without - all pages count
+    getPages = (pagesCount = Math.ceil(this.props.totalUsers / this.props.pageSize)) => {
         let pages = [];
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i);
