@@ -7,10 +7,12 @@ let initialState = {
         // { id: 2, followed: true, name: 'Richard M.', loc: 'Poland, Warsaw', status: 'Uqwemubwem Osas', avaHash: 'm6' }
     ],
     totalUsers: 3,
+    isFetching: true,
+    isFollowing: [],
     pageSize: 6,
     currentPage: 1,
-    isFetching: true,
-    isFollowing: []
+    allPages: 1,
+    pagLength: 5
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -55,7 +57,11 @@ const usersReducer = (state = initialState, action) => {
                     ? [...state.isFollowing, action.userId] 
                     : state.isFollowing.filter(id => id != action.userId)
             }
-
+        case GET_ALL_PAGES:
+            return {
+                ...state,
+                allPages: action.pagesCount
+            }
         default:
             return state;
     }
@@ -69,6 +75,7 @@ const TOTAL_COUNT = 'TOTAL_COUNT';
 const SET_PAGE = 'SET_PAGE';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS';
+const GET_ALL_PAGES = 'GET_ALL_PAGES';
 
 export const unfollowUser = (id) => ({ type: FOLLOW, userId: id });
 export const setUsers = (users) => ({ type: SET_USERS, users });
@@ -76,6 +83,8 @@ export const countOfUsers = (totalCount) => ({ type: TOTAL_COUNT, totalCount });
 export const setPage = (page) => ({ type: SET_PAGE, page });
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 export const toggleIsFollowing = (isFetching, userId) => ({ type: FOLLOWING_IN_PROGRESS, isFetching, userId });
+export const getAllPages = (pagesCount) => ({ type: GET_ALL_PAGES, pagesCount });
+
 
 
 export default usersReducer;

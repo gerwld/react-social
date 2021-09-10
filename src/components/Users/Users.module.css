@@ -152,7 +152,7 @@ span.title {
 }
 
 .pagination {
-    margin-top: 30px;
+    margin-top: 35px;
 
 }
 
@@ -197,9 +197,16 @@ li.currentPage {
 }
 
 li.pag_arrow {
-    font-size: 20px;
-    line-height: 35px;
-    transition: 0.1s ease-in-out;
+    padding: 0 10px;
+    line-height: 32px;
+}
+
+li.pag_arrow span {
+    display: inline-block;
+    margin: 0 3px;
+    font-size: 22px;
+    transition: 0.2s ease-in-out;
+    transform: translateY(2px);
 }
 
 li.pag_arrow:first-child {

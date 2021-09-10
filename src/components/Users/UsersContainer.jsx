@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { usersAPI } from '../../api/api';
-import { countOfUsers, setPage, setUsers, toggleIsFetching, toggleIsFollowing, unfollowUser } from '../../redux/users-reducer';
+import { countOfUsers, setPage, setUsers, toggleIsFetching, toggleIsFollowing, unfollowUser, getAllPages } from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
 
@@ -14,6 +14,8 @@ class UsersAPIComponent extends React.Component {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(data.items);
                 this.props.countOfUsers(data.totalCount);
+                this.props.getAllPages(Math.ceil(this.props.totalUsers / this.props.pageSize));
+                console.log(this.props)
             });
         }
     }
@@ -43,13 +45,25 @@ class UsersAPIComponent extends React.Component {
 
     }
 
-    //with argument creates array of buttons to show, without - all pages count
-    getPages = (pagesCount = Math.ceil(this.props.totalUsers / this.props.pageSize)) => {
-        let pages = [];
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i);
+    getPagCurrentIndexes = () => {
+        let curPage = this.props.currentPage;
+        let allPages = this.props.allPages;
+        let pagLength = this.props.pagLength;
+        let pagination = [];
+
+        var notSmallerThanPag = (curPage + 2) > pagLength ? (curPage + 2) : pagLength;
+        var count = 1;
+        if(curPage > 3) {
+            count = curPage - 2;
         }
-        return pages;
+        if(curPage > allPages - 3) {
+            count = curPage - 4;
+        }
+
+        for(count; count <= notSmallerThanPag && count <= allPages; count++) {
+           pagination.push(count);
+        }
+        return pagination;
     }
 
     render() {
@@ -62,7 +76,9 @@ class UsersAPIComponent extends React.Component {
                 users={this.props.users}
                 followUser={this.followUser}
                 getPages={this.getPages}
-                isFollowing={this.props.isFollowing} />}
+                isFollowing={this.props.isFollowing}
+                getPagCurrentIndexes={this.getPagCurrentIndexes}
+                allPages={this.props.allPages} />}
             </>
         )
     }
@@ -71,14 +87,16 @@ class UsersAPIComponent extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
-        totalUsers: state.usersPage.totalUsers,
-        pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        isFollowing: state.usersPage.isFollowing
+        isFollowing: state.usersPage.isFollowing,
+        totalUsers: state.usersPage.totalUsers,
+        pageSize: state.usersPage.pageSize,
+        allPages: state.usersPage.allPages,
+        pagLength: state.usersPage.pagLength
     }
 }
 
-const UsersContainer = connect(mapStateToProps, {unfollowUser, setUsers, countOfUsers, setPage, toggleIsFetching, toggleIsFollowing})(UsersAPIComponent);
+const UsersContainer = connect(mapStateToProps, {unfollowUser, setUsers, countOfUsers, setPage, toggleIsFetching, toggleIsFollowing, getAllPages})(UsersAPIComponent);
 
 export default UsersContainer;
