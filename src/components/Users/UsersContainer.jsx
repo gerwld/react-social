@@ -21,11 +21,13 @@ class UsersAPIComponent extends React.Component {
     }
 
     onPageChanged = (pageNumber) => {
+
         this.props.setPage(pageNumber);
         this.props.toggleIsFetching(true);
         usersAPI.getUsers(this.props.pageSize, pageNumber).then(data => {
             this.props.toggleIsFetching(false);
             this.props.setUsers(data.items);
+            debugger
         });
     }
 
@@ -55,7 +57,7 @@ class UsersAPIComponent extends React.Component {
         var count = 1;
         if(curPage > 3) {
             count = curPage - 2;
-        }
+        } 
         if(curPage > allPages - 3) {
             count = curPage - 4;
         }
@@ -70,15 +72,11 @@ class UsersAPIComponent extends React.Component {
         return (
             <>
             {this.props.isFetching && <Preloader />}
-            {!this.props.isFetching && <Users totalUsers={this.props.totalUsers}
-                currentPage={this.props.currentPage}
-                onPageChanged={this.onPageChanged}
-                users={this.props.users}
-                followUser={this.followUser}
-                getPages={this.getPages}
-                isFollowing={this.props.isFollowing}
-                getPagCurrentIndexes={this.getPagCurrentIndexes}
-                allPages={this.props.allPages} />}
+            {!this.props.isFetching && <Users {...this.props} 
+                followUser={this.followUser} 
+                onPageChanged={this.onPageChanged} 
+                getPagCurrentIndexes={this.getPagCurrentIndexes} />}
+                
             </>
         )
     }
