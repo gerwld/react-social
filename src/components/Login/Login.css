@@ -1,0 +1,45 @@
+
+.login_content {
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 220px;
+    background-color: #f0f0f0;
+    padding: 45px 45px 40px;
+    border-radius: 30px;
+    border: 1px solid #e5e5e5;
+}
+
+button.btn-login {
+    background-color: #4c6dc1!important;
+    color: #fff;
+}
+
+button.btn-login:hover {
+    background-color: #3b5391!important;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-check-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.form-control {
+    padding: 10px 15px!important;
+    border-radius: 7px!important;
+}
+
+.form-control:focus {
+    box-shadow: none!important;
+}
+
+.form-check-input:checked {
+    background-color: #4c6dc1!important;
+    border-color: #4c6dc1!important;
+}

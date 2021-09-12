@@ -3,16 +3,11 @@ import React, { useEffect } from 'react';
 
 
 const Dialogs = (props) => {
-
-    //реф на textarea
     let currentMessage = React.createRef();
     let endDial = React.createRef();
 
     //скролл вниз при отправке месседжа
-    const scrollToBottom = () => {
-        endDial.current.scrollIntoView({ behavior: "smooth" })
-    }
-    useEffect(scrollToBottom, [props.dialogMap]);
+    useEffect(() => endDial.current.scrollIntoView({ behavior: "smooth" }), [props.dialogMap]);
 
     return (
         <div>
@@ -32,7 +27,8 @@ const Dialogs = (props) => {
                         <input onClick={e => {
                             e.preventDefault();
                             props.onSend(0);
-                            currentMessage.current.value = '';}} type="submit" value="Send"></input>
+                            currentMessage.current.value = '';
+                        }} type="submit" value="Send"></input>
                     </form>
                 </div>
             </div>

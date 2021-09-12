@@ -29,6 +29,7 @@
   
   .app_navbar a:hover {
     opacity: 0.87;
+    color: #ffffff!important;
   }
   
   .app_navbar .current::before {

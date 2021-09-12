@@ -1,9 +1,9 @@
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import s from './Dialogs.module.css';
 import Message from './Message';
-import { NavLink } from 'react-router-dom';
-import React from 'react';
 import Dialogs from './Dialogs';
-import { connect } from 'react-redux';
 import { onInputValue, onSend } from '../../redux/dialogs-reducer';
 
 

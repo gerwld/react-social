@@ -103,19 +103,38 @@ export const getUsersThunkCreator = (currentPage, pageSize, usersCount) => {
     }
 }
 
+export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize) => {
+    return (dispatch) => {
+        //prevent set page bigger or less that it is possible
+        pageNumber = pageNumber ? pageNumber : 1;
+        pageNumber = (pageNumber >= allPages) ? allPages : pageNumber;
+
+        dispatch(setPage(pageNumber));
+        dispatch(toggleIsFetching(true));
+        usersAPI.getUsers(pageSize, pageNumber).then(data => {
+            dispatch(setUsers(data.items));
+            dispatch(toggleIsFetching(false));
+        });
+    }
+}
+
 export const followUserThunkCreator = (user) => {
     return (dispatch) => {
         dispatch(toggleIsFollowing(true, user.id));
         if (!user.followed) {
             usersAPI.followUserRequest(user.id).then(r => {
-                r.resultCode === 0 && dispatch(unfollowUser(user.id));
+                if(r && r.resultCode === 0) {
+                    dispatch(unfollowUser(user.id));
+                }
                 dispatch(toggleIsFollowing(false, user.id));
             })
         } else {
             usersAPI.unfollowUserRequest(user.id).then(r => {
-                r.resultCode === 0 && dispatch(unfollowUser(user.id));
+                if(r && r.resultCode === 0) {
+                    dispatch(unfollowUser(user.id));
+                }
+                // r.resultCode === 0 && dispatch(unfollowUser(user.id));
                 dispatch(toggleIsFollowing(false, user.id));
-                if (r.resultCode === 1) { alert("You are not logged in") };
             })
         }
     }
@@ -140,21 +159,5 @@ export const getPaginationCurrentIndexesTC = (curPage, allPages, pagLength) => {
         return pagination;
     }
 }
-
-export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize) => {
-    return (dispatch) => {
-        //prevent set page bigger or less that it is possible
-        pageNumber = pageNumber ? pageNumber : 1;
-        pageNumber = (pageNumber >= allPages) ? allPages : pageNumber;
-
-        dispatch(setPage(pageNumber));
-        dispatch(toggleIsFetching(true));
-        usersAPI.getUsers(pageSize, pageNumber).then(data => {
-            dispatch(setUsers(data.items));
-            dispatch(toggleIsFetching(false));
-        });
-    }
-}
-
 
 export default usersReducer;
