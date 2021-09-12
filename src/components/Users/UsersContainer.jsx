@@ -1,68 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { usersAPI } from '../../api/api';
-import { countOfUsers, setPage, setUsers, toggleIsFetching, toggleIsFollowing, unfollowUser } from '../../redux/users-reducer';
+import { countOfUsers, setPage, setUsers, toggleIsFetching, toggleIsFollowing, unfollowUser, getAllPages, getUsersThunkCreator, followUserThunkCreator, getPaginationCurrentIndexesTC, onPageChangeThunkCreator } from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
 
 class UsersAPIComponent extends React.Component {
 
     componentDidMount() {
-        if (this.props.users.length < this.props.pageSize) {
-            this.props.toggleIsFetching(true);
-            usersAPI.getUsers(this.props.pageSize, this.props.currentPage).then(data => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-                this.props.countOfUsers(data.totalCount);
-            });
-        }
+        this.props.getUsersThunkCreator(
+            this.props.currentPage,
+            this.props.pageSize,
+            this.props.users.length);
+    }
+
+    getPagCurrentIndexes = () => {
+        return this.props.getPaginationCurrentIndexesTC(
+            this.props.currentPage,
+            this.props.allPages,
+            this.props.pagLength);
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.setPage(pageNumber);
-        this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.pageSize, pageNumber).then(data => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items);
-        });
-    }
-
-    followUser = (user) => {
-        this.props.toggleIsFollowing(true, user.id);
-        if (!user.followed) {
-            usersAPI.followUserRequest(user.id).then(r => {
-                r.resultCode === 0 && this.props.unfollowUser(user.id);
-                this.props.toggleIsFollowing(false, user.id);
-            })
-        } else {
-            usersAPI.unfollowUserRequest(user.id).then(r => {
-                r.resultCode === 0 && this.props.unfollowUser(user.id);
-                this.props.toggleIsFollowing(false, user.id);
-            })
-        }
-
-    }
-
-    //with argument creates array of buttons to show, without - all pages count
-    getPages = (pagesCount = Math.ceil(this.props.totalUsers / this.props.pageSize)) => {
-        let pages = [];
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i);
-        }
-        return pages;
+        this.props.onPageChangeThunkCreator(
+            pageNumber,
+            this.props.allPages,
+            this.props.pageSize);
     }
 
     render() {
         return (
             <>
-            {this.props.isFetching && <Preloader />}
-            {!this.props.isFetching && <Users totalUsers={this.props.totalUsers}
-                currentPage={this.props.currentPage}
-                onPageChanged={this.onPageChanged}
-                users={this.props.users}
-                followUser={this.followUser}
-                getPages={this.getPages}
-                isFollowing={this.props.isFollowing} />}
+                {this.props.isFetching && <Preloader />}
+                {!this.props.isFetching && <Users {...this.props}
+                    followUser={this.props.followUserThunkCreator}
+                    onPageChanged={this.onPageChanged}
+                    getPagCurrentIndexes={this.getPagCurrentIndexes} />}
+
             </>
         )
     }
@@ -71,14 +44,21 @@ class UsersAPIComponent extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
-        totalUsers: state.usersPage.totalUsers,
-        pageSize: state.usersPage.pageSize,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        isFollowing: state.usersPage.isFollowing
+        isFollowing: state.usersPage.isFollowing,
+        totalUsers: state.usersPage.totalUsers,
+        pageSize: state.usersPage.pageSize,
+        allPages: state.usersPage.allPages,
+        pagLength: state.usersPage.pagLength
     }
 }
 
-const UsersContainer = connect(mapStateToProps, {unfollowUser, setUsers, countOfUsers, setPage, toggleIsFetching, toggleIsFollowing})(UsersAPIComponent);
+const UsersContainer = connect(mapStateToProps, {
+    unfollowUser, setUsers, countOfUsers,
+    setPage, toggleIsFetching, toggleIsFollowing,
+    getAllPages, getUsersThunkCreator, followUserThunkCreator,
+    getPaginationCurrentIndexesTC, onPageChangeThunkCreator
+})(UsersAPIComponent);
 
 export default UsersContainer;
