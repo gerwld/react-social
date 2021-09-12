@@ -55,9 +55,7 @@ const mapStateToProps = (state) => {
 }
 
 const UsersContainer = connect(mapStateToProps, {
-    unfollowUser, setUsers, countOfUsers,
-    setPage, toggleIsFetching, toggleIsFollowing,
-    getAllPages, getUsersThunkCreator, followUserThunkCreator,
+    getUsersThunkCreator, followUserThunkCreator,
     getPaginationCurrentIndexesTC, onPageChangeThunkCreator
 })(UsersAPIComponent);
 
