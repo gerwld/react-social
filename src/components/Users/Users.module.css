@@ -17,7 +17,7 @@ span.title {
     margin-left: 10px;
     flex-direction: row;
     justify-content: flex-start;
-    margin-bottom: 7px;
+    margin-bottom: 12px;
     padding: 5px 0;
     border: 1px solid #e9e9e9;
 }
@@ -178,7 +178,7 @@ span.title {
     height: 40px;
     margin: 0;
     margin-left: -1px;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 38px;
     color:#4c6dc1;
     vertical-align: middle;
