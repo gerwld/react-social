@@ -1,12 +1,4 @@
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-
-
-//Action Creators
-export const onInputValue = (newText) => ({ type: UPDATE_NEW_POST_TEXT, newText: newText });
-export const onAddPost = () => ({ type: ADD_POST })
-export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+import { usersAPI } from "../api/api";
 
 let initialState = {
     postData: [
@@ -44,5 +36,27 @@ const profileReducer = (state = initialState, action) => {
             return state;
     }
 }
+
+//Thunk Creators
+
+export const getUserInfo = (userId, authUserId) => {
+    return (dispatch) => {
+        let id = userId ? userId : authUserId;
+        dispatch(setUserProfile(null));
+        usersAPI.getUser(id).then(r => {
+          dispatch(setUserProfile(r.data));
+        });
+    }
+}
+
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_POST = 'ADD-POST';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+
+
+//Action Creators
+export const onInputValue = (newText) => ({ type: UPDATE_NEW_POST_TEXT, newText: newText });
+export const onAddPost = () => ({ type: ADD_POST })
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 
 export default profileReducer;

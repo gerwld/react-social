@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { countOfUsers, setPage, setUsers, toggleIsFetching, toggleIsFollowing, unfollowUser, getAllPages, getUsersThunkCreator, followUserThunkCreator, getPaginationCurrentIndexesTC, onPageChangeThunkCreator } from '../../redux/users-reducer';
+import { getUsersThunkCreator, followUserThunkCreator, getPaginationCurrentIndexesTC, onPageChangeThunkCreator } from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
 
