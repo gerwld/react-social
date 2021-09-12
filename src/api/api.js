@@ -16,12 +16,19 @@ export const usersAPI = {
         return instance.get(`profile/${id}`);
     },
     followUserRequest(userId) {
-        return instance.post(`follow/${userId}`, null).then(r => r.data);
+        return instance.post(`follow/${userId}`, null).then(r => r.data).catch((reason) => {
+            if (reason.response.status === 401) {
+                alert(`You are not logged in. Please log in and try again.`);
+            }
+            else if (reason.response.status === 429) {
+                alert(`The maximum number of requests has been exceeded. Try again later.`);
+            }
+        })
     },
     unfollowUserRequest(userId) {
         return instance.delete(`follow/${userId}`).then(r => r.data);
     },
     getAuth() {
-        return  instance.get('/auth/me').then(r => r.data);
+        return instance.get('/auth/me').then(r => r.data);
     }
 }

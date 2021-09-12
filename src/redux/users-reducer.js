@@ -123,14 +123,18 @@ export const followUserThunkCreator = (user) => {
         dispatch(toggleIsFollowing(true, user.id));
         if (!user.followed) {
             usersAPI.followUserRequest(user.id).then(r => {
-                r.resultCode === 0 && dispatch(unfollowUser(user.id));
+                if(r && r.resultCode === 0) {
+                    dispatch(unfollowUser(user.id));
+                }
                 dispatch(toggleIsFollowing(false, user.id));
             })
         } else {
             usersAPI.unfollowUserRequest(user.id).then(r => {
-                r.resultCode === 0 && dispatch(unfollowUser(user.id));
+                if(r && r.resultCode === 0) {
+                    dispatch(unfollowUser(user.id));
+                }
+                // r.resultCode === 0 && dispatch(unfollowUser(user.id));
                 dispatch(toggleIsFollowing(false, user.id));
-                if (r.resultCode === 1) { alert("You are not logged in") };
             })
         }
     }
