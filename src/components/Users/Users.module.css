@@ -23,7 +23,7 @@ span.title {
 }
 
 .user_avatar {
-    margin: 15px;
+    margin: 10px 12px;
     align-self: center;
     width: 70px;
     height: 70px;
@@ -55,7 +55,7 @@ span.title {
 
 .user_name {
     display: block;
-    font-size: 18px;
+    font-size: 17px;
     margin-bottom: 3px;
     font-weight: bold;
     text-transform: capitalize;
@@ -72,7 +72,7 @@ span.title {
 
 
 .action_buttons {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     font-family: "Roboto", sans-serif;
     margin: 10px 0;
@@ -97,7 +97,7 @@ span.title {
     margin: 0 15px;
     align-self: center;
     margin-left: auto;
-    font-size: 13px;
+    font-size: 12px;
     text-align: right;
 }
 
@@ -152,7 +152,7 @@ span.title {
 }
 
 .pagination {
-    margin-top: 35px;
+    margin-top: 30px;
 
 }
 

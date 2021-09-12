@@ -23,6 +23,10 @@ button.btn-login:hover {
     margin-bottom: 12px;
 }
 
+.form-group label {
+    padding-bottom: 7px;
+}
+
 .form-check-buttons {
     display: flex;
     justify-content: space-between;
