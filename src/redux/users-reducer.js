@@ -1,4 +1,5 @@
 import React from 'react';
+import { usersAPI } from '../api/api';
 
 let initialState = {
     users: [
@@ -38,7 +39,7 @@ const usersReducer = (state = initialState, action) => {
         case TOTAL_COUNT:
             return {
                 ...state,
-                totalUsers: (action.totalCount )
+                totalUsers: (action.totalCount)
             }
         case SET_PAGE:
             return {
@@ -50,11 +51,11 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching
             }
-        case FOLLOWING_IN_PROGRESS: 
+        case FOLLOWING_IN_PROGRESS:
             return {
                 ...state,
-                isFollowing: action.isFetching 
-                    ? [...state.isFollowing, action.userId] 
+                isFollowing: action.isFetching
+                    ? [...state.isFollowing, action.userId]
                     : state.isFollowing.filter(id => id != action.userId)
             }
         case GET_ALL_PAGES:
@@ -85,6 +86,75 @@ export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isF
 export const toggleIsFollowing = (isFetching, userId) => ({ type: FOLLOWING_IN_PROGRESS, isFetching, userId });
 export const getAllPages = (pagesCount) => ({ type: GET_ALL_PAGES, pagesCount });
 
+
+// Thunk Creators 
+
+export const getUsersThunkCreator = (currentPage, pageSize, usersCount) => {
+    return (dispatch) => {
+        if (usersCount < pageSize) {
+            dispatch(toggleIsFetching(true));
+            usersAPI.getUsers(pageSize, currentPage).then(data => {
+                dispatch(toggleIsFetching(false));
+                dispatch(setUsers(data.items));
+                dispatch(countOfUsers(data.totalCount));
+                dispatch(getAllPages(Math.ceil(data.totalCount / pageSize)));
+            });
+        }
+    }
+}
+
+export const followUserThunkCreator = (user) => {
+    return (dispatch) => {
+        dispatch(toggleIsFollowing(true, user.id));
+        if (!user.followed) {
+            usersAPI.followUserRequest(user.id).then(r => {
+                r.resultCode === 0 && dispatch(unfollowUser(user.id));
+                dispatch(toggleIsFollowing(false, user.id));
+            })
+        } else {
+            usersAPI.unfollowUserRequest(user.id).then(r => {
+                r.resultCode === 0 && dispatch(unfollowUser(user.id));
+                dispatch(toggleIsFollowing(false, user.id));
+                if (r.resultCode === 1) { alert("You are not logged in") };
+            })
+        }
+    }
+}
+
+export const getPaginationCurrentIndexesTC = (curPage, allPages, pagLength) => {
+    return () => {
+
+        let pagination = [];
+        let count = 1;
+        let notSmallerThanPag = (curPage + 2) > pagLength ? (curPage + 2) : pagLength;
+
+        if (curPage > 3) {
+            count = curPage - 2;
+        }
+        if (curPage > allPages - 3) {
+            count = curPage - 4;
+        }
+        for (count; count <= notSmallerThanPag && count <= allPages; count++) {
+            pagination.push(count);
+        }
+        return pagination;
+    }
+}
+
+export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize) => {
+    return (dispatch) => {
+        //prevent set page bigger or less that it is possible
+        pageNumber = pageNumber ? pageNumber : 1;
+        pageNumber = (pageNumber >= allPages) ? allPages : pageNumber;
+
+        dispatch(setPage(pageNumber));
+        dispatch(toggleIsFetching(true));
+        usersAPI.getUsers(pageSize, pageNumber).then(data => {
+            dispatch(setUsers(data.items));
+            dispatch(toggleIsFetching(false));
+        });
+    }
+}
 
 
 export default usersReducer;
