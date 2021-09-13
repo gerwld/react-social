@@ -1,15 +1,26 @@
 import s from './Dialogs.module.css';
 import React, { useEffect } from 'react';
+import { Redirect } from 'react-router';
 
 
 const Dialogs = (props) => {
     let currentMessage = React.createRef();
     let endDial = React.createRef();
 
-    //скролл вниз при отправке месседжа
-    useEffect(() => endDial.current.scrollIntoView({ behavior: "smooth" }), [props.dialogMap]);
+
+    //хук скролл вниз при отправке месседжа
+    useEffect( () => {
+        if(props.dialogMap && props.isAuth === true) {
+        return endDial.current.scrollIntoView({ behavior: "smooth" }), [props.dialogMap]
+        }
+    });
+
+    if(props.isAuth === false) {
+        return <Redirect to="/login"/>
+    }
 
     return (
+    
         <div>
             <span className={s.title}>Dialogs</span>
             <div className={s.dialogs_frame}>

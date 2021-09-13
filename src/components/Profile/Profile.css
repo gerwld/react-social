@@ -15,8 +15,8 @@
 
 
 .user-profile__img {
-  width: 175px;
-  height: 175px;
+  width: 155px;
+  height: 155px;
   border-radius: 50%;
 
   margin-top: 10px;
@@ -24,7 +24,7 @@
 
 .user-profile__info {
   list-style: none;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .user-profile__info li {

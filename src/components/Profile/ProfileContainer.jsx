@@ -10,7 +10,9 @@ import { withRouter } from 'react-router';
 class ProfileContainerAPI extends React.Component {
 
   componentDidMount() {
-    this.props.getUserInfo(this.props.match.params.userId, this.props.authUserId)
+    this.props.getUserInfo(
+      this.props.match.params.userId, 
+      this.props.authUserId)
   }
 
 

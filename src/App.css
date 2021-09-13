@@ -44,7 +44,7 @@
   margin: 0 auto;
   box-sizing: content-box;
   display: grid;
-  grid-gap: 12px;
+  grid-gap: 10px;
   grid-template-columns: 150px 1fr;
 }
 
