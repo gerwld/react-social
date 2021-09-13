@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 import { getUserInfo, setUserProfile } from '../../redux/profile-reducer';
@@ -12,7 +12,7 @@ class ProfileContainerAPI extends React.Component {
 
   componentDidMount() {
     this.props.getUserInfo(
-      this.props.match.params.userId, 
+      this.props.match.params.userId,
       this.props.authUserId)
   }
 
@@ -31,7 +31,11 @@ let mapStateToProps = (state) => {
   }
 }
 
+export default compose(
+  connect(mapStateToProps, { setUserProfile, getUserInfo }),
+  withAuthRedirect,
+  withRouter
+)(ProfileContainerAPI)
 
-const ProfileContainer = connect(mapStateToProps, { setUserProfile, getUserInfo })(withRouter(ProfileContainerAPI));
-
-export default withAuthRedirect(ProfileContainer);
+// const ProfileContainer = connect(mapStateToProps, { setUserProfile, getUserInfo })(withRouter(ProfileContainerAPI));
+// export default withAuthRedirect(ProfileContainer);
