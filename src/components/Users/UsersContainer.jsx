@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { getUsersThunkCreator, followUserThunkCreator, getPaginationCurrentIndexesTC, onPageChangeThunkCreator } from '../../redux/users-reducer';
 import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
@@ -59,4 +60,4 @@ const UsersContainer = connect(mapStateToProps, {
     getPaginationCurrentIndexesTC, onPageChangeThunkCreator
 })(UsersAPIComponent);
 
-export default UsersContainer;
+export default withAuthRedirect(UsersContainer);

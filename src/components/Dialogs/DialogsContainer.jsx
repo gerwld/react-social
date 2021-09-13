@@ -5,6 +5,7 @@ import s from './Dialogs.module.css';
 import Message from './Message';
 import Dialogs from './Dialogs';
 import { onInputValue, onSend } from '../../redux/dialogs-reducer';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 
 let mapStateToProps = (state) => {
@@ -16,11 +17,12 @@ let mapStateToProps = (state) => {
                 </NavLink>
             </li>),
         dialogMap: state.messagePage.messagesData.map(m =>
-            <Message content={m.m} userdata={m.userdata} userid={m.userid} />),
-        isAuth: state.auth.isAuth
+            <Message content={m.m} userdata={m.userdata} userid={m.userid} />)
     }
 }
 
+
+
 const DialogsContainer = connect(mapStateToProps, {onInputValue, onSend})(Dialogs);
 
-export default DialogsContainer;
+export default withAuthRedirect(DialogsContainer);
