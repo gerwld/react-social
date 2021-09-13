@@ -16,7 +16,8 @@ let mapStateToProps = (state) => {
                 </NavLink>
             </li>),
         dialogMap: state.messagePage.messagesData.map(m =>
-            <Message content={m.m} userdata={m.userdata} userid={m.userid} />)
+            <Message content={m.m} userdata={m.userdata} userid={m.userid} />),
+        isAuth: state.auth.isAuth
     }
 }
 
