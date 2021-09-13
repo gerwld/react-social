@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setUserData } from "../redux/auth-reducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -27,8 +28,23 @@ export const usersAPI = {
     },
     unfollowUserRequest(userId) {
         return instance.delete(`follow/${userId}`).then(r => r.data);
-    },
+    }
+}
+
+export const authAPI = {
     getAuth() {
         return instance.get('/auth/me').then(r => r.data);
+    }
+}
+
+//Thunk creators
+
+export const getAuthUserDataTC = () => {
+    return (dispatch) => {
+        authAPI.getAuth().then(r => {
+            if(r.resultCode === 0) {
+                dispatch(setUserData(r.data.id, r.data.email, r.data.login));
+            }
+        })
     }
 }
