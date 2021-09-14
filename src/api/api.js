@@ -4,17 +4,18 @@ import { setUserData } from "../redux/auth-reducer";
 const instance = axios.create({
     withCredentials: true,
     headers: {
-        "API-KEY": "e9327719-2998-4837-bc53-8a9b2225f057"
+        "API-KEY": "0655bfbe-786a-4f38-ac1a-9dc225f7b1db"
     },
     baseURL: "https://social-network.samuraijs.com/api/1.0/"
-})
+});
 
 export const usersAPI = {
     getUsers(pageSize = 6, pageNumber = 1) {
         return instance.get(`users?count=${pageSize}&page=${pageNumber}`).then(response => response.data);
     },
     getUser(id) {
-        return instance.get(`profile/${id}`);
+        console.warn('Obsolete method. Please use profileAPI.');
+        return profileAPI.getUser(id);
     },
     followUserRequest(userId) {
         return instance.post(`follow/${userId}`, null).then(r => r.data).catch((reason) => {
@@ -30,6 +31,19 @@ export const usersAPI = {
         return instance.delete(`follow/${userId}`).then(r => r.data);
     }
 }
+
+export const profileAPI = {
+    getUser(id) {
+        return instance.get(`profile/${id}`);
+    },
+    getStatus(id) {
+        return instance.get(`profile/status/${id}`)
+    },
+    setStatus(status) {
+        return instance.put(`profile/status/`, {status: status})
+    }
+}
+
 
 export const authAPI = {
     getAuth() {
