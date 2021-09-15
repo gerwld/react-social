@@ -1,4 +1,4 @@
-import { profileAPI, usersAPI } from "../api/api";
+import { authAPI, profileAPI, usersAPI } from "../api/api";
 
 let initialState = {
     postData: [
@@ -53,22 +53,24 @@ export const getUserInfo = (userId, authUserId) => {
         usersAPI.getUser(id).then(r => {
             dispatch(setUserProfile(r.data));
         });
-        profileAPI.getStatus(authUserId).then(r => {
-            dispatch(setStatus(r.data));
-        });
+
+        if (userId === authUserId || !userId) {
+            profileAPI.getStatus(authUserId).then(r => {
+                dispatch(setStatus(r.data));
+            });
+        }
     }
 }
 
 export const setUserStatus = (status) => {
     return (dispatch) => {
         profileAPI.setStatus(status).then(r => {
-            if(r.data.resultCode === 0) {
-            dispatch(setStatus(status));
+            if (r.data.resultCode === 0) {
+                dispatch(setStatus(status));
             }
         });
     }
 }
-
 
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const ADD_POST = 'ADD-POST';
