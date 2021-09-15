@@ -1,6 +1,5 @@
 import s from './Dialogs.module.css';
 import React, { useEffect } from 'react';
-import { Redirect } from 'react-router';
 
 
 const Dialogs = (props) => {
@@ -14,10 +13,6 @@ const Dialogs = (props) => {
         return endDial.current.scrollIntoView({ behavior: "smooth" }), [props.dialogMap]
         }
     });
-
-    if(props.isAuth === false) {
-        return <Redirect to="/login"/>
-    }
 
     return (
     

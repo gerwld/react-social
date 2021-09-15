@@ -57,3 +57,25 @@
   color: rgb(82, 82, 82);
   text-decoration: underline;
 }
+
+.user-info__data span {
+  display: inline-block;
+  min-width: 80px;
+  max-width: 350px;
+  min-height: 15px;
+  max-height: 55px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+.user-info__data span:hover {
+  background-color: #e4ebff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.user-info__data input {
+  margin-top: -5px;
+  margin-left: -5px;
+  width: 350px;
+}
