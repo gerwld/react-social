@@ -2,19 +2,17 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getUserInfo, getUserStatus, setUserProfile, setUserStatus } from '../../redux/profile-reducer';
+import { getUserInfo, setUserProfile, setUserStatus } from '../../redux/profile-reducer';
 import { withRouter } from 'react-router';
+import { authAPI } from '../../api/api';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { profileAPI } from '../../api/api';
-
 
 
 class ProfileContainerAPI extends React.Component {
-  statusInputRef = React.createRef();
-
   state = {
     status: this.props.status,
-    statusEditMode: false
+    statusEditMode: false,
+    authUserId: this.props.authUserId
   }
 
   activateEditmode = () => {
@@ -37,13 +35,20 @@ class ProfileContainerAPI extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getUserInfo(
-      this.props.match.params.userId,
-      this.props.authUserId)
+    authAPI.getAuth().then(r => {
+      if (r.resultCode === 0) {
+        this.props.getUserInfo(
+          this.props.match.params.userId,
+          r.data.id)
+        this.setState({
+          authUserId: r.data.id
+        })
+      }
+    });
   }
 
-  componentDidUpdate(prevProps){
-    if(prevProps.status != this.props.status) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.status != this.props.status) {
       this.setState({
         status: this.props.status
       })
@@ -53,9 +58,9 @@ class ProfileContainerAPI extends React.Component {
 
   render() {
     return (
-      <Profile profile={this.props.profile} authUserId={this.props.authUserId}  statusEditMode={this.state.statusEditMode}
-       activateEdit={this.activateEditmode} deactivateEdit={this.deactivateEditmode} status={this.state.status} statusGlobal={this.props.status} setUserStatus={this.props.setUserStatus}
-       inputValue={this.statusInputRef} editInput={this.editInput}/>
+      <Profile profile={this.props.profile} authUserId={this.state.authUserId} statusEditMode={this.state.statusEditMode}
+        activateEdit={this.activateEditmode} deactivateEdit={this.deactivateEditmode} status={this.state.status} statusGlobal={this.props.status} setUserStatus={this.props.setUserStatus}
+        inputValue={this.statusInputRef} editInput={this.editInput} />
     )
   }
 }
@@ -63,7 +68,7 @@ class ProfileContainerAPI extends React.Component {
 let mapStateToProps = (state) => {
   return {
     profile: state.profilePage.profile,
-    authUserId: state.profilePage.authUserId,
+    authUserId: state.auth.userId,
     status: state.profilePage.status
   }
 }
@@ -73,6 +78,3 @@ export default compose(
   withAuthRedirect,
   withRouter
 )(ProfileContainerAPI)
-
-// const ProfileContainer = connect(mapStateToProps, { setUserProfile, getUserInfo })(withRouter(ProfileContainerAPI));
-// export default withAuthRedirect(ProfileContainer);

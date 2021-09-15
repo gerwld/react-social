@@ -100,6 +100,7 @@ width: 45px;
     display: block;
     margin-bottom: 4px;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 
@@ -117,7 +118,7 @@ width: 45px;
 }
 
 .messageInput textarea,
-.messageInput input[type="submit"] {
+.messageInput button {
     display: block;
     margin-left: auto;
     border: none;
@@ -137,7 +138,7 @@ width: 45px;
     box-sizing: border-box;
 }
 
-.messageInput input[type="submit"] {
+.messageInput button {
     padding: 10px 20px;
     margin-top: 15px;
     color: white;
@@ -147,7 +148,7 @@ width: 45px;
     font-weight: bold;
 }
 
-.messageInput input[type="submit"]:hover {
+.messageInput button:hover {
     background-color: #4461ac;
 }
 

@@ -1,11 +1,13 @@
 import s from './Dialogs.module.css';
 import React, { useEffect } from 'react';
+import { Field, reduxForm } from 'redux-form';
 
 
 const Dialogs = (props) => {
-    let currentMessage = React.createRef();
     let endDial = React.createRef();
-
+    let onSubmit = (data) => {
+        props.onSendTC(data.message);
+    }
 
     //хук скролл вниз при отправке месседжа
     useEffect( () => {
@@ -15,7 +17,6 @@ const Dialogs = (props) => {
     });
 
     return (
-    
         <div>
             <span className={s.title}>Dialogs</span>
             <div className={s.dialogs_frame}>
@@ -28,18 +29,22 @@ const Dialogs = (props) => {
                         {props.dialogMap}
                         <div ref={endDial} className={s.end_dial} />
                     </div>
-                    <form className={s.messageInput}>
-                        <textarea ref={currentMessage} onChange={e => props.onInputValue(e.target.value)} placeholder="Enter your message..."></textarea>
-                        <input onClick={e => {
-                            e.preventDefault();
-                            props.onSend(0);
-                            currentMessage.current.value = '';
-                        }} type="submit" value="Send"></input>
-                    </form>
+                    <MessageReduxForm onSubmit={onSubmit}/>
                 </div>
             </div>
         </div>
     );
 };
+
+let MessageForm = (props) => {
+    return (
+    <form onSubmit={props.handleSubmit} className={s.messageInput}>
+        <Field component="textarea" name="message" placeholder="Enter your message..." />
+        <button type="submit">Send</button>
+    </form>
+    )
+}
+
+let MessageReduxForm = reduxForm({form: 'dialogsForm'})(MessageForm);
 
 export default Dialogs;
