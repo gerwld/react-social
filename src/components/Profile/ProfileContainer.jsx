@@ -19,8 +19,7 @@ class ProfileContainerAPI extends React.Component {
 
   activateEditmode = () => {
     this.setState({
-      statusEditMode: true,
-      status: this.props.status
+      statusEditMode: true
     })
   }
 
@@ -38,16 +37,21 @@ class ProfileContainerAPI extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getUserStatus(this.props.authUserId);
     this.props.getUserInfo(
       this.props.match.params.userId,
       this.props.authUserId)
   }
 
+  componentDidUpdate(prevProps){
+    if(prevProps.status != this.props.status) {
+      this.setState({
+        status: this.props.status
+      })
+    }
+  }
+
 
   render() {
-    console.log(`локал стейт ` + this.state.status);
-    console.log(`глобал стейт ` + this.props.status);
     return (
       <Profile profile={this.props.profile} authUserId={this.props.authUserId}  statusEditMode={this.state.statusEditMode}
        activateEdit={this.activateEditmode} deactivateEdit={this.deactivateEditmode} status={this.state.status} statusGlobal={this.props.status} setUserStatus={this.props.setUserStatus}
@@ -65,8 +69,8 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-  connect(mapStateToProps, { setUserProfile, getUserInfo, getUserStatus, setUserStatus }),
-  // withAuthRedirect,
+  connect(mapStateToProps, { setUserProfile, getUserInfo, setUserStatus }),
+  withAuthRedirect,
   withRouter
 )(ProfileContainerAPI)
 

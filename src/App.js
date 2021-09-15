@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 
 
 const App = (props) => {
+  console.log(props.isAuth);
   return (
     <div className="app-wrapper">
       <HeaderContainer />
@@ -24,9 +25,9 @@ const App = (props) => {
 
           <Route path="/profile/id:userId?" render={() => <ProfileContainer />} />
           <Route path="/profile" exact render={() => <ProfileContainer />} />
-
+          {/* props.isAuth ===  */}
           <Route path="/login" render={() => {
-            return props.isAuth === true ? <Redirect to="/profile" /> : <LoginContainer />
+            return props.isAuth ? <Redirect to="/profile" /> : <LoginContainer />
           }} />
           <Route path="/" exact render={() => {
             return props.isAuth === true ? <Redirect to="/profile" /> : <Redirect to="/login" />

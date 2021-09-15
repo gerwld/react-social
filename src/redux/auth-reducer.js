@@ -1,7 +1,9 @@
 //константы и экшн криейторы
 const SET_USER_DATA = 'SET_USER_DATA';
+const USER_LOGGED_IN = 'USER_LOGGED_IN';
 
 export const setUserData = (userId, email, login) => ({type: SET_USER_DATA, data: {userId, email, login}});
+export const userLoggedIn = () => ({type: USER_LOGGED_IN});
 
 let initialState = {
     userId: null,
@@ -17,6 +19,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
+                isAuth: true
+            }
+        case USER_LOGGED_IN:
+            return {
+                ...state,
                 isAuth: true
             }
         default:

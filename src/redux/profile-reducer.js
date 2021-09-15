@@ -53,11 +53,6 @@ export const getUserInfo = (userId, authUserId) => {
         usersAPI.getUser(id).then(r => {
             dispatch(setUserProfile(r.data));
         });
-    }
-}
-
-export const getUserStatus = (authUserId) => {
-    return (dispatch) => {
         profileAPI.getStatus(authUserId).then(r => {
             dispatch(setStatus(r.data));
         });
