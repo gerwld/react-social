@@ -74,12 +74,16 @@ export const onSendTC = (message) => {
             dispatch(setUserProfile)
         }
         // console.log(getState().profilePage);
+        if(message !== "" && message){
         dispatch(onSend(message, 
             getState().profilePage.authUserId, 
             getState().profilePage.profile.fullName,
             getState().profilePage.profile.photos.large));
             dispatch(reset('dialogsForm'));}
+        }
         
 }
+
+
 
 export default dialogsReducer;
