@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import s from './Dialogs.module.css';
 import Message from './Message';
 import Dialogs from './Dialogs';
@@ -17,12 +18,14 @@ let mapStateToProps = (state) => {
                 </NavLink>
             </li>),
         dialogMap: state.messagePage.messagesData.map(m =>
-            <Message content={m.m} userdata={m.userdata} userid={m.userid} avatar={m.avatar} />)
+            <Message content={m.m} userdata={m.userdata} userid={m.userid} avatar={m.avatar}  />)
     }
 }
 
 
 
-const DialogsContainer = connect(mapStateToProps, {onInputValue, onSendTC})(Dialogs);
+export default compose(
+    connect(mapStateToProps, {onInputValue, onSendTC}),
+    // withAuthRedirect
+)(Dialogs)
 
-export default withAuthRedirect(DialogsContainer);

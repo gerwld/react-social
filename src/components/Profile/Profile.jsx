@@ -23,8 +23,8 @@ const Profile = (props) => {
           <ul className="user-profile__info">
             <li className="user-info__name">{props.profile.fullName}</li>
 
-            <li className="user-info__data"> 
-            {isCurrentUserProfile ? <StatusEditable {...props}/> : (props.profile.aboutMe || "Status is not set.")}
+            <li className="user-info__data">
+              {isCurrentUserProfile ? <StatusEditable {...props} /> : (props.profile.aboutMe || "Status is not set.")}
             </li>
 
             <li className="user-info__data"><b>Date of Birth:</b> 21 February</li>
@@ -42,9 +42,9 @@ const Profile = (props) => {
 const StatusEditable = (props) => {
   return (
     <>
-    {!props.statusEditMode && <span onClick={props.activateEdit}>{props.statusGlobal || "Status is not set."}</span>}
-   {props.statusEditMode && <input onBlur={(e) => props.deactivateEdit(e.target.value)} 
-                                    onChange={(e) => props.editInput(e.target.value)} type="text" value={props.status} autoFocus="true"/>}
+      {!props.statusEditMode && <span onClick={props.activateEdit}>{props.statusGlobal || "Status is not set."}</span>}
+      {props.statusEditMode && <input onBlur={(e) => props.deactivateEdit(e.target.value)}
+        onChange={(e) => props.editInput(e.target.value)} type="text" value={props.status} autoFocus="true" />}
     </>
   )
 }

@@ -1,4 +1,5 @@
 import {reset} from 'redux-form';
+import { setUserProfile } from './profile-reducer';
 
 const NEW_MESSAGE_STATE = 'NEW-MESSAGE-STATE';
 const SEND_MESSAGE = 'SEND-MESSAGE';
@@ -50,7 +51,6 @@ const dialogsReducer = (state = initialState, action) => {
             };
 
         case SEND_MESSAGE: {
-            debugger;
             var message = action.message;
             if (message !== '' && message !== '\n' && message !== '\n\n') {
                 return {
@@ -68,14 +68,18 @@ const dialogsReducer = (state = initialState, action) => {
 
 export const onSendTC = (message) => {
     return (dispatch, getState) => {
+// TODO:
+        if(getState().profilePage.profile == null) {
+            debugger;
+            dispatch(setUserProfile)
+        }
         // console.log(getState().profilePage);
         dispatch(onSend(message, 
             getState().profilePage.authUserId, 
             getState().profilePage.profile.fullName,
             getState().profilePage.profile.photos.large));
-            
-            dispatch(reset('dialogsForm'));
-    }
+            dispatch(reset('dialogsForm'));}
+        
 }
 
 export default dialogsReducer;

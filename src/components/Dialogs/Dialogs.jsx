@@ -10,9 +10,9 @@ const Dialogs = (props) => {
     }
 
     //хук скролл вниз при отправке месседжа
-    useEffect( () => {
-        if(props.dialogMap && props.isAuth === true) {
-        return endDial.current.scrollIntoView({ behavior: "smooth" }), [props.dialogMap]
+    useEffect(() => {
+        if (props.dialogMap) {
+            return endDial.current.scrollIntoView({ behavior: "smooth" }), [props.dialogMap]
         }
     });
 
@@ -29,7 +29,7 @@ const Dialogs = (props) => {
                         {props.dialogMap}
                         <div ref={endDial} className={s.end_dial} />
                     </div>
-                    <MessageReduxForm onSubmit={onSubmit}/>
+                    <MessageReduxForm onSubmit={onSubmit} />
                 </div>
             </div>
         </div>
@@ -38,13 +38,13 @@ const Dialogs = (props) => {
 
 let MessageForm = (props) => {
     return (
-    <form onSubmit={props.handleSubmit} className={s.messageInput}>
-        <Field component="textarea" name="message" placeholder="Enter your message..." />
-        <button type="submit">Send</button>
-    </form>
+        <form onSubmit={props.handleSubmit} className={s.messageInput}>
+            <Field component="textarea" name="message" placeholder="Enter your message..." />
+            <button type="submit">Send</button>
+        </form>
     )
 }
 
-let MessageReduxForm = reduxForm({form: 'dialogsForm'})(MessageForm);
+let MessageReduxForm = reduxForm({ form: 'dialogsForm' })(MessageForm);
 
 export default Dialogs;

@@ -1,3 +1,4 @@
+import {reset} from 'redux-form';
 import { authAPI, profileAPI, usersAPI } from "../api/api";
 
 let initialState = {
@@ -6,7 +7,6 @@ let initialState = {
         { id: 1, cont: "Deez nuts... Today everything is fine, just vibing with my famity #coolday", likes: 28 },
         { id: 0, cont: "Hi there!! 2007 is rock!", likes: 23 }
     ],
-    newPostText: "",
     profile: null,
     authUserId: 19461,
     status: ''
@@ -18,14 +18,8 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postData: [...state.postData,
-                { id: state.postData.length, cont: state.newPostText, likes: 0 }],
+                { id: state.postData.length, cont: action.message, likes: 0 }],
                 newPostText: ""
-            };
-
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
             };
 
         case SET_USER_PROFILE:
@@ -72,15 +66,21 @@ export const setUserStatus = (status) => {
     }
 }
 
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+export const sendPost = (submit) => {
+    return (dispatch) => {
+        dispatch(onAddPost(submit.post));
+        dispatch(reset('myPosts')); 
+    }
+}
+
+
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
 
 //Action Creators
-export const onInputValue = (newText) => ({ type: UPDATE_NEW_POST_TEXT, newText: newText });
-export const onAddPost = () => ({ type: ADD_POST })
+export const onAddPost = (message) => ({ type: ADD_POST, message })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setStatus = (status) => ({ type: SET_STATUS, status })
 
