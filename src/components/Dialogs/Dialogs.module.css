@@ -105,6 +105,10 @@ width: 45px;
 
 
 .messageInput {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
     width: 99%;
     position: absolute;
     z-index: 10000;
@@ -159,4 +163,8 @@ width: 45px;
 
 .messageInput textarea::placeholder {
     font-size: 16px;
+}
+
+.floatRight {
+    margin-left: auto;
 }

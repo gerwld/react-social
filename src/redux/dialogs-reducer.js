@@ -61,18 +61,18 @@ const dialogsReducer = (state = initialState, action) => {
 export const onSendTC = (message) => {
     return (dispatch, getState) => {
         // TODO:
-        if (getState().profilePage.profile == null) {
-            debugger;
-            dispatch(setUserProfile)
-        }
+        // if (getState().profilePage.profile == null) {
+        //     debugger;
+        //     dispatch(setUserProfile)
+        // }
         // console.log(getState().profilePage);
-        if (message !== "" && message) {
+        // if (message !== "" && message) {
             dispatch(onSend(message,
                 getState().profilePage.authUserId,
                 getState().profilePage.profile.fullName,
                 getState().profilePage.profile.photos.large));
             dispatch(reset('dialogsForm'));
-        }
+        // }
     }
 
 }

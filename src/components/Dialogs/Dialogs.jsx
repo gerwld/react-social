@@ -1,7 +1,8 @@
 import s from './Dialogs.module.css';
 import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form';
-
+import { maxLengthCreator, requiredField } from '../../utils/validators/validator';
+import { Textarea } from '../common/FormControls/FormControls';
 
 const Dialogs = (props) => {
     let endDial = React.createRef();
@@ -36,10 +37,13 @@ const Dialogs = (props) => {
     );
 };
 
+    // Form validators
+    const maxLength20 = maxLengthCreator(20);
+
 let MessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.messageInput}>
-            <Field component="textarea" name="message" placeholder="Enter your message..." />
+            <Field component={Textarea} name="message" placeholder="Enter your message..." validate={[requiredField, maxLength20]} />
             <button type="submit">Send</button>
         </form>
     )
