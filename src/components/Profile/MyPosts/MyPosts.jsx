@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 
 
 const MyPosts = (props) => {
-  let userPosts = props.postData.map(post => <UserPost likes={post.likes} value={post.cont} profile={props.profile}/>);
+  let userPosts = props.postData.map(post => <UserPost likes={post.likes} value={post.cont} profile={props.profile} />);
   let currentPost = React.createRef();
 
   return (
@@ -23,14 +23,14 @@ const MyPosts = (props) => {
 
 const MyPostForm = (props) => {
   return (
-  <form onSubmit={props.handleSubmit} className={s.new_post_input}>
-  <Field component="textarea" name="post" placeholder="What's happening?"></Field>
-  <button type="submit">Send</button>
-</form>
+    <form onSubmit={props.handleSubmit} className={s.new_post_input}>
+      <Field component="textarea" name="post" placeholder="What's happening?"></Field>
+      <button type="submit">Send</button>
+    </form>
   )
 }
 
-const MyPostReduxForm = reduxForm({form: "myPosts"})(MyPostForm);
+const MyPostReduxForm = reduxForm({ form: "myPosts" })(MyPostForm);
 
 
 export default MyPosts;

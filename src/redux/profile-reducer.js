@@ -1,5 +1,5 @@
-import {reset} from 'redux-form';
-import { authAPI, profileAPI, usersAPI } from "../api/api";
+import { reset } from 'redux-form';
+import { profileAPI, usersAPI } from "../api/api";
 
 let initialState = {
     postData: [
@@ -69,7 +69,7 @@ export const setUserStatus = (status) => {
 export const sendPost = (submit) => {
     return (dispatch) => {
         dispatch(onAddPost(submit.post));
-        dispatch(reset('myPosts')); 
+        dispatch(reset('myPosts'));
     }
 }
 
