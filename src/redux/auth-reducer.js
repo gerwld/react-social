@@ -1,8 +1,10 @@
+import { authAPI } from "../api/api";
+
 //константы и экшн криейторы
 const SET_USER_DATA = 'SET_USER_DATA';
 const USER_LOGGED_IN = 'USER_LOGGED_IN';
 
-export const setUserData = (userId, email, login) => ({type: SET_USER_DATA, data: {userId, email, login}});
+export const setUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth}});
 export const userLoggedIn = () => ({type: USER_LOGGED_IN});
 
 let initialState = {
@@ -19,7 +21,7 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+                isAuth: action.data.isAuth
             }
         case USER_LOGGED_IN:
             return {
@@ -30,5 +32,6 @@ const authReducer = (state = initialState, action) => {
             return state;
     }
 }
+
 
 export default authReducer;

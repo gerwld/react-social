@@ -51,6 +51,9 @@ export const authAPI = {
     },
     loginInterface(authObject) {
         return instance.post(`/auth/login`, authObject);
+    },
+    logoutInterface() {
+        return instance.delete(`/auth/login`);
     }
 }
 
@@ -60,8 +63,18 @@ export const getAuthUserDataTC = () => {
     return (dispatch) => {
         authAPI.getAuth().then(r => {
             if(r.resultCode === 0) {
-                dispatch(setUserData(r.data.id, r.data.email, r.data.login));
+                dispatch(setUserData(r.data.id, r.data.email, r.data.login, true));
             }
+        })
+    }
+}
+
+export const logoutUserTC = () => {
+    return (dispatch) => {
+        authAPI.logoutInterface().then(r => {
+            if(r.data.resultCode === 0) {
+                dispatch(setUserData(null, null, null, false));
+            } 
         })
     }
 }
