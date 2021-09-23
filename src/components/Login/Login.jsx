@@ -7,6 +7,8 @@ import { authAPI } from '../../api/api';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { userLoggedIn } from '../../redux/auth-reducer';
+import { isEmailValid, requiredField, requiredFieldEmail, requiredFieldText } from '../../utils/validators/validator';
+import { InputText } from '../common/FormControls/FormControls';
 
 
 class Login extends React.Component {
@@ -43,17 +45,21 @@ class Login extends React.Component {
     }
 }
 
+
+const reduiredEmail = requiredFieldText("Please, enter your email.");
+const reduiredPasswd = requiredFieldText("Password is required.");
 let LoginForm = (props) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div class="form-group">
                 <label for="InputEmail1">Email address</label>
-                <Field component="input" name="email" type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email" autocomplete="email" value="free@samuraijs.com" />
+                <Field component={InputText} validate={[reduiredEmail, isEmailValid]} name="email" type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email" autocomplete="email" value="free@samuraijs.com" />
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
                 <label for="InputPassword1">Password</label>
-                <Field component="input" name="password" type="password" class="form-control" id="InputPassword1" placeholder="Password" autocomplete="current-password" value="free" />
+                <Field component={InputText} validate={[reduiredPasswd]} name="password" type="password" class="form-control" id="InputPassword1" placeholder="Password" autocomplete="current-password" value="free" />
             </div>
             <div className="form-check-buttons">
                 <div class="form-check">

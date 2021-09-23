@@ -3,6 +3,11 @@
     position: relative;
 }
 
+.form_control_block {
+    display: block;
+    position: relative;
+}
+
 .error input,
 .error textarea {
     border: 1px solid red;
