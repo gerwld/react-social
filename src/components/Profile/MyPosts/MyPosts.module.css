@@ -32,7 +32,7 @@
   font-size: 16px;
 }
 
-.new_post_input input[type="submit"] {
+.new_post_input button {
   display: block;
   padding: 15px;
   margin-left: auto;

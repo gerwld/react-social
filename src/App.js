@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 
 
 const App = (props) => {
-  console.log(props.isAuth);
+  // console.log(props.isAuth);
   return (
     <div className="app-wrapper">
       <HeaderContainer />

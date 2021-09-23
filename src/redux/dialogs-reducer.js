@@ -1,12 +1,11 @@
-import {reset} from 'redux-form';
+import { reset } from 'redux-form';
+import { setUserProfile } from './profile-reducer';
 
-const NEW_MESSAGE_STATE = 'NEW-MESSAGE-STATE';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
 
 //Action Creators
-export const onInputValue = (value) => ({ type: NEW_MESSAGE_STATE, currentValue: value });
-export const onSend = (message, userID, userdata, avatar) => ({ type: SEND_MESSAGE, message, userID, userdata, avatar});
+export const onSend = (message, userID, userdata, avatar) => ({ type: SEND_MESSAGE, message, userID, userdata, avatar });
 
 let initialState = {
     dialogsData: [
@@ -43,20 +42,13 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case NEW_MESSAGE_STATE:
-            return {
-                ...state,
-                newMessageText: action.currentValue
-            };
-
         case SEND_MESSAGE: {
-            debugger;
             var message = action.message;
             if (message !== '' && message !== '\n' && message !== '\n\n') {
                 return {
                     ...state,
                     messagesData: [...state.messagesData,
-                        { m: message, userid: action.userID, userdata: action.userdata, avatar: action.avatar }],
+                    { m: message, userid: action.userID, userdata: action.userdata, avatar: action.avatar }],
                     newMessageText: ''
                 }
             }
@@ -68,14 +60,23 @@ const dialogsReducer = (state = initialState, action) => {
 
 export const onSendTC = (message) => {
     return (dispatch, getState) => {
+        // TODO:
+        // if (getState().profilePage.profile == null) {
+        //     debugger;
+        //     dispatch(setUserProfile)
+        // }
         // console.log(getState().profilePage);
-        dispatch(onSend(message, 
-            getState().profilePage.authUserId, 
-            getState().profilePage.profile.fullName,
-            getState().profilePage.profile.photos.large));
-            
+        // if (message !== "" && message) {
+            dispatch(onSend(message,
+                getState().profilePage.authUserId,
+                getState().profilePage.profile.fullName,
+                getState().profilePage.profile.photos.large));
             dispatch(reset('dialogsForm'));
+        // }
     }
+
 }
+
+
 
 export default dialogsReducer;

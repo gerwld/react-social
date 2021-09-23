@@ -21,11 +21,11 @@ class ProfileContainerAPI extends React.Component {
     })
   }
 
-  deactivateEditmode = (userStatus) => {
+  deactivateEditmode = (value) => {
     this.setState({
       statusEditMode: false
     });
-    this.props.setUserStatus(userStatus);
+    this.props.setUserStatus(value);
   }
 
   editInput = (value) => {
@@ -34,17 +34,20 @@ class ProfileContainerAPI extends React.Component {
     })
   }
 
-  componentDidMount() {
+  loadContent = () => {
     authAPI.getAuth().then(r => {
       if (r.resultCode === 0) {
         this.props.getUserInfo(
           this.props.match.params.userId,
           r.data.id)
-        this.setState({
-          authUserId: r.data.id
-        })
+
+        this.setState({authUserId: r.data.id})
       }
     });
+  }
+
+  componentDidMount() {
+    this.loadContent();
   }
 
   componentDidUpdate(prevProps) {
@@ -53,6 +56,13 @@ class ProfileContainerAPI extends React.Component {
         status: this.props.status
       })
     }
+// TODO:
+    // if(prevProps.match.params.userId !== this.state.authUserId) {
+    // } else {
+    // }
+    // console.log(this.props.match.params.userId + ` params`);
+    // console.log(prevProps.match.params.userId + ` prev params`);
+    // console.log(this.state.authUserId + ` state`);
   }
 
 
@@ -75,6 +85,6 @@ let mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, { setUserProfile, getUserInfo, setUserStatus }),
-  withAuthRedirect,
+  // withAuthRedirect,
   withRouter
 )(ProfileContainerAPI)
