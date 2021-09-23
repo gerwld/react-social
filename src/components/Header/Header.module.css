@@ -21,6 +21,13 @@
     color: white;
     text-decoration: none;
     font-weight: 500;
+    color: #f1f1f1;
+  }
+
+  .main_nav a > i {
+    font-size: 20px;
+    margin-left: 5px;
+    transform: translateY(2px);
   }
 
   .main_nav {
