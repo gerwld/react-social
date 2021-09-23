@@ -17,10 +17,24 @@
     filter: brightness(20);
   }
   
-  .main_nav a {
+  .main_nav a,
+  .main_nav b {
     color: white;
     text-decoration: none;
     font-weight: 500;
+    color: #f1f1f1;
+    cursor: pointer;
+  }
+
+  .main_nav a:hover,
+  .main_nav b:hover {
+    color: #fff;
+  }
+
+  .main_nav i {
+    font-size: 20px;
+    margin-left: 5px;
+    transform: translateY(2px);
   }
 
   .main_nav {

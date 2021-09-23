@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './Header';
 import { setUserData } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
-import { authAPI, getAuthUserDataTC } from '../../api/api';
+import { authAPI, getAuthUserDataTC, logoutUserTC } from '../../api/api';
 
 class HeaderContainer extends React.Component {
 
@@ -28,4 +28,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {setUserData, getAuthUserDataTC})(HeaderContainer);
+export default connect(mapStateToProps, {setUserData, getAuthUserDataTC, logoutUserTC})(HeaderContainer);
