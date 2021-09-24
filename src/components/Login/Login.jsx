@@ -13,7 +13,9 @@ import { InputText } from '../common/FormControls/FormControls';
 class Login extends React.Component {
 
     onSubmit = (fieldForm) => {
-        this.props.loginUserTC(fieldForm);
+        this.props.loginUserTC(fieldForm,
+            this.props.captchaTryCount
+        );
     }
 
     render() {
@@ -45,7 +47,8 @@ const reduiredPasswd = requiredFieldText("Password is required.");
 
 let LoginForm = (props) => {
 
-    let isCaptchaShow = props.isCaptchaShow ? "captcha-visible" : "";
+    var isCaptchaShow = props.isCaptchaShow ? "captcha-visible" : "";
+    var isFormGlobalError = props.error ? "form-error-visible" : "";
 
     return (
         <form onSubmit={props.handleSubmit}>
@@ -71,6 +74,7 @@ let LoginForm = (props) => {
                 </div>
                 <Field class="form-control" component={InputText} name="captcha" autocomplete="off" />
             </div>
+            <span className={`form-error ${isFormGlobalError}`}><i class="fas fa-exclamation-circle"></i>{props.error}</span>
         </form>
     )
 }
@@ -82,11 +86,12 @@ let LoginReduxForm = reduxForm({ form: 'login' })(LoginForm);
 let mapStateToProps = (state) => {
     return {
         isCaptchaShow: state.auth.isCaptchaShow,
-        captchaUrl: state.auth.captchaUrl
+        captchaUrl: state.auth.captchaUrl,
+        captchaTryCount: state.auth.captchaTryCount
     }
 }
 
 export default compose(
     connect(mapStateToProps, { loginUserTC }),
-    withRouter
+    // withRouter
 )(Login);

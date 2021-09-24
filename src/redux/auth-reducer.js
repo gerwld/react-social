@@ -4,9 +4,11 @@ import { authAPI } from "../api/api";
 const SET_USER_DATA = 'SET_USER_DATA';
 const USER_LOGGED_IN = 'USER_LOGGED_IN';
 const CAPTCHA_STATUS = 'CAPTCHA_STATUS';
+const CAPTCHA_TRY = 'CAPTCHA_TRY';
 
 export const setUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth}});
 export const userLoggedIn = () => ({type: USER_LOGGED_IN});
+export const captchaTry = () => ({type: CAPTCHA_TRY});
 export const captchaStatus = (isShowing, pic) => ({type: CAPTCHA_STATUS, data: {isShowing, pic}});
 
 let initialState = {
@@ -17,7 +19,8 @@ let initialState = {
     isFetching: false,
 
     isCaptchaShow: false,
-    captchaUrl: ''
+    captchaUrl: '',
+    captchaTryCount: 0
 };
 
 const authReducer = (state = initialState, action) => {
@@ -39,6 +42,12 @@ const authReducer = (state = initialState, action) => {
                 isCaptchaShow: action.data.isShowing,
                 captchaUrl: (action.data.pic || '')
             }
+        case CAPTCHA_TRY: 
+            return {
+                ...state,
+                captchaTryCount: state.captchaTryCount + 1
+            }
+        
         default:
             return state;
     }

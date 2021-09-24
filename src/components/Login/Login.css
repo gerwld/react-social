@@ -7,7 +7,34 @@
     display: flex;
 }
 
+.form-error {
+    display: none;
+    width: 100%;
+    padding: 18px 23px;
+
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 20px);
+
+    font-size: 15px;
+    background-color: #ffebe9;
+    border: 1px solid rgb(255 129 130 / 40%);
+    border-radius: 7px;
+}
+
+.form-error i {
+    color: #cf222e;
+    font-size: 18px;
+    transform: translateY(1px);
+    margin-right: 9px;
+}
+
+.form-error-visible {
+    display: block;
+}
+
 .login_content {
+    position: relative;
     width: 400px;
     margin: 0 auto;
     margin-top: 220px;
