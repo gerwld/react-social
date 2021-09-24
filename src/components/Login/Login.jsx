@@ -13,19 +13,40 @@ import { InputText } from '../common/FormControls/FormControls';
 
 class Login extends React.Component {
 
+
+    state = {
+        showCaptcha: false,
+        captchaUrl: ''
+    }
+
     onSubmit = (fieldForm) => {
+        // debugger;
         authAPI.loginInterface(fieldForm).then(r => {
-            r.data.messages && r.data.messages.map(m => alert(m));
+            r.data.messages && r.data.messages.map(m => {
+                //TODO:
+                // alert(m)
+            });
             if (r.data.resultCode === 0) {
+                this.setState({showCaptcha: false});
                 alert('Login successful.');
                 this.props.userLoggedIn();
             }
-        });
+            else if (r.data.resultCode === 10) {
+                authAPI.getCaptcha().then(pic => {
+                    this.setState({
+                        showCaptcha: true,
+                        captchaUrl: pic
+                    })
+                    
+                })
+            }
+        })
     }
+
     render() {
         return (
             <div className="login_content">
-                <LoginReduxForm onSubmit={this.onSubmit} />
+                <LoginReduxForm {...this.state} onSubmit={this.onSubmit} />
                 <Style>{`
             .main_nav {
                 display: none;
@@ -48,7 +69,10 @@ class Login extends React.Component {
 
 const reduiredEmail = requiredFieldText("Please, enter your email.");
 const reduiredPasswd = requiredFieldText("Password is required.");
+// const reduiredCaptcha = requiredFieldText("Please enter the captcha before sending request.");
 let LoginForm = (props) => {
+
+    let isCaptchaShow = props.showCaptcha ? "captcha-visible" : "";
 
     return (
         <form onSubmit={props.handleSubmit}>
@@ -68,6 +92,12 @@ let LoginForm = (props) => {
                 </div>
                 <button type="submit" class="btn btn-login">Login</button>
             </div>
+            <div className={`form-check-captcha ${isCaptchaShow}`}>
+                <div class="captcha-img" title="CAPTCHA">
+                    <img src={props.captchaUrl} alt="Captcha. Please wait." />
+                </div>
+                <Field  class="form-control" component={InputText} name="captcha" autocomplete="off" />
+            </div>
         </form>
     )
 }
@@ -78,6 +108,6 @@ let LoginReduxForm = reduxForm({ form: 'login' })(LoginForm);
 
 
 export default compose(
-    connect(null, {userLoggedIn}),
+    connect(null, { userLoggedIn }),
     withRouter
 )(Login);

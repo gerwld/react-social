@@ -1,10 +1,18 @@
+.form-check-captcha {
+    display: none;
+    align-items: center;
+}
+
+.captcha-visible {
+    display: flex;
+}
 
 .login_content {
     width: 400px;
     margin: 0 auto;
     margin-top: 220px;
     background-color: #f0f0f0;
-    padding: 45px 45px 40px;
+    padding: 45px 45px 25px;
     border-radius: 30px;
     border: 1px solid #e5e5e5;
 }
@@ -31,7 +39,7 @@ button.btn-login:hover {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 20px;
+    margin: 20px 0 15px;
 }
 
 .form-control {
@@ -46,4 +54,33 @@ button.btn-login:hover {
 .form-check-input:checked {
     background-color: #4c6dc1!important;
     border-color: #4c6dc1!important;
+}
+
+.captcha-img {
+    width: 120px;
+    height: auto;
+    margin-right: 10px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 14.7px;
+    overflow: hidden;
+    object-fit: scale-down;
+    border: 1px solid #e3e3e3;
+    border-radius: 7px;
+    background-color: #4c6dc1;
+}
+
+.captcha-img img {
+    width: 100%;
+    height: auto;
+    max-height: 50px;
+    transform: scale(1.16) translateX(-5px);
+    filter: saturate(0.8) hue-rotate(30deg);
+}
+
+.form-check-captcha input {
+    padding: 7px 5px!important;
+    width: 50%;
+    font-weight: 500;
+    color: rgb(83, 83, 83)!important;
 }

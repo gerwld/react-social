@@ -16,16 +16,17 @@
 
 .error span {
     display: inline-block;
+    min-width: fit-content;
+    padding: 10px 12px;
     position: absolute;
-    white-space: nowrap;
     top: 10px;
     right: calc(100% + 15px);
 
     color: white;
-    padding: 10px 12px;
+    /* white-space: nowrap; */
     background-color: #dc3545;
-    border-radius: 6px;
     border: 1px solid #e3e3e3;
+    border-radius: 6px;
 }
 
 .error span::after {

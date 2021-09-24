@@ -13,7 +13,6 @@ export const Textarea = ({ input, meta, ...props }) => {
 }
 
 export const InputText = ({ input, meta, ...props }) => {
-    // debugger;
     const hasError = meta.touched && meta.error;
     return (
         <div className={s.form_control_block + " " + (hasError ? s.error : null)}>
