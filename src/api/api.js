@@ -1,5 +1,6 @@
 import axios from "axios";
-import { setUserData } from "../redux/auth-reducer";
+import { captchaStatus, captchaTry, setUserData, userLoggedIn } from "../redux/auth-reducer";
+import { change, stopSubmit } from 'redux-form';
 
 const instance = axios.create({
     withCredentials: true,
@@ -54,6 +55,9 @@ export const authAPI = {
     },
     logoutInterface() {
         return instance.delete(`/auth/login`);
+    },
+    getCaptcha() {
+        return instance.get(`/security/get-captcha-url`).then(r => r.data.url);
     }
 }
 
@@ -65,6 +69,33 @@ export const getAuthUserDataTC = () => {
             if(r.resultCode === 0) {
                 dispatch(setUserData(r.data.id, r.data.email, r.data.login, true));
             }
+        })
+    }
+}
+
+export const loginUserTC = (fieldForm, captchaTryCount) => {
+    return (dispatch) => {
+
+        authAPI.loginInterface(fieldForm).then(r => {
+            if (r.data.resultCode === 0) {
+                dispatch(captchaStatus(false, ''));
+                alert('Login successful.');
+                dispatch(userLoggedIn());
+            }
+            else if (r.data.resultCode === 10) {
+                dispatch(captchaTry());
+                authAPI.getCaptcha().then(pic => {
+                    dispatch(captchaStatus(true, pic));
+                    if(r.data.messages.length >= 1 && captchaTryCount) {
+                        dispatch(stopSubmit('login', {_error: r.data.messages[0]}));
+                    } 
+                })
+            } 
+            else {
+                dispatch(stopSubmit('login', {_error: r.data.messages[0]}));
+            }
+            //clear captcha field after submit
+            dispatch(change('login', 'captcha', ''));
         })
     }
 }

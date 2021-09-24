@@ -38,12 +38,12 @@ const Dialogs = (props) => {
 };
 
     // Form validators
-    const maxLength20 = maxLengthCreator(20);
+    const maxLength350 = maxLengthCreator(350);
 
 let MessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.messageInput}>
-            <Field component={Textarea} name="message" placeholder="Enter your message..." validate={[requiredField, maxLength20]} />
+            <Field component={Textarea} name="message" placeholder="Enter your message..." validate={[requiredField, maxLength350]} />
             <button type="submit">Send</button>
         </form>
     )
