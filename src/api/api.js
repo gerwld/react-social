@@ -1,5 +1,5 @@
 import axios from "axios";
-import { captchaStatus, captchaTry, setUserData, userLoggedIn } from "../redux/auth-reducer";
+import { captchaStatus, captchaTry, setUserData, setUserIdAfterLogin, userLoggedIn } from "../redux/auth-reducer";
 import { change, stopSubmit } from 'redux-form';
 
 const instance = axios.create({
@@ -76,6 +76,7 @@ export const loginUserTC = (fieldForm, captchaTryCount) => {
     return (dispatch) => {
 
         authAPI.loginInterface(fieldForm).then(r => {
+            dispatch(setUserIdAfterLogin(r.data.data.userId));
             if (r.data.resultCode === 0) {
                 dispatch(captchaStatus(false, ''));
                 alert('Login successful.');

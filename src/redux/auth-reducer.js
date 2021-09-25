@@ -5,11 +5,13 @@ const SET_USER_DATA = 'SET_USER_DATA';
 const USER_LOGGED_IN = 'USER_LOGGED_IN';
 const CAPTCHA_STATUS = 'CAPTCHA_STATUS';
 const CAPTCHA_TRY = 'CAPTCHA_TRY';
+const SET_USER_ID = 'SET_USER_ID';
 
 export const setUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth}});
 export const userLoggedIn = () => ({type: USER_LOGGED_IN});
 export const captchaTry = () => ({type: CAPTCHA_TRY});
 export const captchaStatus = (isShowing, pic) => ({type: CAPTCHA_STATUS, data: {isShowing, pic}});
+export const setUserIdAfterLogin = (userId) => ({type: SET_USER_ID, userId});
 
 let initialState = {
     userId: null,
@@ -47,7 +49,11 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 captchaTryCount: state.captchaTryCount + 1
             }
-        
+        case SET_USER_ID:
+            return {
+                ...state,
+                userId: action.userId
+            }
         default:
             return state;
     }
