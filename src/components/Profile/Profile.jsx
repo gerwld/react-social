@@ -30,7 +30,7 @@ const Profile = (props) => {
             <li className="user-info__data"><b>Date of Birth:</b> 21 February</li>
             <li className="user-info__data"><b>City:</b> Warsaw</li>
             <li className="user-info__data"><b>Education:</b> SIP Warsaw</li>
-            {props.profile.contacts.vk ? <li className="user-info__data"><b>Web-site:</b> <a href={`http://${props.profile.contacts.vk}`} target="_blank">{props.profile.contacts.vk}</a></li> : null}
+            {props.profile.contacts.vk ? <li className="user-info__data"><b>Web-site:</b> <a href={`http://${props.profile.contacts.vk}`} rel="noreferrer" target="_blank">{props.profile.contacts.vk}</a></li> : null}
           </ul>
         </div>
         <MyPostsContainer />

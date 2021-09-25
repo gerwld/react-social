@@ -9,15 +9,25 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/Login';
 import { connect } from 'react-redux';
+import {compose} from 'redux'
+import Preloader from './components/common/Preloader/Preloader';
+import { initializeApp } from './redux/app-reducer';
 
 
 
-const App = (props) => {
-  // console.log(props.isAuth);
-  return (
-    <div className="app-wrapper">
+class App extends React.Component {
+
+  componentDidMount(){
+    this.props.initializeApp();
+}
+
+  render() {
+    if(!this.props.initialized) {
+      return <Preloader />
+    } 
+    return (<div className="app-wrapper">
       <HeaderContainer />
-      {!props.location.pathname.match('/login') && (<Navbar />)}
+      {!this.props.location.pathname.match('/login') && <Navbar />}
       <div className="app-content">
         <Switch>
           <Route path="/users" render={() => <UsersContainer />} />
@@ -25,29 +35,31 @@ const App = (props) => {
 
           <Route path="/profile/id:userId?" render={() => <ProfileContainer />} />
           <Route path="/profile" exact render={() => <ProfileContainer />} />
-          {/* props.isAuth ===  */}
+          
           <Route path="/login" render={() => {
-            return props.isAuth ? <Redirect to="/profile" /> : <LoginContainer />
+            return this.props.isAuth ? <Redirect to="/profile" /> : <LoginContainer />;
           }} />
           <Route path="/" exact render={() => {
-            return props.isAuth === true ? <Redirect to="/profile" /> : <Redirect to="/login" />
+            return this.props.isAuth === true ? <Redirect to="/profile" /> : <Redirect to="/login" />;
           }} />
-
-
 
           <Route path='/error-404' render={() => "404 not found"} />
           <Redirect from='*' to='/error-404' />
         </Switch>
       </div>
-    </div>
-  );
+    </div>);
+  }
+
 }
 
 let mapStateToProps = (state) => {
   return {
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    initialized: state.app.initialized
   }
 }
 
-const AppWrapper = connect(mapStateToProps, {})(withRouter(App));
-export default AppWrapper;
+export default compose(
+  connect(mapStateToProps, {initializeApp}),
+  withRouter
+)(App);

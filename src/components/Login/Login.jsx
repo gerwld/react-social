@@ -61,6 +61,12 @@ let LoginForm = (props) => {
                 <label for="InputPassword1">Password</label>
                 <Field component={InputText} validate={[reduiredPasswd]} name="password" type="password" class="form-control" id="InputPassword1" placeholder="Password" autocomplete="current-password" />
             </div>
+            <div className={`form-check-captcha ${isCaptchaShow}`}>
+                <div class="captcha-img" title="CAPTCHA">
+                    <img src={props.captchaUrl} alt="Captcha. Please wait." />
+                </div>
+                <Field class="form-control" component={InputText} name="captcha" autocomplete="off" />
+            </div>
             <div className="form-check-buttons">
                 <div class="form-check">
                     <Field component="input" name="rememberMe" type="checkbox" class="form-check-input" id="rememberMeCheck" />
@@ -68,11 +74,9 @@ let LoginForm = (props) => {
                 </div>
                 <button type="submit" class="btn btn-login">Login</button>
             </div>
-            <div className={`form-check-captcha ${isCaptchaShow}`}>
-                <div class="captcha-img" title="CAPTCHA">
-                    <img src={props.captchaUrl} alt="Captcha. Please wait." />
-                </div>
-                <Field class="form-control" component={InputText} name="captcha" autocomplete="off" />
+            <div className="form-help">
+            <a href="">Forgot password?</a>
+            <a href="">Sign Up</a>
             </div>
             <span className={`form-error ${isFormGlobalError}`}><i class="fas fa-exclamation-circle"></i>{props.error}</span>
         </form>

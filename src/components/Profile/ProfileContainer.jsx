@@ -4,15 +4,14 @@ import { connect } from 'react-redux';
 import Profile from './Profile';
 import { getUserInfo, setUserProfile, setUserStatus } from '../../redux/profile-reducer';
 import { withRouter } from 'react-router';
-import { authAPI } from '../../api/api';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { getAuthUserDataTC } from '../../api/api';
 
 
 class ProfileContainerAPI extends React.Component {
   state = {
     status: this.props.status,
-    statusEditMode: false,
-    authUserId: this.props.authUserId
+    statusEditMode: false
   }
 
   activateEditmode = () => {
@@ -34,41 +33,31 @@ class ProfileContainerAPI extends React.Component {
     })
   }
 
-  loadContent = () => {
-    authAPI.getAuth().then(r => {
-      if (r.resultCode === 0) {
-        this.props.getUserInfo(
-          this.props.match.params.userId,
-          r.data.id)
-
-        this.setState({authUserId: r.data.id})
-      }
-    });
-  }
-
   componentDidMount() {
-    this.loadContent();
+    let userId =  this.props.match.params.userId;
+    if (!userId) {
+    userId = this.props.authUserId || this.props.history.push("/login");
+    }
+
+    this.props.getUserInfo(userId);
+
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.status != this.props.status) {
+    if (prevProps.status !== this.props.status) {
       this.setState({
         status: this.props.status
       })
     }
-// TODO:
-    // if(prevProps.match.params.userId !== this.state.authUserId) {
-    // } else {
-    // }
-    // console.log(this.props.match.params.userId + ` params`);
-    // console.log(prevProps.match.params.userId + ` prev params`);
-    // console.log(this.state.authUserId + ` state`);
+    if (prevProps.authUserId !== this.props.authUserId && !this.props.authUserId) {
+      this.props.history.push("/login");
+    }
   }
 
 
   render() {
     return (
-      <Profile profile={this.props.profile} authUserId={this.state.authUserId} statusEditMode={this.state.statusEditMode}
+      <Profile profile={this.props.profile} authUserId={this.props.authUserId} statusEditMode={this.state.statusEditMode}
         activateEdit={this.activateEditmode} deactivateEdit={this.deactivateEditmode} status={this.state.status} statusGlobal={this.props.status} setUserStatus={this.props.setUserStatus}
         inputValue={this.statusInputRef} editInput={this.editInput} />
     )
@@ -79,12 +68,13 @@ let mapStateToProps = (state) => {
   return {
     profile: state.profilePage.profile,
     authUserId: state.auth.userId,
-    status: state.profilePage.status
+    isAuth: state.auth.isAuth,
+    status: state.profilePage.status,
+
   }
 }
 
 export default compose(
-  connect(mapStateToProps, { setUserProfile, getUserInfo, setUserStatus }),
-  withAuthRedirect,
+  connect(mapStateToProps, { setUserProfile, getUserInfo, setUserStatus, getAuthUserDataTC }),
   withRouter
 )(ProfileContainerAPI)
