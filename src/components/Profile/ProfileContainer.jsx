@@ -37,7 +37,7 @@ class ProfileContainerAPI extends React.Component {
     let userId =  this.props.match.params.userId;
     if (!userId) {
     userId = this.props.authUserId || this.props.history.push("/login");
-    } 
+    }
 
     this.props.getUserInfo(userId);
 
@@ -48,6 +48,9 @@ class ProfileContainerAPI extends React.Component {
       this.setState({
         status: this.props.status
       })
+    }
+    if (prevProps.authUserId !== this.props.authUserId && !this.props.authUserId) {
+      this.props.history.push("/login");
     }
   }
 

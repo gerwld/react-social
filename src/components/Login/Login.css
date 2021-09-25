@@ -7,6 +7,10 @@
     display: flex;
 }
 
+.form-check{
+    line-height: 21px;
+}
+
 .form-error {
     display: none;
     width: 100%;
@@ -110,4 +114,39 @@ button.btn-login:hover {
     width: 50%;
     font-weight: 500;
     color: rgb(83, 83, 83)!important;
+}
+
+.form-help {
+    text-align: center;
+}
+
+.form-help a {
+    color: #3a58a5!important;
+    text-decoration: none;
+}
+
+.form-help a:hover {
+    color: #35529c!important;
+    text-decoration: underline;
+}
+
+.form-help a:nth-child(1) {
+    position: relative;
+    margin-right: 20px;
+    margin-left: -10px;
+}
+
+.form-help a:nth-child(1)::after{
+    content: "|";
+    display: block;
+    position: absolute;
+    right: -12px;
+    top: 0;
+    margin-left: 10px;
+    font-weight: normal;
+    color: black;
+}
+
+.form-help a:nth-child(1)::after:hover {
+    color: black;
 }

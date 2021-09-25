@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getUsersThunkCreator, followUserThunkCreator, getPaginationCurrentIndexesTC, onPageChangeThunkCreator } from '../../redux/users-reducer';
+import { getUsersThunkCreator, followUserThunkCreator, getPaginationCurrentIndexesTC, onPageChangeThunkCreator, getAllPages } from '../../redux/users-reducer';
+import { getCurrentPage, getUsers, getIsFetching, getIsFollowing, getTotalUsers, getPageSize, getPagLength, getPages } from '../../redux/users-selectors';
 import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
 
@@ -44,14 +45,14 @@ class UsersAPIComponent extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        isFollowing: state.usersPage.isFollowing,
-        totalUsers: state.usersPage.totalUsers,
-        pageSize: state.usersPage.pageSize,
-        allPages: state.usersPage.allPages,
-        pagLength: state.usersPage.pagLength
+        users: getUsers(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        isFollowing: getIsFollowing(state),
+        totalUsers: getTotalUsers(state),
+        pageSize: getPageSize(state),
+        allPages: getPages(state),
+        pagLength: getPagLength(state)
     }
 }
 
