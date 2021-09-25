@@ -63,14 +63,13 @@ export const authAPI = {
 
 //Thunk creators
 
-export const getAuthUserDataTC = () => {
-    return (dispatch) => {
-        authAPI.getAuth().then(r => {
+export const getAuthUserDataTC = () => 
+    (dispatch) => {
+        return authAPI.getAuth().then(r => {
             if(r.resultCode === 0) {
                 dispatch(setUserData(r.data.id, r.data.email, r.data.login, true));
             }
         })
-    }
 }
 
 export const loginUserTC = (fieldForm, captchaTryCount) => {

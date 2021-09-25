@@ -40,19 +40,16 @@ const profileReducer = (state = initialState, action) => {
 
 //Thunk Creators
 
-export const getUserInfo = (userId, authUserId) => {
+export const getUserInfo = (userId) => {
     return (dispatch) => {
-        let id = userId ? userId : authUserId;
         dispatch(setUserProfile(null));
-        usersAPI.getUser(id).then(r => {
+        usersAPI.getUser(userId).then(r => {
             dispatch(setUserProfile(r.data));
         });
 
-        if (userId === authUserId || !userId) {
-            profileAPI.getStatus(authUserId).then(r => {
-                dispatch(setStatus(r.data));
-            });
-        }
+        profileAPI.getStatus(userId).then(r => {
+            dispatch(setStatus(r.data));
+        });
     }
 }
 
