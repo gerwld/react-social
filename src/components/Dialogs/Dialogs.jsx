@@ -19,13 +19,13 @@ const Dialogs = (props) => {
 
     return (
         <div>
-            <span className={s.title}>Dialogs</span>
             <div className={s.dialogs_frame}>
                 <ul className={s.userlist}>
                     {props.usersMap}
 
                 </ul>
                 <div className={s.dialog_window}>
+                    <span className={s.current_dialog}>Anton Bennett</span>
                     <div>
                         {props.dialogMap}
                         <div ref={endDial} className={s.end_dial} />
@@ -37,14 +37,15 @@ const Dialogs = (props) => {
     );
 };
 
-    // Form validators
-    const maxLength350 = maxLengthCreator(350);
+// Form validators
+const maxLength350 = maxLengthCreator(350);
 
 let MessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.messageInput}>
+            <span className={s.add_file} title="Add a file..." alt="Add a file..."><i class="fas fa-paperclip" /></span>
             <Field component={Textarea} name="message" placeholder="Enter your message..." validate={[requiredField, maxLength350]} />
-            <button type="submit">Send</button>
+            <button type="submit"><i class="far fa-paper-plane" /></button>
         </form>
     )
 }

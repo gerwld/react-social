@@ -5,39 +5,67 @@ span.title {
     font-weight: bold;
 }
 
+.end_dial {
+    padding-top: 60px;
+}
+
 .dialogs_frame {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    height: 85vh;
 }
 
 .dialog_window {
     position: relative;
     flex: 1;
     padding: 30px;
-    padding-top: 60px;
-    height: 80vh;
+    padding-top: 0;
+    height: 100%;
     box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+.current_dialog {
+    display: block;
+    position: absolute;
+    padding: 20px;
+    margin-left: -1px;
+    width: calc(100% + 2px);
+    left: 0;
+    top: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: capitalize;
+    background-color: #fff;
+    color: #535353;
+    border: 1px solid rgb(214, 214, 214);
+    border-radius: 4px;
 }
 
 .dialog_window > div {
     width: 100%;
-    height: 55vh;
+    height: calc(100% - 10vh);
+    margin-top: 65px;
     overflow: hidden;
     overflow-y: scroll;
+}
+
+.dialog_window > div > div:nth-child(1) {
+    margin-top: 20px;
 }
 
 .userlist {
     padding: 0;
     margin: 0;
     padding-bottom: 20px;
-    margin-top: 30px;
-    width: 250px;
-    max-height: 75vh;
+    width: 230px;
+    height: 100%;
+
     list-style: none;
     overflow: hidden;
     overflow-y: scroll;
-    border-right: 2px solid #dcdbdb;
 }
 
 .userlist li a {
@@ -77,8 +105,9 @@ span.title {
     background-color: #e7e7e7;
 }
 
-.message img {
+.message .userAvatar {
 width: 45px;
+border-radius: 50%;
 }
 
 .message {
@@ -86,10 +115,6 @@ width: 45px;
     margin-bottom: 30px;
     justify-content: flex-start;
     align-items: flex-start;
-}
-
-.end_dial {
-    padding-top: 10px;
 }
 
 .message_content {
@@ -106,45 +131,45 @@ width: 45px;
 
 .messageInput {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
-    width: 99%;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     position: absolute;
     z-index: 10000;
-    bottom: -4px;
-    left: 1%;
-
+    bottom: -5px;
+    left: 0;
     padding: 30px;
-    background-color: #ededed;
+    background-color: white;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: 0 0 5px 5px;
+    border-top: 1px solid #e3e3e3;
 }
 
 .messageInput textarea,
 .messageInput button {
     display: block;
-    margin-left: auto;
     border: none;
-    border-radius: 3px;
+    border-radius: var(--button-radius-ui);
 }
 
 .messageInput textarea {
     min-width: 500px;
     max-width: 500px;
-    height: 70px;
+    height: 60px;
     max-height: 100px;
-    min-height: 70px;
+    min-height: 60px;
 
     padding: 10px;
     font-family: inherit;
     font-size: 15px;
     box-sizing: border-box;
+    border: var(--page-border);
 }
 
 .messageInput button {
-    padding: 10px 20px;
-    margin-top: 15px;
+    min-width: 50px;
+    min-height: 50px;
+    margin-left: 20px;
     color: white;
     background-color: #4c6dc1;
     transition: 0.4s ease-in-out;
@@ -167,4 +192,13 @@ width: 45px;
 
 .floatRight {
     margin-left: auto;
+}
+
+.add_file {
+    color: #ababab!important;
+    font-size: 20px;
+    padding: 10px;
+    margin-right: 5px;
+    align-self: flex-start;
+    cursor: pointer;
 }

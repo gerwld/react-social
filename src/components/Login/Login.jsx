@@ -34,6 +34,7 @@ class Login extends React.Component {
             height: 800px;
             border: 1px solid #e6e6e6;
             border-radius: 5px;
+            background-color: #ffffff;
             }`}
                 </Style>
             </div>

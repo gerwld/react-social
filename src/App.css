@@ -44,10 +44,10 @@
   margin: 0 auto;
   box-sizing: content-box;
   display: grid;
-  grid-gap: 10px;
+  grid-gap: var(--gap-between-blocks-s);
   grid-template-columns: 150px 1fr;
 }
 
 .app-content {
-  
+  margin-bottom: 15px;
 }

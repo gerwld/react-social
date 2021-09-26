@@ -5,7 +5,7 @@ const Message = (props) => {
     const userdata = props.userdata ? props.userdata : "Gerwld";
     return (
         <div className={s.message}>
-            <img alt="User Avatar" src={userPic}></img>
+            <img className={s.userAvatar} alt="User Avatar" src={userPic}></img>
             <div className={s.message_content}>
                 <span className={s.user_data}>{userdata}</span>
                 <span>{props.content}</span>
