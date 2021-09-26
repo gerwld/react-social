@@ -1,4 +1,5 @@
 import React from 'react'
+import { createSelector } from 'reselect'
 
 export const getUsers = (state) => {
     return state.usersPage.users;
@@ -31,3 +32,12 @@ export const getPages = (state) => {
 export const getPagLength = (state) => {
     return state.usersPage.pagLength;
 }
+
+//React 'reselect' selector, created to optimize re-render in SPA. Starts only when getPagLength part of state was changed
+//If it's not - get old return from cache
+
+export const getPagLengthWithCreateSelecor = createSelector([getPagLength], (length) => {
+    // length.filter(() => true);
+    return length + 2 - 2;
+    // return length;
+})
