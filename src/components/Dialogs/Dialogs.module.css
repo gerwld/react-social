@@ -19,8 +19,7 @@ span.title {
 .dialog_window {
     position: relative;
     flex: 1;
-    padding: 30px;
-    padding-top: 0;
+    padding: 0 10px 30px 40px;
     height: 100%;
     box-sizing: border-box;
     background-color: #ffffff;
