@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { getUsersThunkCreator, followUserThunkCreator, getPaginationCurrentIndexesTC, onPageChangeThunkCreator, getAllPages } from '../../redux/users-reducer';
-import { getCurrentPage, getUsers, getIsFetching, getIsFollowing, getTotalUsers, getPageSize, getPagLength, getPages } from '../../redux/users-selectors';
+import { getCurrentPage, getUsers, getIsFetching, getIsFollowing, getTotalUsers, getPageSize, getPagLength, getPages, getPagLengthWithCreateSelecor } from '../../redux/users-selectors';
 import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
 
@@ -52,7 +52,7 @@ const mapStateToProps = (state) => {
         totalUsers: getTotalUsers(state),
         pageSize: getPageSize(state),
         allPages: getPages(state),
-        pagLength: getPagLength(state)
+        pagLength: getPagLengthWithCreateSelecor(state)
     }
 }
 
