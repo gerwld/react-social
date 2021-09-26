@@ -8,7 +8,7 @@ let Users = (props) => {
             <span className={s.title}>Friends({props.totalUsers})</span>
             <div className={s.users_section}>
                 {
-                    props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub}`}>
+                    props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub} main-content-block`}>
                         <div className={s.user_avatar}>
                             <NavLink to={`/profile/id1${u.id}`}>
                                 <img src={u.photos.small ? (`${u.photos.small}`) : (`/images/avatars/def-avatar.png`)}></img>

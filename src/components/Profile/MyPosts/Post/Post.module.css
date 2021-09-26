@@ -4,6 +4,7 @@
     height: auto;
     margin-right: 10px;
     vertical-align: middle;
+    border-radius: 50%;
   }
   
   .user_posts__last_item {

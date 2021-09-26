@@ -1,3 +1,12 @@
+
+
+.profile-page {
+  display: grid;
+  grid-gap: 15px;
+  grid-gap: var(--gap-between-blocks);
+  grid-template-columns: 300px 1fr;
+}
+
 .main-image img {
   width: 100%;
   object-fit: cover; 
@@ -7,19 +16,17 @@
 .main-image {
   width: 100%;
   height: 200px;
-  margin-bottom: 10px;
-  border-radius: 5px;
   overflow: hidden;
+  padding: 0!important;
+
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
-
-
 
 .user-profile__img {
   width: 155px;
   height: 155px;
-  border-radius: 50%;
-
-  margin-top: 10px;
+  border-radius: 7%;
 }
 
 .user-profile__info {
@@ -40,8 +47,9 @@
 .user-profile {
   display: flex;
   align-items: center;
-  margin: 10px 0 20px;
-  margin-left: 20px;
+
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .user-info__data {

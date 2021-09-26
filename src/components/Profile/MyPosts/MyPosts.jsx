@@ -9,7 +9,7 @@ const MyPosts = (props) => {
   let currentPost = React.createRef();
 
   return (
-    <div className={s.user_posts}>
+    <div className={`${s.user_posts} main-content-block`}>
       <span className={s.title}>My Posts</span>
       <MyPostReduxForm onSubmit={e => props.sendPost(e)} {...props} currentPost={currentPost} />
       <div className={s.user_posts__last}>
