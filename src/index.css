@@ -7,6 +7,9 @@
   --padding-inside-ui: 10px 17.5px;
   --gap-between-blocks-s: 10px;
   --gap-between-blocks: 12px;
+  --icons-propr-color: #aeb7c2;
+  --main-blue-color: #4c6dc1;
+  --subhead-text: #626d7a;
 }
 
 body {
@@ -40,4 +43,8 @@ code {
   border-radius: var(--border-radius-ui);
   box-shadow: var(--page-block-shadow);
   background-color: #ffffff;
+}
+
+.main-content-block a {
+  color: var(--main-blue-color);
 }

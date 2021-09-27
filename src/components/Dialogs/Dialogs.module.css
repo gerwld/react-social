@@ -23,6 +23,7 @@ span.title {
     height: 100%;
     box-sizing: border-box;
     background-color: #ffffff;
+    box-shadow: var(--page-block-shadow);
 }
 
 .current_dialog {
@@ -147,7 +148,8 @@ border-radius: 50%;
     background-color: white;
     box-sizing: border-box;
     border-radius: 0 0 5px 5px;
-    border-top: 1px solid #e3e3e3;
+    border-top: 1px solid #f3f3f3;
+    box-shadow: var(--page-block-shadow);
 }
 
 .messageInput textarea,
