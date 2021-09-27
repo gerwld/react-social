@@ -14,7 +14,7 @@ let Users = (props) => {
                                 <img src={u.photos.small ? (`${u.photos.small}`) : (`/images/avatars/def-avatar.png`)}></img>
                             </NavLink>
                         </div>
-                        <div class={s.user_mainInfo}>
+                        <div className={s.user_mainInfo}>
                             <div className={s.user_name}><NavLink to={`/profile/id${u.id}`}>{u.name}</NavLink></div>
                             <div className={s.user_status}>{u.status}</div>
                             <div className={`${s.action_buttons} ${s.main_actions}`}><NavLink to={`/dialogs/id${u.id}`}>Write a message</NavLink> | <a>Call</a></div>

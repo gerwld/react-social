@@ -43,9 +43,9 @@ const maxLength350 = maxLengthCreator(350);
 let MessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.messageInput}>
-            <span className={s.add_file} title="Add a file..." alt="Add a file..."><i class="fas fa-paperclip" /></span>
+            <span className={s.add_file} title="Add a file..." alt="Add a file..."><i className="fas fa-paperclip" /></span>
             <Field component={Textarea} name="message" placeholder="Enter your message..." validate={[requiredField, maxLength350]} />
-            <button type="submit"><i class="far fa-paper-plane" /></button>
+            <button type="submit"><i className="far fa-paper-plane" /></button>
         </form>
     )
 }
