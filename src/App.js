@@ -10,7 +10,7 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/Login';
 import { connect } from 'react-redux';
 import {compose} from 'redux'
-import Preloader from './components/common/Preloader/Preloader';
+import { MainPreloader } from './components/common/Preloader/Preloader';
 import { initializeApp } from './redux/app-reducer';
 
 
@@ -23,7 +23,7 @@ class App extends React.Component {
 
   render() {
     if(!this.props.initialized) {
-      return <Preloader />
+      return <MainPreloader />
     } 
     return (<div className="app-wrapper">
       <HeaderContainer />
