@@ -52,33 +52,33 @@ let LoginForm = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
-            <div class="form-group">
+            <div className="form-group">
                 <label for="InputEmail1">Email address</label>
-                <Field component={InputText} validate={[reduiredEmail, isEmailValid]} name="email" type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email" autocomplete="email" />
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <Field component={InputText} validate={[reduiredEmail, isEmailValid]} name="email" type="email" className="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email" autocomplete="email" />
+                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
-            <div class="form-group">
+            <div className="form-group">
                 <label for="InputPassword1">Password</label>
-                <Field component={InputText} validate={[reduiredPasswd]} name="password" type="password" class="form-control" id="InputPassword1" placeholder="Password" autocomplete="current-password" />
+                <Field component={InputText} validate={[reduiredPasswd]} name="password" type="password" className="form-control" id="InputPassword1" placeholder="Password" autocomplete="current-password" />
             </div>
             <div className={`form-check-captcha ${isCaptchaShow}`}>
-                <div class="captcha-img" title="CAPTCHA">
+                <div className="captcha-img" title="CAPTCHA">
                     <img src={props.captchaUrl} alt="Captcha. Please wait." />
                 </div>
-                <Field class="form-control" component={InputText} name="captcha" autocomplete="off" />
+                <Field className="form-control" component={InputText} name="captcha" autocomplete="off" />
             </div>
             <div className="form-check-buttons">
-                <div class="form-check">
-                    <Field component="input" name="rememberMe" type="checkbox" class="form-check-input" id="rememberMeCheck" />
-                    <label class="form-check-label" for="rememberMeCheck">Remember me</label>
+                <div className="form-check">
+                    <Field component="input" name="rememberMe" type="checkbox" className="form-check-input" id="rememberMeCheck" />
+                    <label className="form-check-label" for="rememberMeCheck">Remember me</label>
                 </div>
-                <button type="submit" class="btn btn-login">Login</button>
+                <button type="submit" className="btn btn-login">Login</button>
             </div>
             <div className="form-help">
             <a href="">Forgot password?</a>
             <a href="">Sign Up</a>
             </div>
-            <span className={`form-error ${isFormGlobalError}`}><i class="fas fa-exclamation-circle"></i>{props.error}</span>
+            <span className={`form-error ${isFormGlobalError}`}><i className="fas fa-exclamation-circle"></i>{props.error}</span>
         </form>
     )
 }

@@ -195,7 +195,8 @@
     margin: 15px 0;
     margin-left: calc((600px - 120px) / 2);
     border: none;
-    border-radius: 5px;
     color: #ffffff;
     background-color: var(--main-blue-color);
+    border-radius: var(--border-radius-ui);
+    box-shadow: var(--page-block-shadow);
 }

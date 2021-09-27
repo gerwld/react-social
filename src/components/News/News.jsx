@@ -52,19 +52,19 @@ const FeedBlock = (props) => {
             </div>
             <div className={s.block_buttons}>
                 <div className={s.like_btn}>
-                    <button onClick=""><i class="far fa-heart" /></button>
+                    <button ><i className="far fa-heart" /></button>
                     <span>32</span>
                 </div>
                 <div className={s.comment_btn}>
-                    <button onClick=""><i class="far fa-comment-alt"></i></button>
+                    <button ><i className="far fa-comment-alt"></i></button>
                     <span>0</span>
                 </div>
                 <div className={s.share_btn}>
-                    <button onClick=""><i class="fa fa-share" /></button>
+                    <button ><i className="fa fa-share" /></button>
                 </div>
             </div>
             <div className={s.control_buttons}>
-                <button onClick=""><i class="fas fa-ellipsis-h"></i></button>
+                <button ><i className="fas fa-ellipsis-h"></i></button>
             </div>
         </div>
     )
@@ -75,9 +75,9 @@ const WhatsNew = (props) => {
         <form onSubmit={props.handleSubmit}>
             <div className={s.whatsnew_field}>
                 <Field component="textarea" name="whats-new" placeholder="What's going on?" />
-                <button className={s.clipFile} type="button"><i class="fa fa-camera"></i></button>
+                <button className={s.clipFile} type="button"><i className="fa fa-camera"></i></button>
             </div>
-            <button className={s.send} type="submit"><i class="fa fa-paper-plane"></i></button>
+            <button className={s.send} type="submit"><i className="fa fa-paper-plane"></i></button>
         </form>
     )
 }
