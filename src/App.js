@@ -1,16 +1,15 @@
 import React from 'react';
-import { withRouter, Redirect, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import { Route } from 'react-router-dom';
+import { MainPreloader } from './components/common/Preloader/Preloader';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/Login';
-import { connect } from 'react-redux';
-import {compose} from 'redux'
-import { MainPreloader } from './components/common/Preloader/Preloader';
+import Navbar from './components/Navbar/Navbar';
+import ProfileContainer from './components/Profile/ProfileContainer';
+import UsersContainer from './components/Users/UsersContainer';
 import { initializeApp } from './redux/app-reducer';
 
 

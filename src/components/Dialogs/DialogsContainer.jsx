@@ -1,12 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { compose } from 'redux';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { onSendTC } from '../../redux/dialogs-reducer';
+import Dialogs from './Dialogs';
 import s from './Dialogs.module.css';
 import Message from './Message';
-import Dialogs from './Dialogs';
-import { onSendTC } from '../../redux/dialogs-reducer';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 
 let mapStateToProps = (state) => {

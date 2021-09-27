@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import s from './Preloader.module.css';
 import loaderImg from '../../../img/loader.svg';
+import s from './Preloader.module.css';
 
 const Preloader = () => {
     return (
@@ -11,7 +10,6 @@ const Preloader = () => {
 }
 
 export const MainPreloader = () => {
-
     return (
         <div className={s.mainLoaderAnimation}>
             <span className={s.loading}>Loading</span>
