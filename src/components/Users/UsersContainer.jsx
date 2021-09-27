@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getUsersThunkCreator, followUserThunkCreator, getPaginationCurrentIndexesTC, onPageChangeThunkCreator, getAllPages } from '../../redux/users-reducer';
-import { getCurrentPage, getUsers, getIsFetching, getIsFollowing, getTotalUsers, getPageSize, getPagLength, getPages, getPagLengthWithCreateSelecor } from '../../redux/users-selectors';
+import { followUserThunkCreator, getPaginationCurrentIndexesTC, getUsersThunkCreator, onPageChangeThunkCreator } from '../../redux/users-reducer';
+import { getCurrentPage, getIsFetching, getIsFollowing, getPages, getPageSize, getPagLengthWithCreateSelecor, getTotalUsers, getUsers } from '../../redux/users-selectors';
 import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
 

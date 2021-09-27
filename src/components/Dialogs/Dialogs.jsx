@@ -1,8 +1,8 @@
-import s from './Dialogs.module.css';
 import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, requiredField } from '../../utils/validators/validator';
 import { Textarea } from '../common/FormControls/FormControls';
+import s from './Dialogs.module.css';
 
 const Dialogs = (props) => {
     let endDial = React.createRef();

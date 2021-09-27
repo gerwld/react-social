@@ -6,7 +6,7 @@ span.title {
 }
 
 .end_dial {
-    padding-top: 60px;
+    padding-top: 20px;
 }
 
 .dialogs_frame {
@@ -45,7 +45,7 @@ span.title {
 
 .dialog_window > div {
     width: 100%;
-    height: calc(100% - 10vh);
+    height: calc(100% - 151px);
     margin-top: 65px;
     overflow: hidden;
     overflow-y: scroll;
@@ -99,9 +99,15 @@ span.title {
     border: 0px solid white;
 }
 
-.userlist .selected_item,
-.userlist .selected_item:hover {
+/* TODO: */
+/* .userlist .selected_item,
+.userlist .selected_item:hover{
+
+} */
+
+.userlist li:nth-child(2) a {
     background-color: #e7e7e7;
+    box-shadow: inset 1px 2px 3px 0 #bdbdbd;
 }
 
 .message .userAvatar {

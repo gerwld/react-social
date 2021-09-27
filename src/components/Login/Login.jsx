@@ -1,13 +1,12 @@
 import React from 'react';
-import { compose } from 'redux';
-import './Login.css';
-import { Style } from "react-style-tag";
-import { Field, reduxForm } from 'redux-form'
-import { loginUserTC } from '../../api/api';
-import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { Style } from "react-style-tag";
+import { compose } from 'redux';
+import { Field, reduxForm } from 'redux-form';
+import { loginUserTC } from '../../api/api';
 import { isEmailValid, requiredFieldText } from '../../utils/validators/validator';
 import { InputText } from '../common/FormControls/FormControls';
+import './Login.css';
 
 
 class Login extends React.Component {
