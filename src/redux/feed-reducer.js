@@ -9,7 +9,9 @@ export const onSend = (message, userID, userdata, avatar) => ({ type: SEND_MESSA
 export const loadPosts = (posts) => ({ type: LOAD_POSTS, posts });
 
 let initialState = {
-    posts: null
+    posts: [],
+    nextPage: 1,
+    pageSize: 5
 }
 
 const feedReducer = (state = initialState, action) => {
@@ -18,10 +20,14 @@ const feedReducer = (state = initialState, action) => {
             return state;
         }
         case LOAD_POSTS: {
-            return {
+            let haha = {
                 ...state,
-                posts: action.posts
+                nextPage: state.nextPage + 1,
+                posts: [...state.posts, ...action.posts]
             }
+
+            return haha;
+            
         }
 
         default:
@@ -29,12 +35,10 @@ const feedReducer = (state = initialState, action) => {
     }
 }
 
-export const loadPostsTC = (serving = 5, currPage = 1) => {
+export const loadPostsTC = (pageSize = 5) => {
     return (dispatch, getState) => {
-        entertaimentAPI.getPosts(serving, currPage).then(r => {
-            // debugger;
+        entertaimentAPI.getPosts(pageSize, (getState().feed.nextPage)).then(r => {
             dispatch(loadPosts(r));
-            console.log(getState());
         });
     }
 }

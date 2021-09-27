@@ -8,7 +8,9 @@ const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
     var whatsNewSubmit = (submit) => { };
     var postsMap = props.posts.map(post => {
-        return <FeedBlock text={post.title} avatar={post.avatar} nv={noAvatar} author={post.source.name} data={post.publishedAt} img={post.urlToImage} />
+        return <FeedBlock text={post.title} avatar={post.avatar} nv={noAvatar}
+            author={post.source.name} data={post.publishedAt} img={post.urlToImage}
+            postLink={post.url} />
     })
 
     return (
@@ -18,6 +20,7 @@ const News = (props) => {
                 <WhatsNewForm onSubmit={whatsNewSubmit} />
             </div>
             {postsMap}
+            <button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>
         </div>
 
     )
@@ -33,7 +36,7 @@ const FeedBlock = (props) => {
         <div className={`${s.feed__main_block} main-content-block`}>
             <div className={s.block_author}>
                 <div className={s.author_avatar}>
-                {props.avatar ? <img src={props.avatar} alt="Author avatar" /> : <img src={props.nv} alt="Author avatar" />}
+                    {props.avatar ? <img src={props.avatar} alt="Author avatar" /> : <img src={props.nv} alt="Author avatar" />}
                 </div>
                 <div className={s.main_info}>
                     <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
@@ -42,9 +45,9 @@ const FeedBlock = (props) => {
             </div>
             <div className={s.block_content}>
                 <p>{props.text}</p>
-                {props.img  &&
+                {props.img &&
                     <div className={s.post_image}>
-                        <img src={props.img} alt="Post img" />
+                        <a href={props.postLink} target="_blank" rel="noreferrer"><img src={props.img} alt="Post img" /></a>
                     </div>}
             </div>
             <div className={s.block_buttons}>

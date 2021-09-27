@@ -12,9 +12,9 @@ class NewsContainer extends React.Component {
     }
 
     render() {
-        if(this.props.posts) {
+        if(this.props.posts.length > 3) {
         return (
-            <News news={this.news} posts={this.props.posts} />
+            <News news={this.news} posts={this.props.posts} loadPosts={this.props.loadPostsTC} />
         )}
         else {
             return (

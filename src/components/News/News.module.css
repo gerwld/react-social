@@ -186,3 +186,16 @@
     border: 0px solid #e3e3e3;
     border-radius: 50%;
 }
+
+.loadMore {
+    display: block;
+    width: 120px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    margin: 15px 0;
+    margin-left: calc((600px - 120px) / 2);
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: var(--main-blue-color);
+}
