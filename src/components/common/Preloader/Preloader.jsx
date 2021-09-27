@@ -1,7 +1,7 @@
 import loaderImg from '../../../img/loader.svg';
 import s from './Preloader.module.css';
 
-const Preloader = () => {
+export const Preloader = () => {
     return (
         <div className={s.loaderAnimation}>
             <img src={loaderImg} alt="Loading... Please wait"></img>

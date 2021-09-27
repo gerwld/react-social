@@ -61,6 +61,12 @@ export const authAPI = {
     }
 }
 
+export const entertaimentAPI = {
+    getPosts(serving, currPage) {
+        return axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
+    }
+}
+
 //Thunk creators
 
 export const getAuthUserDataTC = () => 
