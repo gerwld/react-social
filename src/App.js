@@ -7,8 +7,11 @@ import { MainPreloader } from './components/common/Preloader/Preloader';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/Login';
+import MusicContainer from './components/Music/MusicContainer';
 import Navbar from './components/Navbar/Navbar';
+import NewsContainer from './components/News/NewsContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import SettingsContainer from './components/Settings/SettingsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import { initializeApp } from './redux/app-reducer';
 
@@ -31,6 +34,9 @@ class App extends React.Component {
         <Switch>
           <Route path="/users" render={() => <UsersContainer />} />
           <Route path="/dialogs" render={() => <DialogsContainer />} />
+          <Route path="/feed" render={() => <NewsContainer />} />
+          <Route path="/settings" render={() => <SettingsContainer />} />
+          <Route path="/music" render={() => <MusicContainer />} />
 
           <Route path="/profile/id:userId?" render={() => <ProfileContainer />} />
           <Route path="/profile" exact render={() => <ProfileContainer />} />
