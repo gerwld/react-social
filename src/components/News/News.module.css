@@ -200,3 +200,19 @@
     border-radius: var(--border-radius-ui);
     box-shadow: var(--page-block-shadow);
 }
+
+.all_caugth {
+    width: 600px;
+    text-align: center;
+    margin: 25px 0 15px;
+    font-size: 14px;
+    color: var(--subhead-text);
+}
+
+.all_caugth p {
+    color: #9199a3;
+}
+
+.all_caugth i {
+    color: rgb(57, 199, 121);
+}

@@ -3,34 +3,39 @@ import s from "./News.module.css";
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import moment from 'moment';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
-    var whatsNewSubmit = (submit) => { };
-    var postsMap = props.posts.map(post => {
-        return <FeedBlock text={post.title} avatar={post.avatar} nv={noAvatar}
-            author={post.source.name} data={post.publishedAt} img={post.urlToImage}
-            postLink={post.url} />
-    })
+    var isHasMore = props.currentPage < 3;
 
     return (
         <div>
             <div className={`${s.whats_new_block} main-content-block`}>
                 <div className={`${s.author_avatar} ${s.whatsnew_avatar}`}><img src={noAvatar} alt="Avatar" /></div>
-                <WhatsNewForm onSubmit={whatsNewSubmit} />
+                <WhatsNewForm onSubmit={props.whatsNewSubmit} />
             </div>
-            {postsMap}
-            <button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>
+            {props.postsMap(noAvatar)}
+            <InfiniteScroll
+                pageStart={1}
+                loadMore={props.loadPosts}
+                hasMore={isHasMore}
+                initialLoad={true}
+                threshold={70}
+                loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}
+            > 
+            </InfiniteScroll>
+            {!isHasMore && <div className={s.all_caugth}>
+                <span>You're All Caught Up <i className="far fa-check-circle"></i></span>
+                <p>You've seen all new post from the past {props.lastPostTime}</p>
+                </div>}
         </div>
 
     )
 }
 
-const FeedBlock = (props) => {
-
-    var time = (data = props.data) => {
-        return moment(data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
-    }
+export const FeedBlock = (props) => {
+    var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
 
     return (
         <div className={`${s.feed__main_block} main-content-block`}>
@@ -40,7 +45,7 @@ const FeedBlock = (props) => {
                 </div>
                 <div className={s.main_info}>
                     <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
-                    <span className={s.post_time}>{time()}</span>
+                    <span className={s.post_time}>{time}</span>
                 </div>
             </div>
             <div className={s.block_content}>
