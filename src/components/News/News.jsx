@@ -7,7 +7,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
-    var isHasMore = props.currentPage < 2;
+    var isHasMore = props.currentPage < 3;
 
     return (
         <div>
@@ -21,7 +21,7 @@ const News = (props) => {
                 loadMore={props.loadPosts}
                 hasMore={isHasMore}
                 initialLoad={true}
-                threshold={350}
+                threshold={70}
                 loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}
             > 
             </InfiniteScroll>
