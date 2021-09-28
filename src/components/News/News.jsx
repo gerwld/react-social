@@ -3,6 +3,7 @@ import s from "./News.module.css";
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import moment from 'moment';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
@@ -12,6 +13,7 @@ const News = (props) => {
             author={post.source.name} data={post.publishedAt} img={post.urlToImage}
             postLink={post.url} />
     })
+    var isHasMore = props.currentPage < 2;
 
     return (
         <div>
@@ -20,7 +22,19 @@ const News = (props) => {
                 <WhatsNewForm onSubmit={whatsNewSubmit} />
             </div>
             {postsMap}
-            <button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>
+            <InfiniteScroll
+                pageStart={2}
+                loadMore={props.loadPosts}
+                hasMore={isHasMore}
+                initialLoad={false}
+                threshold={350}
+                loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}
+            > 
+            </InfiniteScroll>
+            {!isHasMore && <div className={s.all_caugth}>
+                <span>You're All Caught Up <i className="far fa-check-circle"></i></span>
+                <p>You've seen all new post from the past {props.lastPostTime}</p>
+                </div>}
         </div>
 
     )
