@@ -17,6 +17,7 @@ const News = (props) => {
             </div>
             {props.postsMap(noAvatar)}
             <InfiniteScroll
+                children=""
                 pageStart={1}
                 loadMore={props.loadPosts}
                 hasMore={isHasMore}

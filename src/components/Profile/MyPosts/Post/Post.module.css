@@ -14,10 +14,6 @@
     line-height: 18px;
   }
   
-  .empty_cm {
-      color: gray;
-  }
-
   .post_content {
     width: 90%;
   }
@@ -45,12 +41,15 @@
     background-image: url('../../../../img/heart.svg');
 
   }
+  
+  .empty_cm {
+      color: gray;
+  }
 
-  .likes_disabled {
+  .empty_cm + .likes_count {
     filter: saturate(0)
             brightness(1.5);
   }
-
 
 .post_content span:first-of-type {
   line-height: 140%;

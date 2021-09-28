@@ -31,15 +31,15 @@ const MainInfo = (props) => {
     <div className="user-profile main-content-block">
       <img alt="Avatar" className="user-profile__img" src={avatar_check}></img>
       <ul className="user-profile__info">
-        <li className="user-info__name">{props.profile.fullName}</li>
+        <li key="fgerf" className="user-info__name">{props.profile.fullName}</li>
 
-        <li className="user-info__data">
+        <li key="fgers" className="user-info__data">
           {isCurrentUserProfile ? <StatusEditable {...props} /> : (props.profile.aboutMe || "Status is not set.")}
         </li>
 
-        <li className="user-info__data"><b>Date of Birth:</b> 21 February</li>
-        <li className="user-info__data"><b>City:</b> Warsaw</li>
-        <li className="user-info__data"><b>Education:</b> SIP Warsaw</li>
+        <li key="fger4" className="user-info__data"><b>Date of Birth:</b> 21 February</li>
+        <li key="fgder" className="user-info__data"><b>City:</b> Warsaw</li>
+        <li key="ffger" className="user-info__data"><b>Education:</b> SIP Warsaw</li>
         {props.profile.contacts.vk ? <li className="user-info__data"><b>Web-site:</b> <a href={`http://${props.profile.contacts.vk}`} rel="noreferrer" target="_blank">{props.profile.contacts.vk}</a></li> : null}
       </ul>
     </div>)

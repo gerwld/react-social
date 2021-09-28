@@ -3,7 +3,7 @@ import { profileAPI, usersAPI } from "../api/api";
 
 let initialState = {
     postData: [
-        { id: 2, likes: 999 },
+        { id: 2, cont: "That site is so cool!", likes: 9 },
         { id: 1, cont: "Deez nuts... Today everything is fine, just vibing with my famity #coolday", likes: 28 },
         { id: 0, cont: "Hi there!! 2007 is rock!", likes: 23 }
     ],

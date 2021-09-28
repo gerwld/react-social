@@ -8,12 +8,12 @@ class Navbar extends React.Component {
         return (
             <nav className={s.app_navbar}>
                 <ul>
-                    <li key="2"><NavLink to="/profile" activeClassName={s.current}>Profile</NavLink></li>
-                    <li key="3"><NavLink to="/feed" activeClassName={s.current}>News</NavLink></li>
-                    <li key="3"><NavLink to="/dialogs" activeClassName={s.current}>Messages</NavLink></li>
+                    <li key="0"><NavLink to="/profile" activeClassName={s.current}>Profile</NavLink></li>
+                    <li key="1"><NavLink to="/feed" activeClassName={s.current}>News</NavLink></li>
+                    <li key="2"><NavLink to="/dialogs" activeClassName={s.current}>Messages</NavLink></li>
                     <li key="3"><NavLink to="/users" activeClassName={s.current}>Friends</NavLink></li>
-                    <li key="3"><NavLink to="/music" activeClassName={s.current}>Music</NavLink></li>
-                    <li key="3"><NavLink to="/settings" activeClassName={s.current}>Settings</NavLink></li>
+                    <li key="4"><NavLink to="/music" activeClassName={s.current}>Music</NavLink></li>
+                    <li key="5"><NavLink to="/settings" activeClassName={s.current}>Settings</NavLink></li>
                 </ul>
             </nav>
         );
