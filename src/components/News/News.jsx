@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import s from "./News.module.css";
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
@@ -37,6 +37,22 @@ const News = (props) => {
 
 export const FeedBlock = (props) => {
     var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
+    let [isLikePressed, toggleLike] = useState(false);
+    let [likesCount, likeAction] = useState(22 + Math.floor(Math.random()*10));
+
+    let likePress = (e, id) => {
+        let buttonIcon = e.currentTarget.children[0];
+        //change after to send request with id => get responce, then change local state
+        if(isLikePressed){
+            toggleLike(false);
+            likeAction(likesCount - 1);
+            buttonIcon.className = "far fa-heart";
+        } else {
+            toggleLike(true);
+            likeAction(likesCount + 1);
+            buttonIcon.className = `fa fa-heart ${s.like_pressed}`;
+        }
+    }
 
     return (
         <div className={`${s.feed__main_block} main-content-block`}>
@@ -58,8 +74,8 @@ export const FeedBlock = (props) => {
             </div>
             <div className={s.block_buttons}>
                 <div className={s.like_btn}>
-                    <button ><i className="far fa-heart" /></button>
-                    <span>32</span>
+                    <button onClick={e => likePress(e)}><i className="far fa-heart" /></button>
+                    <span>{likesCount}</span>
                 </div>
                 <div className={s.comment_btn}>
                     <button ><i className="far fa-comment-alt"></i></button>

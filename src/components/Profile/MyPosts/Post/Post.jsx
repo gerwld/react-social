@@ -1,24 +1,32 @@
-import s from './Post.module.css';
+import { useState } from 'react';
+import './Post.css';
 
 const Post = (props) => {
+    let [isLikePressed, toggleLike] = useState(false);
+    let [likesCount, likeAction] = useState(props.likes);
     let isPostNotEmpty = (props.value && props.value !== " " && props.value !== "");
-    let avatar_check = (pic) => { 
-        if(pic.large) {
-            return pic.large;
+
+    let likePress = (e, id) => {
+        //change after to send request with id => get responce, then change local state
+        if(isLikePressed){
+            toggleLike(false);
+            likeAction(likesCount - 1);
+            e.currentTarget.className = "likes_count";
         } else {
-            if(pic.small) return pic.small;
-            return "/images/avatars/def-avatar.png";
+            toggleLike(true);
+            likeAction(likesCount + 1);
+            e.currentTarget.className = "likes_count like_pressed";
         }
     }
- 
+
         return (
-            <div className={s.user_posts__last_item}>
-                <img alt="Avatar" src={avatar_check(props.profile.photos)}></img>
-                <div className={s.post_content}>
+            <div className="user_posts__last_item">
+                <img alt="Avatar" src={props.avatarCheck(props.profile.photos)}></img>
+                <div className="post_content">
                 {isPostNotEmpty ? 
                     <span>{props.value}</span> :
-                    <span className={s.empty_cm}>Empty post</span> }
-                    <span className={`${s.likes_count}`}>{props.likes || "0"}</span>
+                    <span className="empty_cm">Empty post</span> }
+                    <button onClick={e => likePress(e, 1)} className="likes_count"><i className={"fa-heart " + (isLikePressed ? "fa like_pressed" : "far")} />{likesCount || "0"}</button>
                 </div>
             </div>
         );

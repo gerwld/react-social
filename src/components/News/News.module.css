@@ -216,3 +216,7 @@
 .all_caugth i {
     color: rgb(57, 199, 121);
 }
+
+.like_pressed {
+    color: red;
+}
