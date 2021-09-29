@@ -14,7 +14,7 @@ let initialState = {
     currentPage: 1,
     allPages: 1,
     pagLength: 5,
-    loadOnlyFriends: false
+    loadOnlyFriends: true
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -67,7 +67,8 @@ const usersReducer = (state = initialState, action) => {
         case LOAD_FRIENDS_TOGGLE:
             return {
                 ...state,
-                loadOnlyFriends: !state.loadOnlyFriends
+                loadOnlyFriends: !state.loadOnlyFriends,
+                currentPage: 1
             }
         default:
             return state;
