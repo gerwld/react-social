@@ -56,6 +56,16 @@ class UsersAPIComponent extends React.Component {
             setTimeout(this.getUsers, 250)
     }
 
+    showTitle = () => {
+        let title = this.props.loadOnlyFriends ? "Friends" : "All Users";;
+        let searchInput = this.props.searchQuery;
+        let isSearching = searchInput.length >= 1;
+        if(isSearching) {
+            title = `Search result for: ${searchInput} `;
+        }
+        return title;
+    }
+
     render() {
         return (
             <>
@@ -69,6 +79,7 @@ class UsersAPIComponent extends React.Component {
                     searchInput={this.state.searchInput}
                     onSearchChange={this.onSearchChange}
                     onSearchSubmit={this.onSearchSubmit}
+                    title={this.showTitle}
                 />}
 
             </>

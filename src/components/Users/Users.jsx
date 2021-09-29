@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
-import { Form, reduxForm, Field } from 'redux-form';
 
 let Users = (props) => {
     let isUsersAvailable = props.totalUsers >= 1;
@@ -9,13 +8,13 @@ let Users = (props) => {
 
     return (
         <div className={s.users_block}>
-            <span className={s.title}>{props.isOnlyFriends ? "Friends" : "All Users"}({props.totalUsers})</span>
+            <span className={s.title}>{props.title()}({props.totalUsers})</span>
             {isUsersAvailable ? <div className={s.users_section}>
                 {
                     props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub} main-content-block`}>
                         <div className={s.user_avatar}>
                             <NavLink to={`/profile/id1${u.id}`}>
-                                <img src={u.photos.small ? (`${u.photos.small}`) : (`/images/avatars/def-avatar.png`)}></img>
+                                <img alt="User Avatar" src={u.photos.small ? (`${u.photos.small}`) : (`/images/avatars/def-avatar.png`)}></img>
                             </NavLink>
                         </div>
                         <div className={s.user_mainInfo}>
@@ -30,7 +29,7 @@ let Users = (props) => {
 
                     </div>)
                 }
-                    <div className={s.pagination}>
+                <div className={s.pagination}>
                     <ul>
                         <li key="er4s" onClick={e => props.onPageChanged(1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>«</span>first page</li>
                         <li key="erm4s" onClick={e => props.onPageChanged(props.currentPage - 1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>‹</span>prevous</li>
@@ -43,9 +42,9 @@ let Users = (props) => {
                 </div>
             </div> : <div className={s.users_section}>No users available.</div>}
             <div className={`main-content-block ${s.navbar}`}>
-                <input type="search" placeholder="Seach users" onChange={e => props.onSearchChange(e)} value={props.searchInput}/>
+                <input type="search" placeholder="Seach users" onChange={e => props.onSearchChange(e)} value={props.searchInput} />
                 <button type="button" onClick={props.onSearchSubmit}>send</button>
-                <label><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends}/> Show all users</label>
+                <label><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends} /> Show all users</label>
             </div>
         </div>
     )
