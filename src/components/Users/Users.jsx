@@ -1,12 +1,15 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
+import { Form, reduxForm, Field } from 'redux-form';
 
 let Users = (props) => {
+    let isUsersAvailable = props.totalUsers > 1;
+
     return (
-        <div>
-            <span className={s.title}>Friends({props.totalUsers})</span>
-            <div className={s.users_section}>
+        <div className={s.users_block}>
+            <span className={s.title}>{props.isOnlyFriends ? "Friends" : "All Users"}({props.totalUsers})</span>
+            {isUsersAvailable ? <div className={s.users_section}>
                 {
                     props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub} main-content-block`}>
                         <div className={s.user_avatar}>
@@ -28,18 +31,23 @@ let Users = (props) => {
                 }
                 <div className={s.pagination}>
                     <ul>
-                        <li onClick={e => props.onPageChanged(1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>«</span>first page</li>
-                        <li onClick={e => props.onPageChanged(props.currentPage - 1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>‹</span>prevous</li>
+                        <li key="er4s" onClick={e => props.onPageChanged(1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>«</span>first page</li>
+                        <li key="erm4s" onClick={e => props.onPageChanged(props.currentPage - 1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>‹</span>prevous</li>
 
                         {props.getPagCurrentIndexes().map(p => <li onClick={() => props.onPageChanged(p)} className={props.currentPage === p && s.currentPage}>{p}</li>)}
 
-                        <li onClick={e => props.onPageChanged(props.currentPage + 1)} className={`${s.pag_element} ${s.pag_arrow}`}>next<span>›</span></li>
-                        <li onClick={e => props.onPageChanged(props.allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
+                        <li key="er4ks" onClick={e => props.onPageChanged(props.currentPage + 1)} className={`${s.pag_element} ${s.pag_arrow}`}>next<span>›</span></li>
+                        <li key="emr4s" onClick={e => props.onPageChanged(props.allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
                     </ul>
                 </div>
+            </div> : <div className={s.users_section}>No users available.</div>}
+            <div className={`main-content-block ${s.navbar}`}>
+                <label><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends}/> Show all users</label>
             </div>
         </div>
     )
 }
+
+
 
 export default Users;

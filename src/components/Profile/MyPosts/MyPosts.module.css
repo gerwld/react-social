@@ -22,16 +22,11 @@
   padding: 15px;
   box-sizing: border-box;
 
-  background-color: #f3f3f3;
   font-family: inherit;
   font-size: 16px;
 
   border: 1px solid #dadada;
   border-radius: 5px;
-}
-
-.new_post_input textarea::placeholder {
-  font-size: 16px;
 }
 
 .new_post_input button {
@@ -44,9 +39,9 @@
 
 
   font-weight: bold;
-  font-size: 16px;
+  font-size: 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .user_posts__last {

@@ -1,34 +1,35 @@
-import s from './Post.module.css';
-import avatar from '../../../../img/avatar.jpg';
-
+import { useState } from 'react';
+import './Post.css';
 
 const Post = (props) => {
-    // likes counter check
-    let likes = props.likes ? props.likes : "0";
-    let avatar = props.profile.photos;
-    let avatar_check = avatar.large ? avatar.large : (avatar.small ? avatar.small :  "/images/avatars/def-avatar.png");
-    if (!props.value) {
+    let [isLikePressed, toggleLike] = useState(false);
+    let [likesCount, likeAction] = useState(props.likes);
+    let isPostNotEmpty = (props.value && props.value !== " " && props.value !== "");
+
+    let likePress = (e, id) => {
+        //change after to send request with id => get responce, then change local state
+        if(isLikePressed){
+            toggleLike(false);
+            likeAction(likesCount - 1);
+            e.currentTarget.className = "likes_count";
+        } else {
+            toggleLike(true);
+            likeAction(likesCount + 1);
+            e.currentTarget.className = "likes_count like_pressed";
+        }
+    }
+
         return (
-            <div className={s.user_posts__last_item}>
-                <img alt="Avatar" src={avatar_check}></img>
-                <div className={s.post_content}>
-                    <span className={s.empty_cm}>Empty post</span>
-                    <span className={`${s.likes_count} ${s.likes_disabled}`}>0</span>
+            <div className="user_posts__last_item">
+                <img alt="Avatar" src={props.avatarCheck(props.profile.photos)}></img>
+                <div className="post_content">
+                {isPostNotEmpty ? 
+                    <span>{props.value}</span> :
+                    <span className="empty_cm">Empty post</span> }
+                    <button onClick={e => likePress(e, 1)} className="likes_count"><i className={"fa-heart " + (isLikePressed ? "fa like_pressed" : "far")} />{likesCount || "0"}</button>
                 </div>
             </div>
         );
-    }
-    else {
-        return (
-            <div className={s.user_posts__last_item}>
-                <img alt="Avatar" src={avatar_check}></img>
-                <div className={s.post_content}>
-                    <span>{props.value}</span>
-                    <span className={s.likes_count}>{likes}</span>
-                </div>
-            </div>
-        );
-    }
 };
 
 export default Post;

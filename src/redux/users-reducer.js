@@ -13,7 +13,8 @@ let initialState = {
     pageSize: 6,
     currentPage: 1,
     allPages: 1,
-    pagLength: 5
+    pagLength: 5,
+    loadOnlyFriends: true
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -63,6 +64,13 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 allPages: action.pagesCount
             }
+        case LOAD_FRIENDS_TOGGLE:
+            return {
+                ...state,
+                isFetching: true,
+                loadOnlyFriends: !state.loadOnlyFriends,
+                currentPage: 1
+            }
         default:
             return state;
     }
@@ -77,6 +85,7 @@ const SET_PAGE = 'SET_PAGE';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS';
 const GET_ALL_PAGES = 'GET_ALL_PAGES';
+const LOAD_FRIENDS_TOGGLE = 'LOAD_FRIENDS_TOGGLE';
 
 export const unfollowUser = (id) => ({ type: FOLLOW, userId: id });
 export const setUsers = (users) => ({ type: SET_USERS, users });
@@ -85,15 +94,16 @@ export const setPage = (page) => ({ type: SET_PAGE, page });
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 export const toggleIsFollowing = (isFetching, userId) => ({ type: FOLLOWING_IN_PROGRESS, isFetching, userId });
 export const getAllPages = (pagesCount) => ({ type: GET_ALL_PAGES, pagesCount });
+export const loadFriendsToggle = () => ({ type: LOAD_FRIENDS_TOGGLE });
 
 
 // Thunk Creators 
 
-export const getUsersThunkCreator = (currentPage, pageSize, usersCount) => {
+export const getUsersThunkCreator = (currentPage, pageSize, usersCount, friends) => {
     return (dispatch) => {
-        if (usersCount < pageSize) {
+        if (usersCount <= pageSize) {
             dispatch(toggleIsFetching(true));
-            usersAPI.getUsers(pageSize, currentPage).then(data => {
+            usersAPI.getUsers(pageSize, currentPage, friends).then(data => {
                 dispatch(toggleIsFetching(false));
                 dispatch(setUsers(data.items));
                 dispatch(countOfUsers(data.totalCount));
@@ -103,15 +113,15 @@ export const getUsersThunkCreator = (currentPage, pageSize, usersCount) => {
     }
 }
 
-export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize) => {
+export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize, friends) => {
     return (dispatch) => {
         //prevent set page bigger or less that it is possible
-        pageNumber = pageNumber ? pageNumber : 1;
+        pageNumber = pageNumber || 1;
         pageNumber = (pageNumber >= allPages) ? allPages : pageNumber;
 
         dispatch(setPage(pageNumber));
         dispatch(toggleIsFetching(true));
-        usersAPI.getUsers(pageSize, pageNumber).then(data => {
+        usersAPI.getUsers(pageSize, pageNumber, friends).then(data => {
             dispatch(setUsers(data.items));
             dispatch(toggleIsFetching(false));
         });
