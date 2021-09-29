@@ -36,7 +36,9 @@ class UsersAPIComponent extends React.Component {
         this.props.onPageChangeThunkCreator(
             pageNumber,
             this.props.allPages,
-            this.props.pageSize);
+            this.props.pageSize,
+            this.props.loadOnlyFriends
+            );
     }
 
     render() {

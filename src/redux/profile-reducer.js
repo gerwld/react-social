@@ -8,7 +8,7 @@ let initialState = {
         { id: 0, cont: "Hi there!! 2007 is rock!", likes: 23 }
     ],
     profile: null,
-    authUserId: 19461,
+    // authUserId: 19461,
     status: ''
 };
 

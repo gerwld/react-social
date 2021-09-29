@@ -67,6 +67,7 @@ const usersReducer = (state = initialState, action) => {
         case LOAD_FRIENDS_TOGGLE:
             return {
                 ...state,
+                isFetching: true,
                 loadOnlyFriends: !state.loadOnlyFriends,
                 currentPage: 1
             }
@@ -112,21 +113,15 @@ export const getUsersThunkCreator = (currentPage, pageSize, usersCount, friends)
     }
 }
 
-// export const getUsersToggleTC = () => {
-//     (dispatch) => {
-
-//     }
-// }
-
-export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize) => {
+export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize, friends) => {
     return (dispatch) => {
         //prevent set page bigger or less that it is possible
-        pageNumber = pageNumber ? pageNumber : 1;
+        pageNumber = pageNumber || 1;
         pageNumber = (pageNumber >= allPages) ? allPages : pageNumber;
 
         dispatch(setPage(pageNumber));
         dispatch(toggleIsFetching(true));
-        usersAPI.getUsers(pageSize, pageNumber).then(data => {
+        usersAPI.getUsers(pageSize, pageNumber, friends).then(data => {
             dispatch(setUsers(data.items));
             dispatch(toggleIsFetching(false));
         });

@@ -4,11 +4,12 @@ import s from './Users.module.css';
 import { Form, reduxForm, Field } from 'redux-form';
 
 let Users = (props) => {
+    let isUsersAvailable = props.totalUsers > 1;
 
     return (
         <div className={s.users_block}>
-            <span className={s.title}>Friends({props.totalUsers})</span>
-            <div className={s.users_section}>
+            <span className={s.title}>{props.isOnlyFriends ? "Friends" : "All Users"}({props.totalUsers})</span>
+            {isUsersAvailable ? <div className={s.users_section}>
                 {
                     props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub} main-content-block`}>
                         <div className={s.user_avatar}>
@@ -39,7 +40,7 @@ let Users = (props) => {
                         <li key="emr4s" onClick={e => props.onPageChanged(props.allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
                     </ul>
                 </div>
-            </div>
+            </div> : <div className={s.users_section}>No users available.</div>}
             <div className={`main-content-block ${s.navbar}`}>
                 <label><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends}/> Show all users</label>
             </div>
