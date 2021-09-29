@@ -41,7 +41,7 @@ let Users = (props) => {
                 </div>
             </div>
             <div className={`main-content-block ${s.navbar}`}>
-                <label><input type="checkbox" onClick={props.onFriendsToggle} checked={props.isOnlyFriends}/> Show all users</label>
+                <label><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends}/> Show all users</label>
             </div>
         </div>
     )

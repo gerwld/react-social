@@ -8,7 +8,7 @@ import Users from './Users';
 
 class UsersAPIComponent extends React.Component {
 
-    getUsers = () => {
+    getUsers = (boolean) => {
         this.props.getUsersThunkCreator(
             this.props.currentPage,
             this.props.pageSize,
@@ -19,11 +19,10 @@ class UsersAPIComponent extends React.Component {
     componentDidMount() {
         this.getUsers();
     }
-
-
+ 
     onFriendsToggle = () => {
         this.props.loadFriendsToggle();
-        this.getUsers();
+        setTimeout(this.getUsers, 250)
     }
 
     getPagCurrentIndexes = () => {

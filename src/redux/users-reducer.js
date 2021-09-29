@@ -14,7 +14,7 @@ let initialState = {
     currentPage: 1,
     allPages: 1,
     pagLength: 5,
-    loadOnlyFriends: true
+    loadOnlyFriends: false
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -69,7 +69,6 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 loadOnlyFriends: !state.loadOnlyFriends
             }
-
         default:
             return state;
     }
@@ -111,6 +110,12 @@ export const getUsersThunkCreator = (currentPage, pageSize, usersCount, friends)
         }
     }
 }
+
+// export const getUsersToggleTC = () => {
+//     (dispatch) => {
+
+//     }
+// }
 
 export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize) => {
     return (dispatch) => {
