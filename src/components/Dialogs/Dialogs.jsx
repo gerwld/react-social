@@ -42,7 +42,7 @@ const Dialogs = (props) => {
 
 const SelectDialog = () => {
     return (
-        <div className={s.select_dialogscreen}><span>Select dialog</span></div>
+        <div className={s.select_dialogscreen}><span>Select dialog...</span></div>
     );
 }
 

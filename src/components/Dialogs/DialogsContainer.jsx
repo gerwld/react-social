@@ -13,12 +13,16 @@ class DialogsContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        this.props.getFriendsTC();
-        setTimeout(() => this.props.setCurrentUserTC(this.props.match.params.userId), 300);
+        if(this.props.usersLength < 1){
+            this.props.getFriendsTC();
+        }
+        setTimeout(() => this.props.setCurrentUserTC(this.props.match.params.userId), 250);
     }
 
     componentDidUpdate(prevProps) {
+        // debugger;
         let currentId = this.props.match.params.userId;
+        // let path = prevProps.match.path === "/dialogs";
         if(prevProps.match.params.userId !== currentId) {
             this.props.setCurrentUserTC(currentId);
         }
@@ -42,6 +46,7 @@ let mapStateToProps = (state) => {
                     <img src={user.avatar} /><span className={s.user_name}>{user.name}</span>
                 </NavLink>
             </li>),
+        usersLength: state.messagePage.dialogsData.length,
         dialogMap: state.messagePage.messagesData.map(m => <Message data={m}/>),
         converListUser: state.messagePage.currentUser
     }
