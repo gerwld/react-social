@@ -13,7 +13,7 @@ let Users = (props) => {
                 {
                     props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub} main-content-block`}>
                         <div className={s.user_avatar}>
-                            <NavLink to={`/profile/id1${u.id}`}>
+                            <NavLink to={`/profile/id${u.id}`}>
                                 <img alt="User Avatar" src={u.photos.small ? (`${u.photos.small}`) : (`/images/avatars/def-avatar.png`)}></img>
                             </NavLink>
                         </div>
