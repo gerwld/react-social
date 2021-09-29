@@ -42,9 +42,14 @@ let Users = (props) => {
                 </div>
             </div> : <div className={s.users_section}>No users available.</div>}
             <div className={`main-content-block ${s.navbar}`}>
-                <input type="search" placeholder="Seach users" onChange={e => props.onSearchChange(e)} value={props.searchInput} />
-                <button type="button" onClick={props.onSearchSubmit}>send</button>
-                <label><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends} /> Show all users</label>
+                <div className={s.search_block}>
+                    <input type="search" placeholder="Seach users" onChange={e => props.onSearchChange(e)} value={props.searchInput} />
+                    <button type="button" onClick={props.onSearchSubmit}><i class="fas fa-search"></i></button>
+                </div>
+                <div className={s.view_settings}>
+                    <span className={s.view_settings_title}>Sort parameters:</span>
+                <label className={s.showAll}><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends} /> Show all users</label>
+                </div>
             </div>
         </div>
     )
