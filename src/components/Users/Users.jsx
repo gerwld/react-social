@@ -1,10 +1,12 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
+import { Form, reduxForm, Field } from 'redux-form';
 
 let Users = (props) => {
+
     return (
-        <div>
+        <div className={s.users_block}>
             <span className={s.title}>Friends({props.totalUsers})</span>
             <div className={s.users_section}>
                 {
@@ -38,8 +40,13 @@ let Users = (props) => {
                     </ul>
                 </div>
             </div>
+            <div className={`main-content-block ${s.navbar}`}>
+                <label><input type="checkbox" onClick={props.onFriendsToggle} checked={props.isOnlyFriends}/> Show all users</label>
+            </div>
         </div>
     )
 }
+
+
 
 export default Users;
