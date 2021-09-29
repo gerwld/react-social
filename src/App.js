@@ -33,7 +33,8 @@ class App extends React.Component {
       <div className="app-content">
         <Switch>
           <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/dialogs" render={() => <DialogsContainer />} />
+          <Route path="/dialogs/id:userId?" render={() => <DialogsContainer />} />
+          <Route path="/dialogs" exact render={() => <DialogsContainer />} />
           <Route path="/feed" render={() => <NewsContainer />} />
           <Route path="/settings" render={() => <SettingsContainer />} />
           <Route path="/music" render={() => <MusicContainer />} />
