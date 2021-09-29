@@ -1,25 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { followUserThunkCreator, getPaginationCurrentIndexesTC, getUsersThunkCreator, loadFriendsToggle, onPageChangeThunkCreator } from '../../redux/users-reducer';
+import { followUserThunkCreator, getPaginationCurrentIndexesTC, getUsersThunkCreator, loadFriendsToggle, onPageChangeThunkCreator, findUsers } from '../../redux/users-reducer';
 import { getCurrentPage, getIsFetching, getIsFollowing, getPages, getPageSize, getPagLengthWithCreateSelecor, getTotalUsers, getUsers } from '../../redux/users-selectors';
 import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
 
 class UsersAPIComponent extends React.Component {
+    state = {
+        searchInput: ''
+    }
 
     getUsers = (boolean) => {
         this.props.getUsersThunkCreator(
             this.props.currentPage,
             this.props.pageSize,
             this.props.users.length,
-            this.props.loadOnlyFriends);
+            this.props.loadOnlyFriends,
+            this.props.searchQuery);
     }
 
     componentDidMount() {
         this.getUsers();
     }
- 
+
     onFriendsToggle = () => {
         this.props.loadFriendsToggle();
         setTimeout(this.getUsers, 250)
@@ -37,8 +41,19 @@ class UsersAPIComponent extends React.Component {
             pageNumber,
             this.props.allPages,
             this.props.pageSize,
-            this.props.loadOnlyFriends
-            );
+            this.props.loadOnlyFriends,
+            this.props.searchQuery
+        );
+    }
+
+    onSearchChange = (e) => {
+        this.setState({ searchInput: e.target.value });
+    }
+    onSearchSubmit = () => {
+        let value = this.state.searchInput;
+            this.props.loadFriendsToggle(false);
+            this.props.findUsers(value);
+            setTimeout(this.getUsers, 250)
     }
 
     render() {
@@ -51,7 +66,10 @@ class UsersAPIComponent extends React.Component {
                     getPagCurrentIndexes={this.getPagCurrentIndexes}
                     onFriendsToggle={this.onFriendsToggle}
                     isOnlyFriends={this.props.loadOnlyFriends}
-                     />}
+                    searchInput={this.state.searchInput}
+                    onSearchChange={this.onSearchChange}
+                    onSearchSubmit={this.onSearchSubmit}
+                />}
 
             </>
         )
@@ -68,14 +86,15 @@ const mapStateToProps = (state) => {
         pageSize: getPageSize(state),
         allPages: getPages(state),
         pagLength: getPagLengthWithCreateSelecor(state),
-        loadOnlyFriends: state.usersPage.loadOnlyFriends
+        loadOnlyFriends: state.usersPage.loadOnlyFriends,
+        searchQuery: state.usersPage.searchQuery
     }
 }
 
 const UsersContainer = connect(mapStateToProps, {
     getUsersThunkCreator, followUserThunkCreator,
     getPaginationCurrentIndexesTC, onPageChangeThunkCreator,
-    loadFriendsToggle
+    loadFriendsToggle, findUsers
 })(UsersAPIComponent);
 
 export default withAuthRedirect(UsersContainer);

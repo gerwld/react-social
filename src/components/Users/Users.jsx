@@ -4,7 +4,8 @@ import s from './Users.module.css';
 import { Form, reduxForm, Field } from 'redux-form';
 
 let Users = (props) => {
-    let isUsersAvailable = props.totalUsers > 1;
+    let isUsersAvailable = props.totalUsers >= 1;
+    let allPages = props.allPages;
 
     return (
         <div className={s.users_block}>
@@ -29,7 +30,7 @@ let Users = (props) => {
 
                     </div>)
                 }
-                <div className={s.pagination}>
+                    <div className={s.pagination}>
                     <ul>
                         <li key="er4s" onClick={e => props.onPageChanged(1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>«</span>first page</li>
                         <li key="erm4s" onClick={e => props.onPageChanged(props.currentPage - 1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>‹</span>prevous</li>
@@ -37,11 +38,13 @@ let Users = (props) => {
                         {props.getPagCurrentIndexes().map(p => <li onClick={() => props.onPageChanged(p)} className={props.currentPage === p && s.currentPage}>{p}</li>)}
 
                         <li key="er4ks" onClick={e => props.onPageChanged(props.currentPage + 1)} className={`${s.pag_element} ${s.pag_arrow}`}>next<span>›</span></li>
-                        <li key="emr4s" onClick={e => props.onPageChanged(props.allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
+                        <li key="emr4s" onClick={e => props.onPageChanged(allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
                     </ul>
                 </div>
             </div> : <div className={s.users_section}>No users available.</div>}
             <div className={`main-content-block ${s.navbar}`}>
+                <input type="search" placeholder="Seach users" onChange={e => props.onSearchChange(e)} value={props.searchInput}/>
+                <button type="button" onClick={props.onSearchSubmit}>send</button>
                 <label><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends}/> Show all users</label>
             </div>
         </div>

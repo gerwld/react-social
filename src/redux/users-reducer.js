@@ -14,7 +14,8 @@ let initialState = {
     currentPage: 1,
     allPages: 1,
     pagLength: 5,
-    loadOnlyFriends: true
+    loadOnlyFriends: true,
+    searchQuery: ''
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -68,8 +69,14 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: true,
-                loadOnlyFriends: !state.loadOnlyFriends,
+                loadOnlyFriends: (typeof action.boolean == "boolean") ? action.boolean
+                    : !state.loadOnlyFriends,
                 currentPage: 1
+            }
+        case DO_SEARCH:
+            return {
+                ...state,
+                searchQuery: action.searchQuery
             }
         default:
             return state;
@@ -86,6 +93,7 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS';
 const GET_ALL_PAGES = 'GET_ALL_PAGES';
 const LOAD_FRIENDS_TOGGLE = 'LOAD_FRIENDS_TOGGLE';
+const DO_SEARCH = 'DO_SEARCH';
 
 export const unfollowUser = (id) => ({ type: FOLLOW, userId: id });
 export const setUsers = (users) => ({ type: SET_USERS, users });
@@ -94,26 +102,27 @@ export const setPage = (page) => ({ type: SET_PAGE, page });
 export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
 export const toggleIsFollowing = (isFetching, userId) => ({ type: FOLLOWING_IN_PROGRESS, isFetching, userId });
 export const getAllPages = (pagesCount) => ({ type: GET_ALL_PAGES, pagesCount });
-export const loadFriendsToggle = () => ({ type: LOAD_FRIENDS_TOGGLE });
+export const loadFriendsToggle = (boolean) => ({ type: LOAD_FRIENDS_TOGGLE, boolean });
+export const findUsers = (searchQuery) => ({ type: DO_SEARCH, searchQuery });
 
 
 // Thunk Creators 
 
-export const getUsersThunkCreator = (currentPage, pageSize, usersCount, friends) => {
+export const getUsersThunkCreator = (currentPage, pageSize, usersCount, friends, search) => {
     return (dispatch) => {
         if (usersCount <= pageSize) {
             dispatch(toggleIsFetching(true));
-            usersAPI.getUsers(pageSize, currentPage, friends).then(data => {
-                dispatch(toggleIsFetching(false));
+            usersAPI.getUsers(pageSize, currentPage, friends, search).then(data => {
                 dispatch(setUsers(data.items));
                 dispatch(countOfUsers(data.totalCount));
                 dispatch(getAllPages(Math.ceil(data.totalCount / pageSize)));
+                dispatch(toggleIsFetching(false));
             });
         }
     }
 }
 
-export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize, friends) => {
+export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize, friends, search) => {
     return (dispatch) => {
         //prevent set page bigger or less that it is possible
         pageNumber = pageNumber || 1;
@@ -121,7 +130,7 @@ export const onPageChangeThunkCreator = (pageNumber, allPages, pageSize, friends
 
         dispatch(setPage(pageNumber));
         dispatch(toggleIsFetching(true));
-        usersAPI.getUsers(pageSize, pageNumber, friends).then(data => {
+        usersAPI.getUsers(pageSize, pageNumber, friends, search).then(data => {
             dispatch(setUsers(data.items));
             dispatch(toggleIsFetching(false));
         });
@@ -133,14 +142,14 @@ export const followUserThunkCreator = (user) => {
         dispatch(toggleIsFollowing(true, user.id));
         if (!user.followed) {
             usersAPI.followUserRequest(user.id).then(r => {
-                if(r && r.resultCode === 0) {
+                if (r && r.resultCode === 0) {
                     dispatch(unfollowUser(user.id));
                 }
                 dispatch(toggleIsFollowing(false, user.id));
             })
         } else {
             usersAPI.unfollowUserRequest(user.id).then(r => {
-                if(r && r.resultCode === 0) {
+                if (r && r.resultCode === 0) {
                     dispatch(unfollowUser(user.id));
                 }
                 // r.resultCode === 0 && dispatch(unfollowUser(user.id));
@@ -152,7 +161,6 @@ export const followUserThunkCreator = (user) => {
 
 export const getPaginationCurrentIndexesTC = (curPage, allPages, pagLength) => {
     return () => {
-
         let pagination = [];
         let count = 1;
         let notSmallerThanPag = (curPage + 2) > pagLength ? (curPage + 2) : pagLength;
@@ -164,7 +172,9 @@ export const getPaginationCurrentIndexesTC = (curPage, allPages, pagLength) => {
             count = curPage - 4;
         }
         for (count; count <= notSmallerThanPag && count <= allPages; count++) {
-            pagination.push(count);
+            if (count > 0) {
+                pagination.push(count);
+            }
         }
         return pagination;
     }
