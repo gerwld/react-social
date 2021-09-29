@@ -42,7 +42,7 @@ span.title {
     background-color: #979797;
     border-radius: 5%;
     overflow: hidden;
-   
+    flex: 0 0 70px;
 }
 
 .user_avatar img {
@@ -111,6 +111,7 @@ span.title {
     margin-left: auto;
     font-size: 12px;
     text-align: right;
+    flex: 0 0 70px;
 }
 
 .action_user_btn a {
@@ -143,6 +144,7 @@ span.title {
 .user_status {
     color: #72767b;
     font-size: 14px;
+    overflow-wrap: anywhere;
 }
 
 .btn_load {
