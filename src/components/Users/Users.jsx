@@ -1,20 +1,20 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
-import { Form, reduxForm, Field } from 'redux-form';
 
 let Users = (props) => {
-    let isUsersAvailable = props.totalUsers > 1;
+    let isUsersAvailable = props.totalUsers >= 1;
+    let allPages = props.allPages;
 
     return (
         <div className={s.users_block}>
-            <span className={s.title}>{props.isOnlyFriends ? "Friends" : "All Users"}({props.totalUsers})</span>
+            <span className={s.title}>{props.title()}({props.totalUsers})</span>
             {isUsersAvailable ? <div className={s.users_section}>
                 {
                     props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub} main-content-block`}>
                         <div className={s.user_avatar}>
                             <NavLink to={`/profile/id1${u.id}`}>
-                                <img src={u.photos.small ? (`${u.photos.small}`) : (`/images/avatars/def-avatar.png`)}></img>
+                                <img alt="User Avatar" src={u.photos.small ? (`${u.photos.small}`) : (`/images/avatars/def-avatar.png`)}></img>
                             </NavLink>
                         </div>
                         <div className={s.user_mainInfo}>
@@ -37,12 +37,19 @@ let Users = (props) => {
                         {props.getPagCurrentIndexes().map(p => <li onClick={() => props.onPageChanged(p)} className={props.currentPage === p && s.currentPage}>{p}</li>)}
 
                         <li key="er4ks" onClick={e => props.onPageChanged(props.currentPage + 1)} className={`${s.pag_element} ${s.pag_arrow}`}>next<span>›</span></li>
-                        <li key="emr4s" onClick={e => props.onPageChanged(props.allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
+                        <li key="emr4s" onClick={e => props.onPageChanged(allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
                     </ul>
                 </div>
             </div> : <div className={s.users_section}>No users available.</div>}
             <div className={`main-content-block ${s.navbar}`}>
-                <label><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends}/> Show all users</label>
+                <div className={s.search_block}>
+                    <input type="search" placeholder="Seach users" onChange={e => props.onSearchChange(e)} value={props.searchInput} />
+                    <button type="button" onClick={props.onSearchSubmit}><i class="fas fa-search"></i></button>
+                </div>
+                <div className={s.view_settings}>
+                    <span className={s.view_settings_title}>Sort parameters:</span>
+                <label className={s.showAll}><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends} /> Show all users</label>
+                </div>
             </div>
         </div>
     )
