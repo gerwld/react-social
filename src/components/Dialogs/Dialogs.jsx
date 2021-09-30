@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, requiredField } from '../../utils/validators/validator';
 import { Textarea } from '../common/FormControls/FormControls';
 import s from './Dialogs.module.css';
+import { NavLink } from 'react-router-dom';
 
 const Dialogs = (props) => {
     let endDial = React.createRef();
@@ -21,13 +22,11 @@ const Dialogs = (props) => {
             <div className={s.dialogs_frame}>
                 <ul className={s.userlist}>
                     {props.usersMap}
-
                 </ul>
-                {
-                    !props.idFromUrl ?
+                {!props.idFromUrl ?
                     <SelectDialog /> :
                         <div className={s.dialog_window}>
-                        <span className={s.current_dialog}>{props.converListUser.name}</span>
+                        <span className={s.current_dialog}><NavLink to={`/profile/id${props.converListUser.id}`} >{props.converListUser.name}</NavLink></span>
                         <div>
                             {props.dialogMap}
                             <div ref={endDial} className={s.end_dial} />
@@ -42,7 +41,7 @@ const Dialogs = (props) => {
 
 const SelectDialog = () => {
     return (
-        <div className={s.select_dialogscreen}><span>Select dialog...</span></div>
+        <div className={s.select_dialogscreen}><span>Select a chat to start messaging</span></div>
     );
 }
 

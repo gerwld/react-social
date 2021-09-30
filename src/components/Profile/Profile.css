@@ -24,29 +24,33 @@
 }
 
 .user-profile__img {
-  width: 155px;
-  height: 155px;
-  border-radius: 7%;
+  width: 185px;
+  height: 185px;
+  border-radius: 7px;
 }
 
 .user-profile__info {
+  padding: 0;
+  margin: 0;
+  flex: 1;
   list-style: none;
   font-size: 15px;
 }
 
 .user-profile__info li {
-  margin: 10px 0;
+  margin-bottom: 13.5px;
 }
 
 .user-info__name {
-  font-size: 23px;
+  font-size: 28px;
   font-weight: bold;
   text-transform: capitalize;
 }
 
 .user-profile {
   display: flex;
-  align-items: center;
+  align-items:stretch;
+  justify-content: flex-start;
 
   grid-column-start: 1;
   grid-column-end: 3;
@@ -86,4 +90,51 @@
   margin-top: -5px;
   margin-left: -5px;
   width: 350px;
+}
+
+.user_block {
+  padding: 15px;
+}
+
+.user_block__1 {
+  margin-right: 10px;
+}
+
+.user_block__2 {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.contact_buttons a,
+.contact_buttons button {
+  display: block;
+  width: 100%;
+  padding: var(--padding-buttons-ui);
+  color: white;
+  text-decoration: none;
+  background-color: var(--main-blue-color);
+  border: none;
+  border-radius: var(--button-radius-ui);
+  text-align: center;
+}
+
+.contact_buttons a {
+  margin: 10px 0 7px;
+}
+
+.contact_buttons a:hover,
+.contact_buttons button:hover {
+  color: #fff!important;
+  background-color: #3958a8;
+}
+
+li.user-info__status {
+  margin-bottom: 45px;
+  font-style: italic;
+}
+
+.showmore_btn {
+  color: var(--main-blue-color);
+  text-decoration: underline;
+  cursor: pointer;
 }

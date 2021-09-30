@@ -39,6 +39,7 @@ span.title {
     justify-content: flex-start;
     align-items: flex-start;
     height: 85vh;
+    transition: 3s ease-in-out;
 }
 
 .dialog_window {
@@ -65,9 +66,19 @@ span.title {
     font-size: 20px;
     text-transform: capitalize;
     background-color: #fff;
-    color: #535353;
     border: 1px solid rgb(214, 214, 214);
     border-radius: 4px;
+}
+
+.current_dialog a {
+    color: #535353!important;
+    text-decoration: none;
+}
+
+.current_dialog a:hover {
+    color: #2e2e2e!important;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .dialog_window > div {

@@ -69,7 +69,7 @@ export const FeedBlock = (props) => {
                 <p>{props.text}</p>
                 {props.img &&
                     <div className={s.post_image}>
-                        <a href={props.postLink} target="_blank" rel="noreferrer"><img src={props.img} alt="Post img" /></a>
+                        <a href={props.postLink} target="_blank" rel="noreferrer"><img onError={i => i.target.style.display='none'} src={props.img} alt="Post img" /></a>
                     </div>}
             </div>
             <div className={s.block_buttons}>
