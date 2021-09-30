@@ -26,17 +26,17 @@ const Profile = (props) => {
 const MainInfo = (props) => {
   var avatar = props.profile.photos;
   var avatar_check = avatar.large ? avatar.large : (avatar.small ? avatar.small : "/images/avatars/def-avatar.png");
-  var isCurrentUserProfile = props.urlUserId === props.authUserId;
+  var isCurrentUserProfile = props.profile.userId === props.authUserId;
+  var isInactiveBtn = isCurrentUserProfile && 'inactive_btn';
 
   return (
     <div className="user-profile">
       <div className="user_block user_block__1 main-content-block">
         <img alt="Avatar" className="user-profile__img" src={avatar_check}></img>
-        {!isCurrentUserProfile &&
-          <div className="contact_buttons">
+          <div className={`contact_buttons ${isInactiveBtn}`}>
             <NavLink to={`/dialogs/id${props.urlUserId}`}>Write a message</NavLink>
             <button>Add to friends</button>
-          </div>}
+          </div>
       </div>
       <div className="user_block user_block__2 main-content-block">
         <ul className="user-profile__info">

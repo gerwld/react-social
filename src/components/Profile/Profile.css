@@ -129,7 +129,7 @@
 }
 
 li.user-info__status {
-  margin-bottom: 45px;
+  margin-bottom: 30px;
   font-style: italic;
 }
 
@@ -137,4 +137,12 @@ li.user-info__status {
   color: var(--main-blue-color);
   text-decoration: underline;
   cursor: pointer;
+}
+
+.inactive_btn button,
+.inactive_btn a,
+.inactive_btn button:hover,
+.inactive_btn a:hover{
+  background-color: #a6abbb;
+  cursor: default;
 }
