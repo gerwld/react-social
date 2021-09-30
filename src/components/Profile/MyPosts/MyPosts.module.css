@@ -31,7 +31,7 @@
 
 .new_post_input button {
   display: block;
-  padding: 12px 20px;
+  padding: 10px 20px;
   margin-left: auto;
 
   color: white;
@@ -39,9 +39,9 @@
 
 
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .user_posts__last {

@@ -5,7 +5,7 @@ import { change, stopSubmit } from 'redux-form';
 const instance = axios.create({
     withCredentials: true,
     headers: {
-        "API-KEY": "0655bfbe-786a-4f38-ac1a-9dc225f7b1db"
+        "API-KEY": "40e3ccc6-4d4d-4e3b-800c-e6591774439b"
     },
     baseURL: "https://social-network.samuraijs.com/api/1.0/"
 });
@@ -33,6 +33,9 @@ export const usersAPI = {
     },
     unfollowUserRequest(userId) {
         return instance.delete(`follow/${userId}`).then(r => r.data);
+    },
+    getAllFriends(pageNumber = 1, pageSize = 15) {
+        return instance.get(`users?friend=true&count=${pageSize}&page=${pageNumber}`).then(r => r.data.items);
     }
 }
 

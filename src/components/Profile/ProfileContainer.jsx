@@ -34,6 +34,7 @@ class ProfileContainerAPI extends React.Component {
   }
 
   componentDidMount() {
+    debugger;
     let userId =  this.props.match.params.userId;
     if (!userId) {
     userId = this.props.authUserId || this.props.history.push("/login");
@@ -59,7 +60,7 @@ class ProfileContainerAPI extends React.Component {
     return (
       <Profile profile={this.props.profile} authUserId={this.props.authUserId} statusEditMode={this.state.statusEditMode}
         activateEdit={this.activateEditmode} deactivateEdit={this.deactivateEditmode} status={this.state.status} statusGlobal={this.props.status} setUserStatus={this.props.setUserStatus}
-        inputValue={this.statusInputRef} editInput={this.editInput} />
+        inputValue={this.statusInputRef} editInput={this.editInput} urlUserId={this.props.match.params.userId} />
     )
   }
 }
@@ -69,8 +70,7 @@ let mapStateToProps = (state) => {
     profile: state.profilePage.profile,
     authUserId: state.auth.userId,
     isAuth: state.auth.isAuth,
-    status: state.profilePage.status,
-
+    status: state.profilePage.status
   }
 }
 
