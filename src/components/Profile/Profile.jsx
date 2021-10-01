@@ -34,7 +34,7 @@ const MainInfo = (props) => {
       <div className="user_block user_block__1 main-content-block">
         <img alt="Avatar" className="user-profile__img" src={avatar_check}></img>
           <div className={`contact_buttons ${isInactiveBtn}`}>
-            <NavLink to={`/dialogs/id${props.urlUserId}`}>Write a message</NavLink>
+            <NavLink to={!isCurrentUserProfile && `/dialogs/id${props.urlUserId}`}>Write a message</NavLink>
             <button>Add to friends</button>
           </div>
       </div>
