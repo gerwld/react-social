@@ -15,6 +15,17 @@ span.title {
     width: 100%;
 }
 
+.loader_start {
+    text-align: center;
+    color: #868e9b;
+}
+
+.scrollableWindow {
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 .messageInput,
 .current_dialog {
     z-index: 1000000;

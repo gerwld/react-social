@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react'
 import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, requiredField } from '../../utils/validators/validator';
 import { Textarea } from '../common/FormControls/FormControls';
@@ -36,38 +36,30 @@ const Dialogs = (props) => {
 class DialogsWindow extends React.Component {
 
     isMoreMessagesToLoad = () => {
-        let allUser = this.props.totalMessCount;
         let pagination = 10;
-        let totalPages = Math.ceil(allUser / pagination);
+        let totalPages = Math.ceil(this.props.totalMessCount / pagination);
+        console.log(this.props.currentPage + ' эта страница');
+        console.log(this.props.totalMessCount + ' все сообщения');
+
         return (this.props.currentPage <= totalPages);
     }
 
-
     render() {
         return(
-            <div id="scrollableDiv"  ref={(ref) => this.scrollParentRef = ref} onScroll={this.props.onScroll}
-            style={{
-                overflow: 'auto',
-                display: 'flex',
-                flexDirection: 'column-reverse',
-              }}>
+            <div className={s.scrollableWindow} id="scrollableDiv"  
+                ref={(ref) => this.scrollParentRef = ref} onScroll={this.props.onScroll}>
                <InfiniteScroll
                     dataLength={this.props.currentDialog.length}
                     next={this.props.dialogsLoader}
                     style={{ display: 'flex', flexDirection: 'column-reverse' }}
-                    inverse={true} //
+                    inverse={true} 
                     hasMore={this.isMoreMessagesToLoad()}
                     loader={<div className={s.loader_mess}><img src="/images/loader-2.svg" alt="Loading..."/></div>}
                     scrollableTarget="scrollableDiv"
-                    endMessage={
-                        <p style={{ textAlign: 'center' }}>
-                          Conversation start.
-                        </p>
-                      }
-                    >
+                    endMessage={<p className={s.loader_start}>Chat messages beginning.</p>}>
                     
-
                     {this.props.currentDialog.map(m => <Message {...m}/>)}
+
                 </InfiniteScroll>
                 <div  className={s.end_dial}/>
             </div>

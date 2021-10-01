@@ -30,6 +30,7 @@ class DialogsContainer extends React.Component {
         let currentId = this.props.match.params.userId;
         if(prevProps.match.params.userId !== currentId) {
             this.props.messagesInitialized(false);
+            this.setState({currentPage: 2});
             this.props.setCurrentUserTC(currentId);
         }
     }
