@@ -84,9 +84,9 @@ export const dialogsAPI = {
     getDialogs() {
         return instance.get('/dialogs').then(r => r.data);
     },
-    getDialogWithUser(userId, page = 1, pageSize = 12) {
+    getDialogWithUser(userId, page = 1, pageSize = 10) {
         if(userId){
-            return instance.get(`/dialogs/${userId}/messages?page=${page}&count=${pageSize}`).then(r => r.data.items);
+            return instance.get(`/dialogs/${userId}/messages?page=${page}&count=${pageSize}`).then(r => r.data);
         } else return undefined;
     },
     sendMessageToUser(userId, message) {

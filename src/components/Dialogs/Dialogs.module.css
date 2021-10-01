@@ -5,6 +5,16 @@ span.title {
     font-weight: bold;
 }
 
+.loader_mess {
+    width: 40px;
+    height: 40px;
+    margin: 10px auto;
+}
+
+.loader_mess img {
+    width: 100%;
+}
+
 .messageInput,
 .current_dialog {
     z-index: 1000000;
@@ -28,7 +38,7 @@ span.title {
 }
 
 .end_dial {
-    padding-top: 50px;
+    padding-top: 20px;
     /* border: 1px solid red; */
 }
 
@@ -50,6 +60,8 @@ span.title {
 
 .dialog_window {
     position: relative;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     height: 100%;
     box-sizing: border-box;
@@ -89,20 +101,14 @@ span.title {
 
 .dialog_window > div {
     width: 100%;
-    height: calc(100% - 151px);
+    /* height: calc(100% - 151px); */
     margin-top: 65px;
     overflow: hidden;
     overflow-y: scroll;
 }
 
-.dialog_window > div > div:nth-child(1) {
+/* .dialog_window > div > div:nth-child(1) {
     margin-top: 20px;
-}
-
-/* .dialog_window > div > div:nth-last-child(2) {
-    margin: 0;
-    padding: 0;
-    padding-bottom: 40px;
 } */
 
 .userlist {
@@ -175,6 +181,7 @@ border-radius: 50%;
     position: absolute;
     top: 15px;
     right: 10px;
+    font-size: 14px;
     color: #919191;
 }
 
@@ -200,10 +207,10 @@ border-radius: 50%;
     justify-content: center;
     align-items: center;
     width: 100%;
-    position: absolute;
     bottom: -5px;
     left: 0;
     padding: 30px;
+    margin-top: auto;
     background-color: #ffffff;
     box-sizing: border-box;
     border-radius: 0 0 5px 5px;

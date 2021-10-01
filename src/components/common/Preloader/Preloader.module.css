@@ -16,7 +16,10 @@
 
 .loaderAnimation {
     position: absolute;
-    font-size: 0!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px!important;
     height: 715px;
     width: 1040px;
     z-index: 100000;
@@ -32,9 +35,10 @@
 
 .loaderAnimation img {
     display: block;
-    margin: 0 auto;
-    margin-top: calc(355px - 50px);
+    width: 80px;
+    height: 80px;
     user-select: none;
+    margin-bottom: 50px;
 }
 
 .loading {
