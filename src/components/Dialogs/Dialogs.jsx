@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, requiredField } from '../../utils/validators/validator';
 import { Textarea } from '../common/FormControls/FormControls';
 import s from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
+import Preloader from '../common/Preloader/Preloader';
 
 const Dialogs = (props) => {
-    let endDial = React.createRef();
-    let onSubmit = (data) => {
-        props.onSendTC(data.message);
-    }
+    let endDial = useRef();
 
-    //хук скролл вниз при отправке месседжа
+    //hook scroll-to-bottom when currentDialog loads
     useEffect(() => {
-        if (props.dialogMap) {
-            return endDial.current.scrollIntoView({ behavior: "smooth" }), [props.dialogMap]
-        }
-    });
+        
+        setTimeout(() => {
+            if(endDial.current && endDial.current !== null){
+            endDial.current.scrollIntoView({ behavior: 'auto' }) 
+            }
+        }, 20);
+    }, props.currentDialog);
+
     return (
         <div>
             <div className={s.dialogs_frame}>
@@ -27,11 +29,15 @@ const Dialogs = (props) => {
                     <SelectDialog /> :
                         <div className={s.dialog_window}>
                         <span className={s.current_dialog}><NavLink to={`/profile/id${props.converListUser.id}`} >{props.converListUser.name}</NavLink></span>
+
+                        {props.isMessagesLoaded ? 
                         <div>
-                            {props.dialogMap}
-                            <div ref={endDial} className={s.end_dial} />
-                        </div>
-                        <MessageReduxForm onSubmit={onSubmit} />
+                            {props.currentDialog}
+                            <div ref={endDial} className={s.end_dial}/>
+                        </div> :
+                        <Preloader />}
+
+                        <MessageReduxForm onSubmit={props.onSendMessage} />
                     </div>
                 }
             </div>

@@ -34,7 +34,6 @@ class ProfileContainerAPI extends React.Component {
   }
 
   componentDidMount() {
-    debugger;
     let userId =  this.props.match.params.userId;
     if (!userId) {
     userId = this.props.authUserId || this.props.history.push("/login");

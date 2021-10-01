@@ -7,7 +7,7 @@ const Post = (props) => {
     let isPostNotEmpty = (props.value && props.value !== " " && props.value !== "");
 
     let likePress = (e, id) => {
-        //change after to send request with id => get responce, then change local state
+        //change after to send request with id => get response, then change local state
         if(isLikePressed){
             toggleLike(false);
             likeAction(likesCount - 1);

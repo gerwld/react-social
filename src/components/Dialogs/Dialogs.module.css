@@ -5,6 +5,11 @@ span.title {
     font-weight: bold;
 }
 
+.messageInput,
+.current_dialog {
+    z-index: 1000000;
+}
+
 .select_dialogscreen {
     display: flex;
     justify-content: center;
@@ -23,7 +28,8 @@ span.title {
 }
 
 .end_dial {
-    padding-top: 20px;
+    padding-top: 50px;
+    /* border: 1px solid red; */
 }
 
 .user_name {
@@ -39,17 +45,17 @@ span.title {
     justify-content: flex-start;
     align-items: flex-start;
     height: 85vh;
-    transition: 3s ease-in-out;
+    /* transition: 3s ease-in-out; */
 }
 
 .dialog_window {
     position: relative;
     flex: 1;
-    padding: 0 10px 30px 40px;
     height: 100%;
     box-sizing: border-box;
     background-color: #ffffff;
     box-shadow: var(--page-block-shadow);
+    overflow: hidden;
 }
 
 .current_dialog {
@@ -92,6 +98,12 @@ span.title {
 .dialog_window > div > div:nth-child(1) {
     margin-top: 20px;
 }
+
+/* .dialog_window > div > div:nth-last-child(2) {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 40px;
+} */
 
 .userlist {
     padding: 0;
@@ -151,9 +163,24 @@ border-radius: 50%;
 
 .message {
     display: flex;
-    margin-bottom: 30px;
+    position: relative;
+    margin: 0 20px;
+    padding: 15px 10px;
     justify-content: flex-start;
     align-items: flex-start;
+    border-bottom: 1px solid transparent;
+}
+
+.message_data {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    color: #919191;
+}
+
+.message a {
+    color: black;
+    text-decoration: none;
 }
 
 .message_content {
@@ -174,11 +201,10 @@ border-radius: 50%;
     align-items: center;
     width: 100%;
     position: absolute;
-    z-index: 10000;
     bottom: -5px;
     left: 0;
     padding: 30px;
-    background-color: white;
+    background-color: #ffffff;
     box-sizing: border-box;
     border-radius: 0 0 5px 5px;
     border-top: 1px solid #f3f3f3;
