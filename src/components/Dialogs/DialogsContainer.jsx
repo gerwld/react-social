@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
+import { dialogsAPI } from '../../api/api';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getFriendsTC, setCurrentUserTC } from '../../redux/dialogs-reducer';
+import { getFriendsTC, sendMessageToUser, setCurrentUserTC } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import s from './Dialogs.module.css';
 import Message from './Message';
@@ -12,12 +13,13 @@ import Message from './Message';
 class DialogsContainer extends React.Component {
 
     constructor(props) {
+        dialogsAPI.getDialogs();
         super(props);
     //load all users if state us. count is less than 1, then set user from url
         if(this.props.usersLength < 1){
             this.props.getFriendsTC();
         }
-        setTimeout(() => this.props.setCurrentUserTC(this.props.match.params.userId), 250);
+        setTimeout(() => this.props.setCurrentUserTC(this.props.match.params.userId), 600);
     }
 
     componentDidUpdate(prevProps) {
@@ -27,12 +29,20 @@ class DialogsContainer extends React.Component {
         }
     }
 
+    onSendMessage = (data) => {
+        let currentId = this.props.match.params.userId;
+        this.props.sendMessageToUser(currentId, data.message);
+    }
+
     render() {
         console.log("render");
         return (
             <Dialogs usersMap={this.props.usersMap}
                     idFromUrl={this.props.match.params.userId}
-                    converListUser={this.props.converListUser}/>
+                    converListUser={this.props.converListUser}
+                    currentDialog={this.props.currentDialog}
+                    isMessagesLoaded={this.props.isMessagesLoaded}
+                    onSendMessage={this.onSendMessage}/>
         )
     }
 }
@@ -46,15 +56,16 @@ let mapStateToProps = (state) => {
                 </NavLink>
             </li>),
         usersLength: state.messagePage.dialogsData.length,
-        dialogMap: state.messagePage.messagesData.map(m => <Message data={m}/>),
-        converListUser: state.messagePage.currentUser
+        converListUser: state.messagePage.currentUser,
+        isMessagesLoaded: state.messagePage.isMessagesLoaded,
+        currentDialog: state.messagePage.messagesData.map(m => <Message {...m}/>)
     }
 }
 
 
 
 export default compose(
-    connect(mapStateToProps, {getFriendsTC, setCurrentUserTC}),
+    connect(mapStateToProps, {getFriendsTC, setCurrentUserTC, sendMessageToUser}),
     withAuthRedirect,
     withRouter
 )(DialogsContainer)

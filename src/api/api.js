@@ -41,7 +41,11 @@ export const usersAPI = {
 
 export const profileAPI = {
     getUser(id) {
-        return instance.get(`profile/${id}`);
+        if(id !== undefined){
+            return instance.get(`profile/${id}`);
+        } else {
+            return undefined;
+        }
     },
     getStatus(id) {
         return instance.get(`profile/status/${id}`)
@@ -72,6 +76,32 @@ export const entertaimentAPI = {
         return axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=a8cc646b8aab472e8166be569667bd5e`).then(r => r.data.articles);
     }
 }
+
+
+
+
+export const dialogsAPI = {
+    getDialogs() {
+        return instance.get('/dialogs').then(r => r.data);
+    },
+    getDialogWithUser(userId, page = 1, pageSize = 12) {
+        if(userId){
+            return instance.get(`/dialogs/${userId}/messages?page=${page}&count=${pageSize}`).then(r => r.data.items);
+        } else return undefined;
+    },
+    sendMessageToUser(userId, message) {
+        return instance.post(`/dialogs/${userId}/messages`, {body: message}).then(r => r.data);
+    }
+}
+
+
+
+
+
+
+
+
+
 
 //Thunk creators
 

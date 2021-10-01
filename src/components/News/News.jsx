@@ -42,7 +42,7 @@ export const FeedBlock = (props) => {
 
     let likePress = (e, id) => {
         let buttonIcon = e.currentTarget.children[0];
-        //change after to send request with id => get responce, then change local state
+        //change after to send request with id => get response, then change local state
         if(isLikePressed){
             toggleLike(false);
             likeAction(likesCount - 1);
