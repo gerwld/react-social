@@ -18,11 +18,11 @@ const News = (props) => {
             {props.postsMap(noAvatar)}
             <InfiniteScroll
                 children=""
-                pageStart={1}
+                pageStart="1"
                 loadMore={props.loadPosts}
                 hasMore={isHasMore}
                 initialLoad={true}
-                threshold={70}
+                threshold={50000}
                 loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}
             > 
             </InfiniteScroll>

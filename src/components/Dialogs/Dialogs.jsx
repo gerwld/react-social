@@ -5,19 +5,10 @@ import { Textarea } from '../common/FormControls/FormControls';
 import s from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
 import Preloader from '../common/Preloader/Preloader';
+import Message from './Message';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Dialogs = (props) => {
-    let endDial = useRef();
-
-    //hook scroll-to-bottom when currentDialog loads
-    useEffect(() => {
-        
-        setTimeout(() => {
-            if(endDial.current && endDial.current !== null){
-            endDial.current.scrollIntoView({ behavior: 'auto' }) 
-            }
-        }, 20);
-    }, props.currentDialog);
 
     return (
         <div>
@@ -31,10 +22,7 @@ const Dialogs = (props) => {
                         <span className={s.current_dialog}><NavLink to={`/profile/id${props.converListUser.id}`} >{props.converListUser.name}</NavLink></span>
 
                         {props.isMessagesLoaded ? 
-                        <div>
-                            {props.currentDialog}
-                            <div ref={endDial} className={s.end_dial}/>
-                        </div> :
+                        <DialogsWindow {...props} /> :
                         <Preloader />}
 
                         <MessageReduxForm onSubmit={props.onSendMessage} />
@@ -44,6 +32,32 @@ const Dialogs = (props) => {
         </div>
     )
 };
+
+class DialogsWindow extends React.Component {
+    render() {
+        return(
+            <div id="scrollableDiv"  ref={(ref) => this.scrollParentRef = ref} onScroll={this.props.onScroll}
+            style={{
+                overflow: 'auto',
+                display: 'flex',
+                flexDirection: 'column-reverse',
+              }}>
+               <InfiniteScroll
+                    dataLength={this.props.currentDialog.length}
+                    next={this.props.dialogsLoader}
+                    style={{ display: 'flex', flexDirection: 'column-reverse' }}
+                    inverse={true} //
+                    hasMore={true}
+                    loader={<div className={s.loader_mess}><img src="/images/loader-2.svg" alt="Loading..."/></div>}
+                    scrollableTarget="scrollableDiv">
+
+                    {this.props.currentDialog.map(m => <Message {...m}/>)}
+                </InfiniteScroll>
+                <div  className={s.end_dial}/>
+            </div>
+        )
+    }
+}
 
 const SelectDialog = () => {
     return (

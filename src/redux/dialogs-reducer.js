@@ -6,6 +6,7 @@ const SET_CURRENT_USER = 'SET_CURRENT_USER';
 const GET_CONVERSATION = 'GET_CONVERSATION';
 const MESS_INITIALIZED = 'MESS_INITIALIZED';
 const ADD_MESSAGE = 'ADD_MESSAGE';
+const LOAD_MORE_MESSAGES = 'LOAD_MORE_MESSAGES';
 
 
 //Action Creators
@@ -14,6 +15,7 @@ export const setCurrentUser = (id, name, avatar) => ({ type: SET_CURRENT_USER, d
 export const setConversationWithUser = (messages) => ({ type: GET_CONVERSATION, messages });
 export const messagesInitialized = (boolean) => ({ type: MESS_INITIALIZED, boolean });
 export const addMessage = (message) => ({ type: ADD_MESSAGE, message });
+export const loadMoreMessagesAC = (messages) => ({ type: LOAD_MORE_MESSAGES, messages });
 
 
 let initialState = {
@@ -50,11 +52,16 @@ const dialogsReducer = (state = initialState, action) => {
             }
         }
         case GET_CONVERSATION: {
-            let aa = {
+            return {
                 ...state,
                 messagesData: action.messages
             }
-            return aa;
+        }
+        case LOAD_MORE_MESSAGES: {
+            return {
+                ...state,
+                messagesData: [...action.messages, ...state.messagesData]
+            }
         }
         case ADD_MESSAGE: {
             return {
@@ -118,8 +125,18 @@ export const getConverstaionWithUser = (idFromUrl) => {
         if(idFromUrl){
         dialogsAPI.getDialogWithUser(idFromUrl).then(response => {
             let dialogMessages = response.map(r => r);
-            dispatch(setConversationWithUser(dialogMessages, 1));
+            dispatch(setConversationWithUser(dialogMessages));
             dispatch(messagesInitialized(true));
+        })}
+    }
+}
+
+export const loadMoreMessages = (idFromUrl, page) => {
+    return (dispatch) => {
+        if(idFromUrl){
+        dialogsAPI.getDialogWithUser(idFromUrl, page).then(response => {
+            let dialogMessages = response.map(r => r);
+            dispatch(loadMoreMessagesAC(dialogMessages));
         })}
     }
 }
