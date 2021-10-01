@@ -4,20 +4,19 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { dialogsAPI } from '../../api/api';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, getConverstaionWithUser, loadMoreMessages } from '../../redux/dialogs-reducer';
+import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, loadMoreMessages } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import s from './Dialogs.module.css';
 
 
 class DialogsContainer extends React.Component {
 
-    state= {
-        currentPage: 1
-    }
-
     constructor(props) {
         super(props);
         this.currentId = this.props.match.params.userId;
+        this.state = {
+            currentPage: 2
+        }
         //load all users if state us. count is less than 1, then set user from url
         if(this.props.usersLength < 1){
             this.props.getFriendsTC();
@@ -39,12 +38,14 @@ class DialogsContainer extends React.Component {
         this.props.sendMessageToUser(this.currentId, data.message);
     }
 
-    getConversation = (page) => {
-        this.props.loadMoreMessages(this.currentId, page);
+    getConversation = () => {
+        let currPage = this.state.currentPage;
+        this.props.loadMoreMessages(this.currentId, currPage);
+
+        this.setState({currentPage: currPage + 1});
     }
 
     render() {
-        console.log("render");
         return (
             <Dialogs usersMap={this.props.usersMap}
                     idFromUrl={this.props.match.params.userId}
@@ -54,7 +55,9 @@ class DialogsContainer extends React.Component {
                     onSendMessage={this.onSendMessage}
                     dialogsLoader={this.getConversation}
                     dialogsWindow={this.myRef}
-                    onScroll={this.onScroll}/>
+                    onScroll={this.onScroll}
+                    totalMessCount={this.props.totalMessCount}
+                    currentPage={this.state.currentPage}/>
         )
     }
 }
@@ -70,7 +73,8 @@ let mapStateToProps = (state) => {
         usersLength: state.messagePage.dialogsData.length,
         converListUser: state.messagePage.currentUser,
         isMessagesLoaded: state.messagePage.isMessagesLoaded,
-        currentDialog: state.messagePage.messagesData
+        currentDialog: state.messagePage.messagesData,
+        totalMessCount: state.messagePage.totalMessCount
     }
 }
 

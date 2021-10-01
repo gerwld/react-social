@@ -34,6 +34,15 @@ const Dialogs = (props) => {
 };
 
 class DialogsWindow extends React.Component {
+
+    isMoreMessagesToLoad = () => {
+        let allUser = this.props.totalMessCount;
+        let pagination = 10;
+        let totalPages = Math.ceil(allUser / pagination);
+        return (this.props.currentPage <= totalPages);
+    }
+
+
     render() {
         return(
             <div id="scrollableDiv"  ref={(ref) => this.scrollParentRef = ref} onScroll={this.props.onScroll}
@@ -47,9 +56,16 @@ class DialogsWindow extends React.Component {
                     next={this.props.dialogsLoader}
                     style={{ display: 'flex', flexDirection: 'column-reverse' }}
                     inverse={true} //
-                    hasMore={true}
+                    hasMore={this.isMoreMessagesToLoad()}
                     loader={<div className={s.loader_mess}><img src="/images/loader-2.svg" alt="Loading..."/></div>}
-                    scrollableTarget="scrollableDiv">
+                    scrollableTarget="scrollableDiv"
+                    endMessage={
+                        <p style={{ textAlign: 'center' }}>
+                          Conversation start.
+                        </p>
+                      }
+                    >
+                    
 
                     {this.props.currentDialog.map(m => <Message {...m}/>)}
                 </InfiniteScroll>

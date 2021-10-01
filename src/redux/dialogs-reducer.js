@@ -1,5 +1,5 @@
 import { reset } from 'redux-form';
-import { dialogsAPI, profileAPI, usersAPI } from '../api/api';
+import { dialogsAPI, profileAPI } from '../api/api';
 
 const SET_FRIENDS = 'SET_FRIENDS';
 const SET_CURRENT_USER = 'SET_CURRENT_USER';
@@ -12,7 +12,7 @@ const LOAD_MORE_MESSAGES = 'LOAD_MORE_MESSAGES';
 //Action Creators
 export const setFriends = (users) => ({ type: SET_FRIENDS, users });
 export const setCurrentUser = (id, name, avatar) => ({ type: SET_CURRENT_USER, data: { id, name, avatar } });
-export const setConversationWithUser = (messages) => ({ type: GET_CONVERSATION, messages });
+export const setConversationWithUser = (messages, messCount) => ({ type: GET_CONVERSATION, messages, messCount });
 export const messagesInitialized = (boolean) => ({ type: MESS_INITIALIZED, boolean });
 export const addMessage = (message) => ({ type: ADD_MESSAGE, message });
 export const loadMoreMessagesAC = (messages) => ({ type: LOAD_MORE_MESSAGES, messages });
@@ -34,7 +34,8 @@ let initialState = {
         viewed: false
     }],
     isMessagesLoaded: false,
-    currentUser: ''
+    currentUser: '',
+    totalMessCount: 0
 }
 
 const dialogsReducer = (state = initialState, action) => {
@@ -54,19 +55,20 @@ const dialogsReducer = (state = initialState, action) => {
         case GET_CONVERSATION: {
             return {
                 ...state,
-                messagesData: action.messages
+                messagesData: action.messages,
+                totalMessCount: action.messCount
             }
         }
         case LOAD_MORE_MESSAGES: {
             return {
                 ...state,
-                messagesData: [...action.messages, ...state.messagesData]
+                messagesData: [...state.messagesData, ...action.messages]
             }
         }
         case ADD_MESSAGE: {
             return {
                 ...state,
-                messagesData: [...state.messagesData, action.message]
+                messagesData: [action.message, ...state.messagesData]
             }
         }
         case MESS_INITIALIZED: {
@@ -78,12 +80,6 @@ const dialogsReducer = (state = initialState, action) => {
 
         default:
             return state;
-    }
-}
-
-export const onSendTC = (message) => {
-    return (dispatch) => {
-       
     }
 }
 
@@ -124,8 +120,9 @@ export const getConverstaionWithUser = (idFromUrl) => {
         dispatch(messagesInitialized(false));
         if(idFromUrl){
         dialogsAPI.getDialogWithUser(idFromUrl).then(response => {
-            let dialogMessages = response.map(r => r);
-            dispatch(setConversationWithUser(dialogMessages));
+            let dialogMessages = response.items.reverse(r => r);
+            let totalMessCount = response.totalCount;
+            dispatch(setConversationWithUser(dialogMessages, totalMessCount));
             dispatch(messagesInitialized(true));
         })}
     }
@@ -135,7 +132,7 @@ export const loadMoreMessages = (idFromUrl, page) => {
     return (dispatch) => {
         if(idFromUrl){
         dialogsAPI.getDialogWithUser(idFromUrl, page).then(response => {
-            let dialogMessages = response.map(r => r);
+            let dialogMessages = response.items.reverse(r => r);
             dispatch(loadMoreMessagesAC(dialogMessages));
         })}
     }
