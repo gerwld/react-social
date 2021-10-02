@@ -50,4 +50,5 @@
 
 .app-content {
   margin-bottom: 15px;
+  grid-column-end: 3;
 }

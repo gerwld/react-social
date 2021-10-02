@@ -19,23 +19,16 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="login_content">
-                <LoginReduxForm {...this.props} onSubmit={this.onSubmit} />
-                <Style>{`
-            .main_nav {
-                display: none;
-                visibility:hidden;
-            }
-
-            .app-content {
-            grid-column-start: 1;
-            grid-column-end: 3;
-            height: 800px;
-            border: 1px solid #e6e6e6;
-            border-radius: 5px;
-            background-color: #ffffff;
-            }`}
-                </Style>
+            <div className="main-content-block login_block">
+                <div className="login_content">
+                    <LoginReduxForm {...this.props} onSubmit={this.onSubmit} />
+                    <Style>{`
+                    .app-content {
+                    grid-column-start: 1;
+                    grid-column-end: 3;
+                }`}
+                    </Style>
+                </div>
             </div>
         )
     }

@@ -30,7 +30,7 @@ class App extends React.Component {
     } 
     return (<div className="app-wrapper">
       <HeaderContainer />
-      {!this.props.location.pathname.match('/login') && <Navbar />}
+      {!this.props.location.pathname.match('/login') && !this.props.location.pathname.match('/error-404') && <Navbar />}
       <div className="app-content">
         <Switch>
           <Route path="/users" render={() => <UsersContainer />} />

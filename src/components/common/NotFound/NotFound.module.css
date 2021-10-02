@@ -41,3 +41,21 @@
 .illustration img {
     width: 450px;
 }
+
+.nav a {
+    display: inline-block;
+    padding: 10px 23px;
+    margin: 15px 0 50px;
+    background-color: var(--main-blue-color);
+    color: #fff;
+    text-align: center;
+    text-transform: capitalize;
+    text-decoration: none;
+    border-radius: var(--button-radius-ui);
+    transition: 0.2s ease-in-out;
+}
+
+.nav a:hover {
+    color: #fff!important;
+    background-color: var(--main-blue-hover);
+}
