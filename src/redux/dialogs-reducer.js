@@ -130,9 +130,7 @@ export const getConverstaionWithUser = (idFromUrl) => {
 }
 
 export const loadMoreMessages = (idFromUrl, page) => {
-    debugger;
     return (dispatch) => {
-        debugger;
         if(idFromUrl){
         dialogsAPI.getDialogWithUser(idFromUrl, page).then(response => {
             let dialogMessages = response.items.reverse(r => r);

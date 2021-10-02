@@ -7,7 +7,7 @@ export default function NotFound(props) {
     return (
         <div className={`main-content-block ${s.notFound_window}`}>
             <h1 className={s.visuallyHidden}>404 Page - Not Found.</h1>
-            <div>
+            <div className={s.mainBlock}>
                 <span className={s.mainTitle}>404</span>
                 <p className={s.mainText}>Page not found</p>
                 <div className={s.nav}>

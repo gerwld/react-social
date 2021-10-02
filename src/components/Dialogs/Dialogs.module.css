@@ -194,8 +194,12 @@ border-radius: 50%;
     position: absolute;
     top: 15px;
     right: 10px;
-    font-size: 14px;
+    font-size: 12.7px;
     color: #919191;
+}
+
+.message_data span {
+    color: #cccccc;
 }
 
 .message a {

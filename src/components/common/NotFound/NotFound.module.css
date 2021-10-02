@@ -22,30 +22,35 @@
 .mainTitle {
     display: block;
     font-weight: bold;
-    font-size: 94px;
+    font-size: 125px;
     color: #4c6dc1;
 }
 
 .mainText {
-    font-size: 26.5px;
+    font-size: 26px;
     text-transform: capitalize;
     color: #535353;
 }
 
+.mainBlock {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
 .illustration {
-    width: 450px;
-    height: auto;
+    height: 400px;
     overflow: hidden;
 }
 
 .illustration img {
-    width: 450px;
+    height: 400px;
+    width: auto;
 }
 
 .nav a {
     display: inline-block;
     padding: 10px 23px;
-    margin: 15px 0 50px;
+    margin-top: 15px;
     background-color: var(--main-blue-color);
     color: #fff;
     text-align: center;
