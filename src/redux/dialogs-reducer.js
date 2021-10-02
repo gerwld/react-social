@@ -98,7 +98,7 @@ export const getFriendsTC = () => {
     }
 }
 
-export const setCurrentUserTC = (idFromUrl, authId) => {
+export const setCurrentUserTC = (idFromUrl) => {
     //find user from state users, if it not there - get user and put it first in array
     return (dispatch, getState) => {
         let checkFromState = getState().messagePage.dialogsData.filter(r => r.id === parseInt(idFromUrl, 10));
@@ -130,7 +130,9 @@ export const getConverstaionWithUser = (idFromUrl) => {
 }
 
 export const loadMoreMessages = (idFromUrl, page) => {
+    debugger;
     return (dispatch) => {
+        debugger;
         if(idFromUrl){
         dialogsAPI.getDialogWithUser(idFromUrl, page).then(response => {
             let dialogMessages = response.items.reverse(r => r);

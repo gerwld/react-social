@@ -22,7 +22,7 @@ const News = (props) => {
                 loadMore={props.loadPosts}
                 hasMore={isHasMore}
                 initialLoad={true}
-                threshold={50000}
+                threshold={250}
                 loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}
             > 
             </InfiniteScroll>

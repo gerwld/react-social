@@ -14,6 +14,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import SettingsContainer from './components/Settings/SettingsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import { initializeApp } from './redux/app-reducer';
+import NotFound from './components/common/NotFound/NotFound';
 
 
 
@@ -49,7 +50,7 @@ class App extends React.Component {
             return this.props.isAuth === true ? <Redirect to="/profile" /> : <Redirect to="/login" />;
           }} />
 
-          <Route path='/error-404' render={() => "404 not found"} />
+          <Route path='/error-404' render={() => <NotFound />} />
           <Redirect from='*' to='/error-404' />
         </Switch>
       </div>

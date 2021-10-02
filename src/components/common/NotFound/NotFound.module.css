@@ -1,0 +1,43 @@
+.visuallyHidden {
+    font-size: 0!important;
+    width: 1px;
+    height: 1px;
+    display: inline-block;
+    overflow: hidden;
+    position: absolute!important;
+    border: 0!important;
+    padding: 0!important;
+    margin: 0!important;
+    clip: rect(1px,1px,1px,1px);
+}
+
+.notFound_window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    user-select: none;
+}
+
+.mainTitle {
+    display: block;
+    font-weight: bold;
+    font-size: 94px;
+    color: #4c6dc1;
+}
+
+.mainText {
+    font-size: 26.5px;
+    text-transform: capitalize;
+    color: #535353;
+}
+
+.illustration {
+    width: 450px;
+    height: auto;
+    overflow: hidden;
+}
+
+.illustration img {
+    width: 450px;
+}

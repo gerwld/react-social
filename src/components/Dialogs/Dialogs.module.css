@@ -16,6 +16,8 @@ span.title {
 }
 
 .loader_start {
+    display: block;
+    margin: 15px 0;
     text-align: center;
     color: #868e9b;
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { getAuthUserDataTC } from '../api/api';
+import { setunreadMessagesCount, setunreadMessagesCountTC } from './auth-reducer';
 
 //константы и экшн криейторы
 const SET_INITIALIZING = 'SET_INITIALIZING';
@@ -28,6 +29,7 @@ const appReducer = (state = initialState, action) => {
 export const initializeApp = () => {
     return (dispatch) => {
         let promise = dispatch(getAuthUserDataTC());
+        dispatch(setunreadMessagesCountTC());
         promise.then(()=> {
             dispatch(setInitializingSuccess());
         })

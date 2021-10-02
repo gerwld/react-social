@@ -91,6 +91,15 @@ export const dialogsAPI = {
     },
     sendMessageToUser(userId, message) {
         return instance.post(`/dialogs/${userId}/messages`, {body: message}).then(r => r.data);
+    },
+    getUnreadCount() {
+        return instance.get('dialogs/messages/new/count').then(r => {
+            if(Number.isInteger(r)) {
+                return r;
+            } else {
+                return 0;
+            }
+        });
     }
 }
 

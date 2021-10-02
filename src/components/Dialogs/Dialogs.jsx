@@ -18,12 +18,12 @@ const Dialogs = (props) => {
                 </ul>
                 {!props.idFromUrl ?
                     <SelectDialog /> :
-                        <div className={s.dialog_window}>
+                    <div className={s.dialog_window}>
                         <span className={s.current_dialog}><NavLink to={`/profile/id${props.converListUser.id}`} >{props.converListUser.name}</NavLink></span>
 
-                        {props.isMessagesLoaded ? 
-                        <DialogsWindow {...props} /> :
-                        <Preloader />}
+                        {props.isMessagesLoaded ?
+                            <DialogsWindow {...props} /> :
+                            <Preloader />}
 
                         <MessageReduxForm onSubmit={props.onSendMessage} />
                     </div>
@@ -38,40 +38,32 @@ class DialogsWindow extends React.Component {
     isMoreMessagesToLoad = () => {
         let pagination = 10;
         let totalPages = Math.ceil(this.props.totalMessCount / pagination);
-        console.log(this.props.currentPage + ' эта страница');
-        console.log(this.props.totalMessCount + ' все сообщения');
-
         return (this.props.currentPage <= totalPages);
     }
 
     render() {
-        return(
-            <div className={s.scrollableWindow} id="scrollableDiv"  
-                ref={(ref) => this.scrollParentRef = ref} onScroll={this.props.onScroll}>
-               <InfiniteScroll
+        return (
+            <div className={s.scrollableWindow} id="scrollableDiv"
+                ref={(ref) => this.messagesEndRef = ref} onScroll={this.props.onScroll}>
+                <div ref={this.props.endDialogBlock} className={s.end_dial} />
+                <InfiniteScroll
                     dataLength={this.props.currentDialog.length}
                     next={this.props.dialogsLoader}
                     style={{ display: 'flex', flexDirection: 'column-reverse' }}
-                    inverse={true} 
+                    inverse={true}
                     hasMore={this.isMoreMessagesToLoad()}
-                    loader={<div className={s.loader_mess}><img src="/images/loader-2.svg" alt="Loading..."/></div>}
+                    loader={<div className={s.loader_mess}><img src="/images/loader-2.svg" alt="Loading..." /></div>}
                     scrollableTarget="scrollableDiv"
                     endMessage={<p className={s.loader_start}>Chat messages beginning.</p>}>
-                    
-                    {this.props.currentDialog.map(m => <Message {...m}/>)}
 
+                    {this.props.currentDialog.map(m => <Message {...m} />)}
                 </InfiniteScroll>
-                <div  className={s.end_dial}/>
             </div>
         )
     }
 }
 
-const SelectDialog = () => {
-    return (
-        <div className={s.select_dialogscreen}><span>Select a chat to start messaging</span></div>
-    );
-}
+const SelectDialog = () => (<div className={s.select_dialogscreen}><span>Select a chat to start messaging</span></div>);
 
 // Form validators
 const maxLength350 = maxLengthCreator(350);
