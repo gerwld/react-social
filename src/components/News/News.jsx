@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroller';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
@@ -24,7 +24,7 @@ const News = (props) => {
                 loadMore={props.loadPosts}
                 hasMore={isHasMore}
                 initialLoad={true}
-                threshold={250}
+                threshold={50}
                 loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}/>
             {!isHasMore && <div className={s.all_caugth}>
                 <span>You're All Caught Up <i className="far fa-check-circle"></i></span>
@@ -37,12 +37,13 @@ const News = (props) => {
 
 export const FeedBlock = (props) => {
     var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
+    let [isLoading, disableLoading] = useState(true);
     let [isLikePressed, toggleLike] = useState(false);
     let [likesCount, likeAction] = useState(22 + Math.floor(Math.random() * 10));
 
     let likePress = (e, id) => {
         let buttonIcon = e.currentTarget.children[0];
-        //change after to send request with id => get response, then change local state
+        //TODO change after to send request with id => get response, then change local state
         if (isLikePressed) {
             toggleLike(false);
             likeAction(likesCount - 1);
@@ -68,18 +69,20 @@ export const FeedBlock = (props) => {
             <div className={s.block_content}>
                 <p>{props.text}</p>
                 {props.img &&
-                    <div className={s.post_image}>
+                    <div className={`${s.post_image} ${s.load_wrapper}`}>
                         <a href={props.postLink} target="_blank" rel="noreferrer">
                             <LazyLoadImage
-                                alt="Post img"
-                                height="auto"
+                                height="300px"
+                                effect="opacity"
                                 width="570px"
-                                effect="blur"
                                 src={props.img}
-                                threshold={450}
+                                threshold={1}
                                 delayMethod='false'
+                                alt="Post img"
+                                afterLoad={() => disableLoading(false)}
                                 onError={i => i.target.style.display = 'none'} />
                         </a>
+                        {isLoading && <div class={s.load_activity}></div>}
                     </div>}
             </div>
             <div className={s.block_buttons}>
