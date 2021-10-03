@@ -2,7 +2,7 @@ import axios from "axios";
 import { captchaStatus, captchaTry, setUserData, setUserIdAfterLogin, userLoggedIn } from "../redux/auth-reducer";
 import { change, stopSubmit } from 'redux-form';
 
-const instance = axios.create({
+const instance1 = axios.create({
     withCredentials: true,
     headers: {
         "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
@@ -12,7 +12,7 @@ const instance = axios.create({
     url: "cors-anywhere.herokuapp.com"
 });
 
-const instance1 = axios.create({
+const instance = axios.create({
     headers: {
         "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
     },
