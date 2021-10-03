@@ -15,7 +15,7 @@ export const setCurrentUser = (id, name, avatar) => ({ type: SET_CURRENT_USER, d
 export const setConversationWithUser = (messages, messCount) => ({ type: GET_CONVERSATION, messages, messCount });
 export const messagesInitialized = (boolean) => ({ type: MESS_INITIALIZED, boolean });
 export const addMessage = (message) => ({ type: ADD_MESSAGE, message });
-export const loadMoreMessagesAC = (messages) => ({ type: LOAD_MORE_MESSAGES, messages });
+export const loadMoreMessagesAC = (messages, messCount) => ({ type: LOAD_MORE_MESSAGES, messages, messCount });
 
 
 let initialState = {
@@ -62,7 +62,8 @@ const dialogsReducer = (state = initialState, action) => {
         case LOAD_MORE_MESSAGES: {
             return {
                 ...state,
-                messagesData: [...state.messagesData, ...action.messages]
+                messagesData: [...state.messagesData, ...action.messages],
+                totalMessCount: action.messCount
             }
         }
         case ADD_MESSAGE: {
@@ -97,7 +98,7 @@ export const getFriendsTC = () => {
     }
 }
 
-export const setCurrentUserTC = (idFromUrl, authId) => {
+export const setCurrentUserTC = (idFromUrl) => {
     //find user from state users, if it not there - get user and put it first in array
     return (dispatch, getState) => {
         let checkFromState = getState().messagePage.dialogsData.filter(r => r.id === parseInt(idFromUrl, 10));
@@ -133,7 +134,8 @@ export const loadMoreMessages = (idFromUrl, page) => {
         if(idFromUrl){
         dialogsAPI.getDialogWithUser(idFromUrl, page).then(response => {
             let dialogMessages = response.items.reverse(r => r);
-            dispatch(loadMoreMessagesAC(dialogMessages));
+            let totalMessCount = response.totalCount;
+            dispatch(loadMoreMessagesAC(dialogMessages, totalMessCount));
         })}
     }
 }

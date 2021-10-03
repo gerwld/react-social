@@ -8,7 +8,7 @@ import moment from 'moment';
 class NewsContainer extends React.Component {
     
     componentDidMount(){
-        this.props.loadPostsTC();
+        this.props.loadPostsTC(this.props.nextPage);
     }
 
     whatsNewSubmit(data) {
@@ -42,10 +42,9 @@ var mapStateToProps = (state) => {
     return {
         posts: state.feed.posts,
         currentPage: (state.feed.nextPage - 1),
-        lastPostDate: state.feed.lastPostDate
+        lastPostDate: state.feed.lastPostDate,
+        nextPage: state.feed.nextPage
     }
 }
-
-
 
 export default connect(mapStateToProps, {loadPostsTC})(NewsContainer);

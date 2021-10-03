@@ -37,11 +37,16 @@
     display: block;
 }
 
+.login_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+}
+
 .login_content {
     position: relative;
     width: 400px;
-    margin: 0 auto;
-    margin-top: 220px;
     background-color: #f0f0f0;
     padding: 45px 45px 25px;
     border-radius: 30px;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react'
 import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, requiredField } from '../../utils/validators/validator';
 import { Textarea } from '../common/FormControls/FormControls';
@@ -9,7 +9,6 @@ import Message from './Message';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Dialogs = (props) => {
-
     return (
         <div>
             <div className={s.dialogs_frame}>
@@ -18,12 +17,12 @@ const Dialogs = (props) => {
                 </ul>
                 {!props.idFromUrl ?
                     <SelectDialog /> :
-                        <div className={s.dialog_window}>
+                    <div className={s.dialog_window}>
                         <span className={s.current_dialog}><NavLink to={`/profile/id${props.converListUser.id}`} >{props.converListUser.name}</NavLink></span>
 
-                        {props.isMessagesLoaded ? 
-                        <DialogsWindow {...props} /> :
-                        <Preloader />}
+                        {props.isMessagesLoaded ?
+                            <DialogsWindow {...props} /> :
+                            <Preloader />}
 
                         <MessageReduxForm onSubmit={props.onSendMessage} />
                     </div>
@@ -35,51 +34,40 @@ const Dialogs = (props) => {
 
 class DialogsWindow extends React.Component {
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return (this.props !== nextProps || this.state !== nextState);
+    }
+    
+
     isMoreMessagesToLoad = () => {
-        let allUser = this.props.totalMessCount;
         let pagination = 10;
-        let totalPages = Math.ceil(allUser / pagination);
+        let totalPages = Math.ceil(this.props.totalMessCount / pagination);
         return (this.props.currentPage <= totalPages);
     }
 
-
     render() {
-        return(
-            <div id="scrollableDiv"  ref={(ref) => this.scrollParentRef = ref} onScroll={this.props.onScroll}
-            style={{
-                overflow: 'auto',
-                display: 'flex',
-                flexDirection: 'column-reverse',
-              }}>
-               <InfiniteScroll
+        return (
+            <div className={s.scrollableWindow} id="scrollableDiv"
+                ref={(ref) => this.messagesEndRef = ref} onScroll={this.props.onScroll}>
+                <div ref={this.props.endDialogBlock} className={s.end_dial} />
+                <InfiniteScroll
                     dataLength={this.props.currentDialog.length}
                     next={this.props.dialogsLoader}
                     style={{ display: 'flex', flexDirection: 'column-reverse' }}
-                    inverse={true} //
+                    inverse={true}
                     hasMore={this.isMoreMessagesToLoad()}
-                    loader={<div className={s.loader_mess}><img src="/images/loader-2.svg" alt="Loading..."/></div>}
+                    loader={<div className={s.loader_mess}><img src="/images/loader-2.svg" alt="Loading..." /></div>}
                     scrollableTarget="scrollableDiv"
-                    endMessage={
-                        <p style={{ textAlign: 'center' }}>
-                          Conversation start.
-                        </p>
-                      }
-                    >
-                    
+                    endMessage={<p className={s.loader_start}>Chat messages beginning.</p>}>
 
-                    {this.props.currentDialog.map(m => <Message {...m}/>)}
+                    {this.props.currentDialog.map(m => <Message {...m} />)}
                 </InfiniteScroll>
-                <div  className={s.end_dial}/>
             </div>
         )
     }
 }
 
-const SelectDialog = () => {
-    return (
-        <div className={s.select_dialogscreen}><span>Select a chat to start messaging</span></div>
-    );
-}
+const SelectDialog = () => (<div className={s.select_dialogscreen}><span>Select a chat to start messaging</span></div>);
 
 // Form validators
 const maxLength350 = maxLengthCreator(350);

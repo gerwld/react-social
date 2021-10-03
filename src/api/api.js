@@ -5,7 +5,7 @@ import { change, stopSubmit } from 'redux-form';
 const instance = axios.create({
     withCredentials: true,
     headers: {
-        "API-KEY": "40e3ccc6-4d4d-4e3b-800c-e6591774439b"
+        "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
     },
     baseURL: "https://social-network.samuraijs.com/api/1.0/"
 });
@@ -73,7 +73,7 @@ export const authAPI = {
 
 export const entertaimentAPI = {
     getPosts(currPage, serving = 5) {
-        return axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=a8cc646b8aab472e8166be569667bd5e`).then(r => r.data.articles);
+        return axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
     }
 }
 
@@ -91,6 +91,15 @@ export const dialogsAPI = {
     },
     sendMessageToUser(userId, message) {
         return instance.post(`/dialogs/${userId}/messages`, {body: message}).then(r => r.data);
+    },
+    getUnreadCount() {
+        return instance.get('dialogs/messages/new/count').then(r => {
+            if(Number.isInteger(r.data)) {
+                return r.data;
+            } else {
+                return 0;
+            }
+        });
     }
 }
 

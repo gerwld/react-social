@@ -4,10 +4,12 @@ import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroller';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
-    var isHasMore = props.currentPage < 3;
+    var isHasMore = props.currentPage < 3 ;
 
     return (
         <div>
@@ -19,17 +21,15 @@ const News = (props) => {
             <InfiniteScroll
                 children=""
                 pageStart="1"
-                loadMore={props.loadPosts}
+                loadMore={() => props.loadPosts(props.currentPage + 1)}
                 hasMore={isHasMore}
                 initialLoad={true}
-                threshold={50000}
-                loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}
-            > 
-            </InfiniteScroll>
+                threshold={50}
+                loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}/>
             {!isHasMore && <div className={s.all_caugth}>
                 <span>You're All Caught Up <i className="far fa-check-circle"></i></span>
                 <p>You've seen all new post from the past {props.lastPostTime}</p>
-                </div>}
+            </div>}
         </div>
 
     )
@@ -37,13 +37,14 @@ const News = (props) => {
 
 export const FeedBlock = (props) => {
     var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
+    let [isLoading, disableLoading] = useState(true);
     let [isLikePressed, toggleLike] = useState(false);
-    let [likesCount, likeAction] = useState(22 + Math.floor(Math.random()*10));
+    let [likesCount, likeAction] = useState(22 + Math.floor(Math.random() * 10));
 
     let likePress = (e, id) => {
         let buttonIcon = e.currentTarget.children[0];
-        //change after to send request with id => get response, then change local state
-        if(isLikePressed){
+        //TODO change after to send request with id => get response, then change local state
+        if (isLikePressed) {
             toggleLike(false);
             likeAction(likesCount - 1);
             buttonIcon.className = "far fa-heart";
@@ -68,8 +69,20 @@ export const FeedBlock = (props) => {
             <div className={s.block_content}>
                 <p>{props.text}</p>
                 {props.img &&
-                    <div className={s.post_image}>
-                        <a href={props.postLink} target="_blank" rel="noreferrer"><img onError={i => i.target.style.display='none'} src={props.img} alt="Post img" /></a>
+                    <div className={`${s.post_image} ${s.load_wrapper}`}>
+                        <a href={props.postLink} target="_blank" rel="noreferrer">
+                            <LazyLoadImage
+                                height="300px"
+                                effect="opacity"
+                                width="570px"
+                                src={props.img}
+                                threshold={1}
+                                delayMethod='false'
+                                alt="Post img"
+                                afterLoad={() => disableLoading(false)}
+                                onError={i => i.target.style.display = 'none'} />
+                        </a>
+                        {isLoading && <div class={s.load_activity}></div>}
                     </div>}
             </div>
             <div className={s.block_buttons}>

@@ -1,8 +1,8 @@
 import React from 'react';
+import { useRef } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import { dialogsAPI } from '../../api/api';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, loadMoreMessages } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
@@ -13,37 +13,47 @@ class DialogsContainer extends React.Component {
 
     constructor(props) {
         super(props);
+        //sometimes buggy, better use full path
         this.currentId = this.props.match.params.userId;
+        this.endDialogBlock = React.createRef();
         this.state = {
             currentPage: 2
         }
-        //load all users if state us. count is less than 1, then set user from url
+
+        //load all users if state usr. count is less than 1, then set user from url
         if(this.props.usersLength < 1){
             this.props.getFriendsTC();
         }
         setTimeout(() => this.props.setCurrentUserTC(this.props.match.params.userId), 600);
     }
 
-
-
     componentDidUpdate(prevProps) {
         let currentId = this.props.match.params.userId;
         if(prevProps.match.params.userId !== currentId) {
             this.props.messagesInitialized(false);
+            this.setState({currentPage: 2});
             this.props.setCurrentUserTC(currentId);
         }
     }
 
     onSendMessage = (data) => {
-        this.props.sendMessageToUser(this.currentId, data.message);
+        let currentId = this.props.match.params.userId;
+        this.props.sendMessageToUser(currentId, data.message);
+        setTimeout(() => this.scrollToBottom(this.endDialogBlock.current), 500);
     }
 
     getConversation = () => {
         let currPage = this.state.currentPage;
-        this.props.loadMoreMessages(this.currentId, currPage);
-
+        let currentId = this.props.match.params.userId;
+        this.props.loadMoreMessages(currentId, currPage);
         this.setState({currentPage: currPage + 1});
     }
+
+    scrollToBottom = (refCurrent) => {
+        if (refCurrent) {
+            refCurrent.scrollIntoView({ behavior: "smooth" });
+        }
+      };
 
     render() {
         return (
@@ -57,7 +67,8 @@ class DialogsContainer extends React.Component {
                     dialogsWindow={this.myRef}
                     onScroll={this.onScroll}
                     totalMessCount={this.props.totalMessCount}
-                    currentPage={this.state.currentPage}/>
+                    currentPage={this.state.currentPage}
+                    endDialogBlock={this.endDialogBlock}/>
         )
     }
 }

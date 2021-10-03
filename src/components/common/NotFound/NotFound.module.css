@@ -1,0 +1,66 @@
+.visuallyHidden {
+    font-size: 0!important;
+    width: 1px;
+    height: 1px;
+    display: inline-block;
+    overflow: hidden;
+    position: absolute!important;
+    border: 0!important;
+    padding: 0!important;
+    margin: 0!important;
+    clip: rect(1px,1px,1px,1px);
+}
+
+.notFound_window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    user-select: none;
+}
+
+.mainTitle {
+    display: block;
+    font-weight: bold;
+    font-size: 125px;
+    color: #4c6dc1;
+}
+
+.mainText {
+    font-size: 26px;
+    text-transform: capitalize;
+    color: #535353;
+}
+
+.mainBlock {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.illustration {
+    height: 400px;
+    overflow: hidden;
+}
+
+.illustration img {
+    height: 400px;
+    width: auto;
+}
+
+.nav a {
+    display: inline-block;
+    padding: 10px 23px;
+    margin-top: 15px;
+    background-color: var(--main-blue-color);
+    color: #fff;
+    text-align: center;
+    text-transform: capitalize;
+    text-decoration: none;
+    border-radius: var(--button-radius-ui);
+    transition: 0.2s ease-in-out;
+}
+
+.nav a:hover {
+    color: #fff!important;
+    background-color: var(--main-blue-hover);
+}
