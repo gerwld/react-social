@@ -9,7 +9,7 @@ import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
-    var isHasMore = props.currentPage < 3;
+    var isHasMore = props.currentPage < 3 ;
 
     return (
         <div>
@@ -21,7 +21,7 @@ const News = (props) => {
             <InfiniteScroll
                 children=""
                 pageStart="1"
-                loadMore={props.loadPosts}
+                loadMore={() => props.loadPosts(props.currentPage + 1)}
                 hasMore={isHasMore}
                 initialLoad={true}
                 threshold={50}

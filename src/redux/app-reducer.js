@@ -1,6 +1,6 @@
 import React from 'react'
 import { getAuthUserDataTC } from '../api/api';
-import { setunreadMessagesCount, setunreadMessagesCountTC } from './auth-reducer';
+import { setunreadMessagesCountTC } from './auth-reducer';
 
 //константы и экшн криейторы
 const SET_INITIALIZING = 'SET_INITIALIZING';

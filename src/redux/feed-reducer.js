@@ -2,12 +2,11 @@ import React from 'react'
 import { entertaimentAPI } from '../api/api';
 import moment from 'moment';
 
-const SEND_MESSAGE = 'SEND-MESSAGE';
+
 const LOAD_POSTS = 'LOAD_POSTS';
 const LAST_POST_DATE = 'LAST_POST_DATE';
 
 //Action Creators
-export const onSend = (message, userID, userdata, avatar) => ({ type: SEND_MESSAGE, message, userID, userdata, avatar });
 export const loadPosts = (posts) => ({ type: LOAD_POSTS, posts });
 export const addLastPostDate = (date) => ({ type: LAST_POST_DATE, date });
 
@@ -20,15 +19,15 @@ let initialState = {
 
 const feedReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SEND_MESSAGE: {
-            return state;
-        }
         case LOAD_POSTS: {
-            return {
+            
+            let aa = {
                 ...state,
-                nextPage: state.nextPage + 1,
+                nextPage: parseInt(state.nextPage, 10) + 1,
                 posts: [...state.posts, ...action.posts]
             }
+            // debugger;
+            return aa;
         }
         case LAST_POST_DATE:
             return {
@@ -41,9 +40,9 @@ const feedReducer = (state = initialState, action) => {
     }
 }
 
-export const loadPostsTC = () => {
-    return (dispatch, getState) => {
-        entertaimentAPI.getPosts(getState().feed.nextPage).then(r => {
+export const loadPostsTC = (nextPage) => {
+    return (dispatch) => {
+        entertaimentAPI.getPosts(nextPage).then(r => {
             dispatch(loadPosts(r));
             let date = moment(r[r.length - 1].publishedAt, "YYYY-MM-DD-h:mm").fromNow().replace(" ago", "");
             dispatch(addLastPostDate(date));
