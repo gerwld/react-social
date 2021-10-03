@@ -3,7 +3,7 @@ import { captchaStatus, captchaTry, setUserData, setUserIdAfterLogin, userLogged
 import { change, stopSubmit } from 'redux-form';
 
 const instance = axios.create({
-    // withCredentials: true,
+    withCredentials: true,
     headers: {
         "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
     },
@@ -11,6 +11,16 @@ const instance = axios.create({
     crossdomain: true,
     url: "cors-anywhere.herokuapp.com"
 });
+
+const instance1 = axios.create({
+    headers: {
+        "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
+    },
+    baseURL: "https://cors-anywhere.herokuapp.com/https://social-network.samuraijs.com/api/1.0/",
+    crossdomain: true,
+    url: "cors-anywhere.herokuapp.com"
+});
+
 
 
 export const usersAPI = {
