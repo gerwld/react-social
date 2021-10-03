@@ -9,7 +9,6 @@ import Message from './Message';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const Dialogs = (props) => {
-
     return (
         <div>
             <div className={s.dialogs_frame}>
@@ -34,6 +33,11 @@ const Dialogs = (props) => {
 };
 
 class DialogsWindow extends React.Component {
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return (this.props !== nextProps || this.state !== nextState);
+    }
+    
 
     isMoreMessagesToLoad = () => {
         let pagination = 10;

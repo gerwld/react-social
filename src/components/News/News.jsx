@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroller';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
@@ -23,13 +25,11 @@ const News = (props) => {
                 hasMore={isHasMore}
                 initialLoad={true}
                 threshold={250}
-                loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}
-            > 
-            </InfiniteScroll>
+                loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}/>
             {!isHasMore && <div className={s.all_caugth}>
                 <span>You're All Caught Up <i className="far fa-check-circle"></i></span>
                 <p>You've seen all new post from the past {props.lastPostTime}</p>
-                </div>}
+            </div>}
         </div>
 
     )
@@ -38,12 +38,12 @@ const News = (props) => {
 export const FeedBlock = (props) => {
     var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
     let [isLikePressed, toggleLike] = useState(false);
-    let [likesCount, likeAction] = useState(22 + Math.floor(Math.random()*10));
+    let [likesCount, likeAction] = useState(22 + Math.floor(Math.random() * 10));
 
     let likePress = (e, id) => {
         let buttonIcon = e.currentTarget.children[0];
         //change after to send request with id => get response, then change local state
-        if(isLikePressed){
+        if (isLikePressed) {
             toggleLike(false);
             likeAction(likesCount - 1);
             buttonIcon.className = "far fa-heart";
@@ -69,7 +69,17 @@ export const FeedBlock = (props) => {
                 <p>{props.text}</p>
                 {props.img &&
                     <div className={s.post_image}>
-                        <a href={props.postLink} target="_blank" rel="noreferrer"><img onError={i => i.target.style.display='none'} src={props.img} alt="Post img" /></a>
+                        <a href={props.postLink} target="_blank" rel="noreferrer">
+                            <LazyLoadImage
+                                alt="Post img"
+                                height="auto"
+                                width="570px"
+                                effect="blur"
+                                src={props.img}
+                                threshold={450}
+                                delayMethod='false'
+                                onError={i => i.target.style.display = 'none'} />
+                        </a>
                     </div>}
             </div>
             <div className={s.block_buttons}>
