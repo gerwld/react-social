@@ -85,16 +85,15 @@ const dialogsReducer = (state = initialState, action) => {
 }
 
 export const getFriendsTC = () => {
-    return (dispatch) => {
-//get all interlocutor's, then map it to state
-    dialogsAPI.getDialogs().then(response => {
+    return async (dispatch) => {
+    //get all interlocutor's, then map it to state
+    let response = await dialogsAPI.getDialogs();
             let users = response.map(r => ({
                 id: r.id,
                 name: r.userName,
                 avatar: (r.photos.small !== null) ? r.photos.small : '/images/avatars/def-avatar.png'
             }));
             dispatch(setFriends(users));
-        });
     }
 }
 

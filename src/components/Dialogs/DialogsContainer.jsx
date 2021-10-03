@@ -19,19 +19,22 @@ class DialogsContainer extends React.Component {
         this.state = {
             currentPage: 2
         }
+        this.getFriendsAndSetCurrentUser();
+    }
 
-        //load all users if state usr. count is less than 1, then set user from url
-        if(this.props.usersLength < 1){
-            this.props.getFriendsTC();
-        }
-        setTimeout(() => this.props.setCurrentUserTC(this.props.match.params.userId), 600);
+    getFriendsAndSetCurrentUser = async () => {
+         //load all users if state usr. count is less than 1, then set user from url
+        if (this.props.usersLength < 1) {
+            await this.props.getFriendsTC();
+        } 
+        this.props.setCurrentUserTC(this.props.match.params.userId);
     }
 
     componentDidUpdate(prevProps) {
         let currentId = this.props.match.params.userId;
-        if(prevProps.match.params.userId !== currentId) {
+        if (prevProps.match.params.userId !== currentId) {
             this.props.messagesInitialized(false);
-            this.setState({currentPage: 2});
+            this.setState({ currentPage: 2 });
             this.props.setCurrentUserTC(currentId);
         }
     }
@@ -46,29 +49,29 @@ class DialogsContainer extends React.Component {
         let currPage = this.state.currentPage;
         let currentId = this.props.match.params.userId;
         this.props.loadMoreMessages(currentId, currPage);
-        this.setState({currentPage: currPage + 1});
+        this.setState({ currentPage: currPage + 1 });
     }
 
     scrollToBottom = (refCurrent) => {
         if (refCurrent) {
             refCurrent.scrollIntoView({ behavior: "smooth" });
         }
-      };
+    };
 
     render() {
         return (
             <Dialogs usersMap={this.props.usersMap}
-                    idFromUrl={this.props.match.params.userId}
-                    converListUser={this.props.converListUser}
-                    currentDialog={this.props.currentDialog}
-                    isMessagesLoaded={this.props.isMessagesLoaded}
-                    onSendMessage={this.onSendMessage}
-                    dialogsLoader={this.getConversation}
-                    dialogsWindow={this.myRef}
-                    onScroll={this.onScroll}
-                    totalMessCount={this.props.totalMessCount}
-                    currentPage={this.state.currentPage}
-                    endDialogBlock={this.endDialogBlock}/>
+                idFromUrl={this.props.match.params.userId}
+                converListUser={this.props.converListUser}
+                currentDialog={this.props.currentDialog}
+                isMessagesLoaded={this.props.isMessagesLoaded}
+                onSendMessage={this.onSendMessage}
+                dialogsLoader={this.getConversation}
+                dialogsWindow={this.myRef}
+                onScroll={this.onScroll}
+                totalMessCount={this.props.totalMessCount}
+                currentPage={this.state.currentPage}
+                endDialogBlock={this.endDialogBlock} />
         )
     }
 }
@@ -78,21 +81,22 @@ let mapStateToProps = (state) => {
         usersMap: state.messagePage.dialogsData.map(user =>
             <li key={user.id}>
                 <NavLink to={"/dialogs/id" + user.id} activeClassName={s.selected_item}>
-                    <img src={user.avatar} alt={s.user_name}/><span className={s.user_name}>{user.name}</span>
+                    <img src={user.avatar} alt={s.user_name} /><span className={s.user_name}>{user.name}</span>
                 </NavLink>
             </li>),
         usersLength: state.messagePage.dialogsData.length,
         converListUser: state.messagePage.currentUser,
         isMessagesLoaded: state.messagePage.isMessagesLoaded,
         currentDialog: state.messagePage.messagesData,
-        totalMessCount: state.messagePage.totalMessCount
+        totalMessCount: state.messagePage.totalMessCount,
+        loadedUsers: state.messagePage.dialogsData
     }
 }
 
 
 
 export default compose(
-    connect(mapStateToProps, {getFriendsTC, setCurrentUserTC, sendMessageToUser, messagesInitialized, loadMoreMessages}),
+    connect(mapStateToProps, { getFriendsTC, setCurrentUserTC, sendMessageToUser, messagesInitialized, loadMoreMessages }),
     withAuthRedirect,
     withRouter
 )(DialogsContainer)
