@@ -82,7 +82,7 @@ export const authAPI = {
 
 export const entertaimentAPI = {
     getPosts(currPage, serving = 5) {
-        return axios.get(`https://immense-forest-91899.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
+        return axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
     }
 }
 
