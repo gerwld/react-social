@@ -10,7 +10,7 @@ import { change, stopSubmit } from 'redux-form';
 // });
 
 const instance = axios.create({
-    // withCredentials: true,
+    withCredentials: true,
     headers: {
         "API-KEY": "781b8b79-ffcd-41da-9a0b-a1374f504632"
     },
