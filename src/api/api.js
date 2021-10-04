@@ -17,8 +17,6 @@ const instance = axios.create({
     baseURL: "https://immense-forest-91899.herokuapp.com/https://social-network.samuraijs.com/api/1.0/"
 });
 
-// https://immense-forest-91899.herokuapp.com/
-
 export const usersAPI = {
     getUsers(pageSize = 6, pageNumber = 1, friends, search) {
         let isSearch = (search && search !== "") ? `&term=${search}` : '';
