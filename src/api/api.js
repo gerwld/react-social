@@ -15,7 +15,7 @@ const instance = axios.create({
         "origin": "http://localhost:3000/",
         "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
     },
-    baseURL: "https://safe-dawn-56088.herokuapp.com/https://social-network.samuraijs.com/api/1.0/"
+    baseURL: "https://immense-forest-91899.herokuapp.com/https://social-network.samuraijs.com/api/1.0/"
 });
 
 
@@ -83,7 +83,7 @@ export const authAPI = {
 
 export const entertaimentAPI = {
     getPosts(currPage, serving = 5) {
-        return axios.get(`https://safe-dawn-56088.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
+        return axios.get(`https://immense-forest-91899.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
     }
 }
 
