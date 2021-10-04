@@ -1,10 +1,9 @@
 import React from 'react';
-import { useRef } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, loadMoreMessages } from '../../redux/dialogs-reducer';
+import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, getConverstaionWithUser } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import s from './Dialogs.module.css';
 
@@ -13,8 +12,6 @@ class DialogsContainer extends React.Component {
 
     constructor(props) {
         super(props);
-        //sometimes buggy, better use full path
-        this.currentId = this.props.match.params.userId;
         this.endDialogBlock = React.createRef();
         this.state = {
             currentPage: 2
@@ -22,34 +19,34 @@ class DialogsContainer extends React.Component {
         this.getFriendsAndSetCurrentUser();
     }
 
-    getFriendsAndSetCurrentUser = async () => {
-         //load all users if state usr. count is less than 1, then set user from url
-        if (this.props.usersLength < 1) {
-            await this.props.getFriendsTC();
-        } 
-        this.props.setCurrentUserTC(this.props.match.params.userId);
-    }
-
     componentDidUpdate(prevProps) {
         let currentId = this.props.match.params.userId;
         if (prevProps.match.params.userId !== currentId) {
             this.props.messagesInitialized(false);
             this.setState({ currentPage: 2 });
-            this.props.setCurrentUserTC(currentId);
+            this.props.setCurrentUserTC(currentId, this.props.loadedUsers);
         }
     }
 
-    onSendMessage = (data) => {
-        let currentId = this.props.match.params.userId;
-        this.props.sendMessageToUser(currentId, data.message);
-        setTimeout(() => this.scrollToBottom(this.endDialogBlock.current), 500);
+    getFriendsAndSetCurrentUser = async () => {
+         //Gets all users when state is empty, then gets current user from state / api
+        if (this.props.usersLength < 1) {
+            await this.props.getFriendsTC();
+        } 
+        this.props.setCurrentUserTC(this.props.match.params.userId, this.props.loadedUsers);
     }
 
     getConversation = () => {
         let currPage = this.state.currentPage;
         let currentId = this.props.match.params.userId;
-        this.props.loadMoreMessages(currentId, currPage);
+        this.props.getConverstaionWithUser(currentId, currPage, false);
         this.setState({ currentPage: currPage + 1 });
+    }
+
+    onSendMessage = async (data) => {
+        let currentId = this.props.match.params.userId;
+        await this.props.sendMessageToUser(currentId, data.message);
+        this.scrollToBottom(this.endDialogBlock.current);
     }
 
     scrollToBottom = (refCurrent) => {
@@ -67,8 +64,6 @@ class DialogsContainer extends React.Component {
                 isMessagesLoaded={this.props.isMessagesLoaded}
                 onSendMessage={this.onSendMessage}
                 dialogsLoader={this.getConversation}
-                dialogsWindow={this.myRef}
-                onScroll={this.onScroll}
                 totalMessCount={this.props.totalMessCount}
                 currentPage={this.state.currentPage}
                 endDialogBlock={this.endDialogBlock} />
@@ -96,7 +91,7 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, { getFriendsTC, setCurrentUserTC, sendMessageToUser, messagesInitialized, loadMoreMessages }),
+    connect(mapStateToProps, { getFriendsTC, setCurrentUserTC, sendMessageToUser, messagesInitialized, getConverstaionWithUser }),
     withAuthRedirect,
     withRouter
 )(DialogsContainer)
