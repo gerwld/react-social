@@ -10,9 +10,9 @@ import { change, stopSubmit } from 'redux-form';
 // });
 
 const instance = axios.create({
-    withCredentials: true,
+    // withCredentials: true,
     headers: {
-        "Origin": "http://localhost:3000",
+        "origin": "http://localhost:3000/",
         "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
     },
     baseURL: "https://safe-dawn-56088.herokuapp.com/https://social-network.samuraijs.com/api/1.0/"
