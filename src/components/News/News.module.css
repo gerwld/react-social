@@ -11,6 +11,7 @@
 
 .imageSpanWrap img {
     min-height: 300px!important;
+    max-height: 375px!important;
 }
 
 
