@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Social network created on React
+Link to project - https://social-network-project-mu.vercel.app/
 
 ## Available Scripts
 
