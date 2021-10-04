@@ -11,7 +11,7 @@ export const setInitializingSuccess = () => ({type: SET_INITIALIZING});
 
 let initialState = {
 //TODO: change to false later
-    initialized: false
+    initialized: true
 };
 
 const appReducer = (state = initialState, action) => {
