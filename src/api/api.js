@@ -4,16 +4,16 @@ import { change, stopSubmit } from 'redux-form';
 
 const instance1 = axios.create({
     headers: {
+        "Origin": "http://localhost:3000",
         "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
     },
     baseURL: "https://social-network.samuraijs.com/api/1.0/"
 });
 
 const instance = axios.create({
-    // withCredentials: true,
+    withCredentials: true,
     headers: {
-        "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893",
-        "Sec-Fetch-Mode": "no-cors"
+        "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
     },
     baseURL: "https://safe-dawn-56088.herokuapp.com/https://social-network.samuraijs.com/api/1.0/"
 });
@@ -83,10 +83,7 @@ export const authAPI = {
 
 export const entertaimentAPI = {
     getPosts(currPage, serving = 5) {
-        return axios.get(`https://safe-dawn-56088.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`, {
-            headers: {
-                // "Sec-Fetch-Mode": "no-cors"
-            }}).then(r => r.data.articles);
+        return axios.get(`https://safe-dawn-56088.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
     }
 }
 
