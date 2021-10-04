@@ -39,7 +39,6 @@ const profileReducer = (state = initialState, action) => {
 }
 
 //Thunk Creators
-
 export const getUserInfo = (userId) => {
     return (dispatch) => {
         dispatch(setUserProfile(null));

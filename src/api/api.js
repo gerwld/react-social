@@ -3,22 +3,18 @@ import { captchaStatus, captchaTry, setUserData, setUserIdAfterLogin, userLogged
 import { change, stopSubmit } from 'redux-form';
 
 const instance1 = axios.create({
+    headers: {
+        "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
+    },
+    baseURL: "https://cors-anywhere.herokuapp.com/https://social-network.samuraijs.com/api/1.0/"
+});
+
+const instance = axios.create({
     withCredentials: true,
     headers: {
         "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
     },
-    baseURL: "https://cors-anywhere.herokuapp.com/https://social-network.samuraijs.com/api/1.0/",
-    crossdomain: true,
-    url: "cors-anywhere.herokuapp.com"
-});
-
-const instance = axios.create({
-    headers: {
-        "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
-    },
-    baseURL: "https://cors-anywhere.herokuapp.com/https://social-network.samuraijs.com/api/1.0/",
-    crossdomain: true,
-    url: "cors-anywhere.herokuapp.com"
+    baseURL: "https://social-network.samuraijs.com/api/1.0/"
 });
 
 
@@ -86,7 +82,7 @@ export const authAPI = {
 
 export const entertaimentAPI = {
     getPosts(currPage, serving = 5) {
-        return axios.get(`https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
+        return axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
     }
 }
 

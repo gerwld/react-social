@@ -41,12 +41,11 @@ const feedReducer = (state = initialState, action) => {
 }
 
 export const loadPostsTC = (nextPage) => {
-    return (dispatch) => {
-        entertaimentAPI.getPosts(nextPage).then(r => {
+    return async (dispatch) => {
+        let r = await entertaimentAPI.getPosts(nextPage);
             dispatch(loadPosts(r));
             let date = moment(r[r.length - 1].publishedAt, "YYYY-MM-DD-h:mm").fromNow().replace(" ago", "");
             dispatch(addLastPostDate(date));
-        });
     }
 }
 

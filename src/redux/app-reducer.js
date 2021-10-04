@@ -28,12 +28,11 @@ const appReducer = (state = initialState, action) => {
 }
 
 export const initializeApp = () => {
-    return (dispatch) => {
-        let promise = dispatch(getAuthUserDataTC());
-        dispatch(setunreadMessagesCountTC());
-        promise.then(()=> {
-            dispatch(setInitializingSuccess());
-        })
+    return async (dispatch) => {
+        await dispatch(getAuthUserDataTC());
+        await dispatch(setunreadMessagesCountTC());
+
+        dispatch(setInitializingSuccess());
     }
 }
 
