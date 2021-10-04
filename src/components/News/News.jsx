@@ -72,13 +72,14 @@ export const FeedBlock = (props) => {
                     <div className={`${s.post_image} ${s.load_wrapper}`}>
                         <a href={props.postLink} target="_blank" rel="noreferrer">
                             <LazyLoadImage
-                                height="300px"
+                                min-height="300px"
                                 effect="opacity"
                                 width="570px"
                                 src={props.img}
                                 threshold={1}
                                 delayMethod='false'
                                 alt="Post img"
+                                wrapperClassName={s.imageSpanWrap}
                                 afterLoad={() => disableLoading(false)}
                                 onError={i => i.target.style.display = 'none'} />
                         </a>
