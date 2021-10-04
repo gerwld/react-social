@@ -2,17 +2,17 @@ import axios from "axios";
 import { captchaStatus, captchaTry, setUserData, setUserIdAfterLogin, userLoggedIn } from "../redux/auth-reducer";
 import { change, stopSubmit } from 'redux-form';
 
-const instance1 = axios.create({
-    headers: {
-        "Origin": "http://localhost:3000",
-        "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
-    },
-    baseURL: "https://social-network.samuraijs.com/api/1.0/"
-});
+// const instance1 = axios.create({
+//     headers: {
+//         "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
+//     },
+//     baseURL: "https://social-network.samuraijs.com/api/1.0/"
+// });
 
 const instance = axios.create({
     withCredentials: true,
     headers: {
+        "Origin": "http://localhost:3000",
         "API-KEY": "044e15b9-4ab3-4639-87c1-f52961ced893"
     },
     baseURL: "https://safe-dawn-56088.herokuapp.com/https://social-network.samuraijs.com/api/1.0/"
