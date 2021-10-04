@@ -72,7 +72,7 @@ export const FeedBlock = (props) => {
                     <div className={`${s.post_image} ${s.load_wrapper}`}>
                         <a href={props.postLink} target="_blank" rel="noreferrer">
                             <LazyLoadImage
-                                min-height="300px"
+                                height="330px"
                                 effect="opacity"
                                 width="570px"
                                 src={props.img}
