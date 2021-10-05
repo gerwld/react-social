@@ -75,10 +75,10 @@ export const sendPost = (submit) => {
 }
 
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
-const DELETE_POST = 'DELETE_POST';
+const ADD_POST = 'soc-net-pjaw/profile-reducer/ADD-POST';
+const SET_USER_PROFILE = 'soc-net-pjaw/profile-reducer/SET_USER_PROFILE';
+const SET_STATUS = 'soc-net-pjaw/profile-reducer/SET_STATUS';
+const DELETE_POST = 'soc-net-pjaw/profile-reducer/DELETE_POST';
 
 
 //Action Creators

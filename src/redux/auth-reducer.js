@@ -1,12 +1,12 @@
 import { authAPI, dialogsAPI } from "../api/api";
 
 //константы и экшн криейторы
-const SET_USER_DATA = 'SET_USER_DATA';
-const USER_LOGGED_IN = 'USER_LOGGED_IN';
-const CAPTCHA_STATUS = 'CAPTCHA_STATUS';
-const CAPTCHA_TRY = 'CAPTCHA_TRY';
-const SET_USER_ID = 'SET_USER_ID';
-const UNREAD_MESSAGES_COUNT = 'UNREAD_MESSAGES_COUNT';
+const SET_USER_DATA = 'soc-net-pjaw/auth-reducer/SET_USER_DATA';
+const USER_LOGGED_IN = 'soc-net-pjaw/auth-reducer/USER_LOGGED_IN';
+const CAPTCHA_STATUS = 'soc-net-pjaw/auth-reducer/CAPTCHA_STATUS';
+const CAPTCHA_TRY = 'soc-net-pjaw/auth-reducer/CAPTCHA_TRY';
+const SET_USER_ID = 'soc-net-pjaw/auth-reducer/SET_USER_ID';
+const UNREAD_MESSAGES_COUNT = 'soc-net-pjaw/auth-reducer/UNREAD_MESSAGES_COUNT';
 
 export const setUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth}});
 export const userLoggedIn = () => ({type: USER_LOGGED_IN});
