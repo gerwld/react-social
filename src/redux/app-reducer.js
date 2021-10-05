@@ -3,7 +3,7 @@ import { getAuthUserDataTC } from '../api/api';
 import { setunreadMessagesCountTC } from './auth-reducer';
 
 //константы и экшн криейторы
-const SET_INITIALIZING = 'SET_INITIALIZING';
+const SET_INITIALIZING = 'soc-net-pjaw/app-reducer/SET_INITIALIZING';
 
 
 export const setInitializingSuccess = () => ({type: SET_INITIALIZING});

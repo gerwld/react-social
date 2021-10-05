@@ -1,12 +1,12 @@
 import { reset } from 'redux-form';
 import { dialogsAPI, profileAPI } from '../api/api';
 
-const SET_FRIENDS = 'SET_FRIENDS';
-const SET_CURRENT_USER = 'SET_CURRENT_USER';
-const GET_CONVERSATION = 'GET_CONVERSATION';
-const MESS_INITIALIZED = 'MESS_INITIALIZED';
-const ADD_MESSAGE = 'ADD_MESSAGE';
-const LOAD_MORE_MESSAGES = 'LOAD_MORE_MESSAGES';
+const SET_FRIENDS = 'soc-net-pjaw/dialogs-reducer/SET_FRIENDS';
+const SET_CURRENT_USER = 'soc-net-pjaw/dialogs-reducer/SET_CURRENT_USER';
+const GET_CONVERSATION = 'soc-net-pjaw/dialogs-reducer/GET_CONVERSATION';
+const MESS_INITIALIZED = 'soc-net-pjaw/dialogs-reducer/MESS_INITIALIZED';
+const ADD_MESSAGE = 'soc-net-pjaw/dialogs-reducer/ADD_MESSAGE';
+const LOAD_MORE_MESSAGES = 'soc-net-pjaw/dialogs-reducer/LOAD_MORE_MESSAGES';
 
 
 //Action Creators

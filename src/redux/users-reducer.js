@@ -85,15 +85,15 @@ const usersReducer = (state = initialState, action) => {
 
 // Action creators and constant's
 
-const FOLLOW = 'FOLLOW';
-const SET_USERS = 'SET_USERS';
-const TOTAL_COUNT = 'TOTAL_COUNT';
-const SET_PAGE = 'SET_PAGE';
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS';
-const GET_ALL_PAGES = 'GET_ALL_PAGES';
-const LOAD_FRIENDS_TOGGLE = 'LOAD_FRIENDS_TOGGLE';
-const DO_SEARCH = 'DO_SEARCH';
+const FOLLOW = 'soc-net-pjaw/users-reducer/FOLLOW';
+const SET_USERS = 'soc-net-pjaw/users-reducer/SET_USERS';
+const TOTAL_COUNT = 'soc-net-pjaw/users-reducer/TOTAL_COUNT';
+const SET_PAGE = 'soc-net-pjaw/users-reducer/SET_PAGE';
+const TOGGLE_IS_FETCHING = 'soc-net-pjaw/users-reducer/TOGGLE_IS_FETCHING';
+const FOLLOWING_IN_PROGRESS = 'soc-net-pjaw/users-reducer/FOLLOWING_IN_PROGRESS';
+const GET_ALL_PAGES = 'soc-net-pjaw/users-reducer/GET_ALL_PAGES';
+const LOAD_FRIENDS_TOGGLE = 'soc-net-pjaw/users-reducer/LOAD_FRIENDS_TOGGLE';
+const DO_SEARCH = 'soc-net-pjaw/users-reducer/DO_SEARCH';
 
 export const unfollowUser = (id) => ({ type: FOLLOW, userId: id });
 export const setUsers = (users) => ({ type: SET_USERS, users });
