@@ -1,26 +1,27 @@
 import React from 'react';
-import Header from './Header';
-import { setUserData } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
 import { logoutUserTC } from '../../api/api';
+import { NavLink } from 'react-router-dom';
+import s from './Header.module.css';
+import logo from '../../img/logo.png';
 
-class HeaderContainer extends React.Component {
-
-
-
-    render() {
-        return (
-            <Header {...this.props} />
-        );
-    }
+const HeaderContainer = ({ isAuth, logoutUserTC }) => {
+    return (
+        <header className={s.app_header}>
+            <NavLink to="/"><img alt="Logo" src={logo} width="25px" height="auto"></img></NavLink>
+            <nav className={`${s.main_nav} main_nav`}>
+                {isAuth ?
+                    <span onClick={logoutUserTC}>Log Out <i className="fas fa-sign-out-alt" /></span> :
+                    <NavLink to='/login'>Login <i className="fas fa-sign-in-alt"></i></NavLink>}
+            </nav>
+        </header>
+    );
 }
 
 let mapStateToProps = (state) => {
     return {
-        state: state,
-        data: state.auth,
         isAuth: state.auth.isAuth
     }
 }
 
-export default connect(mapStateToProps, {setUserData, logoutUserTC})(HeaderContainer);
+export default connect(mapStateToProps, { logoutUserTC })(HeaderContainer);
