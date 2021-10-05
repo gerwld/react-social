@@ -3,9 +3,9 @@ import { profileAPI, usersAPI } from "../api/api";
 
 let initialState = {
     postData: [
-        { id: 2, cont: "That site is so cool!", likes: 9 },
+        { id: 0, cont: "That site is so cool!", likes: 9 },
         { id: 1, cont: "Deez nuts... Today everything is fine, just vibing with my famity #coolday", likes: 28 },
-        { id: 0, cont: "Hi there!! 2007 is rock!", likes: 23 }
+        { id: 2, cont: "Hi there!! 2007 is rock!", likes: 23 }
     ],
     profile: null,
     // authUserId: 19461,
@@ -32,7 +32,12 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status
             }
-
+        case DELETE_POST: {
+            return {
+                ...state,
+                postData: state.postData.filter(r => r.id !== action.postId)
+            }
+        }
         default:
             return state;
     }
@@ -73,11 +78,13 @@ export const sendPost = (submit) => {
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 
 //Action Creators
 export const onAddPost = (message) => ({ type: ADD_POST, message })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setStatus = (status) => ({ type: SET_STATUS, status })
+export const deletePost = (postId) => ({ type: DELETE_POST, postId })
 
 export default profileReducer;

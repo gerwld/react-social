@@ -40,9 +40,9 @@ const feedReducer = (state = initialState, action) => {
     }
 }
 
-export const loadPostsTC = (nextPage) => {
+export const loadPostsTC = (nextPage, pageSize) => {
     return async (dispatch) => {
-        let r = await entertaimentAPI.getPosts(nextPage);
+        let r = await entertaimentAPI.getPosts(nextPage, pageSize);
             dispatch(loadPosts(r));
             let date = moment(r[r.length - 1].publishedAt, "YYYY-MM-DD-h:mm").fromNow().replace(" ago", "");
             dispatch(addLastPostDate(date));
