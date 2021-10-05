@@ -12,16 +12,12 @@ const HeaderContainer = ({ isAuth, logoutUserTC }) => {
             <nav className={`${s.main_nav} main_nav`}>
                 {isAuth ?
                     <span onClick={logoutUserTC}>Log Out <i className="fas fa-sign-out-alt" /></span> :
-                    <NavLink to='/login'>Login <i className="fas fa-sign-in-alt"></i></NavLink>}
+                    <NavLink to='/login'>Login <i className="fas fa-sign-in-alt" /></NavLink>}
             </nav>
         </header>
     );
 }
 
-let mapStateToProps = (state) => {
-    return {
-        isAuth: state.auth.isAuth
-    }
-}
+let mapStateToProps = (state) => ({ isAuth: state.auth.isAuth });
 
 export default connect(mapStateToProps, { logoutUserTC })(HeaderContainer);

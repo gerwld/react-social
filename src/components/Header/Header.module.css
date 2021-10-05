@@ -27,7 +27,7 @@
   }
 
   .main_nav a:hover,
-  .main_nav b:hover {
+  .main_nav span:hover {
     color: #fff;
   }
 
