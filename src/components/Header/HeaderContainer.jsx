@@ -8,7 +8,9 @@ import logo from '../../img/logo.png';
 const HeaderContainer = ({ isAuth, logoutUserTC }) => {
     return (
         <header className={s.app_header}>
-            <NavLink to="/"><img alt="Logo" src={logo} width="25px" height="auto"></img></NavLink>
+            <NavLink to="/"><img alt="Social Network Project created by P. Jaworski"
+                title="Social Network Project created by P. Jaworski" src={logo} width="25px" height="auto"/>
+            </NavLink>
             <nav className={`${s.main_nav} main_nav`}>
                 {isAuth ?
                     <span onClick={logoutUserTC}>Log Out <i className="fas fa-sign-out-alt" /></span> :

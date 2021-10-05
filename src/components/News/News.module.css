@@ -136,9 +136,14 @@
 
 .block_buttons > div{
     display: inline-flex;
+    max-width: 60px;
     align-items: center;
     justify-content: flex-start;
     margin-right: 10px;
+}
+
+.block_buttons > div:last-child {
+    margin-right: auto;
 }
 
 .block_buttons div > span {
