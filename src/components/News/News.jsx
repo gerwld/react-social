@@ -21,7 +21,7 @@ const News = (props) => {
             <InfiniteScroll
                 children=""
                 pageStart="1"
-                loadMore={() => props.loadPosts(props.currentPage + 1)}
+                loadMore={() => props.loadPosts(props.currentPage + 1, 5)}
                 hasMore={isHasMore}
                 initialLoad={true}
                 threshold={50}
