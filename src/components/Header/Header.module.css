@@ -18,7 +18,7 @@
   }
   
   .main_nav a,
-  .main_nav b {
+  .main_nav span {
     color: white;
     text-decoration: none;
     font-weight: 500;
@@ -27,7 +27,7 @@
   }
 
   .main_nav a:hover,
-  .main_nav b:hover {
+  .main_nav span:hover {
     color: #fff;
   }
 
