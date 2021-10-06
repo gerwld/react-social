@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import avatarCheck from '../../../../utils/validators/avatarCheck';
 import './Post.css';
 
 const Post = (props) => {
@@ -21,7 +22,7 @@ const Post = (props) => {
 
         return (
             <div className="user_posts__last_item">
-                <img alt="Avatar" src={props.avatarCheck(props.profile.photos)}></img>
+                <img alt="Avatar" src={avatarCheck(props.profile.photos)}></img>
                 <div className="post_content">
                 {isPostNotEmpty ? 
                     <span>{props.value}</span> :
