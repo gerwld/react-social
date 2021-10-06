@@ -45,13 +45,13 @@ export const usersAPI = {
 export const profileAPI = {
     getUser(id) {
         if(id !== undefined){
-            return instance.get(`profile/${id}`);
+            return instance.get(`profile/${id}`).then(r => r.data);
         } else {
             return undefined;
         }
     },
     getStatus(id) {
-        return instance.get(`profile/status/${id}`)
+        return instance.get(`profile/status/${id}`).then(r => r.data);
     },
     setStatus(status) {
         return instance.put(`profile/status/`, {status: status})

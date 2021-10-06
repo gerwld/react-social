@@ -4,6 +4,7 @@ import MyPostsContainer from './MyPosts/MyPostsContainer';
 import main_image from '../../img/profile.jpg';
 import Preloader from '../common/Preloader/Preloader';
 import { NavLink } from 'react-router-dom';
+import avatarCheck from '../../utils/validators/avatarCheck';
 
 
 
@@ -24,26 +25,26 @@ const Profile = (props) => {
 };
 
 const MainInfo = (props) => {
-  var avatar = props.profile.photos;
-  var avatar_check = avatar.large ? avatar.large : (avatar.small ? avatar.small : "/images/avatars/def-avatar.png");
   var isCurrentUserProfile = props.profile.userId === props.authUserId;
   var isInactiveBtn = isCurrentUserProfile && 'inactive_btn';
 
   return (
     <div className="user-profile">
       <div className="user_block user_block__1 main-content-block">
-        <img alt="Avatar" className="user-profile__img" src={avatar_check}></img>
-          <div className={`contact_buttons ${isInactiveBtn}`}>
-            <NavLink to={!isCurrentUserProfile && `/dialogs/id${props.urlUserId}`}>Write a message</NavLink>
-            <button>Add to friends</button>
-          </div>
+        <img alt="Avatar" className="user-profile__img" src={avatarCheck(props.profile.photos)}></img>
+        <div className={`contact_buttons ${isInactiveBtn}`}>
+          <NavLink to={!isCurrentUserProfile && `/dialogs/id${props.urlUserId}`}>Write a message</NavLink>
+          <button>Add to friends</button>
+        </div>
       </div>
       <div className="user_block user_block__2 main-content-block">
         <ul className="user-profile__info">
           <li key="fgerf" className="user-info__name">{props.profile.fullName}</li>
 
           <li key="fgers" className="user-info__data user-info__status">
-            {isCurrentUserProfile ? <StatusEditable {...props} /> : (props.profile.aboutMe || "Status is not set.")}
+            {isCurrentUserProfile ?
+              <StatusEditable {...props} /> :
+              (props.profile.aboutMe || "Status is not set.")}
           </li>
 
           <li key="fger4" className="user-info__data"><b>Date of Birth:</b> 21 February</li>

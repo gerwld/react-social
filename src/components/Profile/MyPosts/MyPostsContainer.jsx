@@ -2,15 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import MyPosts from './MyPosts';
 import { sendPost } from '../../../redux/profile-reducer';
+import avatarCheck from '../../../utils/validators/avatarCheck';
 
-let avatar_check = (pic) => { 
-  if(pic.large) {
-      return pic.large;
-  } else {
-      if(pic.small) return pic.small;
-      return "/images/avatars/def-avatar.png";
-  }
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -18,7 +11,7 @@ const mapStateToProps = (state) => {
     inputValue: state.profilePage.newPostText,
     profile: state.profilePage.profile,
     authUserId: state.profilePage.authUserId,
-    avatarCheck: avatar_check
+    avatarCheck: avatarCheck
 
   }
 }
