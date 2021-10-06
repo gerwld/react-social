@@ -4,7 +4,7 @@ import { maxLengthCreator, requiredField } from '../../utils/validators/validato
 import { Textarea } from '../common/FormControls/FormControls';
 import s from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
-import Preloader from '../common/Preloader/Preloader';
+import Preloader, { DialogsPreloader } from '../common/Preloader/Preloader';
 import Message from './Message';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -13,7 +13,8 @@ const Dialogs = (props) => {
         <div>
             <div className={s.dialogs_frame}>
                 <ul className={s.userlist}>
-                    {props.usersMap}
+                
+                    {props.isUsersLoaded ? props.usersMap : <DialogsPreloader />}
                 </ul>
                 {!props.idFromUrl ?
                     <SelectDialog /> :

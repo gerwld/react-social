@@ -19,16 +19,12 @@ let initialState = {
 
 const feedReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD_POSTS: {
-            
-            let aa = {
+        case LOAD_POSTS:
+            return {
                 ...state,
                 nextPage: parseInt(state.nextPage, 10) + 1,
                 posts: [...state.posts, ...action.posts]
             }
-            // debugger;
-            return aa;
-        }
         case LAST_POST_DATE:
             return {
                 ...state,
@@ -43,9 +39,9 @@ const feedReducer = (state = initialState, action) => {
 export const loadPostsTC = (nextPage, pageSize) => {
     return async (dispatch) => {
         let r = await entertaimentAPI.getPosts(nextPage, pageSize);
-            dispatch(loadPosts(r));
-            let date = moment(r[r.length - 1].publishedAt, "YYYY-MM-DD-h:mm").fromNow().replace(" ago", "");
-            dispatch(addLastPostDate(date));
+        dispatch(loadPosts(r));
+        let date = moment(r[r.length - 1].publishedAt, "YYYY-MM-DD-h:mm").fromNow().replace(" ago", "");
+        dispatch(addLastPostDate(date));
     }
 }
 

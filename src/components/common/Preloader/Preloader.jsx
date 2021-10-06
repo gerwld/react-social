@@ -17,4 +17,13 @@ export const MainPreloader = () => {
     );
 }
 
+export const DialogsPreloader = () => {
+    return (
+        <div className={`${s.loaderAnimation} ${s.dialogsLoaderAnimation}`}>
+            {/* <img src={loaderImg} alt="Loading... Please wait"></img> */}
+            <span className={s.loading}>Loading</span>
+        </div>
+    );
+}
+
 export default Preloader;

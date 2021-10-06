@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, getConverstaionWithUser } from '../../redux/dialogs-reducer';
+import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, getConverstaionWithUser, usersInitialized } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import s from './Dialogs.module.css';
 
@@ -14,7 +14,8 @@ class DialogsContainer extends React.Component {
         super(props);
         this.endDialogBlock = React.createRef();
         this.state = {
-            currentPage: 2
+            currentPage: 2,
+
         }
         this.getFriendsAndSetCurrentUser();
     }
@@ -31,7 +32,8 @@ class DialogsContainer extends React.Component {
     getFriendsAndSetCurrentUser = async () => {
          //Gets all users when state is empty, then gets current user from state / api
         if (this.props.usersLength < 1) {
-            await this.props.getFriendsTC();
+           await this.props.getFriendsTC();
+           this.props.usersInitialized(true);
         } 
         this.props.setCurrentUserTC(this.props.match.params.userId, this.props.loadedUsers);
     }
@@ -62,11 +64,13 @@ class DialogsContainer extends React.Component {
                 converListUser={this.props.converListUser}
                 currentDialog={this.props.currentDialog}
                 isMessagesLoaded={this.props.isMessagesLoaded}
+                isUsersLoaded={this.props.isUsersLoaded}
                 onSendMessage={this.onSendMessage}
                 dialogsLoader={this.getConversation}
                 totalMessCount={this.props.totalMessCount}
                 currentPage={this.state.currentPage}
-                endDialogBlock={this.endDialogBlock} />
+                endDialogBlock={this.endDialogBlock}
+                 />
         )
     }
 }
@@ -76,12 +80,13 @@ let mapStateToProps = (state) => {
         usersMap: state.messagePage.dialogsData.map(user =>
             <li key={user.id}>
                 <NavLink to={"/dialogs/id" + user.id} activeClassName={s.selected_item}>
-                    <img src={user.avatar} alt={s.user_name} /><span className={s.user_name}>{user.name}</span>
+                    <img src={user.avatar} className={s.userlist_avatar} alt={s.user_name} /><span className={s.user_name}>{user.name}</span>
                 </NavLink>
             </li>),
         usersLength: state.messagePage.dialogsData.length,
         converListUser: state.messagePage.currentUser,
         isMessagesLoaded: state.messagePage.isMessagesLoaded,
+        isUsersLoaded: state.messagePage.isUsersLoaded,
         currentDialog: state.messagePage.messagesData,
         totalMessCount: state.messagePage.totalMessCount,
         loadedUsers: state.messagePage.dialogsData
@@ -91,7 +96,7 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-    connect(mapStateToProps, { getFriendsTC, setCurrentUserTC, sendMessageToUser, messagesInitialized, getConverstaionWithUser }),
+    connect(mapStateToProps, { getFriendsTC, setCurrentUserTC, sendMessageToUser, messagesInitialized, getConverstaionWithUser, usersInitialized }),
     withAuthRedirect,
     withRouter
 )(DialogsContainer)

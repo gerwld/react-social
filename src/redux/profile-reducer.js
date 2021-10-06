@@ -52,17 +52,15 @@ export const getUserInfo = (userId) => {
 
         let user = await profileAPI.getUser(userId);
         dispatch(setUserProfile(user));
-
     }
 }
 
 export const setUserStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.setStatus(status).then(r => {
-            if (r.data.resultCode === 0) {
-                dispatch(setStatus(status));
-            }
-        });
+    return async (dispatch) => {
+        let response = await profileAPI.setStatus(status);
+        if (response.data.resultCode === 0) {
+            dispatch(setStatus(status));
+        }
     }
 }
 
