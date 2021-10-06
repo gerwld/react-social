@@ -115,15 +115,12 @@ span.title {
 
 .dialog_window > div {
     width: 100%;
-    /* height: calc(100% - 151px); */
     margin-top: 65px;
     overflow: hidden;
     overflow-y: scroll;
+    border: 0;
+    border-radius: 0;
 }
-
-/* .dialog_window > div > div:nth-child(1) {
-    margin-top: 20px;
-} */
 
 .userlist {
     position: relative;
