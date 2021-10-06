@@ -108,16 +108,16 @@ export const getFriendsTC = () => {
 
 export const setCurrentUserTC = (idFromUrl, usersFromState) => {
     //find user from state users, if it not there - get user and put it first in array
-    return (dispatch) => {
-        let checkFromState = usersFromState.filter(r => r.id === parseInt(idFromUrl, 10));
+    return async (dispatch) => {
+        let checkFromState = await usersFromState.filter(r => r.id === parseInt(idFromUrl, 10));
         if (checkFromState.length === 1) {
             dispatch(setCurrentUser(idFromUrl, checkFromState[0].name, checkFromState[0].avatar));
         }
         else if (idFromUrl) {
-            profileAPI.getUser(idFromUrl).then(r => {
-                dispatch(setCurrentUser(idFromUrl, r.data.fullName, r.data.photos.small));
-                dispatch(setFriends([{ id: parseInt(idFromUrl, 10), name: r.data.fullName, avatar: (r.data.photos.small || '/images/avatars/def-avatar.png') }]));
-            });
+            let r = await profileAPI.getUser(idFromUrl);
+            dispatch(setCurrentUser(idFromUrl, r.fullName, r.photos.small));
+            dispatch(setFriends([{ id: parseInt(idFromUrl, 10), name: r.fullName, avatar: (r.photos.small || '/images/avatars/def-avatar.png') }]));
+
         }
 
         dispatch(getConverstaionWithUser(idFromUrl, 1, true));

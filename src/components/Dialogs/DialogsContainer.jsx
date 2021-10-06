@@ -14,9 +14,12 @@ class DialogsContainer extends React.Component {
         super(props);
         this.endDialogBlock = React.createRef();
         this.state = {
-            currentPage: 2,
-
+            currentPage: 2
         }
+        //Set initialization to false if user back to messages from another page
+        this.props.usersInitialized(false);
+        this.props.messagesInitialized(false);
+
         this.getFriendsAndSetCurrentUser();
     }
 
@@ -30,12 +33,12 @@ class DialogsContainer extends React.Component {
     }
 
     getFriendsAndSetCurrentUser = async () => {
-         //Gets all users when state is empty, then gets current user from state / api
+        //Gets all users when state is empty, then gets current user from state / api
         if (this.props.usersLength < 1) {
-           await this.props.getFriendsTC();
-           this.props.usersInitialized(true);
-        } 
-        this.props.setCurrentUserTC(this.props.match.params.userId, this.props.loadedUsers);
+            await this.props.getFriendsTC();
+        }
+        await this.props.setCurrentUserTC(this.props.match.params.userId, this.props.loadedUsers);
+        await this.props.usersInitialized(true);
     }
 
     getConversation = () => {
@@ -70,7 +73,7 @@ class DialogsContainer extends React.Component {
                 totalMessCount={this.props.totalMessCount}
                 currentPage={this.state.currentPage}
                 endDialogBlock={this.endDialogBlock}
-                 />
+            />
         )
     }
 }

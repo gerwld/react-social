@@ -20,8 +20,11 @@ export const MainPreloader = () => {
 export const DialogsPreloader = () => {
     return (
         <div className={`${s.loaderAnimation} ${s.dialogsLoaderAnimation}`}>
-            {/* <img src={loaderImg} alt="Loading... Please wait"></img> */}
-            <span className={s.loading}>Loading</span>
+            <div>
+            <img src={loaderImg} alt="Loading... Please wait"></img>
+                {/* <span>Loading users.</span>
+                <span className={s.loading}>Please wait</span> */}
+            </div>
         </div>
     );
 }
