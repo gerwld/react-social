@@ -148,6 +148,12 @@ export const sendMessageToUser = (idFromUrl, message) => {
             if (r.resultCode === 0) {
                 dispatch(addMessage(r.data.message));
                 dispatch(reset('dialogsForm'));
+            } else if (r.resultCode === 1){
+                   return alert("You have sent too many messages. Your account is temporarily blocked.");
+            } else {
+                r.messages.map(r => {
+                   return alert(r);
+                })
             }
         }
     }

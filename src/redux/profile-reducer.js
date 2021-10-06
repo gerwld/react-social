@@ -47,8 +47,11 @@ const profileReducer = (state = initialState, action) => {
 export const getUserInfo = (userId) => {
     return async (dispatch) => {
         await dispatch(setUserProfile(null));
+
         let status = await profileAPI.getStatus(userId);
-        dispatch(setStatus(status));
+        if (status.status === 200) {
+            dispatch(setStatus(status.data));
+        } else alert(`Network error ${status.status}. If it happened frequently please let us know.`);
 
         let user = await profileAPI.getUser(userId);
         dispatch(setUserProfile(user));
