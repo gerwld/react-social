@@ -51,7 +51,7 @@ export const getUserInfo = (userId) => {
         let status = await profileAPI.getStatus(userId);
         if (status.status === 200) {
             dispatch(setStatus(status.data));
-        } else alert(`Network error ${status.status}. If it happened frequently please let us know.`);
+        } else alert(`Network error ${status.status || 1}. If it happened frequently please let us know.`);
 
         let user = await profileAPI.getUser(userId);
         dispatch(setUserProfile(user));
