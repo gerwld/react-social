@@ -1,5 +1,5 @@
 import { reset } from 'redux-form';
-import { profileAPI, usersAPI } from "../api/api";
+import { profileAPI } from "../api/api";
 
 let initialState = {
     postData: [
@@ -45,15 +45,14 @@ const profileReducer = (state = initialState, action) => {
 
 //Thunk Creators
 export const getUserInfo = (userId) => {
-    return (dispatch) => {
-        dispatch(setUserProfile(null));
-        usersAPI.getUser(userId).then(r => {
-            dispatch(setUserProfile(r.data));
-        });
+    return async (dispatch) => {
+        await dispatch(setUserProfile(null));
+        let status = await profileAPI.getStatus(userId);
+        dispatch(setStatus(status));
 
-        profileAPI.getStatus(userId).then(r => {
-            dispatch(setStatus(r.data));
-        });
+        let user = await profileAPI.getUser(userId);
+        dispatch(setUserProfile(user));
+
     }
 }
 
