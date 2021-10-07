@@ -16,7 +16,7 @@ const Dialogs = (props) => {
                     <ul className={s.userlist}>
                         {props.isUsersLoaded ? props.usersMap : <DialogsPreloader />}
                     </ul>
-                    <div key="button_dialogs43ggF" className={s.btn_dialogs_scroll}><button type="button"><i class="fas fa-chevron-down"/></button></div>
+                    {/* <div key="button_dialogs43ggF" className={s.btn_dialogs_scroll}><button type="button"><i class="fas fa-chevron-down"/></button></div> */}
                 </div>
                 {!props.idFromUrl ?
                     <SelectDialog /> :

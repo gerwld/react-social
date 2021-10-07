@@ -11,11 +11,11 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './redux/redux-store';
 import { Provider } from 'react-redux';
 import SettingsContainer from './components/Settings/SettingsContainer';
-import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import MusicContainer from './components/Music/MusicContainer';
+import withSuspense from './hoc/withSuspense';
 
-
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 const LoginContainer = React.lazy(() => import('./components/Login/Login'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 const NewsContainer = React.lazy(() => import('./components/News/NewsContainer'));
@@ -38,24 +38,17 @@ class App extends React.Component {
       <div className="app-content">
         <Switch>
 
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/dialogs/id:userId?" render={() => <Suspense fallback={<Preloader />}><DialogsContainer /></Suspense>} />
-          <Route path="/dialogs" exact render={() => {
-            return (
-              <Suspense fallback={<Preloader />}>
-                <DialogsContainer />
-              </Suspense>)
-          }} />
-          <Route path="/feed" render={() => <Suspense fallback={<Preloader />}><NewsContainer /></Suspense>} />
-          <Route path="/profile/id:userId?" render={() => <Suspense fallback={<Preloader />}><ProfileContainer /></Suspense>} />
-          <Route path="/profile" exact render={() => <Suspense fallback={<Preloader />}><ProfileContainer /></Suspense>} />
+          <Route path="/users" render={withSuspense(UsersContainer)} />
+          <Route path="/dialogs/id:userId?" render={withSuspense(DialogsContainer)} />
+          <Route path="/dialogs" exact render={withSuspense(DialogsContainer)} />
+          <Route path="/feed" render={withSuspense(NewsContainer)} />
+          <Route path="/profile/id:userId?" render={withSuspense(ProfileContainer)} />
+          <Route path="/profile" exact render={withSuspense(ProfileContainer)} />
 
           <Route path="/settings" render={() => <SettingsContainer />} />
           <Route path="/music" render={() => <MusicContainer />} />
 
-          <Route path="/login" render={() => {
-            return this.props.isAuth ? <Redirect to="/profile" /> : <Suspense fallback={<Preloader />}><LoginContainer /></Suspense>;
-          }} />
+          <Route path="/login" render={this.props.isAuth ? () => <Redirect to="/profile" /> : withSuspense(LoginContainer)}/>
           <Route path="/" exact render={() => {
             return this.props.isAuth === true ? <Redirect to="/profile" /> : <Redirect to="/login" />;
           }} />
