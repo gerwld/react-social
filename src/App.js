@@ -15,11 +15,13 @@ import SettingsContainer from './components/Settings/SettingsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import { initializeApp } from './redux/app-reducer';
 import NotFound from './components/common/NotFound/NotFound';
+import { BrowserRouter } from 'react-router-dom';
+import store from './redux/redux-store';
+import { Provider } from 'react-redux';
 
 
 
 class App extends React.Component {
-
   componentDidMount(){
     this.props.initializeApp();
 }
@@ -66,7 +68,19 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default compose(
+const AppContainer = compose(
   connect(mapStateToProps, {initializeApp}),
   withRouter
 )(App);
+
+let SocialNetworkAppJawo = (props) => {
+  return(
+    <Provider store={store}>
+    <BrowserRouter>
+      <AppContainer />
+    </BrowserRouter>
+  </Provider>
+  );
+}
+
+export default SocialNetworkAppJawo;
