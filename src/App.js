@@ -22,7 +22,6 @@ const NewsContainer = React.lazy(() => import('./components/News/NewsContainer')
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 
-
 class App extends React.Component {
   componentDidMount() {
     this.props.initializeApp();
@@ -32,6 +31,7 @@ class App extends React.Component {
     if (!this.props.initialized) {
       return <MainPreloader />
     }
+
     return (<div className="app-wrapper">
       <HeaderContainer />
       {!this.props.location.pathname.match('/login') && !this.props.location.pathname.match('/error-404') && <Navbar />}
@@ -39,13 +39,13 @@ class App extends React.Component {
         <Switch>
 
           <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/dialogs/id:userId?" render={() => <DialogsContainer />} />
+          <Route path="/dialogs/id:userId?" render={() => <Suspense fallback={<Preloader />}><DialogsContainer /></Suspense>} />
           <Route path="/dialogs" exact render={() => {
             return (
               <Suspense fallback={<Preloader />}>
                 <DialogsContainer />
               </Suspense>)
-            }} />
+          }} />
           <Route path="/feed" render={() => <Suspense fallback={<Preloader />}><NewsContainer /></Suspense>} />
           <Route path="/profile/id:userId?" render={() => <Suspense fallback={<Preloader />}><ProfileContainer /></Suspense>} />
           <Route path="/profile" exact render={() => <Suspense fallback={<Preloader />}><ProfileContainer /></Suspense>} />
@@ -66,8 +66,8 @@ class App extends React.Component {
       </div>
     </div>);
   }
-
 }
+
 
 let mapStateToProps = (state) => {
   return {

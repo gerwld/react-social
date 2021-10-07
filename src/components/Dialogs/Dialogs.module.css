@@ -5,6 +5,52 @@ span.title {
     font-weight: bold;
 }
 
+.btn_dialogs_scroll {
+    position: absolute;
+    width:100%;
+    height: 125px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(0deg, rgba(237,238,240,1) 0%, rgba(237,238,240,1) 33%,
+                 rgb(237 238 240 / 85%) 80%, rgba(237,238,240,0) 100%);
+}
+
+.btn_dialogs_scroll button {
+    display: block;
+    width: 100%;
+    height: 85px;
+    margin: 40px auto 20px;
+    font-size: 28px;
+    color: #868e9b;
+    border: 0px solid transparent;
+    background-color: transparent;
+}
+
+@keyframes slidein {
+    0% {
+        transform: translateY(2px);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+    100% {
+        transform: translateY(-2px);
+      }
+  }
+
+.btn_dialogs_scroll button:hover > i {
+    color: #c2c2c2;
+    animation-duration: 0.8s;
+    animation-iteration-count: infinite;
+    animation-name: slidein;
+    animation-direction: alternate;
+}
+
+.dialogs_user_section {
+    position: relative;
+    height: 100%;
+}
+
 .loader_mess {
     width: 40px;
     height: 40px;
@@ -69,7 +115,6 @@ span.title {
     justify-content: flex-start;
     align-items: flex-start;
     height: 85vh;
-    /* transition: 3s ease-in-out; */
 }
 
 .dialog_window {
@@ -124,15 +169,20 @@ span.title {
 
 .userlist {
     position: relative;
-    padding: 0;
-    margin: 0;
+    padding: 0!important;
+    margin: 0!important;
     padding-bottom: 20px;
     width: 230px;
     height: 100%;
 
+    box-sizing: content-box;
     list-style: none;
     overflow: hidden;
     overflow-y: scroll;
+}
+
+.userlist div {
+    border-radius: 0!important;
 }
 
 .userlist li a {
