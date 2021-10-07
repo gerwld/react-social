@@ -8,6 +8,9 @@ import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
 import appReducer from "./app-reducer";
 import feedReducer from "./feed-reducer";
+import { composeWithDevTools } from 'redux-devtools-extension';
+// const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+
 
 let reducers = combineReducers({
     app: appReducer,
@@ -20,7 +23,10 @@ let reducers = combineReducers({
     feed: feedReducer
 });
 
-
-const store = createStore(reducers, applyMiddleware(thunk));
+/* eslint-disable no-underscore-dangle */
+const store = createStore(reducers, composeWithDevTools(
+    applyMiddleware(thunk)
+));
+/* eslint-enable */
 
 export default store;

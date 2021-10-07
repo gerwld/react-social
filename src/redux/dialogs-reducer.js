@@ -22,7 +22,16 @@ export const loadMoreMessagesAC = (messages, messCount) => ({ type: LOAD_MORE_ME
 
 let initialState = {
     dialogsData: [
-        // { id: "0", name: "Andrew K", avatar: 'm1' }
+        // {
+        // id: 24,
+        // name: 'NataFiona',
+        // avatar: 'https://social-network.samuraijs.com/activecontent/images/users/24/user-small.jpg?v=1'
+        // },
+        // {
+        // id: 22,
+        // name: 'nataladanilcenko',
+        // avatar: 'https://social-network.samuraijs.com/activecontent/images/users/22/user-small.jpg?v=1'
+        // }
     ],
     messagesData: [
         {

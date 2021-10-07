@@ -6,7 +6,9 @@ import { change, stopSubmit } from 'redux-form';
 const instance = axios.create({
     withCredentials: true,
     headers: {
-        "API-KEY": "781b8b79-ffcd-41da-9a0b-a1374f504632"
+        "API-KEY": "b1775b2f-c3a5-4509-8dc9-90b5629de7c3"
+        
+        // 781b8b79-ffcd-41da-9a0b-a1374f504632
     },
     baseURL: "https://social-network.samuraijs.com/api/1.0/"
 });

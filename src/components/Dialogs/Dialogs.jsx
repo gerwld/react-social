@@ -12,10 +12,12 @@ const Dialogs = (props) => {
     return (
         <div>
             <div className={s.dialogs_frame}>
-                <ul className={s.userlist}>
-                
-                    {props.isUsersLoaded ? props.usersMap : <DialogsPreloader />}
-                </ul>
+                <div className={s.dialogs_user_section}>
+                    <ul className={s.userlist}>
+                        {props.isUsersLoaded ? props.usersMap : <DialogsPreloader />}
+                    </ul>
+                    {/* <div key="button_dialogs43ggF" className={s.btn_dialogs_scroll}><button type="button"><i class="fas fa-chevron-down"/></button></div> */}
+                </div>
                 {!props.idFromUrl ?
                     <SelectDialog /> :
                     <div className={s.dialog_window}>

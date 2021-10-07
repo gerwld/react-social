@@ -1,51 +1,54 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import './App.css';
-import { MainPreloader } from './components/common/Preloader/Preloader';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
-import HeaderContainer from './components/Header/HeaderContainer';
-import LoginContainer from './components/Login/Login';
-import MusicContainer from './components/Music/MusicContainer';
+import Preloader, { MainPreloader } from './components/common/Preloader/Preloader';
 import Navbar from './components/Navbar/Navbar';
-import NewsContainer from './components/News/NewsContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
-import SettingsContainer from './components/Settings/SettingsContainer';
-import UsersContainer from './components/Users/UsersContainer';
 import { initializeApp } from './redux/app-reducer';
 import NotFound from './components/common/NotFound/NotFound';
+import { BrowserRouter } from 'react-router-dom';
+import store from './redux/redux-store';
+import { Provider } from 'react-redux';
+import SettingsContainer from './components/Settings/SettingsContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
+import MusicContainer from './components/Music/MusicContainer';
+import withSuspense from './hoc/withSuspense';
 
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+const LoginContainer = React.lazy(() => import('./components/Login/Login'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const NewsContainer = React.lazy(() => import('./components/News/NewsContainer'));
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 
 class App extends React.Component {
-
-  componentDidMount(){
+  componentDidMount() {
     this.props.initializeApp();
-}
+  }
 
   render() {
-    if(!this.props.initialized) {
+    if (!this.props.initialized) {
       return <MainPreloader />
-    } 
+    }
+
     return (<div className="app-wrapper">
       <HeaderContainer />
       {!this.props.location.pathname.match('/login') && !this.props.location.pathname.match('/error-404') && <Navbar />}
       <div className="app-content">
         <Switch>
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/dialogs/id:userId?" render={() => <DialogsContainer />} />
-          <Route path="/dialogs" exact render={() => <DialogsContainer />} />
-          <Route path="/feed" render={() => <NewsContainer />} />
+
+          <Route path="/users" render={withSuspense(UsersContainer)} />
+          <Route path="/dialogs/id:userId?" render={withSuspense(DialogsContainer)} />
+          <Route path="/dialogs" exact render={withSuspense(DialogsContainer)} />
+          <Route path="/feed" render={withSuspense(NewsContainer)} />
+          <Route path="/profile/id:userId?" render={withSuspense(ProfileContainer)} />
+          <Route path="/profile" exact render={withSuspense(ProfileContainer)} />
+
           <Route path="/settings" render={() => <SettingsContainer />} />
           <Route path="/music" render={() => <MusicContainer />} />
 
-          <Route path="/profile/id:userId?" render={() => <ProfileContainer />} />
-          <Route path="/profile" exact render={() => <ProfileContainer />} />
-          
-          <Route path="/login" render={() => {
-            return this.props.isAuth ? <Redirect to="/profile" /> : <LoginContainer />;
-          }} />
+          <Route path="/login" render={this.props.isAuth ? () => <Redirect to="/profile" /> : withSuspense(LoginContainer)}/>
           <Route path="/" exact render={() => {
             return this.props.isAuth === true ? <Redirect to="/profile" /> : <Redirect to="/login" />;
           }} />
@@ -56,8 +59,8 @@ class App extends React.Component {
       </div>
     </div>);
   }
-
 }
+
 
 let mapStateToProps = (state) => {
   return {
@@ -66,7 +69,19 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default compose(
-  connect(mapStateToProps, {initializeApp}),
+const AppContainer = compose(
+  connect(mapStateToProps, { initializeApp }),
   withRouter
 )(App);
+
+let SocialNetworkAppJawo = (props) => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <AppContainer />
+      </BrowserRouter>
+    </Provider>
+  );
+}
+
+export default SocialNetworkAppJawo;

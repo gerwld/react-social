@@ -2,21 +2,11 @@ import reportWebVitals from './reportWebVitals';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import AppWrapper from './App';
-import { BrowserRouter } from 'react-router-dom';
-import store from './redux/redux-store';
-import { Provider } from 'react-redux';
 import "bootstrap/dist/css/bootstrap.min.css";
+import SocialNetworkAppJawo from './App';
 
 
-ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <AppWrapper />
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
-);
+ReactDOM.render(<SocialNetworkAppJawo />, document.getElementById('root'));
 
 
 // If you want to start measuring performance in your app, pass a function
