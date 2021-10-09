@@ -9,7 +9,6 @@ const Music = (props) => {
 
             </div>
         </div>
-
     )
 }
 
