@@ -26,9 +26,10 @@ export const InputText = ({ input, meta, ...props }) => {
 export const createField = (placeholder, name, validators, component, label="", props={}) => (
     <label><div className="label">{label}</div>
         <Field component={component} 
-        placeholder={placeholder} 
+        placeholder={placeholder}
         name={name} 
         validators={validators}
+        autocomplete="off"
         {...props} 
         />
     </label>
