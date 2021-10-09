@@ -43,6 +43,7 @@ class App extends React.Component {
           <Route path="/dialogs" exact render={withSuspense(DialogsContainer)} />
           <Route path="/feed" render={withSuspense(NewsContainer)} />
           <Route path="/profile/id:userId?" render={withSuspense(ProfileContainer)} />
+          <Route path="/profile/status=:status" render={withSuspense(ProfileContainer)} />
           <Route path="/profile" exact render={withSuspense(ProfileContainer)} />
 
           <Route path="/settings" render={() => <SettingsContainer />} />

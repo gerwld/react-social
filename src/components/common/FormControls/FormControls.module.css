@@ -16,7 +16,8 @@
 
 .error span {
     display: inline-block;
-    min-width: fit-content;
+    width: max-content;
+    max-width: 200px;
     padding: 10px 12px;
     position: absolute;
     top: 10px;
