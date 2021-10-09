@@ -1,0 +1,16 @@
+span.title {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 38px;
+    font-weight: bold;
+  }
+
+  .settings_content {
+      display: grid;
+      grid-gap: 30px;
+      margin-left: 10px;
+  }
+
+  .settings_content_block {
+    height: 690px;
+  }

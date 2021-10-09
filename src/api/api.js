@@ -6,7 +6,7 @@ import { change, stopSubmit } from 'redux-form';
 const instance = axios.create({
     withCredentials: true,
     headers: {
-        "API-KEY": "b1775b2f-c3a5-4509-8dc9-90b5629de7c3"
+        "API-KEY": "781b8b79-ffcd-41da-9a0b-a1374f504632"
         
         // 781b8b79-ffcd-41da-9a0b-a1374f504632
     },
@@ -57,6 +57,14 @@ export const profileAPI = {
     },
     setStatus(status) {
         return instance.put(`profile/status/`, {status: status})
+    },
+    setUserAvatar(avatar) {
+        var formData = new FormData();
+        formData.append('Image', avatar);
+        return instance.put('/profile/photo', formData, {
+            headers: {
+            "Content-Type": "multipart/form-data"
+        }}).then(r => r.data);
     }
 }
 
