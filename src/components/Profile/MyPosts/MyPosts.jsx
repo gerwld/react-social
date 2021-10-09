@@ -18,6 +18,7 @@ const MyPosts = (props) => {
 }
 
 const MyPostForm = (props) => {
+
   return (
     <form onSubmit={props.handleSubmit} className={s.new_post_input}>
       <Field component="textarea" name="post" placeholder="What's happening?"></Field>
@@ -26,7 +27,7 @@ const MyPostForm = (props) => {
   )
 }
 
-const MyPostReduxForm = reduxForm({ form: "myPosts" })(MyPostForm);
+const MyPostReduxForm = reduxForm({ form: "myPosts"})(MyPostForm);
 
 
 export default MyPosts;

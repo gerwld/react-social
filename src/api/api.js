@@ -65,6 +65,9 @@ export const profileAPI = {
             headers: {
             "Content-Type": "multipart/form-data"
         }}).then(r => r.data);
+    },
+    setUserSettings(profile) {
+        return instance.put(`profile`, {...profile})
     }
 }
 
