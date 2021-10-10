@@ -50,7 +50,7 @@ class Profile extends React.Component {
               isShowMore={this.props.isShowMore} handleShowClick={this.props.handleShowClick}
               statusEditMode={this.props.statusEditMode} activateEdit={this.props.activateEdit}
               statusGlobal={this.props.statusGlobal} deactivateEdit={this.props.deactivateEdit}
-              status={this.props.status} editInput={this.props.editInput} />}
+              status={this.props.status} editInput={this.props.editInput} postDataLength={this.props.postDataLength} />}
 
             {isEditMode &&
               <ProfileInfoFormRedux initialValues={{ name: nameSplitted, surname: surnameSplitted, ...this.props.profile }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
@@ -92,7 +92,7 @@ const ProfileInfoForm = ({ profile, initialValues, ...props }) => {
 const ProfileInfoFormRedux = reduxForm({ form: "edit_profile" })(ProfileInfoForm);
 
 
-const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, ...props }) => {
+const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, postDataLength, ...props }) => {
   var isProfileContactsEmpty = Object.values(profile.contacts).every(x => x === null || x === '');
   return (
     <div className="profile-info__content">
@@ -105,10 +105,9 @@ const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, ...props
         </span>
       </div>
       <div className="profile-info__block profile-info__block_2 profile-info__block_2__1">
-       {/* <b class="title">About</b> */}
       <div className="about_block">
         <span className="about_subtitle">About Me:</span>
-        <span className="about_content">{profile.aboutMe}</span>
+        <span className="about_content">{profile.aboutMe || "About me section is empty."}</span>
       </div>
       <div className="about_block">
         <span className="about_subtitle">Looking for a job:</span>
@@ -116,7 +115,7 @@ const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, ...props
       </div>
       <div className="about_block">
         <span className="about_subtitle">Knowledge:</span>
-        <span className="about_content">{profile.lookingForAJobDescription}</span>
+        <span className="about_content">{profile.lookingForAJobDescription || 'Looking for a job section is empty.'}</span>
       </div>
       </div>
       <div className="profile-info__block profile-info__block_2">
@@ -127,7 +126,7 @@ const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, ...props
           </div>
           <div className="main-info__block">
             <span className="main-info__title">Posts</span>
-            <span className="main-num">3</span>
+            <span className="main-num">{postDataLength || "3"}</span>
           </div>
           <div className="main-info__block">
             <span className="main-info__title">Groups</span>
