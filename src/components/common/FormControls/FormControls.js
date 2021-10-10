@@ -23,13 +23,15 @@ export const InputText = ({ input, meta, ...props }) => {
     )
 }
 
-export const createField = (placeholder, name, validators, component, label="", props={}) => (
+export const createField = (placeholder, name, validators, component, label="", props={}, maxLength="1000") => (
     <label><div className="label">{label}</div>
         <Field component={component} 
+        type="text"
         placeholder={placeholder}
         name={name} 
         validators={validators}
         autocomplete="off"
+        maxLength={maxLength}
         {...props} 
         />
     </label>
