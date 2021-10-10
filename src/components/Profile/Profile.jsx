@@ -3,7 +3,7 @@ import './Profile.css';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import main_image from '../../img/profile.jpg';
 import Preloader from '../common/Preloader/Preloader';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import avatarCheck from '../../utils/validators/avatarCheck';
 import { createField, InputText, Textarea } from '../common/FormControls/FormControls';
 import { Field, reduxForm } from 'redux-form';
@@ -31,7 +31,7 @@ class Profile extends React.Component {
           <div className="user_block user_block__1">
             <div className="avatar_block">
               <img alt="Avatar" className="user-profile__img" src={avatarCheck(this.props.profile.photos)} />
-              {isCurrentUserProfile && <div className={`ava_buttons ${isEditMode && "avatar_edit"}`}>
+              {isCurrentUserProfile && <div className={`ava_buttons ${isEditMode ? 'avatar_edit' : ''}`}>
                 <label><input type="file" onChange={e => this.props.onHandleAvatar(e)} /><i class="fas fa-file-image" />Upload new avatar</label>
               </div>}
             </div>
@@ -53,7 +53,7 @@ class Profile extends React.Component {
               status={this.props.status} editInput={this.props.editInput} />}
 
             {isEditMode &&
-              <ProfileInfoFormRedux initialValues={{ name: nameSplitted, surname: surnameSplitted, contacts: this.props.profile.contacts }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
+              <ProfileInfoFormRedux initialValues={{ name: nameSplitted, surname: surnameSplitted, aboutMe: "", contacts: this.props.profile.contacts }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
           </div>
           <MyPostsContainer />
         </div>
@@ -64,8 +64,10 @@ class Profile extends React.Component {
 
 
 const ProfileInfoForm = ({ profile, initialValues, ...props }) => {
+
   return (
     <form onSubmit={props.handleSubmit}>
+      {props.error && <div>{props.error}</div>}
       <div className="profile-info-edit__content">
         <div className="profile-info__block profile-info__block_1">
           {createField("Daniel", "name", [], InputText, "Name", { required: "true", className: "fullname_edit" }, 10)}
@@ -88,7 +90,7 @@ const ProfileInfoForm = ({ profile, initialValues, ...props }) => {
     </form>
   )
 }
-const ProfileInfoFormRedux = reduxForm({ form: "myPosts", enableReinitialize: true, keepDirtyOnReinitialize: true })(ProfileInfoForm);
+const ProfileInfoFormRedux = reduxForm({ form: "edit_profile" })(ProfileInfoForm);
 
 
 const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, ...props }) => {

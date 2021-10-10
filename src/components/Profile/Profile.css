@@ -50,6 +50,7 @@
   background-color: rgb(39 48 84 / 65%);
   margin-top: -80%;
   opacity: 0;
+  border-radius: 10px;
   transition: 0.2s ease-in-out;
 }
 
@@ -285,6 +286,12 @@ li.user-info__status {
 .profile_status {
   display: block;
   margin: 6px 0 20px;
+  max-width: 290px;
+  min-width: 170px;
+  max-height: 55px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
 }
 
 .profile-info__block .title{
@@ -295,11 +302,11 @@ li.user-info__status {
 }
 
 .status_editable {
+  display: block;
   padding: 3px 5px;
   margin-left: -5px;
-  width: -moz-fit-content;
   width: fit-content;
-  min-width: 170px;
+
   border-radius: 2px;
 }
 

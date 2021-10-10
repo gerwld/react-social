@@ -1,4 +1,4 @@
-import { reset } from 'redux-form';
+import { reset, stopSubmit } from 'redux-form';
 import { profileAPI } from "../api/api";
 
 let initialState = {
@@ -82,11 +82,14 @@ export const setCurrentSettingsTC = (data) => {
         delete dataNew.name; delete dataNew.surname;
  
         let response = await profileAPI.setUserSettings(dataNew);
-        if (response.data.messages.length > 0) {
-            response.data.messages.map(mess => alert(mess));
-        } else if (response.data.resultCode === 0) {
+        if (response.data.resultCode === 0) {
             await dispatch(getUserInfo(authId));
             alert('Settings saved.');
+        } else {
+            if (response.data.messages.length > 0) {
+                response.data.messages.map(mess => alert(mess));
+                // dispatch(stopSubmit('edit_profile', {"contacts": response.data.messages[0]}));
+            }
         }
     }
 }

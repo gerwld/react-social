@@ -115,6 +115,7 @@ span.title {
     justify-content: flex-start;
     align-items: flex-start;
     height: 85vh;
+    min-height: 750px;
 }
 
 .dialog_window {
@@ -273,6 +274,7 @@ border-radius: 50%;
     justify-content: center;
     align-items: center;
     width: 100%;
+    min-height: 120px;
     bottom: -5px;
     left: 0;
     padding: 30px;
