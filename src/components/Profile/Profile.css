@@ -257,7 +257,7 @@ li.user-info__status {
 }
 
 .profile-info__block_3 {
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(3, auto) 0.8fr;
   margin-bottom: 20px;
 }
 
@@ -324,6 +324,7 @@ li.user-info__status {
 
 .profile-info-edit__content input[type="text"],
 .profile-info-edit__content input[type="email"],
+.profile-info-edit__content input[type="url"],
 .profile-info-edit__content textarea {
   width: 175px;
   padding: 9px 7px;
@@ -398,6 +399,7 @@ textarea.lookingForJob_edit::placeholder {
   display: block;
   padding: 10px 20px;
   margin-left: auto;
+  margin-bottom: 5px;
   color: white;
   background-color: #4c6dc1;
   font-weight: bold;

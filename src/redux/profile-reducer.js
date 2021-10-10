@@ -77,8 +77,8 @@ export const setCurrentSettingsTC = (data) => {
     return async (dispatch, getState) => {
         let authId = await getState().auth.userId;
         let dataNew = await { ...data, "fullName": `${data.name} ${data.surname}`, 
-            "aboutMe": (data.aboutMe || "FrontEnd Developer"), "lookingForAJob": false, 
-            "lookingForAJobDescription": "qwe", "userId": authId }
+            "aboutMe": (data.aboutMe || "FrontEnd Developer"), "lookingForAJob": data.lookingForAJob, 
+            "lookingForAJobDescription": (data.lookingForAJobDescription || "Empty"), "userId": authId }
         delete dataNew.name; delete dataNew.surname;
  
         let response = await profileAPI.setUserSettings(dataNew);

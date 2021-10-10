@@ -53,7 +53,7 @@ class Profile extends React.Component {
               status={this.props.status} editInput={this.props.editInput} />}
 
             {isEditMode &&
-              <ProfileInfoFormRedux initialValues={{ name: nameSplitted, surname: surnameSplitted, ...this.props.profile.contacts }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
+              <ProfileInfoFormRedux initialValues={{ name: nameSplitted, surname: surnameSplitted, contacts: this.props.profile.contacts }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
           </div>
           <MyPostsContainer />
         </div>
@@ -81,7 +81,7 @@ const ProfileInfoForm = ({ profile, initialValues, ...props }) => {
 
         <div className="profile-info__block profile-info__block_3">
           <b class="title">Contacts</b>
-          {Object.keys(profile.contacts).map(key => createField(`http://${key}.com/`, key, [], InputText, key, {}, 100))}
+          {Object.keys(profile.contacts).map(key => createField(`http://${key}.com/`, "contacts." + key, [], InputText, key, {type:"url"}, 100))}
         </div>
         <button type="submit">Save changes</button>
       </div>
