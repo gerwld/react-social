@@ -53,7 +53,7 @@ class Profile extends React.Component {
               status={this.props.status} editInput={this.props.editInput} />}
 
             {isEditMode &&
-              <ProfileInfoFormRedux initialValues={{ name: nameSplitted, surname: surnameSplitted, aboutMe: "", contacts: this.props.profile.contacts }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
+              <ProfileInfoFormRedux initialValues={{ name: nameSplitted, surname: surnameSplitted, ...this.props.profile }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
           </div>
           <MyPostsContainer />
         </div>
@@ -64,7 +64,6 @@ class Profile extends React.Component {
 
 
 const ProfileInfoForm = ({ profile, initialValues, ...props }) => {
-
   return (
     <form onSubmit={props.handleSubmit}>
       {props.error && <div>{props.error}</div>}
@@ -95,7 +94,6 @@ const ProfileInfoFormRedux = reduxForm({ form: "edit_profile" })(ProfileInfoForm
 
 const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, ...props }) => {
   var isProfileContactsEmpty = Object.values(profile.contacts).every(x => x === null || x === '');
-
   return (
     <div className="profile-info__content">
       <div className="profile-info_def__block profile-info_def__block_1">
@@ -106,8 +104,22 @@ const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, ...props
             (profile.aboutMe || "Status is not set.")}
         </span>
       </div>
+      <div className="profile-info__block profile-info__block_2 profile-info__block_2__1">
+       {/* <b class="title">About</b> */}
+      <div className="about_block">
+        <span className="about_subtitle">About Me:</span>
+        <span className="about_content">{profile.aboutMe}</span>
+      </div>
+      <div className="about_block">
+        <span className="about_subtitle">Looking for a job:</span>
+        <span className="about_content">{profile.lookingForAJob ? "Yes" : "No"}</span>
+      </div>
+      <div className="about_block">
+        <span className="about_subtitle">Knowledge:</span>
+        <span className="about_content">{profile.lookingForAJobDescription}</span>
+      </div>
+      </div>
       <div className="profile-info__block profile-info__block_2">
-        <b class="title">Main info</b>
         <div className="main-info__content">
           <div className="main-info__block">
             <span className="main-info__title">Friends</span>

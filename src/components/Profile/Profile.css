@@ -260,6 +260,7 @@ li.user-info__status {
 .profile-info__block_3 {
   grid-template-columns: repeat(3, auto) 0.8fr;
   margin-bottom: 20px;
+  margin-left: 10px;
 }
 
 .profile-info__block_3 .title {
@@ -449,6 +450,7 @@ textarea.lookingForJob_edit::placeholder {
 
 .main-info__content .main-info__title {
   display: block;
+  margin: 2px 0 4px;
 }
 
 
@@ -486,4 +488,32 @@ textarea.lookingForJob_edit::placeholder {
 
 .profile-info__item .info:hover {
   color: #374b7d!important;
+}
+
+.about_block {
+  padding-top: 12px;
+  margin-bottom: 5px;
+}
+
+.about_block:first-child {
+  padding-top: 20px;
+  border-top: 1px solid #efefef
+}
+
+.about_block .about_subtitle {
+  display: inlne-sblock;
+  font-weight: 500;
+  margin-left: 15px;
+  color: #6e7884;
+}
+
+.about_block .about_content {
+  position: absolute;
+  left: 250px;
+  color: #656565;
+}
+
+.profile-info__block_2__1 {
+  font-size: 14.5px;
+  margin-bottom: 25px;
 }

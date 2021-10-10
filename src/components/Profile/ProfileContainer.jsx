@@ -52,8 +52,7 @@ class ProfileContainerAPI extends React.Component {
 
   onSettingsChange = async (e) => {
     await this.props.setCurrentSettingsTC(e);
-
-    await this.props.history.push('/profile');
+    this.props.history.push('/profile');
   }
 
   componentDidMount() {

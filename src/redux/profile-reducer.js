@@ -76,20 +76,20 @@ export const setUserStatus = (status) => {
 export const setCurrentSettingsTC = (data) => {
     return async (dispatch, getState) => {
         let authId = await getState().auth.userId;
-        let dataNew = await { ...data, "fullName": `${data.name} ${data.surname}`, 
-            "aboutMe": (data.aboutMe || "FrontEnd Developer"), "lookingForAJob": data.lookingForAJob, 
-            "lookingForAJobDescription": (data.lookingForAJobDescription || "Empty"), "userId": authId }
+        let dataNew = await {
+            ...data, "fullName": `${data.name} ${data.surname}`,
+            "aboutMe": (data.aboutMe || "FrontEnd Developer"), "lookingForAJob": data.lookingForAJob,
+            "lookingForAJobDescription": (data.lookingForAJobDescription || "Empty"), "userId": authId
+        }
         delete dataNew.name; delete dataNew.surname;
- 
+
         let response = await profileAPI.setUserSettings(dataNew);
         if (response.data.resultCode === 0) {
-            await dispatch(getUserInfo(authId));
+            dispatch(getUserInfo(authId));
             alert('Settings saved.');
-        } else {
-            if (response.data.messages.length > 0) {
-                response.data.messages.map(mess => alert(mess));
-                // dispatch(stopSubmit('edit_profile', {"contacts": response.data.messages[0]}));
-            }
+        }
+        if (response.data.messages.length > 0) { 
+            response.data.messages.map(mess => alert(mess));
         }
     }
 }
