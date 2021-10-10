@@ -2,11 +2,11 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getUserInfo, setUserProfile, setUserStatus, setUserAvatar } from '../../redux/profile-reducer';
-import { withRouter } from 'react-router';
+import { getUserInfo, setUserProfile, setUserStatus, setUserAvatar, setCurrentSettingsTC } from '../../redux/profile-reducer';
+import { useHistory, withRouter } from 'react-router';
 import { getAuthUserDataTC } from '../../api/api';
 import { change } from 'redux-form';
-import { setCurrentSettingsTC } from '../../redux/dialogs-reducer';
+// import { browserHistory } from 'react-router'
 
 
 class ProfileContainerAPI extends React.Component {
@@ -50,6 +50,12 @@ class ProfileContainerAPI extends React.Component {
     }));
   }
 
+  onSettingsChange = async (e) => {
+    await this.props.setCurrentSettingsTC(e);
+    // await browserHistory.push('/registrationStep2')
+    await this.props.history.push('/profile');
+  }
+
   componentDidMount() {
     let userId =  this.props.match.params.userId;
     if (!userId) {
@@ -83,7 +89,7 @@ class ProfileContainerAPI extends React.Component {
         activateEdit={this.activateEditmode} deactivateEdit={this.deactivateEditmode} status={this.state.status} statusGlobal={this.props.status} 
         inputValue={this.statusInputRef} editInput={this.editInput} urlUserId={this.props.match.params.userId} onHandleAvatar={this.onHandleAvatar}
         isEditMode={this.props.match.params.status === "edit_settings"} handleShowClick={this.handleShowClick} isShowMore={this.state.isShowMore}
-        onSettingsSubmit={this.props.setCurrentSettingsTC}
+        onSettingsSubmit={this.onSettingsChange}
        />
     )
   }

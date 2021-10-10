@@ -73,6 +73,24 @@ export const setUserStatus = (status) => {
     }
 }
 
+export const setCurrentSettingsTC = (data) => {
+    return async (dispatch, getState) => {
+        let authId = await getState().auth.userId;
+        let dataNew = await { ...data, "fullName": `${data.name} ${data.surname}`, 
+            "aboutMe": (data.aboutMe || "FrontEnd Developer"), "lookingForAJob": false, 
+            "lookingForAJobDescription": "qwe", "userId": authId }
+        delete dataNew.name; delete dataNew.surname;
+ 
+        let response = await profileAPI.setUserSettings(dataNew);
+        if (response.data.messages.length > 0) {
+            response.data.messages.map(mess => alert(mess));
+        } else if (response.data.resultCode === 0) {
+            await dispatch(getUserInfo(authId));
+            alert('Settings saved.');
+        }
+    }
+}
+
 export const setUserAvatar = (photo) => {
     return async (dispatch) => {
         let response = await profileAPI.setUserAvatar(photo);

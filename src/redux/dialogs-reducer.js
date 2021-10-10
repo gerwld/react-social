@@ -102,19 +102,6 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const setCurrentSettingsTC = (data) => {
-    return async (dispatch) => {
-        let dataNew = await {...data, "fullName": `${data.name} ${data.surname}`, "aboutMe": "blabla", "lookingForAJob": false, "lookingForAJobDescription": "blabla", "userId": "19461"}
-       await delete dataNew.name;
-       await delete dataNew.surname;
-        console.log(dataNew);
-        debugger;
-       let response = await profileAPI.setUserSettings(dataNew);
-       if(response.data.messages.length > 0) {
-        response.data.messages.map(mess => alert(mess));
-       }
-    }
-}
 
 export const getFriendsTC = () => {
     return async (dispatch) => {

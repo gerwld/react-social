@@ -3,7 +3,7 @@ import './Profile.css';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import main_image from '../../img/profile.jpg';
 import Preloader from '../common/Preloader/Preloader';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import avatarCheck from '../../utils/validators/avatarCheck';
 import { createField, InputText, Textarea } from '../common/FormControls/FormControls';
 import { Field, reduxForm } from 'redux-form';
@@ -19,6 +19,9 @@ class Profile extends React.Component {
       var isCurrentUserProfile = this.props.profile.userId === this.props.authUserId;
       var isInactiveBtn = isCurrentUserProfile && 'inactive_btn';
       var isEditMode = this.props.isEditMode;
+      let fullNameSplit = this.props.profile.fullName.split(/[\s,]+/);
+      let nameSplitted = fullNameSplit[0];
+      let surnameSplitted = fullNameSplit[1];
 
       return (
         <div className="profile-page">
@@ -41,14 +44,16 @@ class Profile extends React.Component {
           <div className="user_block user_block__2 main-content-block">
             {(!isEditMode && isCurrentUserProfile) && <NavLink to="/profile/status=edit_settings" className="btn__edit_profile">Edit Profile <i class="far fa-edit" /></NavLink>}
             {(isEditMode && isCurrentUserProfile) && <NavLink to="/profile/" className="btn__edit_profile">Close <i class="fas fa-times down-1-px" /></NavLink>}
-            
-            {!isEditMode && <ProfileInfo profile={this.props.profile} isCurrent={isCurrentUserProfile} 
+
+            {/* usual view (not edit) */}
+            {!isEditMode && <ProfileInfo profile={this.props.profile} isCurrent={isCurrentUserProfile}
               isShowMore={this.props.isShowMore} handleShowClick={this.props.handleShowClick}
-              statusEditMode={this.props.statusEditMode} activateEdit={this.props.activateEdit} 
-              statusGlobal={this.props.statusGlobal} deactivateEdit={this.props.deactivateEdit} 
+              statusEditMode={this.props.statusEditMode} activateEdit={this.props.activateEdit}
+              statusGlobal={this.props.statusGlobal} deactivateEdit={this.props.deactivateEdit}
               status={this.props.status} editInput={this.props.editInput} />}
 
-            {isEditMode && <ProfileInfoFormRedux initialValues={{name: this.props.profile.fullName, status: this.props.statusGlobal}} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
+            {isEditMode &&
+              <ProfileInfoFormRedux initialValues={{ name: nameSplitted, surname: surnameSplitted, ...this.props.profile.contacts }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
           </div>
           <MyPostsContainer />
         </div>
@@ -58,22 +63,25 @@ class Profile extends React.Component {
 };
 
 
-const ProfileInfoForm = ({profile, initialValues, ...props}) => {
-  const {name} = initialValues;
-  debugger;
+const ProfileInfoForm = ({ profile, initialValues, ...props }) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div className="profile-info-edit__content">
         <div className="profile-info__block profile-info__block_1">
-          {createField(name, "name", [], InputText, "Name", { required: "true", className: "fullname_edit" })}
-          {createField("", "surname", [], InputText, "Surame", { required: "true", className: "fullname_edit" })}
-          {createField(props.status, "status", [], Textarea, "Status", { className: "status_edit" })}
+          {createField("Daniel", "name", [], InputText, "Name", { required: "true", className: "fullname_edit" }, 10)}
+          {createField("Hecker", "surname", [], InputText, "Surame", { required: "true", className: "fullname_edit" }, 11)}
+          {createField("Tell something about you...", "aboutMe", [], Textarea, "About me", { className: "status_edit" }, 300)}
         </div>
+
+        <div className="profile-info__block profile-info__block_2">
+          <b class="title">Job</b>
+          <Field id="lookingAJob" component="input" name="lookingForAJob" type="checkbox" /><label className="lookingAJob_label" for="lookingAJob">Currently looking for a job</label>
+          <Field component="textarea" name="lookingForAJobDescription" placeholder="Tell the world what you are good at..." className="lookingForJob_edit" />
+        </div>
+
         <div className="profile-info__block profile-info__block_3">
           <b class="title">Contacts</b>
-          {Object.keys(profile.contacts).map(key => {
-            return createField(profile.contacts[key] || `http://${key}.com/`, key, [], InputText, key)
-          })}
+          {Object.keys(profile.contacts).map(key => createField(`http://${key}.com/`, key, [], InputText, key, {}, 100))}
         </div>
         <button type="submit">Save changes</button>
       </div>
@@ -84,13 +92,17 @@ const ProfileInfoFormRedux = reduxForm({ form: "myPosts", enableReinitialize: tr
 
 
 const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, ...props }) => {
+  var isProfileContactsEmpty = Object.values(profile.contacts).every(x => x === null || x === '');
+
   return (
     <div className="profile-info__content">
-      <div className="profile-info__block profile-info__block_1">
-        <Contact contactTitle="" contactInfo={profile.fullName} styleClass="x2grid full-name" />
-        {isCurrent ?
-          <StatusEditable {...props} /> :
-          (profile.aboutMe || "Status is not set.")}
+      <div className="profile-info_def__block profile-info_def__block_1">
+        <NavLink to={`/profile/id${profile.userId}`} className="full-name">{profile.fullName}</NavLink>
+        <span className="profile_status">
+          {isCurrent ?
+            <StatusEditable {...props} /> :
+            (profile.aboutMe || "Status is not set.")}
+        </span>
       </div>
       <div className="profile-info__block profile-info__block_2">
         <b class="title">Main info</b>
@@ -113,22 +125,26 @@ const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, ...props
           </div>
         </div>
       </div>
-      {isShowMore &&
-        <div className="profile-info__block profile-info__block_3 profile_show">
+      {(isShowMore && !isProfileContactsEmpty) &&
+        <div className="profile-info__block profile-info__block_3">
           <b class="title">Contacts</b>
-          {Object.keys(profile.contacts).map(key => <Contact key={key + (Math.random() * 10)} contactTitle={key} contactInfo={profile.contacts[key]} />)}
+          {Object.keys(profile.contacts).map(key => profile.contacts[key] &&
+            <Contact key={key} contactTitle={key === "mainLink" ? "Other" : key} contactInfo={profile.contacts[key]} />)}
         </div>}
-      <button onClick={handleShowClick} className="show-more_btn">{isShowMore ? "Hide" : "Show more"}</button>
+      {!isProfileContactsEmpty && <button onClick={handleShowClick} className="show-more_btn">{isShowMore ? "Hide" : "Show more"}</button>}
+      {isProfileContactsEmpty && <div className="showmore_box" />}
     </div>
   )
 }
 
 
-const Contact = ({ contactTitle, contactInfo, styleClass }) => {
+export const Contact = ({ contactTitle, contactInfo, styleClass }) => {
+  let contactLink = contactInfo.startsWith("http") ? contactInfo : "http://" + contactInfo;
+  let contactLinkPretty = contactInfo.replace("www.", "").replace("http://", "").replace("https://", "");
   return (
     <p className={`${styleClass ? styleClass : ""} profile-info__item`}>
       <b>{contactTitle}</b>
-      <span className="info">{contactInfo}</span>
+      <a href={contactLink} target="_blank" className="info" rel="noreferrer">{contactLinkPretty}</a>
     </p>
   )
 }
