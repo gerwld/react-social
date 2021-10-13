@@ -28,26 +28,27 @@ export const DialogsPreloader = () => {
 
 export const LoadingSpinner = () => {
     return (
-        <div class={s.spinner} alt="Loading... Please wait"
+        <div className={s.spinner} alt="Loading... Please wait"
             title="Loading... Please wait">
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
-            <div class={s.spinner_blade} />
+            <div className={s.spinner_blade} /><div className={s.spinner_blade} />
+            <div className={s.spinner_blade} /><div className={s.spinner_blade} />
+            <div className={s.spinner_blade} /><div className={s.spinner_blade} />
+            <div className={s.spinner_blade} /><div className={s.spinner_blade} />
+            <div className={s.spinner_blade} /><div className={s.spinner_blade} />
+            <div className={s.spinner_blade} /><div className={s.spinner_blade} />
         </div>
     );
 }
 
-/* <img src={loaderImg} alt="Loading... Please wait"></img> */
-/* <span>Loading users.</span>
-<span className={s.loading}>Please wait</span> */
+export const MusicAnimation = () => {
+    return (
+        <div class={s.musAnim_loader}>
+            <span class={s.musAnim_strok} /><span class={s.musAnim_strok} />
+            <span class={s.musAnim_strok} /><span class={s.musAnim_strok} />
+            <span class={s.musAnim_strok} /><span class={s.musAnim_strok} />
+            <span class={s.musAnim_strok} />
+        </div>
+    );
+}
 
 export default Preloader;

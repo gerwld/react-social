@@ -44,7 +44,7 @@ let Users = (props) => {
             <div className={`main-content-block ${s.navbar}`}>
                 <div className={s.search_block}>
                     <input type="search" placeholder="Seach users" onChange={e => props.onSearchChange(e)} value={props.searchInput} />
-                    <button type="button" onClick={props.onSearchSubmit}><i class="fas fa-search"></i></button>
+                    <button type="button" onClick={props.onSearchSubmit}><i className="fas fa-search"></i></button>
                 </div>
                 <div className={s.view_settings}>
                     <span className={s.view_settings_title}>Sort parameters:</span>

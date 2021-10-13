@@ -50,6 +50,7 @@
   background-color: rgb(39 48 84 / 65%);
   margin-top: -80%;
   opacity: 0;
+  border-radius: 10px;
   transition: 0.2s ease-in-out;
 }
 
@@ -196,7 +197,7 @@
 
 .contact_buttons {
   padding: 8px;
-  margin-top: 10px;
+  margin-top: 12px;
   background-color: #ffffff;
   border-radius: 9px;
   box-shadow: var(--page-block-shadow);
@@ -236,6 +237,10 @@ li.user-info__status {
   cursor: pointer;
 }
 
+.showmore_btn:hover {
+  color: rgb(46, 46, 46);
+}
+
 .inactive_btn button,
 .inactive_btn a,
 .inactive_btn button:hover,
@@ -257,8 +262,9 @@ li.user-info__status {
 }
 
 .profile-info__block_3 {
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(3, auto) 0.8fr;
   margin-bottom: 20px;
+  margin-left: 10px;
 }
 
 .profile-info__block_3 .title {
@@ -285,6 +291,12 @@ li.user-info__status {
 .profile_status {
   display: block;
   margin: 6px 0 20px;
+  max-width: 290px;
+  min-width: 170px;
+  max-height: 55px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
 }
 
 .profile-info__block .title{
@@ -295,11 +307,11 @@ li.user-info__status {
 }
 
 .status_editable {
+  display: block;
   padding: 3px 5px;
   margin-left: -5px;
-  width: -moz-fit-content;
   width: fit-content;
-  min-width: 170px;
+
   border-radius: 2px;
 }
 
@@ -324,6 +336,7 @@ li.user-info__status {
 
 .profile-info-edit__content input[type="text"],
 .profile-info-edit__content input[type="email"],
+.profile-info-edit__content input[type="url"],
 .profile-info-edit__content textarea {
   width: 175px;
   padding: 9px 7px;
@@ -357,7 +370,7 @@ textarea.lookingForJob_edit {
 
 .profile-info__block_2 {
   position: relative;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .profile-info__block_2 input[type="checkbox"]:checked ~ textarea.lookingForJob_edit {
@@ -398,6 +411,7 @@ textarea.lookingForJob_edit::placeholder {
   display: block;
   padding: 10px 20px;
   margin-left: auto;
+  margin-bottom: 5px;
   color: white;
   background-color: #4c6dc1;
   font-weight: bold;
@@ -440,11 +454,12 @@ textarea.lookingForJob_edit::placeholder {
 
 .main-info__content .main-info__title {
   display: block;
+  margin: 2px 0 4px;
 }
 
 
 .main-info__content .main-num {
-  font-size: 28px;
+  font-size: 27px;
   font-weight: 500;
   color: rgb(136 156 214);
 }
@@ -453,7 +468,14 @@ textarea.lookingForJob_edit::placeholder {
   width: 100%;
   height: 40px;
   border: none;
+  font-weight: 500;
+  font-size: 14.5px;
+  border-radius: 5px;
   background-color: #efefef;
+}
+
+.show-more_btn:active {
+  color: rgb(82, 82, 82);
 }
 
 .showmore_box {
@@ -477,4 +499,43 @@ textarea.lookingForJob_edit::placeholder {
 
 .profile-info__item .info:hover {
   color: #374b7d!important;
+}
+
+.about_block {
+  padding-top: 12px;
+  margin-bottom: 5px;
+}
+
+.about_block:first-child {
+  padding-top: 20px;
+  border-top: 1px solid #efefef
+}
+
+.about_block .about_subtitle {
+  display: inlne-sblock;
+  font-weight: 500;
+  margin-left: 15px;
+  padding-right: 10px;
+  color: #6e7884;
+}
+
+.about_block .about_content {
+  display: inline-block;
+  width: 350px;
+  height: 35px;
+  position: absolute;
+  padding-right: 20px;
+  left: 250px;
+  color: #656565;
+  vertical-align: middle;
+  overflow-y: scroll;
+}
+
+.about_block .about_content:hover {
+  text-decoration: underline;
+}
+
+.profile-info__block_2__1 {
+  font-size: 14.5px;
+  margin-bottom: 25px;
 }

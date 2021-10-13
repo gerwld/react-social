@@ -52,8 +52,7 @@ class ProfileContainerAPI extends React.Component {
 
   onSettingsChange = async (e) => {
     await this.props.setCurrentSettingsTC(e);
-    // await browserHistory.push('/registrationStep2')
-    await this.props.history.push('/profile');
+    this.props.history.push('/profile');
   }
 
   componentDidMount() {
@@ -89,7 +88,7 @@ class ProfileContainerAPI extends React.Component {
         activateEdit={this.activateEditmode} deactivateEdit={this.deactivateEditmode} status={this.state.status} statusGlobal={this.props.status} 
         inputValue={this.statusInputRef} editInput={this.editInput} urlUserId={this.props.match.params.userId} onHandleAvatar={this.onHandleAvatar}
         isEditMode={this.props.match.params.status === "edit_settings"} handleShowClick={this.handleShowClick} isShowMore={this.state.isShowMore}
-        onSettingsSubmit={this.onSettingsChange}
+        onSettingsSubmit={this.onSettingsChange} postDataLength={this.props.postDataLength}
        />
     )
   }
@@ -100,7 +99,8 @@ let mapStateToProps = (state) => {
     profile: state.profilePage.profile,
     authUserId: state.auth.userId,
     isAuth: state.auth.isAuth,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    postDataLength: state.profilePage.postData.length,
   }
 }
 

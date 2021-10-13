@@ -1,6 +1,6 @@
 import { authAPI, dialogsAPI } from "../api/api";
 
-//константы и экшн криейторы
+
 const SET_USER_DATA = 'soc-net-pjaw/auth-reducer/SET_USER_DATA';
 const USER_LOGGED_IN = 'soc-net-pjaw/auth-reducer/USER_LOGGED_IN';
 const CAPTCHA_STATUS = 'soc-net-pjaw/auth-reducer/CAPTCHA_STATUS';

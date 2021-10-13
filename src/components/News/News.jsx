@@ -83,7 +83,7 @@ export const FeedBlock = (props) => {
                                 afterLoad={() => disableLoading(false)}
                                 onError={i => i.target.style.display = 'none'} />
                         </a>
-                        {isLoading && <div class={s.load_activity}></div>}
+                        {isLoading && <div className={s.load_activity}></div>}
                     </div>}
             </div>
             <div className={s.block_buttons}>

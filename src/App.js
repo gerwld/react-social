@@ -1,9 +1,9 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import './App.css';
-import Preloader, { MainPreloader } from './components/common/Preloader/Preloader';
+import { MainPreloader } from './components/common/Preloader/Preloader';
 import Navbar from './components/Navbar/Navbar';
 import { initializeApp } from './redux/app-reducer';
 import NotFound from './components/common/NotFound/NotFound';
@@ -37,7 +37,6 @@ class App extends React.Component {
       {!this.props.location.pathname.match('/login') && !this.props.location.pathname.match('/error-404') && <Navbar />}
       <div className="app-content">
         <Switch>
-
           <Route path="/users" render={withSuspense(UsersContainer)} />
           <Route path="/dialogs/id:userId?" render={withSuspense(DialogsContainer)} />
           <Route path="/dialogs" exact render={withSuspense(DialogsContainer)} />
@@ -49,10 +48,8 @@ class App extends React.Component {
           <Route path="/settings" render={() => <SettingsContainer />} />
           <Route path="/music" render={() => <MusicContainer />} />
 
-          <Route path="/login" render={this.props.isAuth ? () => <Redirect to="/profile" /> : withSuspense(LoginContainer)}/>
-          <Route path="/" exact render={() => {
-            return this.props.isAuth === true ? <Redirect to="/profile" /> : <Redirect to="/login" />;
-          }} />
+          <Route path="/login" render={this.props.isAuth ? () => <Redirect to="/profile" /> : withSuspense(LoginContainer)} />
+          <Route path="/" exact render={() => { return this.props.isAuth === true ? <Redirect to="/profile" /> : <Redirect to="/login" />; }} />
 
           <Route path='/error-404' render={() => <NotFound />} />
           <Redirect from='*' to='/error-404' />
@@ -75,7 +72,8 @@ const AppContainer = compose(
   withRouter
 )(App);
 
-let SocialNetworkAppJawo = (props) => {
+
+let SocialNetworkAppJawo = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>

@@ -21,12 +21,8 @@ it('new posts should be added, and next page be incremented', () => {
 });
 
 it('last new post message should be correct', () => {
-    //1. test data
     let action = loadPosts([{id: 12377, m:'Post test', data:'20210505T0409'}, {id: 12377, m:'Post test 2', data:'20210505T0409'}]);
 
-    //2. action
     let newState = feedReducer(state, action);
-
-    //3. expectation
     expect (newState.posts[4].m).toBe('Post test 2');
 });

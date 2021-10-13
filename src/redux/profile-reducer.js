@@ -1,6 +1,18 @@
 import { reset } from 'redux-form';
 import { profileAPI } from "../api/api";
 
+const ADD_POST = 'soc-net-pjaw/profile-reducer/ADD-POST';
+const SET_USER_PROFILE = 'soc-net-pjaw/profile-reducer/SET_USER_PROFILE';
+const SET_STATUS = 'soc-net-pjaw/profile-reducer/SET_STATUS';
+const DELETE_POST = 'soc-net-pjaw/profile-reducer/DELETE_POST';
+const SAVE_PHOTO_SUCCESS = 'soc-net-pjaw/profile-reducer/SAVE_PHOTO_SUCCESS';
+
+export const onAddPost = (message) => ({ type: ADD_POST, message })
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+export const setStatus = (status) => ({ type: SET_STATUS, status })
+export const deletePost = (postId) => ({ type: DELETE_POST, postId })
+export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos })
+
 let initialState = {
     postData: [
         { id: 0, cont: "That site is so cool!", likes: 9 },
@@ -8,7 +20,6 @@ let initialState = {
         { id: 2, cont: "Hi there!! 2007 is rock!", likes: 23 }
     ],
     profile: null,
-    // authUserId: 19461,
     status: ''
 };
 
@@ -76,17 +87,20 @@ export const setUserStatus = (status) => {
 export const setCurrentSettingsTC = (data) => {
     return async (dispatch, getState) => {
         let authId = await getState().auth.userId;
-        let dataNew = await { ...data, "fullName": `${data.name} ${data.surname}`, 
-            "aboutMe": (data.aboutMe || "FrontEnd Developer"), "lookingForAJob": false, 
-            "lookingForAJobDescription": "qwe", "userId": authId }
+        let dataNew = await {
+            ...data, "fullName": `${data.name} ${data.surname}`,
+            "aboutMe": (data.aboutMe || "FrontEnd Developer"), "lookingForAJob": data.lookingForAJob,
+            "lookingForAJobDescription": (data.lookingForAJobDescription || "Empty"), "userId": authId
+        }
         delete dataNew.name; delete dataNew.surname;
- 
+
         let response = await profileAPI.setUserSettings(dataNew);
-        if (response.data.messages.length > 0) {
-            response.data.messages.map(mess => alert(mess));
-        } else if (response.data.resultCode === 0) {
-            await dispatch(getUserInfo(authId));
+        if (response.data.resultCode === 0) {
+            dispatch(getUserInfo(authId));
             alert('Settings saved.');
+        }
+        if (response.data.messages.length > 0) { 
+            response.data.messages.map(mess => alert(mess));
         }
     }
 }
@@ -110,20 +124,5 @@ export const sendPost = (submit) => {
         dispatch(reset('myPosts'));
     }
 }
-
-
-const ADD_POST = 'soc-net-pjaw/profile-reducer/ADD-POST';
-const SET_USER_PROFILE = 'soc-net-pjaw/profile-reducer/SET_USER_PROFILE';
-const SET_STATUS = 'soc-net-pjaw/profile-reducer/SET_STATUS';
-const DELETE_POST = 'soc-net-pjaw/profile-reducer/DELETE_POST';
-const SAVE_PHOTO_SUCCESS = 'soc-net-pjaw/profile-reducer/SAVE_PHOTO_SUCCESS';
-
-
-//Action Creators
-export const onAddPost = (message) => ({ type: ADD_POST, message })
-export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
-export const setStatus = (status) => ({ type: SET_STATUS, status })
-export const deletePost = (postId) => ({ type: DELETE_POST, postId })
-export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos })
 
 export default profileReducer;
