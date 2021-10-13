@@ -280,7 +280,6 @@ span.title {
     left: 10px;
     font-size: 8px;
     font-weight: 600;
-    font-family: "Roboto";
     user-select: none;
     z-index: 0;
     cursor: pointer;
@@ -300,5 +299,5 @@ span.title {
   }
 
   .action_buttons {
-    flex: 0 0 84px;
+    flex: 0 0 88px;
   }
