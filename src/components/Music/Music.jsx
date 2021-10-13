@@ -72,7 +72,7 @@ class Music extends React.Component {
     render() {
         let currentPlayInList = this.props.trackList.find(r => r.id === this.props.currendTrackId);
         let currentPlay = currentPlayInList ? currentPlayInList : this.props.trackList[0];
-
+        let plLength = this.props.trackList.length;
         return (
             <div className={s.music_content}>
                 <span className={s.title}>Music</span>
@@ -80,8 +80,8 @@ class Music extends React.Component {
                     <div className={s.window_controls}>
                         <div className={s.action_buttons}>
                             <button type="button" onClick={() => this.togglePlay(this.props.currendTrackId || 1)}><i className={`fa-solid ${this.state.play ? `fa-pause` : `fa-play`}`} /></button>
-                            <button type="button"><i className="fa-solid fa-backward-step" /></button>
-                            <button type="button"><i className="fa-solid fa-forward-step" /></button>
+                            <button type="button" onClick={() => this.togglePlay(this.props.currendTrackId - 1 || plLength)}><i className="fa-solid fa-backward-step" /></button>
+                            <button type="button" onClick={() => this.togglePlay(this.props.currendTrackId + 1 < plLength ? this.props.currendTrackId + 1 : 1)}><i className="fa-solid fa-forward-step" /></button>
                         </div>
 
                         <div id={currentPlay.id} className={s.music_element_currentplay}>
