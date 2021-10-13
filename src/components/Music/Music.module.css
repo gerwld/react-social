@@ -141,6 +141,7 @@ span.title {
     top: 7px;
     width: 50px!important;
     height: 50px!important;
+    text-align: center;
     font-size: 18px;
     color: #fff;
     background: rgba(0, 0, 0, 0.3);
@@ -186,6 +187,7 @@ span.title {
     font-size: 15px;
     color: #819fc2;
     background: none;
+    text-align: center;
   }
 
   .action_buttons button:nth-child(1) {
@@ -193,6 +195,7 @@ span.title {
     width: 35px;
     height: 35px;
     border-radius: 50%;
+    text-align: center;
     color: #ffffff;
     background-color: #5181b8;
   }
@@ -305,4 +308,5 @@ span.title {
     flex: 0 0 85px;
     justify-content: space-between;
     align-items: center;
+
   }
