@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
 Social network created on React \
-Link to the project - https://social-network-project-mu.vercel.app/
+Link to the project - http://network-project-pjaw.herokuapp.com/
 
 ## Available Scripts
 
