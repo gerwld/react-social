@@ -7,6 +7,15 @@ span.title {
     grid-column-end: 3;
   }
 
+.progress_bar_progress,
+.volume_slider_progress {
+  transition: 0.2s ;
+}
+
+/* .progress_bar_buffered {
+  transition: 1.5s ;
+} */
+
   .music_content {
       display: grid;
       grid-gap: 30px 15px;
@@ -61,8 +70,31 @@ span.title {
     width: 2px;
     top: 4px;
     background-color: rgb(73, 84, 148);
-    z-index: 2;
+    z-index: 3;
   }
+
+  .progress_bar_buffered {
+    position: absolute;
+    min-width: 2px;
+    width: 2px;
+    top: 4px;
+    background-color: rgb(182, 182, 182);
+    z-index: 2;
+    animation: buffer 0.25s;
+  }
+
+  .buffer {
+    animation-iteration-count: 1;
+  }
+
+  @keyframes buffer {
+    from {
+        width: 0;
+    }
+    to {
+      width: 25%;
+    }
+}
 
   .progress_bar,
   .progress_bar_progress {
@@ -149,10 +181,6 @@ span.title {
     border-radius: 3px;
     overflow: hidden;
   }
-
-  /* .play_icon {
-    transform: translate(0px, 1px)!important;
-  } */
 
   .music_element:active > .music_content__control i {
     font-size: 22px;
@@ -252,7 +280,8 @@ span.title {
     width: 80px!important;
     flex: 0 0 80px;
     height: 3px;
-    padding: 4px 4px 6px;
+    padding: 4px 0px 6px;
+    margin-left: 10px;
     cursor: pointer!important;
     border-radius: 3px;
   }
@@ -282,7 +311,7 @@ span.title {
   }
 
   .volume_slider_progress {
-    width: 99%;
+    width: 50%;
     background-color: rgb(73, 84, 148);
     z-index: 2;
     margin-top: -3px;
