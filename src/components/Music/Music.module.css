@@ -189,6 +189,7 @@ span.title {
   }
 
   .action_buttons button:nth-child(1) {
+    flex: 0 0 35px;
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -300,7 +301,8 @@ span.title {
   }
 
   .action_buttons {
-    flex: 0 0 88px;
-    min-width: 88px;
-    width: 88px!important;
+    display: flex;
+    flex: 0 0 85px;
+    justify-content: space-between;
+    align-items: center;
   }
