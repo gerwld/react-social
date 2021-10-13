@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
 import appReducer from "./app-reducer";
 import feedReducer from "./feed-reducer";
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import audioReducer from "./audio-reducer";
 
 
@@ -23,9 +23,15 @@ let reducers = combineReducers({
 });
 
 /* eslint-disable no-underscore-dangle */
-const store = createStore(reducers, composeWithDevTools(
+const store = createStore(reducers,
     applyMiddleware(thunk)
-));
+);
+/* eslint-enable */
+
+/* eslint-disable no-underscore-dangle */
+// const store = createStore(reducers, composeWithDevTools(
+//     applyMiddleware(thunk)
+// ));
 /* eslint-enable */
 
 export default store;
