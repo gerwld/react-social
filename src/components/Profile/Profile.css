@@ -237,6 +237,10 @@ li.user-info__status {
   cursor: pointer;
 }
 
+.showmore_btn:hover {
+  color: rgb(46, 46, 46);
+}
+
 .inactive_btn button,
 .inactive_btn a,
 .inactive_btn button:hover,
@@ -470,6 +474,10 @@ textarea.lookingForJob_edit::placeholder {
   background-color: #efefef;
 }
 
+.show-more_btn:active {
+  color: rgb(82, 82, 82);
+}
+
 .showmore_box {
   width: 100%;
   height: 40px;
@@ -512,10 +520,15 @@ textarea.lookingForJob_edit::placeholder {
 }
 
 .about_block .about_content {
+  display: inline-block;
+  width: 350px;
+  height: 35px;
   position: absolute;
   padding-right: 20px;
   left: 250px;
   color: #656565;
+  vertical-align: middle;
+  overflow-y: scroll;
 }
 
 .about_block .about_content:hover {

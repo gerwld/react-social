@@ -32,7 +32,7 @@ class Profile extends React.Component {
             <div className="avatar_block">
               <img alt="Avatar" className="user-profile__img" src={avatarCheck(this.props.profile.photos)} />
               {isCurrentUserProfile && <div className={`ava_buttons ${isEditMode ? 'avatar_edit' : ''}`}>
-                <label><input type="file" onChange={e => this.props.onHandleAvatar(e)} /><i class="fas fa-file-image" />Upload new avatar</label>
+                <label><input type="file" onChange={e => this.props.onHandleAvatar(e)} /><i className="fas fa-file-image" />Upload new avatar</label>
               </div>}
             </div>
             <div className={`contact_buttons ${isInactiveBtn}`}>
@@ -42,8 +42,8 @@ class Profile extends React.Component {
           </div>
 
           <div className="user_block user_block__2 main-content-block">
-            {(!isEditMode && isCurrentUserProfile) && <NavLink to="/profile/status=edit_settings" className="btn__edit_profile">Edit Profile <i class="far fa-edit" /></NavLink>}
-            {(isEditMode && isCurrentUserProfile) && <NavLink to="/profile/" className="btn__edit_profile">Close <i class="fas fa-times down-1-px" /></NavLink>}
+            {(!isEditMode && isCurrentUserProfile) && <NavLink to="/profile/status=edit_settings" className="btn__edit_profile">Edit Profile <i className="far fa-edit" /></NavLink>}
+            {(isEditMode && isCurrentUserProfile) && <NavLink to="/profile/" className="btn__edit_profile">Close <i className="fas fa-times down-1-px" /></NavLink>}
 
             {/* usual view (not edit) */}
             {!isEditMode && <ProfileInfo profile={this.props.profile} isCurrent={isCurrentUserProfile}
@@ -75,13 +75,13 @@ const ProfileInfoForm = ({ profile, initialValues, ...props }) => {
         </div>
 
         <div className="profile-info__block profile-info__block_2">
-          <b class="title">Job</b>
+          <b className="title">Job</b>
           <Field id="lookingAJob" component="input" name="lookingForAJob" type="checkbox" /><label className="lookingAJob_label" for="lookingAJob">Currently looking for a job</label>
           <Field component="textarea" name="lookingForAJobDescription" placeholder="Tell the world what you are good at..." className="lookingForJob_edit" />
         </div>
 
         <div className="profile-info__block profile-info__block_3">
-          <b class="title">Contacts</b>
+          <b className="title">Contacts</b>
           {Object.keys(profile.contacts).map(key => createField(`http://${key}.com/`, "contacts." + key, [], InputText, key, {type:"url"}, 100))}
         </div>
         <button type="submit">Save changes</button>
@@ -140,7 +140,7 @@ const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, postData
       </div>
       {(isShowMore && !isProfileContactsEmpty) &&
         <div className="profile-info__block profile-info__block_3">
-          <b class="title">Contacts</b>
+          <b className="title">Contacts</b>
           {Object.keys(profile.contacts).map(key => profile.contacts[key] &&
             <Contact key={key} contactTitle={key === "mainLink" ? "Other" : key} contactInfo={profile.contacts[key]} />)}
         </div>}
@@ -165,7 +165,7 @@ export const Contact = ({ contactTitle, contactInfo, styleClass }) => {
 const StatusEditable = ({ statusEditMode, activateEdit, statusGlobal, deactivateEdit, status, editInput }) => {
   return (
     <>
-      {!statusEditMode && <span class="status_editable" onClick={activateEdit}>{statusGlobal || "Status is not set."}</span>}
+      {!statusEditMode && <span className="status_editable" onClick={activateEdit}>{statusGlobal || "Status is not set."}</span>}
       {statusEditMode && <input onBlur={(e) => deactivateEdit(e.target.value)}
         onChange={(e) => editInput(e.target.value)} type="text" value={status} autoFocus="true" />}
     </>
