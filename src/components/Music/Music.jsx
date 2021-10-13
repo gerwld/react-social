@@ -8,39 +8,35 @@ var audio = new Audio();
 
 class Music extends React.Component {
     state = {
-        play: false,
+        play: !audio.paused,
         duration: 0,
-        progress: 0,
-        volume: 0.4,
-        time: 0
+        progress: (audio.currentTime / audio.duration * 100) || 0,
+        volume: audio.paused ? 0.4 : audio.volume
     }
 
     componentDidMount() {
-        audio.addEventListener('ended', () => { this.reapetingCurrentOption(this.props.isRepeatSameTrack); });
+        audio.addEventListener('ended', () => { this.repeatCurrentTrack(this.props.isRepeatSameTrack); });
         audio.addEventListener('loadedmetadata', (e) => { this.setState({ duration: e.target.duration }) });
+        audio.disableRemotePlayback = true;
         audio.volume = this.state.volume;
+        audio.preload = false;
     }
 
     componentWillUnmount() {
-        audio.removeEventListener('ended', () => { this.reapetingCurrentOption(this.props.isRepeatSameTrack); });
+        audio.removeEventListener('ended', () => { this.repeatCurrentTrack(this.props.isRepeatSameTrack); });
         audio.removeEventListener('loadedmetadata', (e) => { this.setState({ duration: e.target.duration }) });
-        audio.pause();
     }
 
-    reapetingCurrentOption = (isRepeatOne) => {
+    repeatCurrentTrack = (isRepeatOne) => {
         if (isRepeatOne) {
             audio.currentTime = 0;
-            audio.play();
             this.setState({ progress: 0 });
+            audio.play();
         } else {
             this.props.setCurrentSong(this.props.currendTrackId < 9 ? this.props.currendTrackId + 1 : 1);
             audio.src = this.props.currentUrl;
             audio.play();
         }
-    }
-
-    setProgress = (value) => {
-        this.setState({ progress: value });
     }
 
     onChangeVolume = (e, barLength) => {
@@ -88,8 +84,7 @@ class Music extends React.Component {
                             <div className={s.music_cred}>
                                 <span className={s.music_element__name}>{currentPlay.name}</span>
                                 <span className={s.music_element__authors}>{currentPlay.artist}</span>
-                                <ProgressBar audio={audio} progress={this.state.progress} setProgress={this.setProgress}
-                                    isPlay={this.state.play} duration={this.state.duration} nowPlayingId={this.props.currendTrackId} />
+                                <ProgressBar audio={audio} progress={this.state.progress} duration={this.state.duration} />
                                 <CurrentTime play={this.state.play} />
                             </div>
                             <div className={s.music_element__album}>

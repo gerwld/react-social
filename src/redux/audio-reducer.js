@@ -2,8 +2,10 @@ import React from 'react'
 
 const SET_CURRENT_SONG = 'soc-net-pjaw/audio-reducer/SET_CURRENT_SONG';
 const TOGGLE_REPEAT = 'soc-net-pjaw/audio-reducer/TOGGLE_REPEAT';
+const SET_PROGRESS = 'soc-net-pjaw/audio-reducer/SET_PROGRESS';
 export const setCurrentSong = (id, url) => ({type: SET_CURRENT_SONG, id, url});
 export const toggleRepeatSong = () => ({type: TOGGLE_REPEAT});
+export const setProgress = (value) => ({type: SET_PROGRESS, value});
 
 
 
@@ -100,10 +102,10 @@ let initialState = {
             favorited: false
           }
     ],
-    isPlaying: false,
     isRepeatSameTrack: false,
     currentUrl: null,
-    currendTrackId: null
+    currendTrackId: null,
+    progress: 0
 };
 
 const audioReducer = (state = initialState, action) => {
@@ -118,6 +120,11 @@ const audioReducer = (state = initialState, action) => {
           return {
             ...state,
             isRepeatSameTrack: !state.isRepeatSameTrack
+          }
+        case SET_PROGRESS:
+          return {
+            ...state,
+            progress: action.progress
           }
         default:
             return state;
