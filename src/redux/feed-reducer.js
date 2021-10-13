@@ -6,7 +6,6 @@ import moment from 'moment';
 const LOAD_POSTS = 'soc-net-pjaw/feed-reducer/LOAD_POSTS';
 const LAST_POST_DATE = 'soc-net-pjaw/feed-reducer/LAST_POST_DATE';
 
-//Action Creators
 export const loadPosts = (posts) => ({ type: LOAD_POSTS, posts });
 export const addLastPostDate = (date) => ({ type: LAST_POST_DATE, date });
 

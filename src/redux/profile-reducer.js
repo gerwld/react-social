@@ -1,5 +1,17 @@
-import { reset, stopSubmit } from 'redux-form';
+import { reset } from 'redux-form';
 import { profileAPI } from "../api/api";
+
+const ADD_POST = 'soc-net-pjaw/profile-reducer/ADD-POST';
+const SET_USER_PROFILE = 'soc-net-pjaw/profile-reducer/SET_USER_PROFILE';
+const SET_STATUS = 'soc-net-pjaw/profile-reducer/SET_STATUS';
+const DELETE_POST = 'soc-net-pjaw/profile-reducer/DELETE_POST';
+const SAVE_PHOTO_SUCCESS = 'soc-net-pjaw/profile-reducer/SAVE_PHOTO_SUCCESS';
+
+export const onAddPost = (message) => ({ type: ADD_POST, message })
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+export const setStatus = (status) => ({ type: SET_STATUS, status })
+export const deletePost = (postId) => ({ type: DELETE_POST, postId })
+export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos })
 
 let initialState = {
     postData: [
@@ -8,7 +20,6 @@ let initialState = {
         { id: 2, cont: "Hi there!! 2007 is rock!", likes: 23 }
     ],
     profile: null,
-    // authUserId: 19461,
     status: ''
 };
 
@@ -113,20 +124,5 @@ export const sendPost = (submit) => {
         dispatch(reset('myPosts'));
     }
 }
-
-
-const ADD_POST = 'soc-net-pjaw/profile-reducer/ADD-POST';
-const SET_USER_PROFILE = 'soc-net-pjaw/profile-reducer/SET_USER_PROFILE';
-const SET_STATUS = 'soc-net-pjaw/profile-reducer/SET_STATUS';
-const DELETE_POST = 'soc-net-pjaw/profile-reducer/DELETE_POST';
-const SAVE_PHOTO_SUCCESS = 'soc-net-pjaw/profile-reducer/SAVE_PHOTO_SUCCESS';
-
-
-//Action Creators
-export const onAddPost = (message) => ({ type: ADD_POST, message })
-export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
-export const setStatus = (status) => ({ type: SET_STATUS, status })
-export const deletePost = (postId) => ({ type: DELETE_POST, postId })
-export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos })
 
 export default profileReducer;

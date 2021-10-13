@@ -9,8 +9,6 @@ const ADD_MESSAGE = 'soc-net-pjaw/dialogs-reducer/ADD_MESSAGE';
 const LOAD_MORE_MESSAGES = 'soc-net-pjaw/dialogs-reducer/LOAD_MORE_MESSAGES';
 const USERS_INITIALIZED = 'soc-net-pjaw/dialogs-reducer/USERS_INITIALIZED';
 
-
-//Action Creators
 export const setFriends = (users) => ({ type: SET_FRIENDS, users });
 export const setCurrentUser = (id, name, avatar) => ({ type: SET_CURRENT_USER, data: { id, name, avatar } });
 export const setConversationWithUser = (messages, messCount) => ({ type: GET_CONVERSATION, messages, messCount });
@@ -36,7 +34,7 @@ let initialState = {
     messagesData: [
         {
             addedAt: "2021-10-01T11:51:37.15",
-            body: "415 база ответьте",
+            body: "message text",
             id: "5593ac05-bfb9-465c-9f66-2026492ef08d",
             recipientId: 19907,
             senderId: 19461,

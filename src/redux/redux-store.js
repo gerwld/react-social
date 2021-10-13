@@ -1,6 +1,5 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import dialogsReducer from "./dialogs-reducer";
-import sidebarReducer from "./navbar-reducer";
 import profileReducer from './profile-reducer';
 import usersReducer from "./users-reducer";
 import authReducer from './auth-reducer';
@@ -9,18 +8,18 @@ import { reducer as formReducer } from 'redux-form'
 import appReducer from "./app-reducer";
 import feedReducer from "./feed-reducer";
 import { composeWithDevTools } from 'redux-devtools-extension';
-// const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
+import audioReducer from "./audio-reducer";
 
 
 let reducers = combineReducers({
     app: appReducer,
     profilePage: profileReducer,
     messagePage: dialogsReducer,
-    sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form: formReducer,
-    feed: feedReducer
+    feed: feedReducer,
+    audio: audioReducer,
+    form: formReducer
 });
 
 /* eslint-disable no-underscore-dangle */

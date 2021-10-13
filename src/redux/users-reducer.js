@@ -1,11 +1,29 @@
 import React from 'react';
 import { usersAPI } from '../api/api';
 
+const FOLLOW = 'soc-net-pjaw/users-reducer/FOLLOW';
+const SET_USERS = 'soc-net-pjaw/users-reducer/SET_USERS';
+const TOTAL_COUNT = 'soc-net-pjaw/users-reducer/TOTAL_COUNT';
+const SET_PAGE = 'soc-net-pjaw/users-reducer/SET_PAGE';
+const TOGGLE_IS_FETCHING = 'soc-net-pjaw/users-reducer/TOGGLE_IS_FETCHING';
+const FOLLOWING_IN_PROGRESS = 'soc-net-pjaw/users-reducer/FOLLOWING_IN_PROGRESS';
+const GET_ALL_PAGES = 'soc-net-pjaw/users-reducer/GET_ALL_PAGES';
+const LOAD_FRIENDS_TOGGLE = 'soc-net-pjaw/users-reducer/LOAD_FRIENDS_TOGGLE';
+const DO_SEARCH = 'soc-net-pjaw/users-reducer/DO_SEARCH';
+
+export const unfollowUser = (id) => ({ type: FOLLOW, userId: id });
+export const setUsers = (users) => ({ type: SET_USERS, users });
+export const countOfUsers = (totalCount) => ({ type: TOTAL_COUNT, totalCount });
+export const setPage = (page) => ({ type: SET_PAGE, page });
+export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
+export const toggleIsFollowing = (isFetching, userId) => ({ type: FOLLOWING_IN_PROGRESS, isFetching, userId });
+export const getAllPages = (pagesCount) => ({ type: GET_ALL_PAGES, pagesCount });
+export const loadFriendsToggle = (boolean) => ({ type: LOAD_FRIENDS_TOGGLE, boolean });
+export const findUsers = (searchQuery) => ({ type: DO_SEARCH, searchQuery });
+
 let initialState = {
     users: [
-        // { id: 0, followed: true, name: 'Andrew K.', loc: 'Minsk, Belarus', status: 'Im looking for someone...', avaHash: 'm1' },
-        // { id: 1, followed: true, name: 'Anton B.', loc: 'Ukraine, Kiev', status: 'O, hi Mark', avaHash: '2' },
-        // { id: 2, followed: true, name: 'Richard M.', loc: 'Poland, Warsaw', status: 'Uqwemubwem Osas', avaHash: 'm6' }
+        // { id: 0, followed: true, name: 'Andrew K.', loc: 'Minsk, Belarus', status: 'Im looking for someone...', avaHash: 'm1' }
     ],
     totalUsers: 3,
     isFetching: true,
@@ -83,31 +101,8 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-// Action creators and constant's
-
-const FOLLOW = 'soc-net-pjaw/users-reducer/FOLLOW';
-const SET_USERS = 'soc-net-pjaw/users-reducer/SET_USERS';
-const TOTAL_COUNT = 'soc-net-pjaw/users-reducer/TOTAL_COUNT';
-const SET_PAGE = 'soc-net-pjaw/users-reducer/SET_PAGE';
-const TOGGLE_IS_FETCHING = 'soc-net-pjaw/users-reducer/TOGGLE_IS_FETCHING';
-const FOLLOWING_IN_PROGRESS = 'soc-net-pjaw/users-reducer/FOLLOWING_IN_PROGRESS';
-const GET_ALL_PAGES = 'soc-net-pjaw/users-reducer/GET_ALL_PAGES';
-const LOAD_FRIENDS_TOGGLE = 'soc-net-pjaw/users-reducer/LOAD_FRIENDS_TOGGLE';
-const DO_SEARCH = 'soc-net-pjaw/users-reducer/DO_SEARCH';
-
-export const unfollowUser = (id) => ({ type: FOLLOW, userId: id });
-export const setUsers = (users) => ({ type: SET_USERS, users });
-export const countOfUsers = (totalCount) => ({ type: TOTAL_COUNT, totalCount });
-export const setPage = (page) => ({ type: SET_PAGE, page });
-export const toggleIsFetching = (isFetching) => ({ type: TOGGLE_IS_FETCHING, isFetching });
-export const toggleIsFollowing = (isFetching, userId) => ({ type: FOLLOWING_IN_PROGRESS, isFetching, userId });
-export const getAllPages = (pagesCount) => ({ type: GET_ALL_PAGES, pagesCount });
-export const loadFriendsToggle = (boolean) => ({ type: LOAD_FRIENDS_TOGGLE, boolean });
-export const findUsers = (searchQuery) => ({ type: DO_SEARCH, searchQuery });
-
 
 // Thunk Creators 
-
 export const getUsersThunkCreator = (currentPage, pageSize, usersCount, friends, search) => {
     return (dispatch) => {
         if (usersCount <= pageSize) {
