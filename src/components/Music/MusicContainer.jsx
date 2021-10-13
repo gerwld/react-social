@@ -8,7 +8,9 @@ import { usePrevious } from "../../hooks/customHooks";
 class MusicContainer extends React.Component {
 
     setCurrentSong = (id) => {
-        this.props.setCurrentSongTC(id);
+        if (id) {
+            this.props.setCurrentSongTC(id);
+        }
     }
 
     toggleRepeat = () => {

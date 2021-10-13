@@ -80,8 +80,8 @@ class Music extends React.Component {
                     <div className={s.window_controls}>
                         <div className={s.action_buttons}>
                             <button type="button" onClick={() => this.togglePlay(this.props.currendTrackId || 1)}><i className={`fa-solid ${this.state.play ? `fa-pause` : `fa-play`}`} /></button>
-                            <button type="button" onClick={() => this.togglePlay(this.props.currendTrackId - 1 || plLength)}><i className="fa-solid fa-backward-step" /></button>
-                            <button type="button" onClick={() => this.togglePlay(this.props.currendTrackId + 1 < plLength ? this.props.currendTrackId + 1 : 1)}><i className="fa-solid fa-forward-step" /></button>
+                            <button type="button" onClick={() => this.togglePlay((this.props.currendTrackId > 1) ? this.props.currendTrackId - 1 : plLength)}><i className="fa-solid fa-backward-step" /></button>
+                            <button type="button" onClick={() => this.togglePlay((this.props.currendTrackId < plLength) ? this.props.currendTrackId + 1 : 1)}><i className="fa-solid fa-forward-step" /></button>
                         </div>
 
                         <div id={currentPlay.id} className={s.music_element_currentplay}>
