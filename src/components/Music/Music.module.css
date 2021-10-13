@@ -148,9 +148,9 @@ span.title {
     overflow: hidden;
   }
 
-  .play_icon {
+  /* .play_icon {
     transform: translate(0px, 1px)!important;
-  }
+  } */
 
   .music_element:active > .music_content__control i {
     font-size: 22px;
@@ -297,4 +297,8 @@ span.title {
   .music_element_currentplay .music_cred {
     flex: 0;
     position: relative;
+  }
+
+  .action_buttons {
+    flex: 0 0 84px;
   }
