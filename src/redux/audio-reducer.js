@@ -125,11 +125,9 @@ const audioReducer = (state = initialState, action) => {
 }
 
 export const setCurrentSongTC = (id) => {
-    debugger;
     return (dispatch, getState) => {
         let trackUrlById = getState().audio.tracks.find(r => r.id === id);
         dispatch(setCurrentSong(id, trackUrlById.source));
-        
     }
 }
 
