@@ -11,7 +11,7 @@ const instance = axios.create({
     baseURL: "https://immense-forest-91899.herokuapp.com/https://social-network.samuraijs.com/api/1.0/"
 });
 
-// Proxy for CORS: https://immense-forest-91899.herokuapp.com/
+// Proxy for CORS: https://immense-forest-91899.herokuapp.com/v
 
 export const usersAPI = {
     getUsers(pageSize = 6, pageNumber = 1, friends, search) {
