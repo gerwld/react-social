@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
 Social network created on React \
-Link to the project - http://network-project-pjaw.herokuapp.com/
+Link to the project - https://network-project-pjaw.herokuapp.com/music
 
 ## Available Scripts
 
