@@ -8,7 +8,7 @@ const Message = ({converListUser, authProfile, ...props}) => {
     var isAuthUser = props.senderId === authProfile.userId;
     debugger;
     return (
-        <div key={props.id} className={`${s.message} ${!props.viewed && s.message_unread}`}>
+        <div key={props.id} className={s.message}>
             <NavLink to={`/profile/id${props.senderId}`}>
             {isAuthUser ? 
                 <img className={s.userAvatar} alt="Your avatar" src={authProfile.photos.small || "/images/avatars/def-avatar.png"}/>
@@ -22,6 +22,7 @@ const Message = ({converListUser, authProfile, ...props}) => {
             </NavLink>
                 <span>{props.body}</span>
                 <span className={s.message_data}>{time} <span>{data}</span></span>
+                <span className={`${s.status} ${props.viewed && s.viewed}`}><i class="fa-solid fa-check-double"/></span>
             </div>
         </div>
     );
