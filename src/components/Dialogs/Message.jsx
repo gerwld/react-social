@@ -8,7 +8,7 @@ const Message = ({converListUser, authProfile, ...props}) => {
     var isAuthUser = props.senderId === authProfile.userId;
     debugger;
     return (
-        <div key={props.id} className={s.message}>
+        <div key={props.id} className={`${s.message} ${!props.viewed && s.message_unread}`}>
             <NavLink to={`/profile/id${props.senderId}`}>
             {isAuthUser ? 
                 <img className={s.userAvatar} alt="Your avatar" src={authProfile.photos.small || "/images/avatars/def-avatar.png"}/>
