@@ -9,7 +9,7 @@ import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
-    var isHasMore = props.currentPage < 3 ;
+    var isHasMore = props.currentPage < 3;
 
     return (
         <div>
@@ -18,14 +18,13 @@ const News = (props) => {
                 <WhatsNewForm onSubmit={props.whatsNewSubmit} />
             </div>
             {props.postsMap(noAvatar)}
-            <InfiniteScroll
+            {/* <InfiniteScroll key={123} pageStart={1}
                 children=""
-                pageStart="1"
                 loadMore={() => props.loadPosts(props.currentPage + 1, 5)}
-                hasMore={isHasMore}
-                initialLoad={true}
-                threshold={50}
-                loader={<button className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>}/>
+                hasMore={isHasMore} initialLoad={true}
+                threshold={50} loader={<button
+                className={s.loadMore} 
+                onClick={e => props.loadPosts()}>Load more...</button>}/> */}
             {!isHasMore && <div className={s.all_caugth}>
                 <span>You're All Caught Up <i className="far fa-check-circle"></i></span>
                 <p>You've seen all new post from the past {props.lastPostTime}</p>
@@ -39,7 +38,7 @@ export const FeedBlock = (props) => {
     var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
     let [isLoading, disableLoading] = useState(true);
     let [isLikePressed, toggleLike] = useState(false);
-    let [likesCount, likeAction] = useState(22 + Math.floor(Math.random() * 10));
+    let [likesCount, likeAction] = useState(isNaN(props.likesCount) ? 22 + Math.floor(Math.random() * 10): props.likesCount);
 
     let likePress = (e, id) => {
         let buttonIcon = e.currentTarget.children[0];
@@ -110,7 +109,7 @@ const WhatsNew = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={s.whatsnew_field}>
-                <Field component="textarea" name="whats-new" placeholder="What's going on?" />
+                <Field component="textarea" name="postData" placeholder="What's going on?" />
                 <button className={s.clipFile} type="button"><i className="fa fa-camera"></i></button>
             </div>
             <button className={s.send} type="submit"><i className="fa fa-paper-plane"></i></button>

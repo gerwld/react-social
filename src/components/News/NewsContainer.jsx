@@ -1,6 +1,6 @@
 import React from 'react'
 import News, { FeedBlock } from './News';
-import { loadPostsTC } from '../../redux/feed-reducer';
+import { loadPostsTC, addNewPost } from '../../redux/feed-reducer';
 import { connect } from 'react-redux';
 import Preloader from '../common/Preloader/Preloader';
 import moment from 'moment';
@@ -11,15 +11,22 @@ class NewsContainer extends React.Component {
         this.props.loadPostsTC(this.props.nextPage, this.props.pageSize);
     }
 
-    whatsNewSubmit(data) {
-
+    whatsNewSubmit = (data) => {
+        this.props.addNewPost({
+            "source": {
+                "name": this.props.authUserName
+              },
+              "title": data.postData,
+              "publishedAt": moment(),
+              "likesCount": 0
+        });
     }
 
     postsMap = (noAvatar) => {
        return this.props.posts.map(post => {
-            return <FeedBlock text={post.title} avatar={post.avatar} nv={noAvatar}
+            return <div key={post.publishedAt}><FeedBlock text={post.title} avatar={post.avatar} nv={noAvatar}
                 author={post.source.name} data={post.publishedAt} img={post.urlToImage}
-                postLink={post.url} />
+                postLink={post.url} likesCount={post.likesCount} /></div>
         })
     }
    
@@ -44,8 +51,9 @@ var mapStateToProps = (state) => {
         currentPage: (state.feed.nextPage - 1),
         lastPostDate: state.feed.lastPostDate,
         nextPage: state.feed.nextPage,
-        pageSize: state.feed.pageSize
+        pageSize: state.feed.pageSize,
+        authUserName: state.auth.login
     }
 }
 
-export default connect(mapStateToProps, {loadPostsTC})(NewsContainer);
+export default connect(mapStateToProps, {loadPostsTC, addNewPost})(NewsContainer);

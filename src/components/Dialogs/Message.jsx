@@ -6,7 +6,7 @@ const Message = ({converListUser, authProfile, ...props}) => {
     var time = moment(props.addedAt, "YYYY-MM-DD-h:mm").format("hh:mm A");
     var data = moment(props.addedAt, "YYYY-MM-DD-h:mm").format("(MMM Do)");
     var isAuthUser = props.senderId === authProfile.userId;
-    debugger;
+
     return (
         <div key={props.id} className={s.message}>
             <NavLink to={`/profile/id${props.senderId}`}>
