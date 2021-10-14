@@ -1,4 +1,4 @@
-import { authAPI, dialogsAPI } from "../api/api";
+import { dialogsAPI } from "../api/api";
 
 
 const SET_USER_DATA = 'soc-net-pjaw/auth-reducer/SET_USER_DATA';

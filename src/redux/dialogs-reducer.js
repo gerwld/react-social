@@ -114,7 +114,6 @@ export const getAuthUserData = (authId) => {
     return async (dispatch) => {
             let user = await profileAPI.getUser(authId);
             dispatch(setAuthUser(user));
-            alert('get auth from API');
         }
     }
 
