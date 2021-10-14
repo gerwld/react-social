@@ -17,7 +17,7 @@ const Dialogs = ({ getLastTimeOrShowOnline, ...props }) => {
                     <ul className={s.userlist}>
                         {props.isUsersLoaded ?
                             props.loadedUsers.map(user =>
-                                <li key={user.id} className={s.user_item}>
+                                <li key={user.name} className={s.user_item}>
                                     <NavLink to={"/dialogs/id" + user.id} activeClassName={s.selected_item}>
                                         <img src={user.avatar} className={s.userlist_avatar} alt={s.user_name} /><span className={s.user_name}>{user.name}</span>
                                         {user.hasNewMessages && <span className={s.newMessagesCount}>{user.newMessagesCount}</span>}
@@ -62,7 +62,7 @@ class DialogsWindow extends React.Component {
 
     render() {
         return (
-            <div className={s.scrollableWindow} id="scrollableDiv"
+            <div key="dialogs_window" className={s.scrollableWindow} id="scrollableDiv"
                 ref={(ref) => this.messagesEndRef = ref} onScroll={this.props.onScroll}>
                 <div ref={this.props.endDialogBlock} className={s.end_dial} />
                 <InfiniteScroll
@@ -75,8 +75,8 @@ class DialogsWindow extends React.Component {
                     scrollableTarget="scrollableDiv"
                     endMessage={<p className={s.loader_start}>Chat messages beginning.</p>}>
 
-                    {this.props.currentDialog.map(m => <Message converListUser={this.props.converListUser}
-                    authProfile={this.props.authProfile} {...m} />)}
+                    {this.props.currentDialog.map(m => <div key={m.id}><Message converListUser={this.props.converListUser}
+                    authProfile={this.props.authProfile} {...m} /></div>)}
                 </InfiniteScroll>
             </div>
         )

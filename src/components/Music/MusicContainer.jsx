@@ -27,9 +27,10 @@ export const ProgressBar = ({ audio, progress, duration }) => {
         var [counter, setCounter] = React.useState(progress);
         var [timer, setTimer] = React.useState(0);
         React.useEffect(() => {
-          setTimeout(() =>{ 
+          const timer = setTimeout(() =>{ 
               setCounter(audio.currentTime / duration * 100);
               setTimer(timer + 1)}, 1000);
+            return () => clearTimeout(timer);
         }, [audio.currentTime, timer, counter, duration, progress])
 
         //give new width & time value, do some math and then check a last value.

@@ -22,7 +22,7 @@ const Message = ({converListUser, authProfile, ...props}) => {
             </NavLink>
                 <span>{props.body}</span>
                 <span className={s.message_data}>{time} <span>{data}</span></span>
-                <span className={`${s.status} ${props.viewed && s.viewed}`}><i class="fa-solid fa-check-double"/></span>
+                <span className={`${s.status} ${props.viewed && s.viewed}`}><i className="fa-solid fa-check-double"/></span>
             </div>
         </div>
     );

@@ -24,7 +24,7 @@ let Users = (props) => {
                         </div>
                         <div className={s.user_location}>{u.loc}</div>
                         <div className={`${s.action_buttons} ${s.action_user_btn}`}>
-                            <a className={props.isFollowing.some(id => id === u.id) && s.disabled_link} onClick={() => props.followUser(u)}>{u.followed ? "Unsubscribe" : "Subscribe"}</a>
+                            <a className={props.isFollowing.some(id => id === u.id) && s.disabled_link || ''} onClick={() => props.followUser(u)}>{u.followed ? "Unsubscribe" : "Subscribe"}</a>
                             <a>Block user</a><a>Add to list</a></div>
 
                     </div>)
@@ -34,7 +34,7 @@ let Users = (props) => {
                         <li key="er4s" onClick={e => props.onPageChanged(1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>«</span>first page</li>
                         <li key="erm4s" onClick={e => props.onPageChanged(props.currentPage - 1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>‹</span>prevous</li>
 
-                        {props.getPagCurrentIndexes().map(p => <li onClick={() => props.onPageChanged(p)} className={props.currentPage === p && s.currentPage}>{p}</li>)}
+                        {props.getPagCurrentIndexes().map(p => <li key={p + "pag"} onClick={() => props.onPageChanged(p)} className={props.currentPage === p ? s.currentPage : ''}>{p}</li>)}
 
                         <li key="er4ks" onClick={e => props.onPageChanged(props.currentPage + 1)} className={`${s.pag_element} ${s.pag_arrow}`}>next<span>›</span></li>
                         <li key="emr4s" onClick={e => props.onPageChanged(allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
@@ -48,7 +48,7 @@ let Users = (props) => {
                 </div>
                 <div className={s.view_settings}>
                     <span className={s.view_settings_title}>Sort parameters:</span>
-                <label className={s.showAll}><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends} /> Show all users</label>
+                <label className={s.showAll}><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends} onChange={i => i} /> Show all users</label>
                 </div>
             </div>
         </div>

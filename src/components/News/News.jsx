@@ -17,14 +17,12 @@ const News = (props) => {
                 <div className={`${s.author_avatar} ${s.whatsnew_avatar}`}><img src={noAvatar} alt="Avatar" /></div>
                 <WhatsNewForm onSubmit={props.whatsNewSubmit} />
             </div>
-            {props.postsMap(noAvatar)}
-            {/* <InfiniteScroll key={123} pageStart={1}
-                children=""
+            <InfiniteScroll pageStart={1}
+                children={props.postsMap(noAvatar)}
                 loadMore={() => props.loadPosts(props.currentPage + 1, 5)}
                 hasMore={isHasMore} initialLoad={true}
-                threshold={50} loader={<button
-                className={s.loadMore} 
-                onClick={e => props.loadPosts()}>Load more...</button>}/> */}
+                threshold={50}
+                loader={<button key={0} className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>} />
             {!isHasMore && <div className={s.all_caugth}>
                 <span>You're All Caught Up <i className="far fa-check-circle"></i></span>
                 <p>You've seen all new post from the past {props.lastPostTime}</p>
@@ -38,7 +36,7 @@ export const FeedBlock = (props) => {
     var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
     let [isLoading, disableLoading] = useState(true);
     let [isLikePressed, toggleLike] = useState(false);
-    let [likesCount, likeAction] = useState(isNaN(props.likesCount) ? 22 + Math.floor(Math.random() * 10): props.likesCount);
+    let [likesCount, likeAction] = useState(isNaN(props.likesCount) ? 22 + Math.floor(Math.random() * 10) : props.likesCount);
 
     let likePress = (e, id) => {
         let buttonIcon = e.currentTarget.children[0];

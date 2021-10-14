@@ -9,6 +9,14 @@ span.title {
     position: relative;
 }
 
+.user_data {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
 .last_seen {
     display: block;
     width: fit-content;
@@ -290,6 +298,7 @@ img.userlist_avatar {
 
 .message .userAvatar {
 width: 45px;
+height: 45px;
 border-radius: 50%;
 }
 
@@ -338,14 +347,6 @@ border-radius: 50%;
 .message_content {
     margin-left: 8px;
     width: 550px;
-}
-
-.user_data {
-    display: inline-block;
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 14px;
-    text-transform: capitalize;
 }
 
 .message_content > span {
