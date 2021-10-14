@@ -10,7 +10,7 @@ const LOAD_MORE_MESSAGES = 'soc-net-pjaw/dialogs-reducer/LOAD_MORE_MESSAGES';
 const USERS_INITIALIZED = 'soc-net-pjaw/dialogs-reducer/USERS_INITIALIZED';
 
 export const setFriends = (users) => ({ type: SET_FRIENDS, users });
-export const setCurrentUser = (id, name, avatar) => ({ type: SET_CURRENT_USER, data: { id, name, avatar } });
+export const setCurrentUser = (id, name, avatar, lastUserActivityDate) => ({ type: SET_CURRENT_USER, data: { id, name, avatar, lastUserActivityDate } });
 export const setConversationWithUser = (messages, messCount) => ({ type: GET_CONVERSATION, messages, messCount });
 export const messagesInitialized = (boolean) => ({ type: MESS_INITIALIZED, boolean });
 export const usersInitialized = (boolean) => ({ type: USERS_INITIALIZED, boolean });
@@ -108,7 +108,10 @@ export const getFriendsTC = () => {
         let users = response.map(r => ({
             id: r.id,
             name: r.userName,
-            avatar: (r.photos.small !== null) ? r.photos.small : '/images/avatars/def-avatar.png'
+            avatar: (r.photos.small !== null) ? r.photos.small : '/images/avatars/def-avatar.png',
+            lastUserActivityDate: r.lastUserActivityDate,
+            hasNewMessages: r.hasNewMessages,
+            newMessagesCount: r.newMessagesCount
         }));
         dispatch(setFriends(users));
     }
@@ -119,7 +122,7 @@ export const setCurrentUserTC = (idFromUrl, usersFromState) => {
     return async (dispatch) => {
         let checkFromState = await usersFromState.filter(r => r.id === parseInt(idFromUrl, 10));
         if (checkFromState.length === 1) {
-            dispatch(setCurrentUser(idFromUrl, checkFromState[0].name, checkFromState[0].avatar));
+            dispatch(setCurrentUser(idFromUrl, checkFromState[0].name, checkFromState[0].avatar, checkFromState[0].lastUserActivityDate));
         }
         else if (idFromUrl) {
             let r = await profileAPI.getUser(idFromUrl);

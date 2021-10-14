@@ -3,7 +3,6 @@ import Music from './Music';
 import { connect } from 'react-redux';
 import { setCurrentSongTC, toggleRepeatSong, setProgress } from '../../redux/audio-reducer';
 import s from "./Music.module.css";
-import { InputText } from '../common/FormControls/FormControls';
 
 class MusicContainer extends React.Component {
 

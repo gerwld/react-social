@@ -2,14 +2,15 @@ import moment from 'moment';
 import { NavLink } from 'react-router-dom';
 import s from './Dialogs.module.css';
 
-const Message = (props) => {
-    let userPic = props.avatar ? props.avatar : "/images/avatars/def-avatar.png";
+const Message = ({converListUser, ...props}) => {
     var time = moment(props.addedAt, "YYYY-MM-DD-h:mm").format("hh:mm A");
     var data = moment(props.addedAt, "YYYY-MM-DD-h:mm").format("(MMM Do)");
+    var isConverUser = props.senderId === parseInt(converListUser.id);
     return (
         <div key={props.id} className={s.message}>
             <NavLink to={`/profile/id${props.senderId}`}>
-                <img className={s.userAvatar} alt="User Avatar" src={userPic}/>
+            {isConverUser && <img className={s.userAvatar} alt="User Avatar" src={converListUser.avatar || "/images/avatars/def-avatar.png"}/>}
+            {!isConverUser && <img className={s.userAvatar} alt="Your avatar" src={false || "/images/avatars/def-avatar.png"}/>}
             </NavLink>
             <div className={s.message_content}>
             <NavLink to={`/profile/id${props.senderId}`}>
