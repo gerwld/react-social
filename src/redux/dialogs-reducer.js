@@ -8,6 +8,7 @@ const MESS_INITIALIZED = 'soc-net-pjaw/dialogs-reducer/MESS_INITIALIZED';
 const ADD_MESSAGE = 'soc-net-pjaw/dialogs-reducer/ADD_MESSAGE';
 const LOAD_MORE_MESSAGES = 'soc-net-pjaw/dialogs-reducer/LOAD_MORE_MESSAGES';
 const USERS_INITIALIZED = 'soc-net-pjaw/dialogs-reducer/USERS_INITIALIZED';
+const SET_AUTH_USER = 'soc-net-pjaw/dialogs-reducer/SET_AUTH_USER';
 
 export const setFriends = (users) => ({ type: SET_FRIENDS, users });
 export const setCurrentUser = (id, name, avatar, lastUserActivityDate) => ({ type: SET_CURRENT_USER, data: { id, name, avatar, lastUserActivityDate } });
@@ -16,6 +17,8 @@ export const messagesInitialized = (boolean) => ({ type: MESS_INITIALIZED, boole
 export const usersInitialized = (boolean) => ({ type: USERS_INITIALIZED, boolean });
 export const addMessage = (message) => ({ type: ADD_MESSAGE, message });
 export const loadMoreMessagesAC = (messages, messCount) => ({ type: LOAD_MORE_MESSAGES, messages, messCount });
+export const setAuthUser = (profile) => ({ type: SET_AUTH_USER, profile });
+
 
 
 let initialState = {
@@ -45,7 +48,8 @@ let initialState = {
     isMessagesLoaded: false,
     isUsersLoaded: false,
     currentUser: '',
-    totalMessCount: 0
+    totalMessCount: 0,
+    authProfile: null
 }
 
 const dialogsReducer = (state = initialState, action) => {
@@ -60,6 +64,12 @@ const dialogsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser: action.data
+            }
+        }
+        case SET_AUTH_USER: {
+            return {
+                ...state,
+                authProfile: action.profile
             }
         }
         case GET_CONVERSATION: {
@@ -100,6 +110,13 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
+export const getAuthUserData = (authId) => {
+    return async (dispatch) => {
+            let user = await profileAPI.getUser(authId);
+            dispatch(setAuthUser(user));
+            alert('get auth from API');
+        }
+    }
 
 export const getFriendsTC = () => {
     return async (dispatch) => {

@@ -75,7 +75,8 @@ class DialogsWindow extends React.Component {
                     scrollableTarget="scrollableDiv"
                     endMessage={<p className={s.loader_start}>Chat messages beginning.</p>}>
 
-                    {this.props.currentDialog.map(m => <Message converListUser={this.props.converListUser} {...m} />)}
+                    {this.props.currentDialog.map(m => <Message converListUser={this.props.converListUser}
+                    authProfile={this.props.authProfile} {...m} />)}
                 </InfiniteScroll>
             </div>
         )

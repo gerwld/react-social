@@ -1,10 +1,10 @@
 import moment from 'moment';
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, getConverstaionWithUser, usersInitialized } from '../../redux/dialogs-reducer';
+import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, getConverstaionWithUser, usersInitialized, getAuthUserData } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import s from './Dialogs.module.css';
 
@@ -22,6 +22,12 @@ class DialogsContainer extends React.Component {
         this.props.messagesInitialized(false);
 
         this.getFriendsAndSetCurrentUser();
+        //Check in state is there authProfile, if not get it from API
+        if(!this.props.authProfile){
+            if(!this.props.profile || this.props.profile.userId !== this.props.authId) {
+                this.props.getAuthUserData(this.props.authId);
+            }
+        }
     }
 
     componentDidUpdate(prevProps) {
@@ -56,7 +62,7 @@ class DialogsContainer extends React.Component {
         if(isShowOnline) {
             return <span className={s.online}>Online</span>
         } else if(!showOnlyIfOnline) {
-            return <>Last seen {lastOnline}</>
+            return <>Last seen {lastOnline !== "Invalid date" ? lastOnline : "a long time ago"}</>
         }
     }
 
@@ -86,6 +92,7 @@ class DialogsContainer extends React.Component {
                 currentPage={this.state.currentPage}
                 endDialogBlock={this.endDialogBlock}
                 getLastTimeOrShowOnline={this.getLastTimeOrShowOnline}
+                authProfile={this.props.authProfile || this.props.profile}
             />
         )
     }
@@ -99,14 +106,17 @@ let mapStateToProps = (state) => {
         isUsersLoaded: state.messagePage.isUsersLoaded,
         currentDialog: state.messagePage.messagesData,
         totalMessCount: state.messagePage.totalMessCount,
-        loadedUsers: state.messagePage.dialogsData
+        loadedUsers: state.messagePage.dialogsData,
+        authId: state.auth.userId,
+        authProfile: state.messagePage.authProfile,
+        profile: state.profilePage.profile,
     }
 }
 
 
 
 export default compose(
-    connect(mapStateToProps, { getFriendsTC, setCurrentUserTC, sendMessageToUser, messagesInitialized, getConverstaionWithUser, usersInitialized }),
+    connect(mapStateToProps, { getFriendsTC, setCurrentUserTC, sendMessageToUser, messagesInitialized, getConverstaionWithUser, usersInitialized, getAuthUserData }),
     withAuthRedirect,
     withRouter
 )(DialogsContainer)
