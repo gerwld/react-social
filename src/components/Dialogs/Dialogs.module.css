@@ -5,6 +5,77 @@ span.title {
     font-weight: bold;
 }
 
+.user_item {
+    position: relative;
+}
+
+.user_data {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
+.last_seen {
+    display: block;
+    width: fit-content;
+    margin: 4px auto 0;
+    color: var(--subhead-text);
+    font-size: 13px;
+    font-weight: normal;
+    text-transform: none;
+}
+
+.online {
+    position: relative;
+}
+
+.online::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: -10px; 
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgb(65, 190, 82);
+}
+
+.user_item .online {
+    position: absolute;
+    bottom: 10px;
+    left: 50px;
+    font-size: 0!important;
+}
+
+.user_item .online::after {
+    position: absolute;
+    width: 13.5px;
+    height: 13.5px;
+    border: 2px solid white;
+    font-size: 0!important;
+}
+
+.newMessagesCount {
+    position: absolute;
+    display: block;
+    padding: 1px 4px;
+    min-width: 22px;
+    color: white;
+    right: 15px;
+    top: calc(50% - 9px);
+    text-align: center;
+    font-size: 13.5px;
+    font-family: Helvetica;
+    line-height: 15.5px;
+    background-color: rgb(71, 151, 255);
+    border-radius: 10px;
+    border: 1.4px solid #4c6dc1;
+    box-sizing: border-box;
+}
+
 .btn_dialogs_scroll {
     position: absolute;
     width:100%;
@@ -133,7 +204,7 @@ span.title {
 .current_dialog {
     display: block;
     position: absolute;
-    padding: 20px;
+    padding: 11px 0;
     margin-left: -1px;
     width: calc(100% + 2px);
     height: 68px;
@@ -227,6 +298,7 @@ img.userlist_avatar {
 
 .message .userAvatar {
 width: 45px;
+height: 45px;
 border-radius: 50%;
 }
 
@@ -234,21 +306,36 @@ border-radius: 50%;
     display: flex;
     position: relative;
     margin: 0 20px;
-    padding: 15px 10px;
+    padding: 15px 30px;
     justify-content: flex-start;
     align-items: flex-start;
     border-bottom: 1px solid transparent;
 }
 
+.status {
+    position: absolute;
+    right: 97px;
+    bottom: 30px;
+    font-size: 13.2px;
+    color: #b7beca;
+}
+
+.viewed {
+    color:#9bc7ff;
+}
+
 .message_data {
     position: absolute;
     top: 15px;
-    right: 10px;
+    right: 30px;
     font-size: 12.7px;
     color: #919191;
+    text-align: right;
 }
 
 .message_data span {
+    display: block;
+    margin-top: 3px;
     color: #cccccc;
 }
 
@@ -258,16 +345,13 @@ border-radius: 50%;
 }
 
 .message_content {
-    margin-left: 10px;
+    margin-left: 8px;
+    width: 550px;
 }
 
-.user_data {
+.message_content > span {
     display: block;
-    margin-bottom: 4px;
-    font-weight: bold;
-    text-transform: capitalize;
 }
-
 
 .messageInput {
     display: flex;

@@ -36,7 +36,7 @@ class Profile extends React.Component {
               </div>}
             </div>
             <div className={`contact_buttons ${isInactiveBtn}`}>
-              <NavLink to={!isCurrentUserProfile && `/dialogs/id${this.props.urlUserId}`}>Write a message</NavLink>
+              <NavLink to={!isCurrentUserProfile ? `/dialogs/id${this.props.urlUserId}` : ""}>Write a message</NavLink>
               <button>Add to friends</button>
             </div>
           </div>
@@ -65,18 +65,18 @@ class Profile extends React.Component {
 
 const ProfileInfoForm = ({ profile, initialValues, ...props }) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form key="profileInfoForm" onSubmit={props.handleSubmit}>
       {props.error && <div>{props.error}</div>}
       <div className="profile-info-edit__content">
         <div className="profile-info__block profile-info__block_1">
-          {createField("Daniel", "name", [], InputText, "Name", { required: "true", className: "fullname_edit" }, 10)}
-          {createField("Hecker", "surname", [], InputText, "Surame", { required: "true", className: "fullname_edit" }, 11)}
+          {createField("Daniel", "name", [], InputText, "Name", { required: true, className: "fullname_edit" }, 10)}
+          {createField("Hecker", "surname", [], InputText, "Surame", { required: true, className: "fullname_edit" }, 11)}
           {createField("Tell something about you...", "aboutMe", [], Textarea, "About me", { className: "status_edit" }, 300)}
         </div>
 
         <div className="profile-info__block profile-info__block_2">
           <b className="title">Job</b>
-          <Field id="lookingAJob" component="input" name="lookingForAJob" type="checkbox" /><label className="lookingAJob_label" for="lookingAJob">Currently looking for a job</label>
+          <Field id="lookingAJob" component="input" name="lookingForAJob" type="checkbox" /><label className="lookingAJob_label" htmlFor="lookingAJob">Currently looking for a job</label>
           <Field component="textarea" name="lookingForAJobDescription" placeholder="Tell the world what you are good at..." className="lookingForJob_edit" />
         </div>
 

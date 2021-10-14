@@ -1,11 +1,10 @@
 import moment from "moment";
 import React from "react";
-import { MusicAnimation } from "../common/Preloader/Preloader";
 import s from "./Music.module.css";
-import { ProgressBar } from "./MusicContainer";
+import { MusicElement, ProgressBar } from "./MusicContainer";
+
 
 var audio = new Audio();
-
 class Music extends React.Component {
     state = {
         play: !audio.paused,
@@ -15,7 +14,7 @@ class Music extends React.Component {
     }
 
     componentDidMount() {
-        audio.addEventListener('ended', () => { this.repeatCurrentTrack(this.props.isRepeatSameTrack); });
+        audio.addEventListener('ended', () => { this.props.repeatCurrentTrack(this.props.isRepeatSameTrack, audio); });
         audio.addEventListener('loadedmetadata', (e) => { this.setState({ duration: e.target.duration }) });
         audio.disableRemotePlayback = true;
         audio.volume = this.state.volume;
@@ -23,20 +22,8 @@ class Music extends React.Component {
     }
 
     componentWillUnmount() {
-        audio.removeEventListener('ended', () => { this.repeatCurrentTrack(this.props.isRepeatSameTrack); });
+        audio.removeEventListener('ended', () => { this.props.repeatCurrentTrack(this.props.isRepeatSameTrack, audio); });
         audio.removeEventListener('loadedmetadata', (e) => { this.setState({ duration: e.target.duration }) });
-    }
-
-    repeatCurrentTrack = (isRepeatOne) => {
-        if (isRepeatOne) {
-            audio.currentTime = 0;
-            this.setState({ progress: 0 });
-            audio.play();
-        } else {
-            this.props.setCurrentSong(this.props.currendTrackId < 9 ? this.props.currendTrackId + 1 : 1);
-            audio.src = this.props.currentUrl;
-            audio.play();
-        }
     }
 
     onChangeVolume = (e, barLength) => {
@@ -48,16 +35,16 @@ class Music extends React.Component {
     }
 
     togglePlay = async (id) => {
-        let setPauseOrPlay = () => { this.state.play ? audio.play() : audio.pause(); }
+        let setPauseOrPlay = () => this.state.play ? audio.play() : audio.pause();
         let isChangeTrack = (id !== this.props.currendTrackId);
-        //if track changes - change url to new track, else check initial value and toggle play/pause
+        //if track changes - change url to new track, else - check initial value and toggle play/pause
         if (!isChangeTrack) {
             this.setState({ play: !this.state.play }, setPauseOrPlay);
             if (this.props.currendTrackId === null) {
                 await this.props.setCurrentSong(id);
                 audio.src = this.props.currentUrl;
                 this.setState({ nowPlayingId: id, progress: 1 });
-            };
+            }
         } else {
             await this.props.setCurrentSong(id);
             audio.src = this.props.currentUrl;
@@ -90,7 +77,7 @@ class Music extends React.Component {
                             <div className={s.music_element__album}>
                                 <img onError={i => i.target.style.display = 'none'} src={currentPlay.cover || ""} alt={`${currentPlay.artist} – ${currentPlay.name}.`} />
                             </div>
-                            
+
                             <div className={s.volume_slider} onClick={e => this.onChangeVolume(e, 80)}>
                                 <div className={s.volume_slider_bar} />
                                 <div className={s.volume_slider_progress} style={{ width: this.state.volume * 100 + '%' }} />
@@ -100,8 +87,8 @@ class Music extends React.Component {
                     </div>
 
                     {this.props.trackList.map(r =>
-                        <MusicElement id={r.id} name={r.name} authors={r.artist} cover={r.cover} showProgress={false} url={r.source} duration={r.duration}
-                            nowPlaying={this.state.play && this.props.currendTrackId} onPlayToggle={this.togglePlay} />)}
+                        <div key={r.name}><MusicElement id={r.id} name={r.name} authors={r.artist} cover={r.cover} showProgress={false} url={r.source} duration={r.duration}
+                            nowPlaying={this.state.play && this.props.currendTrackId} onPlayToggle={this.togglePlay} /></div>)}
                 </div>
                 <div className={`${s.searchbar_block} main-content-block`}>
 
@@ -112,33 +99,14 @@ class Music extends React.Component {
 }
 
 class CurrentTime extends React.Component {
-    state = { formatted: 0 }
-    componentDidMount() {
-        setInterval(() => { this.setState({ formatted: moment.utc(audio.currentTime * 1000).format('mm:ss') }) }, 250);
-    }
+    state = {formatted: 0}
+    progressTime = setInterval(() => { this.setState({ formatted: moment.utc(audio.currentTime * 1000).format('mm:ss') }) }, 250);
+
+    componentWillUnmount() { clearInterval(this.progressTime); }
     render() { return <div className={s.length_currentplay}>{this.state.formatted}</div> }
 }
 
 
-const MusicElement = ({ id, name, authors, cover, onPlayToggle, nowPlaying, duration }) => {
-    return (
-        <div key={id} className={`${s.music_element} ${nowPlaying === id && s.music_element__play}`} onClick={() => { onPlayToggle(id) }}>
-            <div className={s.music_cred}>
-                <span className={s.music_element__name}>{name}</span>
-                <span className={s.music_element__authors}>{authors}</span>
-            </div>
-            <span className={s.music_element__length}>{duration}</span>
-            <div className={s.music_element__album}>
-                <img onError={i => i.target.style.display = 'none'} src={cover || ""} alt={`${authors} – ${name}.`} />
-                <span className={s.anim_frame}><MusicAnimation /></span>
-            </div>
-            <div className={s.music_content__control}>
-                <button type="button">
-                    <i className={`fas ${s.play_icon} ${nowPlaying === id ? 'fa-stop' : 'fa-play'}`} />
-                </button>
-            </div>
-        </div>)
-}
 
 export default Music;
 

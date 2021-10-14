@@ -42,11 +42,11 @@ export const LoadingSpinner = () => {
 
 export const MusicAnimation = () => {
     return (
-        <div class={s.musAnim_loader}>
-            <span class={s.musAnim_strok} /><span class={s.musAnim_strok} />
-            <span class={s.musAnim_strok} /><span class={s.musAnim_strok} />
-            <span class={s.musAnim_strok} /><span class={s.musAnim_strok} />
-            <span class={s.musAnim_strok} />
+        <div className={s.musAnim_loader}>
+            <span className={s.musAnim_strok} /><span className={s.musAnim_strok} />
+            <span className={s.musAnim_strok} /><span className={s.musAnim_strok} />
+            <span className={s.musAnim_strok} /><span className={s.musAnim_strok} />
+            <span className={s.musAnim_strok} />
         </div>
     );
 }

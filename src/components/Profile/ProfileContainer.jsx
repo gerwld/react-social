@@ -3,10 +3,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 import { getUserInfo, setUserProfile, setUserStatus, setUserAvatar, setCurrentSettingsTC } from '../../redux/profile-reducer';
-import { useHistory, withRouter } from 'react-router';
+import { withRouter } from 'react-router';
 import { getAuthUserDataTC } from '../../api/api';
 import { change } from 'redux-form';
-// import { browserHistory } from 'react-router'
 
 
 class ProfileContainerAPI extends React.Component {
@@ -39,7 +38,7 @@ class ProfileContainerAPI extends React.Component {
   }
 
   onHandleAvatar = async (e) => {
-    if(e.target.files.length){
+    if (e.target.files.length) {
       this.props.setUserAvatar(e.target.files[0]);
     }
   }
@@ -56,25 +55,21 @@ class ProfileContainerAPI extends React.Component {
   }
 
   componentDidMount() {
-    let userId =  this.props.match.params.userId;
-    if (!userId) {
-    userId = this.props.authUserId || this.props.history.push("/login");
-    }
+    let userId = this.props.match.params.userId;
+    if (!userId) { userId = this.props.authUserId || this.props.history.push("/login") }
     this.props.getUserInfo(userId);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.status !== this.props.status) {
-      this.setState({
-        status: this.props.status
-      })
+      this.setState({ status: this.props.status })
     }
     if (prevProps.authUserId !== this.props.authUserId && !this.props.authUserId) {
       this.props.history.push("/login");
     }
     let currentIdFromUrl = this.props.match.params.userId;
-    if(currentIdFromUrl !== prevProps.match.params.userId) {
-      if(currentIdFromUrl){
+    if (currentIdFromUrl !== prevProps.match.params.userId) {
+      if (currentIdFromUrl) {
         this.props.getUserInfo(currentIdFromUrl);
       } else {
         this.props.getUserInfo(this.props.authUserId);
@@ -85,11 +80,11 @@ class ProfileContainerAPI extends React.Component {
   render() {
     return (
       <Profile profile={this.props.profile} authUserId={this.props.authUserId} statusEditMode={this.state.statusEditMode}
-        activateEdit={this.activateEditmode} deactivateEdit={this.deactivateEditmode} status={this.state.status} statusGlobal={this.props.status} 
+        activateEdit={this.activateEditmode} deactivateEdit={this.deactivateEditmode} status={this.state.status} statusGlobal={this.props.status}
         inputValue={this.statusInputRef} editInput={this.editInput} urlUserId={this.props.match.params.userId} onHandleAvatar={this.onHandleAvatar}
         isEditMode={this.props.match.params.status === "edit_settings"} handleShowClick={this.handleShowClick} isShowMore={this.state.isShowMore}
         onSettingsSubmit={this.onSettingsChange} postDataLength={this.props.postDataLength}
-       />
+      />
     )
   }
 }

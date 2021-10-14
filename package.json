@@ -12,6 +12,7 @@
     "axios": "^0.22.0",
     "bootstrap": "^5.1.2",
     "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.26.1",
     "immer": "^9.0.6",
     "moment": "^2.29.1",
     "npm": "^8.0.0",
@@ -40,6 +41,7 @@
   },
   "eslintConfig": {
     "extends": [
+      "plugin:react/recommended",
       "react-app",
       "react-app/jest"
     ]
