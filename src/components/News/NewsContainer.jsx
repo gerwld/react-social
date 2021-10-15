@@ -5,11 +5,21 @@ import { connect } from 'react-redux';
 import Preloader from '../common/Preloader/Preloader';
 import moment from 'moment';
 import { getAuthUserData } from '../../redux/profile-reducer';
+import { change, getFormValues } from 'redux-form';
 
 class NewsContainer extends React.Component {
 
     componentDidMount() {
         this.props.loadPostsTC(this.props.nextPage, this.props.pageSize);
+    }
+
+    addValueToMessage = (value) => {
+        let message = this.props.currentComment;
+        if(message){
+            this.props.change('addCommentFeed', "comment", message.comment + value);
+        } else {
+            this.props.change('addCommentFeed', "comment", value);
+        }
     }
 
     whatsNewSubmit = async (data) => {
@@ -37,7 +47,7 @@ class NewsContainer extends React.Component {
 
     postsMap = (noAvatar) => {
         return this.props.posts.map(post => {
-            return <div key={post.publishedAt}><FeedBlock postId={post.postId} id={post.source.id} text={post.title}
+            return <div key={post.publishedAt}><FeedBlock addValueToMessage={this.addValueToMessage} postId={post.postId} id={post.source.id} text={post.title}
                 avatar={post.avatar} nv={noAvatar} author={post.source.name} data={post.publishedAt}
                 postLink={post.url} likesCount={post.likesCount} img={post.urlToImage}
                 isAuthPost={post.source.id === this.props.authId} deletePost={this.props.deletePost} /></div>
@@ -67,7 +77,9 @@ var mapStateToProps = (state) => {
         profile: state.profilePage.profile,
         authProfile: state.profilePage.authProfile,
         authId: state.auth.userId,
+        currentComment: getFormValues("addCommentFeed")(state)
     }
 }
 
-export default connect(mapStateToProps, { loadPostsTC, addNewPostTC, getAuthUserData, deletePost })(NewsContainer);
+
+export default connect(mapStateToProps, { loadPostsTC, addNewPostTC, getAuthUserData, deletePost, change })(NewsContainer);

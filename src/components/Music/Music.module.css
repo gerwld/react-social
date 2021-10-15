@@ -12,10 +12,6 @@ span.title {
   transition: 0.2s ;
 }
 
-/* .progress_bar_buffered {
-  transition: 1.5s ;
-} */
-
   .music_content {
       display: grid;
       grid-gap: 30px 15px;
@@ -25,9 +21,9 @@ span.title {
   .music_content_block {
     position: relative;
     max-height: 770px;
-    min-height: 650px;
+    min-height: 760px;
     padding-bottom: 30px;
-    padding-top: 110px;
+    padding-top: 95px;
     user-select: none;
   }
 
@@ -59,7 +55,7 @@ span.title {
 
   .progress_bar {
     width: 100%;
-    border-bottom: 3px solid rgb(214, 214, 214);
+    border-bottom: 3px solid #E7E8EC;
     border-radius: 10px;
     z-index: 1;
   }
@@ -69,7 +65,7 @@ span.title {
     min-width: 2px;
     width: 2px;
     top: 4px;
-    background-color: rgb(73, 84, 148);
+    background-color:#5382B6;
     z-index: 3;
   }
 
@@ -78,7 +74,7 @@ span.title {
     min-width: 2px;
     width: 2px;
     top: 4px;
-    background-color: rgb(182, 182, 182);
+    background-color: #D3D9DE;
     z-index: 2;
     animation: buffer 0.25s;
   }
@@ -182,8 +178,13 @@ span.title {
     overflow: hidden;
   }
 
-  .music_element:active > .music_content__control i {
+  .music_content__control i {
+    font-size: inherit!important;
+  }
+
+  .music_element:active > .music_content__control button {
     font-size: 22px;
+
   }
 
   .music_element {
@@ -246,8 +247,8 @@ span.title {
   }
 
   .anim_frame {
-    display: block;
-    opacity: 0;
+    display: none;
+    opacity: 1;
     position: absolute;
   }
 
@@ -256,7 +257,7 @@ span.title {
   }
 
   .music_element__play .anim_frame {
-    opacity: 1;
+    display: block;
   }
 
   .music_element__play:hover .anim_frame {
@@ -288,9 +289,11 @@ span.title {
   .music_element_currentplay .repeat_song {
     position: relative;
     order: 2;
+    font-size: 21px;
+    line-height: 1px;
     margin: 0 10px;
     padding: 5px;
-    color: rgb(59, 77, 136);
+    color: #5382B6;
     cursor: pointer;
   }
   .music_element_currentplay .music_progress {
@@ -306,26 +309,15 @@ span.title {
 
   .volume_slider_bar {
     width: 100%;
-    background-color: #d6d6d6;
+    background-color: #E7E8EC;
     z-index: 1;
   }
 
   .volume_slider_progress {
     width: 50%;
-    background-color: rgb(73, 84, 148);
+    background-color: #5382B6;
     z-index: 2;
     margin-top: -3px;
-  }
-
-  .repeat_song span {
-    position: absolute;
-    bottom: 9px;
-    left: 10px;
-    font-size: 8px;
-    font-weight: 600;
-    user-select: none;
-    z-index: 0;
-    cursor: pointer;
   }
 
   .length_currentplay {

@@ -13,6 +13,15 @@ export const Textarea = ({ input, meta, ...props }) => {
     )
 }
 
+export const Textarea_100 = ({ input, meta, height, ...props }) => {
+    const hasError = meta.touched && meta.error && meta.submitFailed;
+    return (
+        <div className={s.form_control + " " + (hasError ? s.error : null)}>
+                <textarea style={{height: height}} {...input} {...props} />
+        </div>
+    )
+}
+
 export const InputText = ({ input, meta, ...props }) => {
     const hasError = meta.touched && meta.error && meta.submitFailed;
     return (

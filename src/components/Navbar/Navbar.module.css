@@ -19,11 +19,10 @@
 }
 
 .app_navbar {
-    padding: 15px;
-    padding-left: 15px;
+    padding: 15px 15px 50px;
     background-color: #4c6dc1;
-    height: 280px;
-    border-radius: 5px;
+    height: fit-content;
+    border-radius: var(--border-radius-ui);
   }
   
   .app_navbar ul {
