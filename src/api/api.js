@@ -8,7 +8,7 @@ const instance = axios.create({
     headers: {
         "API-KEY": "781b8b79-ffcd-41da-9a0b-a1374f504632"
     },
-    baseURL: "https://social-network.samuraijs.com/api/1.0/"
+    baseURL: "https://immense-forest-91899.herokuapp.com/https://social-network.samuraijs.com/api/1.0/"
 });
 
 // Proxy for CORS: https://immense-forest-91899.herokuapp.com/
@@ -87,7 +87,7 @@ export const authAPI = {
 
 export const entertaimentAPI = {
     getPosts(currPage, serving = 3) {
-        return axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
+        return axios.get(`https://immense-forest-91899.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
     }
 }
 // a8cc646b8aab472e8166be569667bd5e
