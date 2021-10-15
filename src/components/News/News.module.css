@@ -34,10 +34,6 @@
     grid-row-end: 3;
 }
 
-.navbar_wrapper_action .navbar {
-    margin-left: calc(1030px - 365px);
-}
-
 .main_content {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -51,10 +47,21 @@
     margin: 0 auto; 
     top:5px;
 }
-
-.hide_content {
-    overflow: hidden;
+.navbar_wrapper_action .navbar {
+    margin-left: calc(1030px - 365px);
 }
+
+@media only screen and (max-width: 1200px) {
+    .navbar_wrapper_action {
+        width: auto; 
+        position: unset;
+        margin: 0; 
+        top:0;
+    }
+    .navbar_wrapper_action .navbar {
+        margin-left: 0;
+    }
+  }
 
 .hide_content > * {
     filter: blur(15px);

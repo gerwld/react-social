@@ -39,7 +39,7 @@
 
 .app-wrapper {
   width: 1200px;
-  padding: 0 20px;
+  padding: 0;
   /* padding-left: calc(100vw - 100% + 20px); */
   margin: 0 auto;
   box-sizing: content-box;
