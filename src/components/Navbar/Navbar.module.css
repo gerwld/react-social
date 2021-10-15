@@ -22,7 +22,7 @@
     padding: 15px;
     padding-left: 15px;
     background-color: #4c6dc1;
-    height: 400px;
+    height: 280px;
     border-radius: 5px;
   }
   
@@ -35,7 +35,7 @@
     position: relative;
     display: inline-block;
     display: block;
-    margin: 7px 0;
+    margin: 9px 0;
   }
   
   .app_navbar a {
