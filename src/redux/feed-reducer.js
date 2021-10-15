@@ -1,19 +1,22 @@
 import { entertaimentAPI } from '../api/api';
 import moment from 'moment';
+import { reset } from 'redux-form';
 
 
 const LOAD_POSTS = 'soc-net-pjaw/feed-reducer/LOAD_POSTS';
 const ADD_POST = 'soc-net-pjaw/feed-reducer/ADD_POST';
 const LAST_POST_DATE = 'soc-net-pjaw/feed-reducer/LAST_POST_DATE';
+const DELETE_POST = 'soc-net-pjaw/feed-reducer/DELETE_POST';
 
 export const loadPosts = (posts) => ({ type: LOAD_POSTS, posts });
 export const addLastPostDate = (date) => ({ type: LAST_POST_DATE, date });
 export const addNewPost = (postData) => ({ type: ADD_POST, postData });
+export const deletePost = (postId) => ({ type: DELETE_POST, postId });
 
 let initialState = {
     posts: [],
     nextPage: 1,
-    pageSize: 5,
+    pageSize: 3,
     lastPostDate: ""
 }
 
@@ -35,6 +38,11 @@ const feedReducer = (state = initialState, action) => {
                 ...state,
                 posts: [action.postData, ...state.posts]
             }
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(post => post.postId !== action.postId)
+            }
         default:
             return state;
     }
@@ -49,6 +57,11 @@ export const loadPostsTC = (nextPage, pageSize) => {
     }
 }
 
-
+export const addNewPostTC = (postData) => {
+    return (dispatch) => {
+        dispatch(addNewPost(postData));
+        dispatch(reset('whatsNewFeed'));
+    }
+}
 
 export default feedReducer;

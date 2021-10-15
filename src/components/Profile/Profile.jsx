@@ -8,7 +8,6 @@ import avatarCheck from '../../utils/validators/avatarCheck';
 import { createField, InputText, Textarea } from '../common/FormControls/FormControls';
 import { Field, reduxForm } from 'redux-form';
 
-
 class Profile extends React.Component {
 
   render() {
@@ -20,8 +19,6 @@ class Profile extends React.Component {
       var isInactiveBtn = isCurrentUserProfile && 'inactive_btn';
       var isEditMode = this.props.isEditMode;
       let fullNameSplit = this.props.profile.fullName.split(/[\s,]+/);
-      let nameSplitted = fullNameSplit[0];
-      let surnameSplitted = fullNameSplit[1];
 
       return (
         <div className="profile-page">
@@ -53,7 +50,7 @@ class Profile extends React.Component {
               status={this.props.status} editInput={this.props.editInput} postDataLength={this.props.postDataLength} />}
 
             {isEditMode &&
-              <ProfileInfoFormRedux initialValues={{ name: nameSplitted, surname: surnameSplitted, ...this.props.profile }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
+              <ProfileInfoFormRedux initialValues={{ name: fullNameSplit[0], surname: fullNameSplit[1], ...this.props.profile }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
           </div>
           <MyPostsContainer />
         </div>

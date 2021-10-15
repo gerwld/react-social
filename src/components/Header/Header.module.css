@@ -6,7 +6,8 @@
     padding: 17px 15px;
     background-color: #4c6dc1;
     /* margin-top: 10px; */
-    border-radius: 5px;
+    border-radius: var(--border-radius-ui);
+    z-index: 100;
   }
   
   .app_header img {

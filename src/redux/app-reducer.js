@@ -8,7 +8,7 @@ export const setInitializingSuccess = () => ({type: SET_INITIALIZING});
 
 
 let initialState = {
-    initialized: false
+    initialized: false,
 };
 
 const appReducer = (state = initialState, action) => {

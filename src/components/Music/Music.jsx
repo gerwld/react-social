@@ -2,6 +2,8 @@ import moment from "moment";
 import React from "react";
 import s from "./Music.module.css";
 import { MusicElement, ProgressBar } from "./MusicContainer";
+import { MdOutlineRepeat, MdOutlineRepeatOne} from "react-icons/md";
+
 
 
 var audio = new Audio();
@@ -82,7 +84,7 @@ class Music extends React.Component {
                                 <div className={s.volume_slider_bar} />
                                 <div className={s.volume_slider_progress} style={{ width: this.state.volume * 100 + '%' }} />
                             </div>
-                            <div className={s.repeat_song} onClick={this.props.toggleRepeat}><i className="fa-solid fa-repeat" /> {this.props.isRepeatSameTrack && <span>1</span>}</div>
+                            <div className={s.repeat_song} onClick={this.props.toggleRepeat}>{this.props.isRepeatSameTrack ? <MdOutlineRepeatOne /> : <MdOutlineRepeat />}</div>
                         </div>
                     </div>
 

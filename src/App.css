@@ -39,13 +39,13 @@
 
 .app-wrapper {
   width: 1200px;
-  padding: 0 20px;
-  padding-left: calc(100vw - 100% + 20px);
+  padding: 0;
+  /* padding-left: calc(100vw - 100% + 20px); */
   margin: 0 auto;
   box-sizing: content-box;
   display: grid;
   grid-gap: var(--gap-between-blocks-s);
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 150px 1030px;
 }
 
 .app-content {

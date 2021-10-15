@@ -28,7 +28,7 @@ let initialState = {
     totalUsers: 3,
     isFetching: true,
     isFollowing: [],
-    pageSize: 6,
+    pageSize: 7,
     currentPage: 1,
     allPages: 1,
     pagLength: 5,
