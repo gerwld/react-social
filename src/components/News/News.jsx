@@ -37,7 +37,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, ...props }) => {
     let [isLoading, disableLoading] = useState(true);
     let [isHide, hideContent] = useState(false);
     let [isLikePressed, toggleLike] = useState(false);
-    let [likesCount, likeAction] = useState(isNaN(props.likesCount) ? 22 + Math.floor(Math.random() * 10) : props.likesCount);
+    let [likesCount, likeAction] = useState(isNaN(props.likesCount) ? (22 + Math.floor(Math.random() * 10)) : props.likesCount);
     let [isShowSet, toggleSet] = useState(false);
 
     let likePress = (e, id) => {
@@ -103,44 +103,38 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, ...props }) => {
     )
 }
 
-const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId, ...props }) => {
-    //Almost all here is hardcoded, so actions road is also simple
-    let propertiesGlobal = [
+const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId }) => {
+    //Almost all here is hardcoded, so actions road is also simple.
+    let dropDown = [
         { id: 'hide', name: "Not show post's from this group", onClick: () => hideContent(true), icon: "fa-solid fa-eye-slash" },
         { id: 'report', name: "Report problem", onClick: (e) => e, icon: "fa-solid fa-circle-exclamation" },
         { id: 'why', name: "Why am i seeing this content?", onClick: (e) => e, icon: "fa-solid fa-circle-question" },
     ];
-    let authProp = [
+    let dropDownAuthor = [
         { id: 'delete', name: "Delete post", onClick: () =>  setTimeout(() => deletePost(postId), 200), icon: "fa-solid fa-trash" },
         { id: 'edit', name: "Edit post", onClick: (e) => e, icon: "fa-solid fa-edit" },
         { id: 'report', name: "Report problem", onClick: (e) => e, icon: "fa-solid fa-circle-exclamation" }
     ];
-    let set = propertiesGlobal;
-    if (isAuthor) {
-        set = authProp;
-    }
-    return (
-        <div className={s.dropdown_menu}>
+    let set = isAuthor ? dropDownAuthor : dropDown;
+
+    return (<div className={s.dropdown_menu}>
             <ul>
                 {set.map(prop => <li key={prop.id} onClick={(id) => prop.onClick(id)}>
                     {prop.icon && <i className={`${prop.icon} ${s.icons}`} />}
                     <span>{prop.name}</span>
                 </li>)}
             </ul>
-        </div>
-    );
+        </div>);
 }
 
 const WhatsNew = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
+    return <form onSubmit={props.handleSubmit}>
             <div className={s.whatsnew_field}>
                 <Field component="textarea" name="postData" placeholder="What's going on?" />
                 <button className={s.clipFile} type="button"><i className="fa fa-camera"></i></button>
             </div>
             <button className={s.send} type="submit"><i className="fa fa-paper-plane"></i></button>
         </form>
-    )
 }
 
 const WhatsNewForm = reduxForm({ form: "whatsNewFeed" })(WhatsNew);
