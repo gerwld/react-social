@@ -6,6 +6,8 @@ import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroller';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
+import ButtonBase from '@mui/material/ButtonBase'
+import Foco from 'react-foco';
 
 const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
@@ -17,11 +19,9 @@ const News = (props) => {
                 <div className={`${s.author_avatar} ${s.whatsnew_avatar}`}><img src={noAvatar} alt="Avatar" /></div>
                 <WhatsNewForm onSubmit={props.whatsNewSubmit} />
             </div>
-            <InfiniteScroll pageStart={1}
-                children={props.postsMap(noAvatar)}
+            <InfiniteScroll pageStart={1} children={props.postsMap(noAvatar)}
                 loadMore={() => props.loadPosts(props.currentPage + 1, 5)}
-                hasMore={isHasMore} initialLoad={true}
-                threshold={50}
+                hasMore={isHasMore} initialLoad={true} threshold={50}
                 loader={<button key={0} className={s.loadMore} onClick={e => props.loadPosts()}>Load more...</button>} />
             {!isHasMore && <div className={s.all_caugth}>
                 <span>You're All Caught Up <i className="far fa-check-circle"></i></span>
@@ -32,28 +32,33 @@ const News = (props) => {
     )
 }
 
-export const FeedBlock = (props) => {
+export const FeedBlock = ({ isAuthPost, ...props }) => {
     var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
     let [isLoading, disableLoading] = useState(true);
+    let [isHide, hideContent] = useState(false);
     let [isLikePressed, toggleLike] = useState(false);
     let [likesCount, likeAction] = useState(isNaN(props.likesCount) ? 22 + Math.floor(Math.random() * 10) : props.likesCount);
+    let [isShowSet, toggleSet] = useState(false);
 
     let likePress = (e, id) => {
         let buttonIcon = e.currentTarget.children[0];
         //TODO change after to send request with id => get response, then change local state
+        toggleLike(!isLikePressed);
         if (isLikePressed) {
-            toggleLike(false);
             likeAction(likesCount - 1);
             buttonIcon.className = "far fa-heart";
         } else {
-            toggleLike(true);
             likeAction(likesCount + 1);
             buttonIcon.className = `fa fa-heart ${s.like_pressed}`;
         }
     }
 
     return (
-        <div className={`${s.feed__main_block} main-content-block`}>
+        <div className={`${s.feed__main_block} ${isHide && s.hide_content} main-content-block`}>
+            {isHide && <div className={s.hide_content_block}>
+                <span>Posts from this source have been removed from the feed.</span>
+                <button onClick={() => hideContent(false)}>Cancel</button>
+                </div>}
             <div className={s.block_author}>
                 <div className={s.author_avatar}>
                     {props.avatar ? <img src={props.avatar} alt="Author avatar" /> : <img src={props.nv} alt="Author avatar" />}
@@ -68,17 +73,9 @@ export const FeedBlock = (props) => {
                 {props.img &&
                     <div className={`${s.post_image} ${s.load_wrapper}`}>
                         <a href={props.postLink} target="_blank" rel="noreferrer">
-                            <LazyLoadImage
-                                // height="330px"
-                                effect="opacity"
-                                width="570px"
-                                src={props.img}
-                                threshold={1}
-                                delayMethod='false'
-                                alt="Post img"
-                                wrapperClassName={s.imageSpanWrap}
-                                afterLoad={() => disableLoading(false)}
-                                onError={i => i.target.style.display = 'none'} />
+                            <LazyLoadImage effect="opacity" width="570px" src={props.img}
+                                threshold={1} delayMethod='false' alt="Post img" wrapperClassName={s.imageSpanWrap}
+                                afterLoad={() => disableLoading(false)} onError={i => i.target.style.display = 'none'} />
                         </a>
                         {isLoading && <div className={s.load_activity}></div>}
                     </div>}
@@ -97,10 +94,40 @@ export const FeedBlock = (props) => {
                 </div>
             </div>
             <div className={s.control_buttons}>
-                <button ><i className="fas fa-ellipsis-h"></i></button>
+                <Foco onClickOutside={() => toggleSet(false)}>
+                    <ButtonBase children={<button onClick={() => toggleSet(!isShowSet)}><i className="fas fa-ellipsis-h"></i></button>} />
+                    {isShowSet && <DropDownMenu isAuthor={isAuthPost} hideContent={hideContent}/>}
+                </Foco>
             </div>
         </div>
     )
+}
+
+const DropDownMenu = ({ isAuthor, hideContent, ...props }) => {
+    let propertiesGlobal = [
+        { id: 'hide', name: "Not show post's from this group", onClick: () => hideContent(true), icon: "fa-solid fa-eye-slash" },
+        { id: 'report', name: "Report problem", onClick: (e) => e, icon: "fa-solid fa-circle-exclamation" },
+        { id: 'why', name: "Why am i seeing this content?", onClick: (e) => e, icon: "fa-solid fa-circle-question" },
+    ];
+    let authProp = [
+        { id: 'delete', name: "Delete post", onClick: (e) => e, icon: "fa-solid fa-trash" },
+        { id: 'edit', name: "Edit post", onClick: (e) => e, icon: "fa-solid fa-edit" },
+        { id: 'report', name: "Report problem", onClick: (e) => e, icon: "fa-solid fa-circle-exclamation" }
+    ];
+    let set = propertiesGlobal;
+    if (isAuthor) {
+        set = authProp;
+    }
+    return (
+        <div className={s.dropdown_menu}>
+            <ul>
+                {set.map(prop => <li key={prop.id} onClick={(id) => prop.onClick(id)}>
+                    {prop.icon && <i className={`${prop.icon} ${s.icons}`} />}
+                    <span>{prop.name}</span>
+                </li>)}
+            </ul>
+        </div>
+    );
 }
 
 const WhatsNew = (props) => {

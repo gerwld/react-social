@@ -13,7 +13,7 @@ export const addNewPost = (postData) => ({ type: ADD_POST, postData });
 let initialState = {
     posts: [],
     nextPage: 1,
-    pageSize: 5,
+    pageSize: 3,
     lastPostDate: ""
 }
 

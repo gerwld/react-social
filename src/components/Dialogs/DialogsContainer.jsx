@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, getConverstaionWithUser, usersInitialized, getAuthUserData } from '../../redux/dialogs-reducer';
+import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, getConverstaionWithUser, usersInitialized } from '../../redux/dialogs-reducer';
+import { getAuthUserData } from '../../redux/profile-reducer';
 import Dialogs from './Dialogs';
 import s from './Dialogs.module.css';
 
@@ -22,12 +23,12 @@ class DialogsContainer extends React.Component {
         this.props.messagesInitialized(false);
 
         this.getFriendsAndSetCurrentUser();
-        //Check in state is there authProfile, if not get it from API
+        //Check in state is there authProfile, if not - get it from API
         if(!this.props.authProfile){
             if(!this.props.profile || this.props.profile.userId !== this.props.authId) {
                 this.props.getAuthUserData(this.props.authId);
             }
-        }
+        } 
     }
 
     componentDidUpdate(prevProps) {
@@ -108,7 +109,7 @@ let mapStateToProps = (state) => {
         totalMessCount: state.messagePage.totalMessCount,
         loadedUsers: state.messagePage.dialogsData,
         authId: state.auth.userId,
-        authProfile: state.messagePage.authProfile,
+        authProfile: state.profilePage.authProfile,
         profile: state.profilePage.profile,
     }
 }

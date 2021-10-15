@@ -4,6 +4,7 @@ import { loadPostsTC, addNewPost } from '../../redux/feed-reducer';
 import { connect } from 'react-redux';
 import Preloader from '../common/Preloader/Preloader';
 import moment from 'moment';
+import { getAuthUserData } from '../../redux/profile-reducer';
 
 class NewsContainer extends React.Component {
     
@@ -11,11 +12,20 @@ class NewsContainer extends React.Component {
         this.props.loadPostsTC(this.props.nextPage, this.props.pageSize);
     }
 
-    whatsNewSubmit = (data) => {
+    whatsNewSubmit = async (data) => {
+        if(!this.props.authProfile){
+            if(!this.props.profile || this.props.profile.userId !== this.props.authId) {
+                await this.props.getAuthUserData(this.props.authId);
+            } 
+        } 
+        let profile = this.props.authProfile || this.props.profile;
+        
         this.props.addNewPost({
             "source": {
-                "name": this.props.authUserName
+                "id": profile.userId,
+                "name": profile.fullName,
               },
+              "avatar": profile.photos.small,
               "title": data.postData,
               "publishedAt": moment(),
               "likesCount": 0
@@ -24,9 +34,10 @@ class NewsContainer extends React.Component {
 
     postsMap = (noAvatar) => {
        return this.props.posts.map(post => {
-            return <div key={post.publishedAt}><FeedBlock text={post.title} avatar={post.avatar} nv={noAvatar}
-                author={post.source.name} data={post.publishedAt} img={post.urlToImage}
-                postLink={post.url} likesCount={post.likesCount} /></div>
+            return <div key={post.publishedAt}><FeedBlock id={post.source.id} text={post.title} 
+                avatar={post.avatar} nv={noAvatar} author={post.source.name} data={post.publishedAt}
+                postLink={post.url} likesCount={post.likesCount} img={post.urlToImage}
+                isAuthPost={post.source.id === this.props.authId}/></div>
         })
     }
    
@@ -52,8 +63,11 @@ var mapStateToProps = (state) => {
         lastPostDate: state.feed.lastPostDate,
         nextPage: state.feed.nextPage,
         pageSize: state.feed.pageSize,
-        authUserName: state.auth.login
+        authUserName: state.auth.login,
+        profile: state.profilePage.profile,
+        authProfile: state.profilePage.authProfile,
+        authId: state.auth.userId
     }
 }
 
-export default connect(mapStateToProps, {loadPostsTC, addNewPost})(NewsContainer);
+export default connect(mapStateToProps, {loadPostsTC, addNewPost, getAuthUserData})(NewsContainer);
