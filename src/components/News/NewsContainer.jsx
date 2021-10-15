@@ -1,6 +1,6 @@
 import React from 'react'
 import News, { FeedBlock } from './News';
-import { loadPostsTC, addNewPost } from '../../redux/feed-reducer';
+import { loadPostsTC, addNewPost, deletePost, addNewPostTC } from '../../redux/feed-reducer';
 import { connect } from 'react-redux';
 import Preloader from '../common/Preloader/Preloader';
 import moment from 'moment';
@@ -20,7 +20,8 @@ class NewsContainer extends React.Component {
         } 
         let profile = this.props.authProfile || this.props.profile;
         
-        this.props.addNewPost({
+        this.props.addNewPostTC({
+            "postId": profile.fullName + moment().format(),
             "source": {
                 "id": profile.userId,
                 "name": profile.fullName,
@@ -34,10 +35,10 @@ class NewsContainer extends React.Component {
 
     postsMap = (noAvatar) => {
        return this.props.posts.map(post => {
-            return <div key={post.publishedAt}><FeedBlock id={post.source.id} text={post.title} 
+            return <div key={post.publishedAt}><FeedBlock postId={post.postId} id={post.source.id} text={post.title} 
                 avatar={post.avatar} nv={noAvatar} author={post.source.name} data={post.publishedAt}
                 postLink={post.url} likesCount={post.likesCount} img={post.urlToImage}
-                isAuthPost={post.source.id === this.props.authId}/></div>
+                isAuthPost={post.source.id === this.props.authId} deletePost={this.props.deletePost}/></div>
         })
     }
    
@@ -70,4 +71,4 @@ var mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {loadPostsTC, addNewPost, getAuthUserData})(NewsContainer);
+export default connect(mapStateToProps, {loadPostsTC, addNewPostTC, getAuthUserData, deletePost})(NewsContainer);

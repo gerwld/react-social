@@ -32,7 +32,7 @@ const News = (props) => {
     )
 }
 
-export const FeedBlock = ({ isAuthPost, ...props }) => {
+export const FeedBlock = ({ isAuthPost, postId, deletePost, ...props }) => {
     var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
     let [isLoading, disableLoading] = useState(true);
     let [isHide, hideContent] = useState(false);
@@ -96,21 +96,22 @@ export const FeedBlock = ({ isAuthPost, ...props }) => {
             <div className={s.control_buttons}>
                 <Foco onClickOutside={() => toggleSet(false)}>
                     <ButtonBase children={<button onClick={() => toggleSet(!isShowSet)}><i className="fas fa-ellipsis-h"></i></button>} />
-                    {isShowSet && <DropDownMenu isAuthor={isAuthPost} hideContent={hideContent}/>}
+                    {isShowSet && <DropDownMenu postId={postId} isAuthor={isAuthPost} hideContent={hideContent} deletePost={deletePost}/>}
                 </Foco>
             </div>
         </div>
     )
 }
 
-const DropDownMenu = ({ isAuthor, hideContent, ...props }) => {
+const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId, ...props }) => {
+    //Almost all here is hardcoded, so actions road is also simple
     let propertiesGlobal = [
         { id: 'hide', name: "Not show post's from this group", onClick: () => hideContent(true), icon: "fa-solid fa-eye-slash" },
         { id: 'report', name: "Report problem", onClick: (e) => e, icon: "fa-solid fa-circle-exclamation" },
         { id: 'why', name: "Why am i seeing this content?", onClick: (e) => e, icon: "fa-solid fa-circle-question" },
     ];
     let authProp = [
-        { id: 'delete', name: "Delete post", onClick: (e) => e, icon: "fa-solid fa-trash" },
+        { id: 'delete', name: "Delete post", onClick: () =>  setTimeout(() => deletePost(postId), 200), icon: "fa-solid fa-trash" },
         { id: 'edit', name: "Edit post", onClick: (e) => e, icon: "fa-solid fa-edit" },
         { id: 'report', name: "Report problem", onClick: (e) => e, icon: "fa-solid fa-circle-exclamation" }
     ];
