@@ -32,8 +32,10 @@ class App extends React.Component {
       return <MainPreloader />
     }
 
-    return (<div className="app-wrapper">
-      <HeaderContainer />
+    return (
+    <>
+    <HeaderContainer />
+    <div className="app-wrapper">
       {!this.props.location.pathname.match('/login') && !this.props.location.pathname.match('/error-404') && <Navbar />}
       <div className="app-content">
         <Switch>
@@ -55,7 +57,8 @@ class App extends React.Component {
           <Redirect from='*' to='/error-404' />
         </Switch>
       </div>
-    </div>);
+    </div>
+    </>);
   }
 }
 

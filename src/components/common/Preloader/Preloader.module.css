@@ -117,10 +117,10 @@
     align-items: center;
     font-size: 14px!important;
     height: 715px;
-    width: 1040px;
+    width: 970px;
     z-index: 100000;
     user-select: none;
-    border-radius: 10px;
+    border-radius: 7px;
     border: var(--page-border);
     background: #f3f3f3;
 }

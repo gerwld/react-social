@@ -19,6 +19,7 @@ import { FormControlLabel, Switch } from '@mui/material';
 import { AiOutlineCamera } from 'react-icons/ai'
 import { RiSendPlaneFill } from 'react-icons/ri'
 import { ImFire } from 'react-icons/im'
+import NewsContainer from './NewsContainer';
 
 
 
@@ -54,9 +55,26 @@ const FeedNavbar = () => {
     var scrollYPosBigger65 = useScrollPosition(21) > 65;
     return (
         <div className={`${s.navbar_wrapper} ${scrollYPosBigger65 && s.navbar_wrapper_action}`}>
-            <div className={`${s.navbar} main-content-block`}>Feed settings navbar block (smart-fixed)</div>
+            <div className={`${s.navbar} main-content-block`}>
+            <ul className={s.navbar_nav_1}>
+                <li className={s.col_block}>
+                    <span className={`${s.col_title} ${s.col_title_active}`}>News</span>
+                    <ul>
+                        <li>Photos</li>
+                        <li>Videos</li>
+                        <li>Coronavirus</li>
+                        <li>Technologies</li>
+                    </ul>
+                </li>
+                <li>Recomendations</li>
+                <li>Search</li>
+            </ul>
+            <ul className={s.navbar_nav_2}>
+                <li>Liked recently</li>
+            </ul>
+            </div>
             <div className={`${s.navbar_interest} main-content-block`}>
-                    <FormControlLabel control={<Switch defaultChecked size="small" />} label={<div><ImFire /> Interesting first ‏‏‎  ‏‏‎ </div>} labelPlacement="start"/>
+                    <FormControlLabel control={<Switch defaultChecked size="small" />} label={<div><ImFire /> Show the most interesting first ‏‏‎  ‏‏‎ </div>} labelPlacement="start"/>
                 </div>
         </div>
     )
