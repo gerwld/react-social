@@ -32,7 +32,7 @@ let initialState = {
     currentPage: 1,
     allPages: 1,
     pagLength: 5,
-    loadOnlyFriends: true,
+    loadOnlyFriends: false,
     searchQuery: ''
 }
 

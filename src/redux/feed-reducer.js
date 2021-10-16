@@ -50,9 +50,21 @@ const feedReducer = (state = initialState, action) => {
 
 export const loadPostsTC = (nextPage, pageSize) => {
     return async (dispatch) => {
-        let r = await entertaimentAPI.getPosts(nextPage, pageSize);
-        dispatch(loadPosts(r));
-        let date = moment(r[r.length - 1].publishedAt, "YYYY-MM-DD-h:mm").fromNow().replace(" ago", "");
+        let res = await entertaimentAPI.getPosts(nextPage, pageSize);
+        let posts = res.map(r => {
+            return { 
+            "source": {
+            "postId": r.publishedAt + r.source.name.split(" ")[0] + '_postId',
+            "name": r.source.name
+          },
+          "title": r.title,
+          "url": r.url,
+          "urlToImage": r.urlToImage,
+          "publishedAt": r.publishedAt,
+         }});
+         
+        dispatch(loadPosts(posts));
+        let date = moment(res[res.length - 1].publishedAt, "YYYY-MM-DD-h:mm").fromNow().replace(" ago", "");
         dispatch(addLastPostDate(date));
     }
 }

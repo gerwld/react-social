@@ -6,6 +6,7 @@ import Preloader from '../common/Preloader/Preloader';
 import moment from 'moment';
 import { getAuthUserData } from '../../redux/profile-reducer';
 import { change, getFormValues } from 'redux-form';
+import store from '../../redux/redux-store.js'
 
 class NewsContainer extends React.Component {
 
@@ -13,14 +14,16 @@ class NewsContainer extends React.Component {
         this.props.loadPostsTC(this.props.nextPage, this.props.pageSize);
     }
 
-    addValueToMessage = (value) => {
-        let message = this.props.currentComment;
-        if(message){
-            this.props.change('addCommentFeed', "comment", message.comment + value);
+    addValueToMessage = async (symbol, postId) => {
+       let state = store.getState();
+       let message = getFormValues(postId)(state);
+        if(message && message.comment.length > 0){
+            this.props.change(postId, "comment", message.comment + symbol.native);
         } else {
-            this.props.change('addCommentFeed', "comment", value);
+            this.props.change(postId, "comment", symbol.native);
         }
     }
+
 
     whatsNewSubmit = async (data) => {
         if (data.postData && data.postData.length > 0) {
@@ -32,9 +35,9 @@ class NewsContainer extends React.Component {
             let profile = this.props.authProfile || this.props.profile;
 
             this.props.addNewPostTC({
-                "postId": profile.fullName + moment().format(),
                 "source": {
                     "id": profile.userId,
+                    "postId": profile.fullName.split(' ')[0] + moment().format() + "_postId",
                     "name": profile.fullName,
                 },
                 "avatar": profile.photos.small,
@@ -47,7 +50,7 @@ class NewsContainer extends React.Component {
 
     postsMap = (noAvatar) => {
         return this.props.posts.map(post => {
-            return <div key={post.publishedAt}><FeedBlock addValueToMessage={this.addValueToMessage} postId={post.postId} id={post.source.id} text={post.title}
+            return <div key={post.source.postId}><FeedBlock addValueToMessage={this.addValueToMessage} postId={post.source.postId} id={post.source.id} text={post.title}
                 avatar={post.avatar} nv={noAvatar} author={post.source.name} data={post.publishedAt}
                 postLink={post.url} likesCount={post.likesCount} img={post.urlToImage}
                 isAuthPost={post.source.id === this.props.authId} deletePost={this.props.deletePost} /></div>
@@ -76,10 +79,9 @@ var mapStateToProps = (state) => {
         authUserName: state.auth.login,
         profile: state.profilePage.profile,
         authProfile: state.profilePage.authProfile,
-        authId: state.auth.userId,
-        currentComment: getFormValues("addCommentFeed")(state)
+        authId: state.auth.userId
     }
 }
 
 
-export default connect(mapStateToProps, { loadPostsTC, addNewPostTC, getAuthUserData, deletePost, change })(NewsContainer);
+export default connect(mapStateToProps, { loadPostsTC, addNewPostTC, getAuthUserData, deletePost, change, getFormValues })(NewsContainer);
