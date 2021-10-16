@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { logoutUserTC } from '../../api/api';
 import { NavLink } from 'react-router-dom';
 import s from './Header.module.css';
-import logo from '../../img/logo.png';
+import {IoLogOutOutline, IoLogInOutline} from "react-icons/io5";
 
 const HeaderContainer = ({ isAuth, logoutUserTC }) => {
     return (
@@ -14,8 +14,8 @@ const HeaderContainer = ({ isAuth, logoutUserTC }) => {
             </NavLink>
             <nav className={`${s.main_nav} main_nav`}>
                 {isAuth ?
-                    <span onClick={logoutUserTC}>Log Out <i className="fas fa-sign-out-alt" /></span> :
-                    <NavLink to='/login'>Login <i className="fas fa-sign-in-alt" /></NavLink>}
+                    <span onClick={logoutUserTC}>Log Out <IoLogOutOutline /></span> :
+                    <NavLink to='/login'>Login <IoLogInOutline /></NavLink>}
             </nav>
             </div>
         </header>

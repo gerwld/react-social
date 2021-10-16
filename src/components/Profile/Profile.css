@@ -5,6 +5,8 @@
   grid-template-columns: 245px 1fr;
 }
 
+
+
 .main-image img {
   width: 100%;
   object-fit: cover; 
@@ -473,7 +475,8 @@ textarea.lookingForJob_edit::placeholder {
   font-weight: 500;
   font-size: 14.5px;
   border-radius: 5px;
-  background-color: #efefef;
+  border: 2px solid #efefef;
+  background-color: #fbfbfb;
 }
 
 .show-more_btn:active {

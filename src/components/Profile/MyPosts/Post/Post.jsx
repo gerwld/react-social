@@ -21,7 +21,7 @@ const Post = (props) => {
     }
 
         return (
-            <div className="user_posts__last_item">
+            <div className="user_posts__last_item main-content-block">
                 <img alt="Avatar" src={avatarCheck(props.profile.photos)}></img>
                 <div className="post_content">
                 {isPostNotEmpty ? 

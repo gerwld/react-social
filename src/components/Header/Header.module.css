@@ -32,6 +32,11 @@
     cursor: pointer;
   }
 
+  .main_nav svg {
+    font-size: 24px;
+    transform: translateY(-1px);
+  }
+
   .main_nav a:hover,
   .main_nav span:hover {
     color: #fff;

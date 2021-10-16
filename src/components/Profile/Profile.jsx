@@ -52,7 +52,7 @@ class Profile extends React.Component {
             {isEditMode &&
               <ProfileInfoFormRedux initialValues={{ name: fullNameSplit[0], surname: fullNameSplit[1], ...this.props.profile }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
           </div>
-          <MyPostsContainer />
+          <MyPostsContainer avatar={avatarCheck(this.props.profile.photos)} fullName={this.props.profile.fullName} />
         </div>
       );
     }
