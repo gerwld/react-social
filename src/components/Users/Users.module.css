@@ -1,6 +1,6 @@
 .users_block {
     display: grid;
-    grid-template-columns: 700px 1fr;
+    grid-template-columns: 670px 1fr;
     grid-gap: 30px 15px;
     margin-left: 10px;
 }

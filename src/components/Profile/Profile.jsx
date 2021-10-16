@@ -22,9 +22,9 @@ class Profile extends React.Component {
 
       return (
         <div className="profile-page">
-          <div className="main-image main-content-block">
+          {/* <div className="main-image main-content-block">
             <img alt="Main Piсture" src={main_image} />
-          </div>
+          </div> */}
           <div className="user_block user_block__1">
             <div className="avatar_block">
               <img alt="Avatar" className="user-profile__img" src={avatarCheck(this.props.profile.photos)} />
