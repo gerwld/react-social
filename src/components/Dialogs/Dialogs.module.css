@@ -335,6 +335,7 @@ outline: none;
 
 .userlist div {
     border-radius: 0!important;
+    border: 0px;
 }
 
 .userlist li:last-of-type {

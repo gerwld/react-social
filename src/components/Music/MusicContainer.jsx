@@ -61,7 +61,7 @@ export const ProgressBar = ({ audio, progress, duration }) => {
         }
     }
     return (
-        <div className={s.music_progress} onClick={e => scrollProgress(e, 360)}>
+        <div className={s.music_progress} onClick={e => scrollProgress(e, 300)}>
             <div className={s.progress_bar} />
             <div className={s.progress_bar_progress} style={{ width: counter + '%' }} />
             {audio.buffered.length > 0.1 && <div className={s.progress_bar_buffered} style={{ width: audio.buffered.length * 100 + '%' }} />}
