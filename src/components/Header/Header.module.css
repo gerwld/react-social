@@ -1,21 +1,28 @@
 .app_header {
     grid-column-start: 1;
     grid-column-end: 3;
-    display: flex;
-    justify-content: space-between;
-    padding: 17px 15px;
+    padding: 10px 15px;
     background-color: #4c6dc1;
     /* margin-top: 10px; */
-    border-radius: var(--border-radius-ui);
     z-index: 100;
+    margin-bottom: 10px;
   }
+
+.header_content {
+  width: 1120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
   
   .app_header img {
-    width: 34px;
-    max-width: 34px;
-    height:auto;
-    max-height: 20px;
-    filter: brightness(20);
+    width: 120px;
+    height: 40px;
+    /* max-width: 34px; */
+    /* height:auto;
+    max-height: 20px; */
+    /* filter: brightness(20); */
   }
   
   .main_nav a,

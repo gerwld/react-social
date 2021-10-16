@@ -38,14 +38,14 @@
 }
 
 .app-wrapper {
-  width: 1200px;
+  width: 1120px;
   padding: 0;
   /* padding-left: calc(100vw - 100% + 20px); */
   margin: 0 auto;
   box-sizing: content-box;
   display: grid;
   grid-gap: var(--gap-between-blocks-s);
-  grid-template-columns: 150px 1030px;
+  grid-template-columns: 150px 970px;
 }
 
 .app-content {

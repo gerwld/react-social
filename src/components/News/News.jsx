@@ -6,15 +6,22 @@ import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroller';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
-import ButtonBase from '@mui/material/ButtonBase'
-import Foco from 'react-foco';
-import { AiOutlineCamera } from 'react-icons/ai'
-import { RiSendPlaneFill } from 'react-icons/ri'
-import useScrollPosition from '@react-hook/window-scroll'
-import { Textarea_100 } from '../common/FormControls/FormControls';
+
 import 'emoji-mart/css/emoji-mart.css'
 import './emoji-edit.css';
 import { Picker } from 'emoji-mart'
+
+import Foco from 'react-foco';
+import ButtonBase from '@mui/material/ButtonBase'
+import useScrollPosition from '@react-hook/window-scroll'
+import { Textarea_100 } from '../common/FormControls/FormControls';
+import { FormControlLabel, Switch } from '@mui/material';
+import { AiOutlineCamera } from 'react-icons/ai'
+import { RiSendPlaneFill } from 'react-icons/ri'
+import { ImFire } from 'react-icons/im'
+import NewsContainer from './NewsContainer';
+
+
 
 const News = (props) => {
     var noAvatar = "/images/avatars/def-avatar.png";
@@ -44,11 +51,31 @@ const News = (props) => {
     )
 }
 
-const FeedNavbar = (props) => {
-    var scrollYPosBigger65 = useScrollPosition(30) > 65;
+const FeedNavbar = () => {
+    var scrollYPosBigger65 = useScrollPosition(21) > 65;
     return (
         <div className={`${s.navbar_wrapper} ${scrollYPosBigger65 && s.navbar_wrapper_action}`}>
-            <div className={`${s.navbar} main-content-block`}>Feed settings navbar block (smart-fixed)</div>
+            <div className={`${s.navbar} main-content-block`}>
+            <ul className={s.navbar_nav_1}>
+                <li className={s.col_block}>
+                    <span className={`${s.col_title} ${s.col_title_active}`}>News</span>
+                    <ul>
+                        <li>Photos</li>
+                        <li>Videos</li>
+                        <li>Coronavirus</li>
+                        <li>Technologies</li>
+                    </ul>
+                </li>
+                <li>Recomendations</li>
+                <li>Search</li>
+            </ul>
+            <ul className={s.navbar_nav_2}>
+                <li>Liked recently</li>
+            </ul>
+            </div>
+            <div className={`${s.navbar_interest} main-content-block`}>
+                    <FormControlLabel control={<Switch defaultChecked size="small" />} label={<div><ImFire /> Show the most interesting first ‏‏‎  ‏‏‎ </div>} labelPlacement="start"/>
+                </div>
         </div>
     )
 }
@@ -59,25 +86,25 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, .
     let [isHide, hideContent] = useState(false);
     let [isComment, showComment] = useState(false);
     let [isShowEmoji, showEmoji] = useState(false);
-    let [isLikePressed, toggleLike] = useState(false);
+    let [isLike, toggleLike] = useState(false);
     let [likesCount, likeAction] = useState(isNaN(props.likesCount) ? (22 + Math.floor(Math.random() * 10)) : props.likesCount);
     let [isShowSet, toggleSet] = useState(false);
+    let [autoFocus, setFocus] = useState(true);
+
+    const PostCommentForm = reduxForm({ form: `${postId}_form`, destroyOnUnmount: false,
+    keepDirtyOnReinitialize: true, forceUnregisterOnUnmount: true })(PostCommentsBlock);
 
     let likePress = (e, id) => {
         let buttonIcon = e.currentTarget.children[0];
         //TODO change after to send request with id => get response, then change local state
-        toggleLike(!isLikePressed);
-        if (isLikePressed) {
+        toggleLike(!isLike);
+        if (isLike) {
             likeAction(likesCount - 1);
             buttonIcon.className = "far fa-heart";
         } else {
             likeAction(likesCount + 1);
             buttonIcon.className = `fa fa-heart ${s.like_pressed}`;
         }
-    }
-
-    let addEmoji = (e) => {
-        addValueToMessage(e.native);
     }
 
     return (
@@ -126,14 +153,13 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, .
                     {isShowSet && <DropDownMenu postId={postId} isAuthor={isAuthPost} hideContent={hideContent} deletePost={deletePost} />}
                 </Foco>
             </div>
-            {isComment && <PostCommentForm emojiTogle={showEmoji} />}
-
+            {isComment && <PostCommentForm emojiTogle={showEmoji} autoFocus={autoFocus}/>}
             {isShowEmoji &&
-                <Foco onClickOutside={() => showEmoji(false)}>
-                    <div className={`${s.emoji_picker} picker_style`}>
-                        <Picker set='apple' sheetSize="32" showSkinTones="false" onSelect={addEmoji} title=""/>
-                    </div>
-                </Foco>}
+                    <div onMouseLeave={() => showEmoji(false)} className={`${s.emoji_picker} picker_style`}>
+                        <Foco onClickOutside={() => showEmoji(false)}>
+                            <Picker set='apple' include={['search', 'smileys', 'people', 'nature']} sheetSize="32" showSkinTones="false" onSelect={e => {addValueToMessage(e, `${postId}_form`); setFocus(true)}} title=""/>
+                        </Foco>
+                    </div>}
         </div>
     )
 }
@@ -176,10 +202,9 @@ const WhatsNew = (props) => {
 }
 
 const PostCommentsBlock = ({ emojiTogle, ...props }) => {
- 
     return <form onSubmit={props.handleSubmit} className={s.comment_block}>
         <div className={s.comment_field}>
-            <Field component="textarea" name="comment" autoFocus="true" />
+            <Field component="textarea" name="comment" />
             <button className={s.clipFile} type="button"><AiOutlineCamera /></button>
             <button className={s.emoji_btn} type="button" onMouseOver={() => emojiTogle(true)} onClick={() => emojiTogle(true)}><i className="far fa-smile" /></button>
         </div>
@@ -188,6 +213,5 @@ const PostCommentsBlock = ({ emojiTogle, ...props }) => {
 }
 
 const WhatsNewForm = reduxForm({ form: "whatsNewFeed" })(WhatsNew);
-const PostCommentForm = reduxForm({ form: "addCommentFeed" })(PostCommentsBlock);
 
 export default News;

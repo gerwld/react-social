@@ -1,3 +1,4 @@
+import { Checkbox } from "@mui/material";
 import React from "react";
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
@@ -48,7 +49,7 @@ let Users = (props) => {
                 </div>
                 <div className={s.view_settings}>
                     <span className={s.view_settings_title}>Sort parameters:</span>
-                <label className={s.showAll}><input type="checkbox" onClick={props.onFriendsToggle} checked={!props.isOnlyFriends} onChange={i => i} /> Show all users</label>
+                <label className={s.showAll}><Checkbox onClick={props.onFriendsToggle} sx={{ '& .MuiSvgIcon-root': { fontSize: 18 }, padding: 0 }} checked={!props.isOnlyFriends} /> Show all users</label>
                 </div>
             </div>
         </div>
