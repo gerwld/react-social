@@ -136,11 +136,14 @@ outline: none;
 
 .user_item .online::after {
     position: absolute;
-    width: 13.5px;
-    height: 13.5px;
+    width: 13.2px;
+    height: 13.2px;
+    bottom: -2px;
+    left: -3px;
     border: 2px solid white;
     font-size: 0!important;
 }
+
 
 .newMessagesCount {
     position: absolute;

@@ -9,10 +9,15 @@ let Users = (props) => {
 
     return (
         <div className={s.users_block}>
-            <span className={s.title}>{props.title()}({props.totalUsers})</span>
-            {isUsersAvailable ? <div className={s.users_section}>
-                {
-                    props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub} main-content-block`}>
+            {isUsersAvailable ?
+                <div className={`${s.users_section} main-content-block`}>
+                    <div className={`${s.user_posts_navtitle} main-content-block`}>
+                        <ul className={s.user_posts_nav}>
+                            <li className={s.user_posts_active}>{props.title()}({props.totalUsers})</li>
+                            <li>Users online($ct)</li>
+                        </ul>
+                    </div>
+                    {props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub}`}>
                         <div className={s.user_avatar}>
                             <NavLink to={`/profile/id${u.id}`}>
                                 <img alt="User Avatar" src={u.photos.small ? (`${u.photos.small}`) : (`/images/avatars/def-avatar.png`)}></img>
@@ -29,19 +34,19 @@ let Users = (props) => {
                             <a>Block user</a><a>Add to list</a></div>
 
                     </div>)
-                }
-                <div className={s.pagination}>
-                    <ul>
-                        <li key="er4s" onClick={e => props.onPageChanged(1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>«</span>first page</li>
-                        <li key="erm4s" onClick={e => props.onPageChanged(props.currentPage - 1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>‹</span>prevous</li>
+                    }
+                    <div className={s.pagination}>
+                        <ul>
+                            <li key="er4s" onClick={e => props.onPageChanged(1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>«</span>first page</li>
+                            <li key="erm4s" onClick={e => props.onPageChanged(props.currentPage - 1)} className={`${s.pag_element} ${s.pag_arrow}`}><span>‹</span>prevous</li>
 
-                        {props.getPagCurrentIndexes().map(p => <li key={p + "pag"} onClick={() => props.onPageChanged(p)} className={props.currentPage === p ? s.currentPage : ''}>{p}</li>)}
+                            {props.getPagCurrentIndexes().map(p => <li key={p + "pag"} onClick={() => props.onPageChanged(p)} className={props.currentPage === p ? s.currentPage : ''}>{p}</li>)}
 
-                        <li key="er4ks" onClick={e => props.onPageChanged(props.currentPage + 1)} className={`${s.pag_element} ${s.pag_arrow}`}>next<span>›</span></li>
-                        <li key="emr4s" onClick={e => props.onPageChanged(allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
-                    </ul>
-                </div>
-            </div> : <div className={s.users_section}>No users available.</div>}
+                            <li key="er4ks" onClick={e => props.onPageChanged(props.currentPage + 1)} className={`${s.pag_element} ${s.pag_arrow}`}>next<span>›</span></li>
+                            <li key="emr4s" onClick={e => props.onPageChanged(allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
+                        </ul>
+                    </div>
+                </div> : <div className={`${s.users_section} main-content-block`}>No users available.</div>}
             <div className={`main-content-block ${s.navbar}`}>
                 <div className={s.search_block}>
                     <input type="search" placeholder="Seach users" onChange={e => props.onSearchChange(e)} value={props.searchInput} />
@@ -49,7 +54,7 @@ let Users = (props) => {
                 </div>
                 <div className={s.view_settings}>
                     <span className={s.view_settings_title}>Sort parameters:</span>
-                <label className={s.showAll}><Checkbox onClick={props.onFriendsToggle} sx={{ '& .MuiSvgIcon-root': { fontSize: 18 }, padding: 0 }} checked={!props.isOnlyFriends} /> Show all users</label>
+                    <label className={s.showAll}><Checkbox onClick={props.onFriendsToggle} sx={{ '& .MuiSvgIcon-root': { fontSize: 18 }, padding: 0 }} checked={!props.isOnlyFriends} /> Show all users</label>
                 </div>
             </div>
         </div>

@@ -21,10 +21,10 @@ class Navbar extends React.Component {
                     <li key="5"><NavLink to="/settings" activeClassName={s.current}><IoSettingsOutline /> Settings</NavLink></li>
                 </ul>
                 <div className={s.subnav_info}>
-                    <a href="#">P. Jaworski</a>
+                    <NavLink to="/profile/id19461">P. Jaworski</NavLink>
                     <a href="#">Blog</a>
-                    <a href="#">About p/Jaw network</a>
-                    <a href="#">GitHub</a>
+                    <a target="_blank" rel="noreferrer" href="https://github.com/gerwld/Social-Network-Project#readme">About p/Jaw network</a>
+                    <a target="_blank" rel="noreferrer" href="https://github.com/gerwld/">GitHub</a>
                 </div>
             </nav>
         );

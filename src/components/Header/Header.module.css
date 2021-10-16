@@ -1,4 +1,5 @@
 .app_header {
+  min-width: 1135px;
     position: relative;
     grid-column-start: 1;
     grid-column-end: 3;

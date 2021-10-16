@@ -89,7 +89,7 @@ class DialogsWindow extends React.Component {
                     hasMore={this.isMoreMessagesToLoad()}
                     loader={<div className={s.loader_mess}><img src="/images/loader-2.svg" alt="Loading..." /></div>}
                     scrollableTarget="scrollableDiv"
-                    endMessage={<p className={s.loader_start}>Chat messages beginning.</p>}>
+                    endMessage={<p className={s.loader_start}>{this.props.currentDialog.length < 1 ? "Say \"Hi!\" to start a conversation" : "Chat messages beginning."}</p>}>
 
                     {this.props.currentDialog.map(m => <div key={m.id}><Message converListUser={this.props.converListUser}
                     authProfile={this.props.authProfile} {...m} /></div>)}

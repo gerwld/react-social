@@ -101,6 +101,7 @@
 
 .new_post_form {
   display: flex;
+  margin: 5px 0;
   justify-content: space-between;
   align-items: flex-start;
 }
