@@ -11,7 +11,7 @@ class UsersAPIComponent extends React.Component {
         searchInput: ''
     }
 
-    getUsers = (boolean) => {
+    getUsers = () => {
         this.props.getUsersThunkCreator(
             this.props.currentPage,
             this.props.pageSize,
@@ -24,9 +24,9 @@ class UsersAPIComponent extends React.Component {
         this.getUsers();
     }
 
-    onFriendsToggle = () => {
-        this.props.loadFriendsToggle();
-        setTimeout(this.getUsers, 250)
+    onFriendsToggle = async () => {
+        await this.props.loadFriendsToggle();
+        this.getUsers();
     }
 
     getPagCurrentIndexes = () => {

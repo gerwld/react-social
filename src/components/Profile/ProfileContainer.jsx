@@ -6,6 +6,7 @@ import { getUserInfo, setUserProfile, setUserStatus, setUserAvatar, setCurrentSe
 import { withRouter } from 'react-router';
 import { getAuthUserDataTC } from '../../api/api';
 import { change } from 'redux-form';
+import { getUsersThunkCreator } from '../../redux/users-reducer';
 
 
 class ProfileContainerAPI extends React.Component {
@@ -16,6 +17,7 @@ class ProfileContainerAPI extends React.Component {
       statusEditMode: false,
       isShowMore: false
     }
+      this.props.getUsersThunkCreator( 1,  6, 1, true);
   }
 
   activateEditmode = () => {
@@ -83,7 +85,7 @@ class ProfileContainerAPI extends React.Component {
         activateEdit={this.activateEditmode} deactivateEdit={this.deactivateEditmode} status={this.state.status} statusGlobal={this.props.status}
         inputValue={this.statusInputRef} editInput={this.editInput} urlUserId={this.props.match.params.userId} onHandleAvatar={this.onHandleAvatar}
         isEditMode={this.props.match.params.status === "edit_settings"} handleShowClick={this.handleShowClick} isShowMore={this.state.isShowMore}
-        onSettingsSubmit={this.onSettingsChange} postDataLength={this.props.postDataLength}
+        onSettingsSubmit={this.onSettingsChange} postDataLength={this.props.postDataLength} friendsList={this.props.friendsList}
       />
     )
   }
@@ -96,10 +98,11 @@ let mapStateToProps = (state) => {
     isAuth: state.auth.isAuth,
     status: state.profilePage.status,
     postDataLength: state.profilePage.postData.length,
+    friendsList: state.usersPage.users
   }
 }
 
 export default compose(
-  connect(mapStateToProps, { setUserProfile, getUserInfo, setUserStatus, getAuthUserDataTC, setUserAvatar, change, setCurrentSettingsTC }),
+  connect(mapStateToProps, { setUserProfile, getUserInfo, setUserStatus, getAuthUserDataTC, setUserAvatar, change, setCurrentSettingsTC, getUsersThunkCreator }),
   withRouter
 )(ProfileContainerAPI)

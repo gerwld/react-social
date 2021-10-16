@@ -26,15 +26,26 @@ class Profile extends React.Component {
             <img alt="Main Piсture" src={main_image} />
           </div> */}
           <div className="user_block user_block__1">
-            <div className="avatar_block">
-              <img alt="Avatar" className="user-profile__img" src={avatarCheck(this.props.profile.photos)} />
-              {isCurrentUserProfile && <div className={`ava_buttons ${isEditMode ? 'avatar_edit' : ''}`}>
-                <label><input type="file" onChange={e => this.props.onHandleAvatar(e)} /><i className="fas fa-file-image" />Upload new avatar</label>
-              </div>}
+            <div className="subblock_1 main-content-block">
+              <div className="avatar_block">
+                <img alt="Avatar" className="user-profile__img" src={avatarCheck(this.props.profile.photos)} />
+                {isCurrentUserProfile && <div className={`ava_buttons ${isEditMode ? 'avatar_edit' : ''}`}>
+                  <label><input type="file" onChange={e => this.props.onHandleAvatar(e)} /><i className="fas fa-file-image" />Upload new avatar</label>
+                </div>}
+              </div>
+              <div className={`contact_button ${isInactiveBtn}`}>
+              <NavLink to={!isCurrentUserProfile ? `/dialogs/id${this.props.urlUserId}` : ""}><button>Write a message</button></NavLink>
+                <button>Add to friends</button>
+              </div>
             </div>
-            <div className={`contact_buttons ${isInactiveBtn}`}>
-              <NavLink to={!isCurrentUserProfile ? `/dialogs/id${this.props.urlUserId}` : ""}>Write a message</NavLink>
-              <button>Add to friends</button>
+            <div className="subblock_2 main-content-block">
+              <span className="subblock_2_title">Friends(72)</span>
+              <ul className="friends_last">
+              {this.props.friendsList.map(u => {
+                return <li><NavLink to={`/profile/id${u.id}`}><div className="user_ava"><img src={avatarCheck(u.photos)} alt={u.name}/></div>
+                <span className="user_name">{u.name.split(' ')[0].split('_')[0].split('-')[0]}</span></NavLink></li>
+              })}
+              </ul>
             </div>
           </div>
 
@@ -142,7 +153,6 @@ const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, postData
             <Contact key={key} contactTitle={key === "mainLink" ? "Other" : key} contactInfo={profile.contacts[key]} />)}
         </div>}
       {!isProfileContactsEmpty && <button onClick={handleShowClick} className="show-more_btn">{isShowMore ? "Hide" : "Show more"}</button>}
-      {isProfileContactsEmpty && <div className="showmore_box" />}
     </div>
   )
 }

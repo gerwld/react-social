@@ -7,6 +7,11 @@ import { NavLink } from 'react-router-dom';
 import Preloader, { DialogsPreloader } from '../common/Preloader/Preloader';
 import Message from './Message';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { IoMdSettings, IoIosAdd } from "react-icons/io";
+import {IoSearchSharp, IoStar } from "react-icons/io5";
+import {AiOutlineSend} from "react-icons/ai";
+
+
 
 const Dialogs = ({ getLastTimeOrShowOnline, ...props }) => {
     return (
@@ -26,8 +31,15 @@ const Dialogs = ({ getLastTimeOrShowOnline, ...props }) => {
                                 </li>)
                         : <DialogsPreloader />}
                     </ul>
-
-                    {/* <div key="button_dialogs43ggF" className={s.btn_dialogs_scroll}><button type="button"><i className="fas fa-chevron-down"/></button></div> */}
+                    <div className={s.dialogs_userlist_search}>
+                        <label>
+                            <input type="text" placeholder="Search..."/>
+                            <IoSearchSharp />
+                        </label>
+                            <span className={s.pinned_conv}><IoStar />17</span>
+                            <span className={s.pin_conv}><IoIosAdd /></span>
+                    </div>
+                    
                 </div>
                 {!props.idFromUrl ?
                     <SelectDialog /> :
@@ -43,6 +55,10 @@ const Dialogs = ({ getLastTimeOrShowOnline, ...props }) => {
                         <MessageReduxForm onSubmit={props.onSendMessage} />
                     </div>
                 }
+                <div className={s.dialogs_userlist_settings}>
+                        <span>All conversations showed</span>
+                        <IoMdSettings />
+                    </div>
             </div>
         </div>
     )
@@ -93,7 +109,7 @@ let MessageForm = ({ handleSubmit }) => {
         <form onSubmit={handleSubmit} className={s.messageInput}>
             <span className={s.add_file} title="Add a file..." alt="Add a file..."><i className="fas fa-paperclip" /></span>
             <Field component={Textarea} name="message" placeholder="Enter your message..." validate={[requiredField, maxLength350]} />
-            <button type="submit"><i className="far fa-paper-plane" /></button>
+            <button type="submit"><AiOutlineSend /></button>
         </form>
     )
 }

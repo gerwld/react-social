@@ -5,6 +5,91 @@ span.title {
     font-weight: bold;
 }
 
+.dialogs_userlist_settings,
+.dialogs_userlist_search {
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    left: 0;
+    background-color: #ffffff;
+}
+
+.dialogs_userlist_settings svg,
+.dialogs_userlist_search svg {
+    font-size: 22px;
+    line-height: 22px;
+    color: #BAC6D6;
+}
+
+.dialogs_userlist_settings {
+    bottom: 0;
+    width: 252px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 18px;
+    border: 1px solid #e3e3e3;
+    border-top: 0!important;
+    border-bottom-left-radius: 5px;
+}
+
+.dialogs_userlist_settings span {
+    margin-right: 20px;
+    color: #41485f;
+}
+
+.dialogs_userlist_search {
+    top: 0;
+    padding: 15px 0 15px 10px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.dialogs_userlist_search input {
+    width: 170px;
+    padding: 15px 0 15px 30px;
+    height: 30px;
+    border: none;
+}
+
+.dialogs_userlist_search input:focus {
+border: none;
+box-shadow: none;
+outline-offset: 0;
+outline: none;
+}
+
+.dialogs_userlist_search input::placeholder,
+.pinned_conv {
+    color: #7f8c9c!important;
+}
+
+.dialogs_userlist_search label svg {
+    position: absolute;
+    bottom: 16px;
+    left: 15px;
+}
+
+.pinned_conv svg,
+.pin_conv svg{
+    transform: translateY(-2.5px);
+}
+
+
+.pinned_conv svg,
+.pinned_conv {
+    font-size: 15px;
+}
+
+.pinned_conv svg {
+    margin-right: 2px;
+}
+
+.pinned_conv,
+.pin_conv {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+
 .user_item {
     position: relative;
 }
@@ -18,9 +103,8 @@ span.title {
 }
 
 .last_seen {
-    display: block;
     width: fit-content;
-    margin: 4px auto 0;
+    margin: 0 15px;
     color: var(--subhead-text);
     font-size: 13px;
     font-weight: normal;
@@ -76,26 +160,6 @@ span.title {
     box-sizing: border-box;
 }
 
-.btn_dialogs_scroll {
-    position: absolute;
-    width:100%;
-    height: 125px;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(0deg, rgba(237,238,240,1) 0%, rgba(237,238,240,1) 33%,
-                 rgb(237 238 240 / 85%) 80%, rgba(237,238,240,0) 100%);
-}
-
-.btn_dialogs_scroll button {
-    display: block;
-    width: 100%;
-    height: 85px;
-    margin: 40px auto 20px;
-    font-size: 28px;
-    color: #868e9b;
-    border: 0px solid transparent;
-    background-color: transparent;
-}
 
 @keyframes slidein {
     0% {
@@ -119,7 +183,13 @@ span.title {
 
 .dialogs_user_section {
     position: relative;
-    height: 100%;
+    height: 690px;
+    height: calc(100% - 60px);
+    border: var(--page-border);
+    background-color: white;
+    border-right: 0;
+    border-top-left-radius: 5px;
+    overflow: hidden;
 }
 
 .loader_mess {
@@ -159,12 +229,13 @@ span.title {
     height: 100%;
     background-color: #fff;
     border: var(--page-border);
-    box-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
+    /* border-left: none; */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .select_dialogscreen span {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 21px;
     color: var(--subhead-text);
 }
 
@@ -177,16 +248,20 @@ span.title {
     display: block;
     white-space: nowrap;
     max-width: 128px;
+    margin-left: 6px;
     overflow: hidden;
     text-transform: capitalize;
 }
 
 .dialogs_frame {
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     height: 85vh;
     min-height: 750px;
+    background-color: #ffffff;
+    border-radius: 5px;
 }
 
 .dialog_window {
@@ -197,26 +272,26 @@ span.title {
     height: 100%;
     box-sizing: border-box;
     background-color: #ffffff;
-    box-shadow: var(--page-block-shadow);
+    border: 1px solid #e3e3e3;
     overflow: hidden;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .current_dialog {
     display: block;
     position: absolute;
-    padding: 11px 0;
+    padding: 20px;
     margin-left: -1px;
     width: calc(100% + 2px);
-    height: 68px;
+    height: 60px;
     left: 0;
     top: 0;
-    text-align: center;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     text-transform: capitalize;
     background-color: #fff;
-    border: 1px solid rgb(214, 214, 214);
-    border-radius: 4px;
+    border-bottom: 1px solid rgb(214, 214, 214);
 }
 
 .current_dialog a {
@@ -232,7 +307,7 @@ span.title {
 
 .dialog_window > div {
     width: 100%;
-    margin-top: 65px;
+    margin-top: 60px;
     overflow: hidden;
     overflow-y: scroll;
     border: 0;
@@ -242,10 +317,12 @@ span.title {
 .userlist {
     position: relative;
     padding: 0!important;
-    margin: 0!important;
+    margin: 0;
+    margin-top: 60px;
     padding-bottom: 20px;
-    width: 230px;
-    height: 100%;
+    width: 250px;
+    height: 690px;
+    height: calc(100% - 60px);
 
     box-sizing: content-box;
     list-style: none;
@@ -257,20 +334,21 @@ span.title {
     border-radius: 0!important;
 }
 
+.userlist li:last-of-type {
+    border-bottom: 0;
+}
+
 .userlist li a {
     display: block;
     position: relative;
-    padding: 25.4px 30px;
+    padding: 23px 30px;
     padding-left: 65px;
     color: black;
     text-decoration: none;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
 }
 
 .userlist li {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-bottom: 1px solid #e3e3e3;
 }
 
 .userlist li:hover {
@@ -281,19 +359,19 @@ img.userlist_avatar {
     display: block;
     position: absolute;
     left: 20px;
-    bottom: calc(50% - 17px);
-    width: 30px;
-    height: 30px;
+    bottom: calc(50% - 21px);
+    width: 40px;
+    height: 40px;
     background-color: #e3e3e3;
-    border-radius: 4px;
+    border-radius: 50%;
     border: 0px solid white;
 }
 
 /* TODO: */
 .userlist .selected_item,
 .userlist .selected_item:hover{
-    background-color: #e7e7e7;
-    box-shadow: inset 1px 2px 3px 0 #bdbdbd;
+    background-color: rgba(76, 109, 193, 0.9);
+    color: #fff!important;
 }
 
 .message .userAvatar {
@@ -306,7 +384,7 @@ border-radius: 50%;
     display: flex;
     position: relative;
     margin: 0 20px;
-    padding: 15px 30px;
+    padding: 15px 20px;
     justify-content: flex-start;
     align-items: flex-start;
     border-bottom: 1px solid transparent;
@@ -346,11 +424,12 @@ border-radius: 50%;
 
 .message_content {
     margin-left: 8px;
-    width: 550px;
+    width: 470px;
 }
 
 .message_content > span {
     display: block;
+    font-size: 14.5;
 }
 
 .messageInput {
@@ -365,7 +444,7 @@ border-radius: 50%;
     margin-top: auto;
     background-color: #ffffff;
     box-sizing: border-box;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 5px 0;
     border-top: 1px solid #f3f3f3;
     box-shadow: var(--page-block-shadow);
 }
@@ -389,17 +468,22 @@ border-radius: 50%;
     font-size: 15px;
     box-sizing: border-box;
     border: var(--page-border);
+    resize: none;
 }
 
 .messageInput button {
     min-width: 50px;
     min-height: 50px;
-    margin-left: 20px;
+    margin-left: 15px;
     color: white;
     background-color: #4c6dc1;
     transition: 0.4s ease-in-out;
     cursor: pointer;
     font-weight: bold;
+}
+
+.messageInput button svg {
+    font-size: 25px;
 }
 
 .messageInput button:hover {
