@@ -68,7 +68,7 @@
 }
 
 .new_post_input textarea {
-  width: 100%;
+  width: 500px;
   resize: none;
   border: none!important;
   transition: 0.2s;

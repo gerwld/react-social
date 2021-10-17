@@ -172,7 +172,7 @@ const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId }) => {
         { id: 'why', name: "Why am i seeing this content?", onClick: (e) => e, icon: "fa-solid fa-circle-question" },
     ];
     let dropDownAuthor = [
-        { id: 'delete', name: "Delete post", onClick: () => setTimeout(() => deletePost(postId), 200), icon: "fa-solid fa-trash" },
+        { id: 'delete', name: "Delete post", onClick: () => setTimeout(() => {deletePost(postId)}, 200), icon: "fa-solid fa-trash" },
         { id: 'edit', name: "Edit post", onClick: (e) => e, icon: "fa-solid fa-edit" },
         { id: 'report', name: "Report problem", onClick: (e) => e, icon: "fa-solid fa-circle-exclamation" }
     ];
