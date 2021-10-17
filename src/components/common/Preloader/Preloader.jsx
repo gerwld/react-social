@@ -8,6 +8,14 @@ export const Preloader = () => {
     );
 }
 
+export const Preloaderw_100 = () => {
+    return (
+        <div className={`${s.loaderAnimation} ${s.loaderAnimation_w100}`}>
+            <LoadingSpinner />
+        </div>
+    );
+}
+
 export const MainPreloader = () => {
     return (
         <div className={s.mainLoaderAnimation}>

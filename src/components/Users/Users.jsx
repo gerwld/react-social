@@ -2,19 +2,28 @@ import { Checkbox } from "@mui/material";
 import React from "react";
 import { NavLink } from 'react-router-dom';
 import s from './Users.module.css';
+import { Preloaderw_100 } from '../common/Preloader/Preloader';
 
 let Users = (props) => {
     let isUsersAvailable = props.totalUsers >= 1;
     let allPages = props.allPages;
+    const currentActive = (link) => {
+        if (link === "online") return s.user_posts_ac_1;
+      }
 
     return (
         <div className={s.users_block}>
             {isUsersAvailable ?
+            <div>
+            {props.isFetching ? <Preloaderw_100 /> :
                 <div className={`${s.users_section} main-content-block`}>
                     <div className={`${s.user_posts_navtitle} main-content-block`}>
-                        <ul className={s.user_posts_nav}>
-                            <li className={s.user_posts_active}>{props.title()}({props.totalUsers})</li>
-                            <li>Users online($ct)</li>
+                        <ul className={`${s.user_posts_nav}`}>
+                            <li>
+                                <NavLink to={`/users`} exact activeClassName={s.active}>{props.title()}({props.totalUsers})</NavLink>
+                                <span className={currentActive(props.match.params.flags)}/>
+                            </li>
+                            <li><NavLink to={`/users/filter=online`} activeClassName={s.active}>Users online($ct)</NavLink></li>
                         </ul>
                     </div>
                     {props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub}`}>
@@ -46,7 +55,7 @@ let Users = (props) => {
                             <li key="emr4s" onClick={e => props.onPageChanged(allPages)} className={`${s.pag_element} ${s.pag_arrow}`}>last page<span>»</span></li>
                         </ul>
                     </div>
-                </div> : <div className={`${s.users_section} main-content-block`}>No users available.</div>}
+                </div>} </div> : <div className={`${s.users_section} main-content-block`}>No users available.</div>}
             <div className={`main-content-block ${s.navbar}`}>
                 <div className={s.search_block}>
                     <input type="search" placeholder="Seach users" onChange={e => props.onSearchChange(e)} value={props.searchInput} />

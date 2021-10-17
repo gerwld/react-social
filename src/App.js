@@ -39,11 +39,13 @@ class App extends React.Component {
       {!this.props.location.pathname.match('/login') && !this.props.location.pathname.match('/error-404') && <Navbar />}
       <div className="app-content">
         <Switch>
-          <Route path="/users" render={withSuspense(UsersContainer)} />
+          <Route path="/users/filter=:flags" render={withSuspense(UsersContainer)} />
+          <Route path="/users" exact render={withSuspense(UsersContainer)} />
+
           <Route path="/dialogs/id:userId?" render={withSuspense(DialogsContainer)} />
           <Route path="/dialogs" exact render={withSuspense(DialogsContainer)} />
           <Route path="/feed" render={withSuspense(NewsContainer)} />
-          
+
           <Route path="/profile/id:userId?/filter=:flags?" render={withSuspense(ProfileContainer)} />
           <Route path="/profile/id:userId?" render={withSuspense(ProfileContainer)} />
           <Route path="/profile/status=:status" render={withSuspense(ProfileContainer)} />

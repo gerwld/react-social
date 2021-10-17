@@ -125,6 +125,11 @@
     background: #f3f3f3;
 }
 
+.loaderAnimation_w100 {
+  width:100%;
+  height: 845px;
+}
+
 .dialogsLoaderAnimation {
   position: relative;
   z-index: 10000;
