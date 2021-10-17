@@ -28,13 +28,13 @@
   width: 225px;
   height: 225px;
   overflow: hidden;
+  border-radius: var(--border-radius-ui);
 }
 
 .user-profile__img {
   width: 225px;
   height: auto;
   transition: 0.2s ease-in-out;
-  border-radius: var(--border-radius-ui);
 }
 
 .ava_buttons {
@@ -208,8 +208,31 @@
   margin-top: 10px;
 }
 
-.contact_button button:nth-child(1) {
+.contact_button button,
+.contact_button a {
   margin-bottom: 5px;
+}
+
+.contact_button .last {
+  margin-bottom: 0;
+}
+
+.sub_btn_transparent {
+  padding: 8px 5px!important;
+  background-color: transparent!important;
+  color: #8a94a0!important;
+  text-align: left!important;
+  vertical-align: bottom;
+}
+
+button.sub_btn_transparent:hover {
+  color: #747e8a!important;
+}
+
+.sub_btn_transparent svg {
+  font-size: 22px;
+  transform: translateY(-2px);
+  margin-right: 5px;
 }
 
 ul.friends_last {
@@ -282,10 +305,11 @@ ul.friends_last {
   padding: var(--padding-buttons-ui);
   color: white;
   text-decoration: none;
-  background-color: var(--main-blue-color);
+  background-color: var(--main-button-color);
   border: none;
   border-radius: var(--button-radius-ui);
   text-align: center;
+  transition: 0.2s;
 }
 
 .contact_button a {
@@ -295,8 +319,8 @@ ul.friends_last {
 
 .contact_button a:hover,
 .contact_button button:hover {
-  color: #fff!important;
-  background-color: #3958a8;
+  color: #fff;
+  background-color: #4a63a3;
   text-decoration: none;
 }
 
@@ -621,5 +645,5 @@ textarea.lookingForJob_edit::placeholder {
 }
 
 .user_block .subblock_2 {
-  padding: 9px;
+  padding: 9px 5px;
 }

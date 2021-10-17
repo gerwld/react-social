@@ -1,9 +1,7 @@
 import s from './MyPosts.module.css';
-import Post from './Post/Post';
 import React, { useState } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Textarea_100 } from '../../common/FormControls/FormControls';
-import { AiOutlineSend } from 'react-icons/ai'
 import { FeedBlock } from '../../News/News';
 
 

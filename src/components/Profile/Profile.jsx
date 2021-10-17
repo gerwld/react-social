@@ -1,12 +1,12 @@
 import React from 'react';
 import './Profile.css';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
-import main_image from '../../img/profile.jpg';
 import Preloader from '../common/Preloader/Preloader';
 import { NavLink } from 'react-router-dom';
 import avatarCheck from '../../utils/validators/avatarCheck';
 import { createField, InputText, Textarea } from '../common/FormControls/FormControls';
 import { Field, reduxForm } from 'redux-form';
+import { IoStatsChart, IoArrowBackCircle} from "react-icons/io5";
 
 class Profile extends React.Component {
 
@@ -15,53 +15,57 @@ class Profile extends React.Component {
       return <Preloader />
     }
     else {
-      var isCurrentUserProfile = this.props.profile.userId === this.props.authUserId;
-      var isInactiveBtn = isCurrentUserProfile && 'inactive_btn';
+      var isAuthProfile = this.props.profile.userId === this.props.authUserId;
       var isEditMode = this.props.isEditMode;
       let fullNameSplit = this.props.profile.fullName.split(/[\s,]+/);
 
       return (
         <div className="profile-page">
-          {/* <div className="main-image main-content-block">
-            <img alt="Main Piсture" src={main_image} />
-          </div> */}
           <div className="user_block user_block__1">
             <div className="subblock_1 main-content-block">
               <div className="avatar_block">
                 <img alt="Avatar" className="user-profile__img" src={avatarCheck(this.props.profile.photos)} />
-                {isCurrentUserProfile && <div className={`ava_buttons ${isEditMode ? 'avatar_edit' : ''}`}>
+                {isAuthProfile && <div className={`ava_buttons ${isEditMode ? 'avatar_edit' : ''}`}>
                   <label><input type="file" onChange={e => this.props.onHandleAvatar(e)} /><i className="fas fa-file-image" />Upload new avatar</label>
                 </div>}
               </div>
-              <div className={`contact_button ${isInactiveBtn}`}>
-              <NavLink to={!isCurrentUserProfile ? `/dialogs/id${this.props.urlUserId}` : ""}><button>Write a message</button></NavLink>
-                <button>Add to friends</button>
+              <div className={'contact_button'}>
+                {isAuthProfile ?
+                  <div>
+                    <NavLink to={`/profile/status=edit_settings`}><button>Edit profile</button></NavLink>
+                    <NavLink to={`/profile/status=page_memo`}><button className="sub_btn_transparent"><IoArrowBackCircle />Memories</button></NavLink>
+                    <NavLink to={`/profile/status=page_stats`}><button className="sub_btn_transparent last"><IoStatsChart />Page statistics</button></NavLink>
+                  </div> :
+                  <div>
+                    <NavLink to={`/dialogs/id${this.props.urlUserId}`}><button>Write a message</button></NavLink>
+                    <button>Add to friends</button>
+                  </div>}
               </div>
             </div>
             <div className="subblock_2 main-content-block">
               <span className="subblock_2_title">Friends(72)</span>
               <ul className="friends_last">
-              {this.props.friendsList.map(u => {
-                return <li><NavLink to={`/profile/id${u.id}`}><div className="user_ava"><img src={avatarCheck(u.photos)} alt={u.name}/></div>
-                <span className="user_name">{u.name.split(' ')[0].split('_')[0].split('-')[0]}</span></NavLink></li>
-              })}
+                {this.props.friendsList.map(u => {
+                  return <li><NavLink to={`/profile/id${u.id}`}><div className="user_ava"><img src={avatarCheck(u.photos)} alt={u.name} /></div>
+                    <span className="user_name">{u.name.split(' ')[0].split('_')[0].split('-')[0]}</span></NavLink></li>
+                })}
               </ul>
             </div>
           </div>
 
           <div className="user_block user_block__2 main-content-block">
-            {(!isEditMode && isCurrentUserProfile) && <NavLink to="/profile/status=edit_settings" className="btn__edit_profile">Edit Profile <i className="far fa-edit" /></NavLink>}
-            {(isEditMode && isCurrentUserProfile) && <NavLink to="/profile/" className="btn__edit_profile">Close <i className="fas fa-times down-1-px" /></NavLink>}
+            {(!isEditMode && isAuthProfile) && <NavLink to="/profile/status=edit_settings" className="btn__edit_profile">Edit Profile <i className="far fa-edit" /></NavLink>}
+            {(isEditMode && isAuthProfile) && <NavLink to="/profile/" className="btn__edit_profile">Close <i className="fas fa-times down-1-px" /></NavLink>}
 
             {/* usual view (not edit) */}
-            {!isEditMode && <ProfileInfo profile={this.props.profile} isCurrent={isCurrentUserProfile}
+            {!isEditMode && <ProfileInfo profile={this.props.profile} isCurrent={isAuthProfile}
               isShowMore={this.props.isShowMore} handleShowClick={this.props.handleShowClick}
               statusEditMode={this.props.statusEditMode} activateEdit={this.props.activateEdit}
               statusGlobal={this.props.statusGlobal} deactivateEdit={this.props.deactivateEdit}
               status={this.props.status} editInput={this.props.editInput} postDataLength={this.props.postDataLength} />}
 
             {isEditMode &&
-              <ProfileInfoFormRedux initialValues={{ name: fullNameSplit[0], surname: fullNameSplit[1], ...this.props.profile }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isCurrentUserProfile} />}
+              <ProfileInfoFormRedux initialValues={{ name: fullNameSplit[0], surname: fullNameSplit[1], ...this.props.profile }} onSubmit={e => this.props.onSettingsSubmit(e)} profile={this.props.profile} isCurrent={isAuthProfile} />}
           </div>
           <MyPostsContainer avatar={avatarCheck(this.props.profile.photos)} fullName={this.props.profile.fullName} />
         </div>
@@ -90,7 +94,7 @@ const ProfileInfoForm = ({ profile, initialValues, ...props }) => {
 
         <div className="profile-info__block profile-info__block_3">
           <b className="title">Contacts</b>
-          {Object.keys(profile.contacts).map(key => createField(`http://${key}.com/`, "contacts." + key, [], InputText, key, {type:"url"}, 100))}
+          {Object.keys(profile.contacts).map(key => createField(`http://${key}.com/`, "contacts." + key, [], InputText, key, { type: "url" }, 100))}
         </div>
         <button type="submit">Save changes</button>
       </div>
@@ -113,18 +117,18 @@ const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, postData
         </span>
       </div>
       <div className="profile-info__block profile-info__block_2 profile-info__block_2__1">
-      <div className="about_block">
-        <span className="about_subtitle">About Me:</span>
-        <span className="about_content">{profile.aboutMe || "About me section is empty."}</span>
-      </div>
-      <div className="about_block">
-        <span className="about_subtitle">Looking for a job:</span>
-        <span className="about_content">{profile.lookingForAJob ? "Yes" : "No"}</span>
-      </div>
-      <div className="about_block">
-        <span className="about_subtitle">Knowledge:</span>
-        <span className="about_content">{profile.lookingForAJobDescription || 'Looking for a job section is empty.'}</span>
-      </div>
+        <div className="about_block">
+          <span className="about_subtitle">About Me:</span>
+          <span className="about_content">{profile.aboutMe || "About me section is empty."}</span>
+        </div>
+        <div className="about_block">
+          <span className="about_subtitle">Looking for a job:</span>
+          <span className="about_content">{profile.lookingForAJob ? "Yes" : "No"}</span>
+        </div>
+        <div className="about_block">
+          <span className="about_subtitle">Knowledge:</span>
+          <span className="about_content">{profile.lookingForAJobDescription || 'Looking for a job section is empty.'}</span>
+        </div>
       </div>
       <div className="profile-info__block profile-info__block_2">
         <div className="main-info__content">
