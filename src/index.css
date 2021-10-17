@@ -15,9 +15,13 @@
   --main-button-color: #6783c9;
 }
 
+/* html {
+background: linear-gradient(0deg, rgba(76,109,193,1) 4%, rgba(241,241,243,1) 4%, rgba(241,241,243,1) 4%, rgba(241,241,243,1) 100%);
+} */
+
 body {
   min-width: 1200px;
-  background-color: #edeef0c4!important;
+  background-color: #F1F1F3!important;
   margin: 0;
   font-size: 15px!important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -56,3 +60,4 @@ code {
 .changeBackground::before {
   display: block;
 }
+

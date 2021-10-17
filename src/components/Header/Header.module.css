@@ -9,8 +9,6 @@
     margin-bottom: 10px;
   }
 
-  /* #4c6dc1 */
-
 .header_content {
   width: 1120px;
   display: flex;
@@ -51,4 +49,5 @@
 
   .main_nav {
     color: #fff;
+    margin-top: 4px;
   }
