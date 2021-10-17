@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Style } from "react-style-tag";
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { loginUserTC } from '../../api/api';
@@ -22,12 +21,6 @@ class Login extends React.Component {
             <div className="main-content-block login_block">
                 <div className="login_content">
                     <LoginReduxForm {...this.props} onSubmit={this.onSubmit} />
-                    <Style>{`
-                    .app-content {
-                    grid-column-start: 1;
-                    grid-column-end: 3;
-                }`}
-                    </Style>
                 </div>
             </div>
         )

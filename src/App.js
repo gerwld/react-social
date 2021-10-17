@@ -58,11 +58,11 @@ class App extends React.Component {
           <Route path="/login" render={this.props.isAuth ? () => <Redirect to="/profile" /> : withSuspense(LoginContainer)} />
           <Route path="/" exact render={() => { return this.props.isAuth === true ? <Redirect to="/profile" /> : <Redirect to="/login" />; }} />
 
-          <Route path='/error-404' render={() => <NotFound />} />
           <Redirect from='*' to='/error-404' />
         </Switch>
       </div>
     </div>
+    <Route path='/error-404' render={() => <NotFound />} />
     </>);
   }
 }

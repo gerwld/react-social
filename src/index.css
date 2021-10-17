@@ -16,6 +16,7 @@
 }
 
 body {
+  min-width: 1200px;
   background-color: #edeef0c4!important;
   margin: 0;
   font-size: 15px!important;
@@ -50,4 +51,8 @@ code {
 
 .main-content-block a {
   color: var(--main-blue-color);
+}
+
+.changeBackground::before {
+  display: block;
 }

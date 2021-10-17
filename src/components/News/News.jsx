@@ -62,7 +62,7 @@ const FeedNavbar = () => {
                         <li>Photos</li>
                         <li>Videos</li>
                         <li>Coronavirus</li>
-                        <li>Technologies</li>
+                        <li>Technologies </li>
                     </ul>
                 </li>
                 <li>Recomendations</li>
@@ -127,7 +127,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, .
                     <div className={`${s.post_image} ${s.load_wrapper}`}>
                         <a href={props.postLink} target="_blank" rel="noreferrer">
                             <LazyLoadImage effect="opacity" src={props.img}
-                                threshold={1} delayMethod='false' alt="Post img" wrapperClassName={s.imageSpanWrap}
+                                threshold={250} delayMethod='false' alt="Post img" wrapperClassName={s.imageSpanWrap}
                                 afterLoad={() => disableLoading(false)} onError={i => i.target.style.display = 'none'} />
                         </a>
                         {isLoading && <div className={s.load_activity}></div>}

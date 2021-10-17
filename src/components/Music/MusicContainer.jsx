@@ -3,9 +3,12 @@ import Music from './Music';
 import { connect } from 'react-redux';
 import { setCurrentSongTC, toggleRepeatSong, setProgress } from '../../redux/audio-reducer';
 import s from "./Music.module.css";
-import { MusicAnimation } from '../common/Preloader/Preloader';
+import { MusicAnimation, Preloaderw_100 } from '../common/Preloader/Preloader';
 
 class MusicContainer extends React.Component {
+    state = {
+        isInitialized: false,
+    }
 
     setCurrentSong = (id) => {
         if (id) {
@@ -27,12 +30,23 @@ class MusicContainer extends React.Component {
         }
     }
 
+    componentDidMount() {
+       this.initialize = setTimeout(() => this.setState({isInitialized: true}), 500);
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.initialize);
+    }
+
     render() {
+        if(this.state.isInitialized){
         return (
             <Music trackList={this.props.trackList} currentUrl={this.props.currentUrl} setCurrentSong={this.setCurrentSong}
                 currendTrackId={this.props.currendTrackId} isRepeatSameTrack={this.props.isRepeatSameTrack} toggleRepeat={this.toggleRepeat}
                 repeatCurrentTrack={this.repeatCurrentTrack} />
-        )
+        )} else {
+            return <Preloaderw_100 />
+        }
     }
 }
 

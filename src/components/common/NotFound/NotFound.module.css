@@ -11,13 +11,25 @@
     clip: rect(1px,1px,1px,1px);
 }
 
+.notFound_background {
+    width: 100vw;
+    min-width: 1200px;
+    height: calc(100vh - 60px);
+    background-color: white;
+    margin-top: -25px;
+    overflow: hidden;
+}
+
 .notFound_window {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 85vh;
     user-select: none;
+    width: 1130px;
+    margin: 0 auto;
 }
+
 
 .mainTitle {
     display: block;
