@@ -204,21 +204,21 @@
   font-weight: bold;
 }
 
-.contact_button {
+.contact_buttons {
   margin-top: 10px;
 }
 
-.contact_button button,
-.contact_button a {
+.contact_buttons button,
+.contact_buttons a {
   margin-bottom: 5px;
 }
 
-.contact_button .last {
+.contact_buttons .last {
   margin-bottom: 0;
 }
 
 .sub_btn_transparent {
-  padding: 8px 5px!important;
+  padding: 7px 5px!important;
   background-color: transparent!important;
   color: #8a94a0!important;
   text-align: left!important;
@@ -232,7 +232,7 @@ button.sub_btn_transparent:hover {
 .sub_btn_transparent svg {
   font-size: 22px;
   transform: translateY(-2px);
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
 ul.friends_last {
@@ -299,7 +299,7 @@ ul.friends_last {
   max-width: 140%;
 }
 
-.contact_button button {
+.contact_buttons button {
   display: block;
   width: 100%;
   padding: var(--padding-buttons-ui);
@@ -312,16 +312,20 @@ ul.friends_last {
   transition: 0.2s;
 }
 
-.contact_button a {
+.contact_buttons a {
   text-decoration: none;
 }
 
 
-.contact_button a:hover,
-.contact_button button:hover {
+.contact_buttons a:hover,
+.contact_buttons button:hover {
   color: #fff;
   background-color: #4a63a3;
   text-decoration: none;
+}
+
+.contact_buttons a:nth-child(1) button {
+  margin-bottom: 7px;
 }
 
 li.user-info__status {

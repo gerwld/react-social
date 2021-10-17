@@ -6,7 +6,8 @@ import { NavLink } from 'react-router-dom';
 import avatarCheck from '../../utils/validators/avatarCheck';
 import { createField, InputText, Textarea } from '../common/FormControls/FormControls';
 import { Field, reduxForm } from 'redux-form';
-import { IoStatsChart, IoArrowBackCircle} from "react-icons/io5";
+import { BiHistory} from "react-icons/bi";
+import { IoMdStats} from "react-icons/io";
 
 class Profile extends React.Component {
 
@@ -29,12 +30,12 @@ class Profile extends React.Component {
                   <label><input type="file" onChange={e => this.props.onHandleAvatar(e)} /><i className="fas fa-file-image" />Upload new avatar</label>
                 </div>}
               </div>
-              <div className={'contact_button'}>
+              <div className={'contact_buttons'}>
                 {isAuthProfile ?
                   <div>
                     <NavLink to={`/profile/status=edit_settings`}><button>Edit profile</button></NavLink>
-                    <NavLink to={`/profile/status=page_memo`}><button className="sub_btn_transparent"><IoArrowBackCircle />Memories</button></NavLink>
-                    <NavLink to={`/profile/status=page_stats`}><button className="sub_btn_transparent last"><IoStatsChart />Page statistics</button></NavLink>
+                    <NavLink to={`/profile/status=page_memo`}><button className="sub_btn_transparent"><BiHistory />Memories</button></NavLink>
+                    <NavLink to={`/profile/status=page_stats`}><button className="sub_btn_transparent last"><IoMdStats />Page statistics</button></NavLink>
                   </div> :
                   <div>
                     <NavLink to={`/dialogs/id${this.props.urlUserId}`}><button>Write a message</button></NavLink>

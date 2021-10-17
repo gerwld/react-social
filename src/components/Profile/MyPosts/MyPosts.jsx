@@ -12,7 +12,8 @@ const MyPosts = (props) => {
     if (link === "my_posts") return s.user_posts_ac_1;
     else if (link === "post_archive")return s.user_posts_ac_2;
   }
-
+  let isHasId = (props.match.params.userId && props.match.params.userId.length > 1) ? '/id' + props.match.params.userId : '';
+  debugger;
   return (
     <><div className={`${s.user_posts} main-content-block`}>
       <MyPostReduxForm onSubmit={e => props.sendPost(e)} {...props} />
@@ -20,9 +21,9 @@ const MyPosts = (props) => {
       <div className={`${s.user_posts}`}>
         <div className={`${s.user_posts_navtitle} main-content-block`}>
           <ul className={`${s.user_posts_nav} ${currentActive(props.match.params.flags)}`}>
-            <li><NavLink to="/profile" exact activeClassName={s.active}>All posts</NavLink></li>
-            <li><NavLink to="/profile/filter=my_posts" activeClassName={s.active}>My posts</NavLink></li>
-            <li><NavLink to="/profile/filter=post_archive" activeClassName={s.active}>Post archive</NavLink></li>
+            <li><NavLink to={`/profile${isHasId}`} exact activeClassName={s.active}>All posts</NavLink></li>
+            <li><NavLink to={`/profile${isHasId}/filter=my_posts`} activeClassName={s.active}>My posts</NavLink></li>
+            <li><NavLink to={`/profile${isHasId}/filter=post_archive`} activeClassName={s.active}>Post archive</NavLink></li>
           </ul>
         </div>
         <div className={s.user_posts__last}>
