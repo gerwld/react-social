@@ -19,7 +19,6 @@ import { FormControlLabel, Switch } from '@mui/material';
 import { AiOutlineCamera } from 'react-icons/ai'
 import { RiSendPlaneFill } from 'react-icons/ri'
 import { ImFire } from 'react-icons/im'
-import NewsContainer from './NewsContainer';
 
 
 
