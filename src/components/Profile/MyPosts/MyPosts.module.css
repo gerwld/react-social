@@ -23,15 +23,15 @@
   position: relative;
   border-bottom-left-radius: 0!important;
   border-bottom-right-radius: 0!important;
-  border-bottom: 1px solid rgb(228, 228, 228);
+  border-bottom: 2px solid rgb(228, 228, 228);
   box-shadow: 0 0 0 1px #e7e8ec;
 }
 
 .feed_block:nth-last-child(1) > div {
-  z-index: 0;
+  z-index: 100;
   border-top-left-radius: 0!important;
   border-top-right-radius: 0!important;
-  margin-top: -1px;
+  box-shadow: 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
 }
 
 .user_posts_nav {
@@ -75,7 +75,7 @@
   content: '';
   display: block;
   position: absolute;
-  bottom: -2px;
+  bottom: -1px;
   left: 10px;
   width: 79px;
   height: 3px;

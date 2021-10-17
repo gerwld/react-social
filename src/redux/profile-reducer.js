@@ -18,9 +18,15 @@ export const setAuthUser = (profile) => ({ type: SET_AUTH_USER, profile });
 
 let initialState = {
     postData: [
-        { id: 0, cont: "That site is so cool!", likes: 9 },
-        { id: 1, cont: "Deez nuts... Today everything is fine, just vibing with my famity #coolday", likes: 28 },
-        { id: 2, cont: "Hi there!! 2007 is rock!", likes: 23 }
+        { id: 0, publishedAt: '2006-9-4T17:09:15Z', cont: "That site is so cool!", likes: 9 },
+        {
+            id: 1,
+            publishedAt: '2007-10-17T13:06:15Z',
+            cont: "Hi there!! 2007 is rock!",
+            likes: 23,
+            urlToImage: '/images/post-photo-2.jpg'
+        },
+        { id: 2, publishedAt: '2012-10-17T13:06:15Z', cont: "Deez nuts... Today everything is fine, just vibing with my famity🙃 #coolday", likes: 28 },
     ],
     profile: null,
     authProfile: null,
@@ -33,7 +39,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postData: [...state.postData,
-                { id: state.postData.length, cont: action.message, likes: 0 }],
+                action.message],
                 newPostText: ""
             };
 
@@ -88,10 +94,10 @@ export const getUserInfo = (userId) => {
 
 export const getAuthUserData = (authId) => {
     return async (dispatch) => {
-            let user = await profileAPI.getUser(authId);
-            dispatch(setAuthUser(user));
-        }
+        let user = await profileAPI.getUser(authId);
+        dispatch(setAuthUser(user));
     }
+}
 
 
 export const setUserStatus = (status) => {
@@ -118,7 +124,7 @@ export const setCurrentSettingsTC = (data) => {
             dispatch(getUserInfo(authId));
             alert('Settings saved.');
         }
-        if (response.data.messages.length > 0) { 
+        if (response.data.messages.length > 0) {
             response.data.messages.map(mess => alert(mess));
         }
     }
@@ -137,10 +143,21 @@ export const setUserAvatar = (photo) => {
     }
 }
 
-export const sendPost = (submit) => {
+export const sendPost = (post) => {
     return (dispatch) => {
-        dispatch(onAddPost(submit.post));
-        dispatch(reset('myPosts'));
+        let data = moment().format("MMM Do, hh:mm a");
+        let isEmpty = !post.post || post.post.length < 1;
+        if (!isEmpty) {
+            let postObj = {
+                postId: moment() + '_postId',
+                publishedAt: data,
+                cont: post.post,
+                likes: 0
+            }
+            dispatch(onAddPost(postObj));
+            dispatch(reset('myPosts'));
+        } 
+        else alert("Your message is empty, or you provided incorrect data.");
     }
 }
 

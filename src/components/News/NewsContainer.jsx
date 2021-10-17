@@ -33,16 +33,16 @@ class NewsContainer extends React.Component {
                 }
             }
             let profile = this.props.authProfile || this.props.profile;
-
+            let time = moment().format();
             this.props.addNewPostTC({
                 "source": {
                     "id": profile.userId,
-                    "postId": profile.fullName.split(' ')[0] + moment().format() + "_postId",
+                    "postId": profile.fullName.split(' ')[0] + time + "_postId",
                     "name": profile.fullName,
                 },
                 "avatar": profile.photos.small,
                 "title": data.postData,
-                "publishedAt": moment(),
+                "publishedAt": time,
                 "likesCount": 0
             });
         } else alert("Your message is empty, or you provided incorrect data.");

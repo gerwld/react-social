@@ -118,7 +118,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, .
                 </div>
                 <div className={s.main_info}>
                     <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
-                    <span className={s.post_time}>{time}</span>
+                    <span className={s.post_time}>{isNaN(props.data[0]) ? props.data : time }</span>
                 </div>
             </div>
             <div className={s.block_content}>
@@ -126,7 +126,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, .
                 {props.img &&
                     <div className={`${s.post_image} ${s.load_wrapper}`}>
                         <a href={props.postLink} target="_blank" rel="noreferrer">
-                            <LazyLoadImage effect="opacity" width="650px" src={props.img}
+                            <LazyLoadImage effect="opacity" src={props.img}
                                 threshold={1} delayMethod='false' alt="Post img" wrapperClassName={s.imageSpanWrap}
                                 afterLoad={() => disableLoading(false)} onError={i => i.target.style.display = 'none'} />
                         </a>

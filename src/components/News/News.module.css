@@ -362,9 +362,11 @@
 
 .post_image {
     display: flex;
-    height: 330px;
+    min-height: 330px;
+    max-height: 400px;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     object-fit: cover;
     font-size: 0;
 }

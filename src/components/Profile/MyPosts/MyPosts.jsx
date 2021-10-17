@@ -4,10 +4,11 @@ import { Field, reduxForm } from 'redux-form';
 import { Textarea_100 } from '../../common/FormControls/FormControls';
 import { FeedBlock } from '../../News/News';
 import { NavLink } from 'react-router-dom';
+import { moment } from 'moment';
 
 
 const MyPosts = (props) => {
-  let userPosts = props.postData.map(post => <div key={post.id} className={s.feed_block}><FeedBlock postId={post.id} data="2021-10-16T14:00:00Z" author={props.fullName} avatar={props.avatar} likesCount={post.likes} text={post.cont} img="" /></div>);
+  let userPosts = props.postData.map(post => <div key={post.id} className={s.feed_block}><FeedBlock postId={post.id} data={post.publishedAt} author={props.fullName} avatar={props.avatar} likesCount={post.likes} text={post.cont} img={post.urlToImage} /></div>);
   const currentActive = (link) => {
     if (link === "my_posts") return s.user_posts_ac_1;
     else if (link === "post_archive")return s.user_posts_ac_2;
@@ -16,7 +17,7 @@ const MyPosts = (props) => {
   debugger;
   return (
     <><div className={`${s.user_posts} main-content-block`}>
-      <MyPostReduxForm onSubmit={e => props.sendPost(e)} {...props} />
+      <MyPostReduxForm onSubmit={props.sendPost} {...props} />
     </div>
       <div className={`${s.user_posts}`}>
         <div className={`${s.user_posts_navtitle} main-content-block`}>
@@ -38,7 +39,6 @@ const MyPosts = (props) => {
 
 const MyPostForm = (props) => {
   const [fieldHeight, setHeight] = useState("45px");
-
   return <form className={s.new_post_form} onSubmit={props.handleSubmit}>
     <div className={s.user_avatar}>
       <img src={props.avatar} alt="profile" />

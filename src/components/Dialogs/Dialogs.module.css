@@ -397,7 +397,7 @@ border-radius: 50%;
 .status {
     position: absolute;
     right: 97px;
-    bottom: 30px;
+    top: 30px;
     font-size: 13.2px;
     color: #b7beca;
 }
