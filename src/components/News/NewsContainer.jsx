@@ -13,6 +13,11 @@ class NewsContainer extends React.Component {
 
     componentDidMount() {
         this.props.loadPostsTC(this.props.nextPage, this.props.pageSize);
+        if (!this.props.authProfile) {
+            if (!this.props.profile || this.props.profile.userId !== this.props.authId) {
+                this.props.getAuthUserData(this.props.authId);
+            }
+        }
     }
 
     addValueToMessage = async (symbol, postId) => {
@@ -25,14 +30,15 @@ class NewsContainer extends React.Component {
         }
     }
 
-    addComment = async (data, postId) => {
+    addComment = async (data, postId) => {    
+        let profile = this.props.authProfile || this.props.profile;
         let currentT = moment().format();
         let message = {
-        id: '33', 
+        id: `${profile.userId}_${currentT}_${Math.random() * 100}_commentId`, 
         postId: postId, 
-        senderId: 123, 
-        avatar: '/images/avatars/def-avatar.png',
-        fullName:'P Jaworski', 
+        senderId: profile.userId, 
+        avatar: profile.photos.small,
+        fullName: profile.fullName, 
         text: data.comment, 
         data: currentT, 
         likes: 0
@@ -43,13 +49,8 @@ class NewsContainer extends React.Component {
 
 
     whatsNewSubmit = async (data) => {
+        let profile = this.props.authProfile || this.props.profile;
         if (data.postData && data.postData.length > 0) {
-            if (!this.props.authProfile) {
-                if (!this.props.profile || this.props.profile.userId !== this.props.authId) {
-                    await this.props.getAuthUserData(this.props.authId);
-                }
-            }
-            let profile = this.props.authProfile || this.props.profile;
             let time = moment().format();
             this.props.addNewPostTC({
                 "source": {

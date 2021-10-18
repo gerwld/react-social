@@ -10,7 +10,7 @@ export const editComment = (commentId, newText) => ({ type: EDIT_COMMENT, commen
 
 let initialState = {
     list: [
-        { id: '', postId: "2021-10-18T16:18:45ZThe_postId", senderId: 123, avatar: '/images/avatars/def-avatar.png', fullName:'P Jaworski', text: '123123', data: "2021-10-18T14:00:01Z", likes: 5 }
+        { id: '', postId: "2021-10-18T16:18:45ZThe_postId", senderId: 123, avatar: '/images/avatars/def-avatar.png', fullName:'Salvadore Dali', text: 'Just a comment', data: "2021-10-18T14:00:01Z", likes: 5 }
     ]
 }
 
