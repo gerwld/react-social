@@ -7,11 +7,17 @@ import moment from 'moment';
 import { getAuthUserData } from '../../redux/profile-reducer';
 import { change, getFormValues } from 'redux-form';
 import store from '../../redux/redux-store.js'
+import { addCommentTC } from '../../redux/comments-reducer';
 
 class NewsContainer extends React.Component {
 
     componentDidMount() {
         this.props.loadPostsTC(this.props.nextPage, this.props.pageSize);
+        if (!this.props.authProfile) {
+            if (!this.props.profile || this.props.profile.userId !== this.props.authId) {
+                this.props.getAuthUserData(this.props.authId);
+            }
+        }
     }
 
     addValueToMessage = async (symbol, postId) => {
@@ -24,15 +30,26 @@ class NewsContainer extends React.Component {
         }
     }
 
+    addComment = async (data, postId) => {    
+        let profile = this.props.authProfile || this.props.profile;
+        let currentT = moment().format();
+        let message = {
+        id: `${profile.userId}_${currentT}_${Math.random() * 100}_commentId`, 
+        postId: postId, 
+        senderId: profile.userId, 
+        avatar: profile.photos.small,
+        fullName: profile.fullName, 
+        text: data.comment, 
+        data: currentT, 
+        likes: 0
+        }
+        this.props.addCommentTC(message);
+    }
+
 
     whatsNewSubmit = async (data) => {
+        let profile = this.props.authProfile || this.props.profile;
         if (data.postData && data.postData.length > 0) {
-            if (!this.props.authProfile) {
-                if (!this.props.profile || this.props.profile.userId !== this.props.authId) {
-                    await this.props.getAuthUserData(this.props.authId);
-                }
-            }
-            let profile = this.props.authProfile || this.props.profile;
             let time = moment().format();
             this.props.addNewPostTC({
                 "source": {
@@ -55,7 +72,7 @@ class NewsContainer extends React.Component {
                 avatar={post.avatar} nv={noAvatar} author={post.source.name} data={post.publishedAt}
                 postLink={post.url} likesCount={post.likesCount} img={post.urlToImage}
                 isAuthPost={post.source.id === this.props.authId} deletePost={this.props.deletePost}
-                isPopup={true} /></div>
+                isPopup={true} comments={this.props.comments.filter(c => c.postId === post.source.postId)} addComment={this.addComment} /></div>
         })
     }
 
@@ -81,9 +98,10 @@ var mapStateToProps = (state) => {
         authUserName: state.auth.login,
         profile: state.profilePage.profile,
         authProfile: state.profilePage.authProfile,
-        authId: state.auth.userId
+        authId: state.auth.userId,
+        comments: state.comments.list
     }
 }
 
 
-export default connect(mapStateToProps, { loadPostsTC, addNewPostTC, getAuthUserData, deletePost, change, getFormValues })(NewsContainer);
+export default connect(mapStateToProps, { loadPostsTC, addNewPostTC, getAuthUserData, deletePost, change, getFormValues, addCommentTC })(NewsContainer);

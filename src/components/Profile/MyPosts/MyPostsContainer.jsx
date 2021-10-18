@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MyPosts from './MyPosts';
-import { sendPost } from '../../../redux/profile-reducer';
+import { getAuthUserData, sendPost } from '../../../redux/profile-reducer';
 import avatarCheck from '../../../utils/validators/avatarCheck';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import store from '../../../redux/redux-store.js'
 import { getFormValues, change } from 'redux-form';
+import { addCommentTC } from '../../../redux/comments-reducer';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,12 +15,25 @@ const mapStateToProps = (state) => {
     inputValue: state.profilePage.newPostText,
     profile: state.profilePage.profile,
     authUserId: state.profilePage.authUserId,
+    comments: state.comments.list,
+    profile: state.profilePage.profile,
+    authProfile: state.profilePage.authProfile,
+    authId: state.auth.userId,
     avatarCheck: avatarCheck
 
   }
 }
 
 class MyPostContainer extends React.Component {
+
+  componentDidMount() {
+    if (!this.props.authProfile) {
+      if (!this.props.profile || this.props.profile.userId !== this.props.authId) {
+          this.props.getAuthUserData(this.props.authId);
+      }
+  }
+  }
+
   addValueToMessage = async (symbol, postId) => {
     let state = store.getState();
     let message = getFormValues(postId)(state);
@@ -30,14 +44,30 @@ class MyPostContainer extends React.Component {
      }
  }
 
+ addComment = async (data, postId) => {    
+  let profile = this.props.authProfile || this.props.profile;
+  let currentT = moment().format();
+  let message = {
+  id: `${profile.userId}_${currentT}_${Math.random() * 100}_commentId`, 
+  postId: postId, 
+  senderId: profile.userId, 
+  avatar: profile.photos.small,
+  fullName: profile.fullName, 
+  text: data.comment, 
+  data: currentT, 
+  likes: 0
+  }
+  this.props.addCommentTC(message);
+}
+
   render() {
     return(
-      <MyPosts {...this.props} addValueToMessage={this.addValueToMessage}/>
+      <MyPosts {...this.props} addValueToMessage={this.addValueToMessage} addComment={this.addComment}/>
     )
   }
 }
 
 export default compose(
-  connect(mapStateToProps, { sendPost, change }),
+  connect(mapStateToProps, { sendPost, change, addCommentTC, getAuthUserData}),
   withRouter
 )(MyPostContainer);
