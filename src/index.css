@@ -61,3 +61,6 @@ code {
   display: block;
 }
 
+.popup-content {
+  width: 0!important;
+}

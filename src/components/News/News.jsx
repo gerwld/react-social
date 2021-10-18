@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroller';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 import 'emoji-mart/css/emoji-mart.css'
@@ -18,7 +17,12 @@ import { Textarea_100 } from '../common/FormControls/FormControls';
 import { FormControlLabel, Switch } from '@mui/material';
 import { AiOutlineCamera } from 'react-icons/ai'
 import { RiSendPlaneFill } from 'react-icons/ri'
+import { BiCheck } from 'react-icons/bi'
 import { ImFire } from 'react-icons/im'
+import LazyLoadImageHOC from '../../hoc/LazyLoad';
+import DropDownMenu from '../common/DropDownMenu/DropDownMenu';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 
 
@@ -55,26 +59,26 @@ const FeedNavbar = () => {
     return (
         <div className={`${s.navbar_wrapper} ${scrollYPosBigger65 && s.navbar_wrapper_action}`}>
             <div className={`${s.navbar} main-content-block`}>
-            <ul className={s.navbar_nav_1}>
-                <li className={s.col_block}>
-                    <span className={`${s.col_title} ${s.col_title_active}`}>News</span>
-                    <ul>
-                        <li>Photos</li>
-                        <li>Videos</li>
-                        <li>Coronavirus</li>
-                        <li>Technologies </li>
-                    </ul>
-                </li>
-                <li>Recomendations</li>
-                <li>Search</li>
-            </ul>
-            <ul className={s.navbar_nav_2}>
-                <li>Liked recently</li>
-            </ul>
+                <ul className={s.navbar_nav_1}>
+                    <li className={s.col_block}>
+                        <span className={`${s.col_title} ${s.col_title_active}`}>News</span>
+                        <ul>
+                            <li>Photos</li>
+                            <li>Videos</li>
+                            <li>Coronavirus</li>
+                            <li>Technologies </li>
+                        </ul>
+                    </li>
+                    <li>Recomendations</li>
+                    <li>Search</li>
+                </ul>
+                <ul className={s.navbar_nav_2}>
+                    <li>Liked recently</li>
+                </ul>
             </div>
             <div className={`${s.navbar_interest} main-content-block`}>
-                    <FormControlLabel control={<Switch defaultChecked size="small" />} label={<div><ImFire /> Show the most interesting first ‏‏‎  ‏‏‎ </div>} labelPlacement="start"/>
-                </div>
+                <FormControlLabel control={<Switch defaultChecked size="small" />} label={<div><ImFire /> Show the most interesting first ‏‏‎  ‏‏‎ </div>} labelPlacement="start" />
+            </div>
         </div>
     )
 }
@@ -88,10 +92,13 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, .
     let [isLike, toggleLike] = useState(false);
     let [likesCount, likeAction] = useState(isNaN(props.likesCount) ? (22 + Math.floor(Math.random() * 10)) : props.likesCount);
     let [isShowSet, toggleSet] = useState(false);
+    let [isShowSetPop, toggleSetPop] = useState(false);
     let [autoFocus, setFocus] = useState(true);
 
-    const PostCommentForm = reduxForm({ form: `${postId}_form`, destroyOnUnmount: false,
-    keepDirtyOnReinitialize: true, forceUnregisterOnUnmount: true })(PostCommentsBlock);
+    const PostCommentForm = reduxForm({
+        form: `${postId}_form`, destroyOnUnmount: false,
+        keepDirtyOnReinitialize: true, forceUnregisterOnUnmount: true
+    })(PostCommentsBlock);
 
     let likePress = (e, id) => {
         let buttonIcon = e.currentTarget.children[0];
@@ -118,73 +125,84 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, .
                 </div>
                 <div className={s.main_info}>
                     <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
-                    <span className={s.post_time}>{isNaN(props.data[0]) ? props.data : time }</span>
+                    <span className={s.post_time}>{isNaN(props.data[0]) ? props.data : time}</span>
                 </div>
             </div>
             <div className={s.block_content}>
                 <p>{props.text}</p>
                 {props.img &&
                     <div className={`${s.post_image} ${s.load_wrapper}`}>
-                        <a href={props.postLink} target="_blank" rel="noreferrer">
-                            <LazyLoadImage effect="opacity" src={props.img}
-                                threshold={250} delayMethod='false' alt="Post img" wrapperClassName={s.imageSpanWrap}
-                                afterLoad={() => disableLoading(false)} onError={i => i.target.style.display = 'none'} />
-                        </a>
+                        <Popup lockScroll={true} modal={true} trigger={<div><LazyLoadImageHOC img={props.img} s={s.imageSpanWrap} d={disableLoading} /></div>} position="right center">
+                            {close => (
+                                <div className={s.news_popup}>
+                                    <div className={`${s.news_popup_content} main-content-block`}>
+                                            <div className={s.block_author}>
+                                                <div className={s.author_avatar}>
+                                                    {props.avatar ? <img src={props.avatar} alt="Author avatar" /> : <img src={props.nv} alt="Author avatar" />}
+                                                </div>
+                                                <div className={s.main_info}>
+                                                    <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
+                                                    <span className={s.post_time}>{isNaN(props.data[0]) ? props.data : time}</span>
+                                                </div>
+                                                <div className={s.news_popup_buttons}>
+                                                    <button className={s.follow}><BiCheck />Following</button>
+                                                    <ActionBlockButton isShowSet={isShowSetPop} toggleSet={toggleSetPop} postId={postId}
+                                                        isAuthPost={isAuthPost} hideContent={hideContent} deletePost={deletePost} />
+                                                </div>
+                                            </div>
+
+                                            <div className={s.fullscreen_post_content}>{props.content.split("[")[0]}</div>
+                                            <div className={s.fullscreen_post_img}><img src={props.img} alt="Post" /></div>
+                                            <ButtonsBlock likePress={likePress} likesCount={likesCount} showComment={showComment} />
+                                    </div>
+                                    <div className={s.news_popup__bg} onClick={close} />
+                                </div>
+                            )}
+                        </Popup>
                         {isLoading && <div className={s.load_activity}></div>}
                     </div>}
             </div>
-            <div className={s.block_buttons}>
-                <div className={s.like_btn}>
-                    <button onClick={e => likePress(e)}><i className="far fa-heart" /></button>
-                    <span>{likesCount}</span>
-                </div>
-                <div className={s.comment_btn}>
-                    <button onClick={() => showComment(true)} ><i className="far fa-comment-alt"></i></button>
-                    <span>0</span>
-                </div>
-                <div className={s.share_btn}>
-                    <button ><i className="fa fa-share" /></button>
-                </div>
-            </div>
+            <ButtonsBlock likePress={likePress} likesCount={likesCount} showComment={showComment} />
             <div className={s.control_buttons}>
-                <Foco onClickOutside={() => toggleSet(false)}>
-                    <ButtonBase children={<button onClick={() => toggleSet(!isShowSet)}><i className="fas fa-ellipsis-h"></i></button>} />
-                    {isShowSet && <DropDownMenu postId={postId} isAuthor={isAuthPost} hideContent={hideContent} deletePost={deletePost} />}
-                </Foco>
+                <ActionBlockButton isShowSet={isShowSet} toggleSet={toggleSet} postId={postId}
+                    isAuthPost={isAuthPost} hideContent={hideContent} deletePost={deletePost} />
             </div>
-            {isComment && <PostCommentForm emojiTogle={showEmoji} autoFocus={autoFocus}/>}
+            {isComment && <PostCommentForm emojiTogle={showEmoji} autoFocus={autoFocus} />}
             {isShowEmoji &&
-                    <div onMouseLeave={() => showEmoji(false)} className={`${s.emoji_picker} picker_style`}>
-                        <Foco onClickOutside={() => showEmoji(false)}>
-                            <Picker set='apple' include={['search', 'smileys', 'people', 'nature']} sheetSize="32" showSkinTones="false" onSelect={e => {addValueToMessage(e, `${postId}_form`); setFocus(true)}} title=""/>
-                        </Foco>
-                    </div>}
+                <div onMouseLeave={() => showEmoji(false)} className={`${s.emoji_picker} picker_style`}>
+                    <Foco onClickOutside={() => showEmoji(false)}>
+                        <Picker set='apple' include={['search', 'smileys', 'people', 'nature']} sheetSize="32" showSkinTones="false" onSelect={e => { addValueToMessage(e, `${postId}_form`); setFocus(true) }} title="" />
+                    </Foco>
+                </div>}
         </div>
     )
 }
 
-const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId }) => {
-    //Almost all here is hardcoded, so actions road is also simple.
-    let dropDown = [
-        { id: 'hide', name: "Not show post's from this group", onClick: () => hideContent(true), icon: "fa-solid fa-eye-slash" },
-        { id: 'report', name: "Report problem", onClick: (e) => e, icon: "fa-solid fa-circle-exclamation" },
-        { id: 'why', name: "Why am i seeing this content?", onClick: (e) => e, icon: "fa-solid fa-circle-question" },
-    ];
-    let dropDownAuthor = [
-        { id: 'delete', name: "Delete post", onClick: () => setTimeout(() => {deletePost(postId)}, 200), icon: "fa-solid fa-trash" },
-        { id: 'edit', name: "Edit post", onClick: (e) => e, icon: "fa-solid fa-edit" },
-        { id: 'report', name: "Report problem", onClick: (e) => e, icon: "fa-solid fa-circle-exclamation" }
-    ];
-    let set = isAuthor ? dropDownAuthor : dropDown;
+const ButtonsBlock = ({ likePress, likesCount, showComment }) => {
+    return (
+        <div className={s.block_buttons}>
+            <div className={s.like_btn}>
+                <button onClick={e => likePress(e)}><i className="far fa-heart" /></button>
+                <span>{likesCount}</span>
+            </div>
+            <div className={s.comment_btn}>
+                <button onClick={() => showComment(true)} ><i className="far fa-comment-alt"></i></button>
+                <span>0</span>
+            </div>
+            <div className={s.share_btn}>
+                <button ><i className="fa fa-share" /></button>
+            </div>
+        </div>
+    )
+}
 
-    return (<div className={s.dropdown_menu}>
-        <ul>
-            {set.map(prop => <li key={prop.id} onClick={(id) => prop.onClick(id)}>
-                {prop.icon && <i className={`${prop.icon} ${s.icons}`} />}
-                <span>{prop.name}</span>
-            </li>)}
-        </ul>
-    </div>);
+const ActionBlockButton = ({ isShowSet, toggleSet, postId, isAuthPost, hideContent, deletePost }) => {
+    return (
+        <Foco onClickOutside={() => toggleSet(false)}>
+            <ButtonBase children={<button onClick={() => toggleSet(!isShowSet)}><i className="fas fa-ellipsis-h" /></button>} />
+            {isShowSet && <DropDownMenu postId={postId} isAuthor={isAuthPost} hideContent={hideContent} deletePost={deletePost} />}
+        </Foco>
+    )
 }
 
 const WhatsNew = (props) => {

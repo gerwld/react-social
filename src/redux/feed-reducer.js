@@ -61,6 +61,7 @@ export const loadPostsTC = (nextPage, pageSize) => {
           "url": r.url,
           "urlToImage": r.urlToImage,
           "publishedAt": r.publishedAt,
+          "content": r.description + r.content
          }});
          
         dispatch(loadPosts(posts));
