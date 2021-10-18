@@ -461,12 +461,6 @@
     border-radius: 50%;
 }
 
-/* .control_buttons button:active {
-    background-color: #eee;
-} */
-
-
-
 .anim_background {
     display: block;
     position: absolute;
@@ -598,8 +592,8 @@
 
 .news_popup_buttons div {
     position: absolute;
-    top: 70px;
-    right: 20px;
+    top: 78px;
+    right: 15px;
 }
 
 .fullscreen_post_img img {

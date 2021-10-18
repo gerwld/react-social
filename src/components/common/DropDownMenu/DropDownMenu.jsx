@@ -1,5 +1,7 @@
 import React from 'react'
 import s from "./Drop.module.css";
+import Foco from 'react-foco';
+import ButtonBase from '@mui/material/ButtonBase'
 
 const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId, toggleSet }) => {
     //Almost all here is hardcoded, so actions road is also simple.
@@ -25,4 +27,14 @@ const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId, toggleSet }) 
     </div>);
 }
 
-export default DropDownMenu;
+const ActionBlockButton = ({ isShowSet, toggleSet, postId, isAuthPost, hideContent, deletePost }) => {
+    return (
+        <Foco onClickOutside={() => toggleSet(false)}>
+            <ButtonBase children={<span onClick={() => toggleSet(!isShowSet)}><i className="fas fa-ellipsis-h" /></span>} />
+            {isShowSet && <DropDownMenu postId={postId} isAuthor={isAuthPost} hideContent={hideContent} deletePost={deletePost}
+                toggleSet={toggleSet} />}
+        </Foco>
+    )
+}
+
+export default ActionBlockButton;

@@ -11,7 +11,6 @@ import './emoji-edit.css';
 import { Picker } from 'emoji-mart'
 
 import Foco from 'react-foco';
-import ButtonBase from '@mui/material/ButtonBase'
 import useScrollPosition from '@react-hook/window-scroll'
 import { FormControlLabel, Switch } from '@mui/material';
 import { AiOutlineCamera } from 'react-icons/ai'
@@ -19,9 +18,9 @@ import { RiSendPlaneFill } from 'react-icons/ri'
 import { BiCheck } from 'react-icons/bi'
 import { ImFire } from 'react-icons/im'
 import LazyLoadImageHOC from '../../hoc/LazyLoad';
-import DropDownMenu from '../common/DropDownMenu/DropDownMenu';
 import Popup from 'reactjs-popup';
 import WhatsNew from '../common/WhatsNewForm/WhatsNew';
+import ActionBlockButton from '../common/DropDownMenu/DropDownMenu';
 
 
 
@@ -194,16 +193,6 @@ const PopupFullSizeFeed = ({ isShowSetPop, toggleSetPop, postId, isAuthPost,
                 </div>
             )}
         </Popup>
-    )
-}
-
-const ActionBlockButton = ({ isShowSet, toggleSet, postId, isAuthPost, hideContent, deletePost }) => {
-    return (
-        <Foco onClickOutside={() => toggleSet(false)}>
-            <ButtonBase children={<span onClick={() => toggleSet(!isShowSet)}><i className="fas fa-ellipsis-h" /></span>} />
-            {isShowSet && <DropDownMenu postId={postId} isAuthor={isAuthPost} hideContent={hideContent} deletePost={deletePost}
-                toggleSet={toggleSet} />}
-        </Foco>
     )
 }
 
