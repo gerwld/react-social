@@ -1,10 +1,10 @@
 import React from 'react'
 import s from "./Drop.module.css";
 
-const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId }) => {
+const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId, toggleSet }) => {
     //Almost all here is hardcoded, so actions road is also simple.
     let dropDown = [
-        { id: 'hide', name: "Not show post's from this group", onClick: () => hideContent(true), icon: "fa-solid fa-eye-slash" },
+        { id: 'hide', name: "Not show post's from this group", onClick: () => {hideContent(true); toggleSet(false)}, icon: "fa-solid fa-eye-slash" },
         { id: 'report', name: "Report problem", onClick: (e) => e, icon: "fa-solid fa-circle-exclamation" },
         { id: 'why', name: "Why am i seeing this content?", onClick: (e) => e, icon: "fa-solid fa-circle-question" },
     ];

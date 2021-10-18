@@ -50,10 +50,12 @@ class NewsContainer extends React.Component {
 
     postsMap = (noAvatar) => {
         return this.props.posts.map(post => {
-            return <div key={post.source.postId}><FeedBlock content={post.content} addValueToMessage={this.addValueToMessage} postId={post.source.postId} id={post.source.id} text={post.title}
+            return <div key={post.source.postId}><FeedBlock content={post.content} addValueToMessage={this.addValueToMessage} 
+                postId={post.source.postId} id={post.source.id} text={post.title}
                 avatar={post.avatar} nv={noAvatar} author={post.source.name} data={post.publishedAt}
                 postLink={post.url} likesCount={post.likesCount} img={post.urlToImage}
-                isAuthPost={post.source.id === this.props.authId} deletePost={this.props.deletePost} /></div>
+                isAuthPost={post.source.id === this.props.authId} deletePost={this.props.deletePost}
+                isPopup={true} /></div>
         })
     }
 

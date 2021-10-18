@@ -8,7 +8,7 @@ import { moment } from 'moment';
 
 
 const MyPosts = (props) => {
-  let userPosts = props.postData.map(post => <div key={post.id} className={s.feed_block}><FeedBlock addValueToMessage={props.addValueToMessage} postId={post.id} data={post.publishedAt} author={props.fullName} avatar={props.avatar} likesCount={post.likes} text={post.cont} img={post.urlToImage} /></div>);
+  let userPosts = props.postData.map(post => <div key={post.id} className={s.feed_block}><FeedBlock isPopup={false} addValueToMessage={props.addValueToMessage} postId={post.id} data={post.publishedAt} author={props.fullName} avatar={props.avatar} likesCount={post.likes} text={post.cont} img={post.urlToImage} /></div>);
   const currentActive = (link) => {
     if (link === "my_posts") return s.user_posts_ac_1;
     else if (link === "post_archive")return s.user_posts_ac_2;

@@ -83,7 +83,7 @@ const FeedNavbar = () => {
     )
 }
 
-export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, ...props }) => {
+export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, isPopup, ...props }) => {
     var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
     let [isLoading, disableLoading] = useState(true);
     let [isHide, hideContent] = useState(false);
@@ -132,33 +132,10 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, .
                 <p>{props.text}</p>
                 {props.img &&
                     <div className={`${s.post_image} ${s.load_wrapper}`}>
-                        <Popup lockScroll={true} modal={true} trigger={<div><LazyLoadImageHOC img={props.img} s={s.imageSpanWrap} d={disableLoading} /></div>} position="right center">
-                            {close => (
-                                <div className={s.news_popup}>
-                                    <div className={`${s.news_popup_content} main-content-block`}>
-                                            <div className={s.block_author}>
-                                                <div className={s.author_avatar}>
-                                                    {props.avatar ? <img src={props.avatar} alt="Author avatar" /> : <img src={props.nv} alt="Author avatar" />}
-                                                </div>
-                                                <div className={s.main_info}>
-                                                    <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
-                                                    <span className={s.post_time}>{isNaN(props.data[0]) ? props.data : time}</span>
-                                                </div>
-                                                <div className={s.news_popup_buttons}>
-                                                    <button className={s.follow}><BiCheck />Following</button>
-                                                    <ActionBlockButton isShowSet={isShowSetPop} toggleSet={toggleSetPop} postId={postId}
-                                                        isAuthPost={isAuthPost} hideContent={hideContent} deletePost={deletePost} />
-                                                </div>
-                                            </div>
-
-                                            <div className={s.fullscreen_post_content}>{props.content.split("[")[0]}</div>
-                                            <div className={s.fullscreen_post_img}><img src={props.img} alt="Post" /></div>
-                                            <ButtonsBlock likePress={likePress} likesCount={likesCount} showComment={showComment} />
-                                    </div>
-                                    <div className={s.news_popup__bg} onClick={close} />
-                                </div>
-                            )}
-                        </Popup>
+                        {isPopup ? <PopupFullSizeFeed isShowSetPop={isShowSetPop} toggleSetPop={toggleSetPop} postId={postId}
+                            isAuthPost={isAuthPost} hideContent={hideContent} deletePost={deletePost} likePress={likePress}
+                            likesCount={likesCount} showComment={showComment} disableLoading={disableLoading} time={time} {...props} /> :
+                            <LazyLoadImageHOC img={props.img} s={s.imageSpanWrap} d={disableLoading} />}
                         {isLoading && <div className={s.load_activity}></div>}
                     </div>}
             </div>
@@ -196,11 +173,45 @@ const ButtonsBlock = ({ likePress, likesCount, showComment }) => {
     )
 }
 
+const PopupFullSizeFeed = ({ isShowSetPop, toggleSetPop, postId, isAuthPost,
+    hideContent, deletePost, likePress, likesCount, showComment, disableLoading, time, ...props }) => {
+    return (
+        <Popup lockScroll={true} modal={true} trigger={<div><LazyLoadImageHOC img={props.img} s={s.imageSpanWrap} d={disableLoading} /></div>} position="right center">
+            {close => (
+                <div className={s.news_popup}>
+                    <div className={`${s.news_popup_content} main-content-block`}>
+                        <div className={s.block_author}>
+                            <div className={s.author_avatar}>
+                                {props.avatar ? <img src={props.avatar} alt="Author avatar" /> : <img src={props.nv} alt="Author avatar" />}
+                            </div>
+                            <div className={s.main_info}>
+                                <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
+                                <span className={s.post_time}>{isNaN(props.data[0]) ? props.data : time}</span>
+                            </div>
+                            <div className={s.news_popup_buttons}>
+                                <button className={s.follow}><BiCheck />Following</button>
+                                <ActionBlockButton isShowSet={isShowSetPop} toggleSet={toggleSetPop} postId={postId}
+                                    isAuthPost={isAuthPost} hideContent={hideContent} deletePost={deletePost} />
+                            </div>
+                        </div>
+
+                        <div className={s.fullscreen_post_content}>{props.content.split("[")[0]}</div>
+                        <div className={s.fullscreen_post_img}><img src={props.img} alt="Post" /></div>
+                        <ButtonsBlock likePress={likePress} likesCount={likesCount} showComment={showComment} />
+                    </div>
+                    <div className={s.news_popup__bg} onClick={close} />
+                </div>
+            )}
+        </Popup>
+    )
+}
+
 const ActionBlockButton = ({ isShowSet, toggleSet, postId, isAuthPost, hideContent, deletePost }) => {
     return (
         <Foco onClickOutside={() => toggleSet(false)}>
-            <ButtonBase children={<button onClick={() => toggleSet(!isShowSet)}><i className="fas fa-ellipsis-h" /></button>} />
-            {isShowSet && <DropDownMenu postId={postId} isAuthor={isAuthPost} hideContent={hideContent} deletePost={deletePost} />}
+            <ButtonBase children={<span onClick={() => toggleSet(!isShowSet)}><i className="fas fa-ellipsis-h" /></span>} />
+            {isShowSet && <DropDownMenu postId={postId} isAuthor={isAuthPost} hideContent={hideContent} deletePost={deletePost}
+                toggleSet={toggleSet} />}
         </Foco>
     )
 }
