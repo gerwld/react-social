@@ -146,12 +146,12 @@ export const setUserAvatar = (photo) => {
 export const sendPost = (post) => {
     return (dispatch) => {
         let data = moment().format("MMM Do, hh:mm a");
-        let isEmpty = !post.post || post.post.length < 1;
+        let isEmpty = !post.postData || post.postData.length < 1;
         if (!isEmpty) {
             let postObj = {
                 postId: moment() + '_postId',
                 publishedAt: data,
-                cont: post.post,
+                cont: post.postData,
                 likes: 0
             }
             dispatch(onAddPost(postObj));

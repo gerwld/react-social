@@ -356,6 +356,10 @@
     max-height:100%;
 }
 
+.whatsNewSubmit_feed {
+    margin-bottom: 10px;
+}
+
 .post_image img {
     z-index: 100;
     position: relative;
@@ -512,35 +516,6 @@
       font-size: 15px!important;
   }
 
-.whatsnew_field {
-    width: 480px;
-    display: block;
-    position: relative;
-}
-
-.clipFile {
-    position: absolute;
-    top: 2px;
-    right: 0;
-    border: none;
-    font-size: 19px;
-    color: #c8cdd2;
-    background-color: transparent;
-}
-
-.clipFile:active {
-    color: var(--main-blue-color);
-}
-
-.whatsnew_field + .send {
-    flex: 1 0 40px;
-    margin-left: 15px;
-    font-size: 20px;
-    color: var(--main-blue-color);
-    background: transparent;
-    border: 0px solid #e3e3e3;
-    border-radius: 50%;
-}
 
 .loadMore {
     display: block;

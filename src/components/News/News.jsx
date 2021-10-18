@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import s from "./News.module.css";
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
@@ -13,7 +13,6 @@ import { Picker } from 'emoji-mart'
 import Foco from 'react-foco';
 import ButtonBase from '@mui/material/ButtonBase'
 import useScrollPosition from '@react-hook/window-scroll'
-import { Textarea_100 } from '../common/FormControls/FormControls';
 import { FormControlLabel, Switch } from '@mui/material';
 import { AiOutlineCamera } from 'react-icons/ai'
 import { RiSendPlaneFill } from 'react-icons/ri'
@@ -22,22 +21,20 @@ import { ImFire } from 'react-icons/im'
 import LazyLoadImageHOC from '../../hoc/LazyLoad';
 import DropDownMenu from '../common/DropDownMenu/DropDownMenu';
 import Popup from 'reactjs-popup';
+import WhatsNew from '../common/WhatsNewForm/WhatsNew';
 
 
 
 const News = (props) => {
-    var noAvatar = "/images/avatars/def-avatar.png";
     var isHasMore = props.currentPage < 3;
+    const WhatsNewForm = reduxForm({ form: "whatsNewFeed" })(WhatsNew);
 
     return (
         <div className={s.news_content}>
             <FeedNavbar />
             <div className={s.main_content}>
-                <div className={`${s.whats_new_block} main-content-block`}>
-                    <div className={`${s.author_avatar} ${s.whatsnew_avatar}`}><img src={noAvatar} alt="Avatar" /></div>
-                    <WhatsNewForm onSubmit={props.whatsNewSubmit} />
-                </div>
-                {props.postsMap(noAvatar)}
+                <WhatsNewForm onSubmit={props.whatsNewSubmit} styles={s.whatsNewSubmit_feed} fullWidth="90"/>
+                {props.postsMap("/images/avatars/def-avatar.png")}
                 <InfiniteScroll pageStart="1" children=""
                     loadMore={() => props.loadPosts(props.currentPage + 1, 5)}
                     hasMore={isHasMore} initialLoad={true} threshold={20}
@@ -168,7 +165,7 @@ const ButtonsBlock = ({ likePress, likesCount, showComment, isLike }) => {
 
 const PopupFullSizeFeed = ({ isShowSetPop, toggleSetPop, postId, isAuthPost,
     hideContent, deletePost, likePress, showComment, disableLoading, time, lc, isLike, ...props }) => {
-       
+
     return (
         <Popup lockScroll={true} modal={true} trigger={<div><LazyLoadImageHOC img={props.img} s={s.imageSpanWrap} d={disableLoading} /></div>} position="right center">
             {close => (
@@ -210,19 +207,6 @@ const ActionBlockButton = ({ isShowSet, toggleSet, postId, isAuthPost, hideConte
     )
 }
 
-const WhatsNew = (props) => {
-    const [fieldHeight, setHeight] = useState("45px");
-
-    return <form onSubmit={props.handleSubmit}>
-        <div className={s.whatsnew_field}>
-            <Field component={Textarea_100} height={fieldHeight} name="postData" placeholder="What's going on?"
-                onClick={() => setHeight("80px")} onBlur={() => setTimeout(() => setHeight("45px"), 2000)} />
-            <button className={s.clipFile} type="button"><i className="fa fa-camera"></i></button>
-        </div>
-        <button className={s.send} type="submit"><i className="fa fa-paper-plane"></i></button>
-    </form>
-}
-
 const PostCommentsBlock = ({ emojiTogle, ...props }) => {
     return <form onSubmit={props.handleSubmit} className={s.comment_block}>
         <div className={s.comment_field}>
@@ -233,7 +217,5 @@ const PostCommentsBlock = ({ emojiTogle, ...props }) => {
         <ButtonBase class={s.comment_button} children={<RiSendPlaneFill />} />
     </form>
 }
-
-const WhatsNewForm = reduxForm({ form: "whatsNewFeed" })(WhatsNew);
 
 export default News;
