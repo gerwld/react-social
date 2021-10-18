@@ -7,6 +7,7 @@ import moment from 'moment';
 import { getAuthUserData } from '../../redux/profile-reducer';
 import { change, getFormValues } from 'redux-form';
 import store from '../../redux/redux-store.js'
+import { addCommentTC } from '../../redux/comments-reducer';
 
 class NewsContainer extends React.Component {
 
@@ -22,6 +23,22 @@ class NewsContainer extends React.Component {
         } else {
             this.props.change(postId, "comment", symbol.native);
         }
+    }
+
+    addComment = async (data, postId) => {
+        let currentT = moment().format();
+        let message = {
+        id: '33', 
+        postId: postId, 
+        senderId: 123, 
+        avatar: '/images/avatars/def-avatar.png',
+        fullName:'P Jaworski', 
+        text: data.comment, 
+        data: currentT, 
+        likes: 0
+        }
+
+        this.props.addCommentTC(message);
     }
 
 
@@ -55,7 +72,7 @@ class NewsContainer extends React.Component {
                 avatar={post.avatar} nv={noAvatar} author={post.source.name} data={post.publishedAt}
                 postLink={post.url} likesCount={post.likesCount} img={post.urlToImage}
                 isAuthPost={post.source.id === this.props.authId} deletePost={this.props.deletePost}
-                isPopup={true} /></div>
+                isPopup={true} comments={this.props.comments.filter(c => c.postId === post.source.postId)} addComment={this.addComment} /></div>
         })
     }
 
@@ -81,9 +98,10 @@ var mapStateToProps = (state) => {
         authUserName: state.auth.login,
         profile: state.profilePage.profile,
         authProfile: state.profilePage.authProfile,
-        authId: state.auth.userId
+        authId: state.auth.userId,
+        comments: state.comments.list
     }
 }
 
 
-export default connect(mapStateToProps, { loadPostsTC, addNewPostTC, getAuthUserData, deletePost, change, getFormValues })(NewsContainer);
+export default connect(mapStateToProps, { loadPostsTC, addNewPostTC, getAuthUserData, deletePost, change, getFormValues, addCommentTC })(NewsContainer);

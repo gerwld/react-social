@@ -9,6 +9,7 @@ import appReducer from "./app-reducer";
 import feedReducer from "./feed-reducer";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import audioReducer from "./audio-reducer";
+import commentsReducer from "./comments-reducer";
 
 
 let reducers = combineReducers({
@@ -19,6 +20,7 @@ let reducers = combineReducers({
     auth: authReducer,
     feed: feedReducer,
     audio: audioReducer,
+    comments: commentsReducer,
     form: formReducer
 });
 

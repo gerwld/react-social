@@ -29,7 +29,7 @@
     border: 0px solid #e3e3e3;
     border-radius: 50%;
     align-self: flex-start;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .whats_new_block {
@@ -55,7 +55,7 @@
     border-radius: 5px;
     border: 1px solid var(--icons-propr-color);
     border: none;
-    transition: 0.25s ease-in-out;
+    transition: 0.27s ease-in-out;
     resize: none;
 }
 

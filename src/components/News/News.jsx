@@ -14,13 +14,17 @@ import Foco from 'react-foco';
 import useScrollPosition from '@react-hook/window-scroll'
 import { FormControlLabel, Switch } from '@mui/material';
 import { AiOutlineCamera } from 'react-icons/ai'
-import { RiSendPlaneFill } from 'react-icons/ri'
+import { RiArrowDownSLine, RiSendPlaneFill } from 'react-icons/ri'
+import { IoCloseSharp } from 'react-icons/io5'
 import { BiCheck } from 'react-icons/bi'
 import { ImFire } from 'react-icons/im'
 import LazyLoadImageHOC from '../../hoc/LazyLoad';
 import Popup from 'reactjs-popup';
 import WhatsNew from '../common/WhatsNewForm/WhatsNew';
 import ActionBlockButton from '../common/DropDownMenu/DropDownMenu';
+import ButtonBase from '@mui/material/ButtonBase';
+
+
 
 
 
@@ -32,7 +36,7 @@ const News = (props) => {
         <div className={s.news_content}>
             <FeedNavbar />
             <div className={s.main_content}>
-                <WhatsNewForm onSubmit={props.whatsNewSubmit} styles={s.whatsNewSubmit_feed} fullWidth="90"/>
+                <WhatsNewForm onSubmit={props.whatsNewSubmit} styles={s.whatsNewSubmit_feed} button={s.whatsNewSubmit_btn} fullWidth="80" />
                 {props.postsMap("/images/avatars/def-avatar.png")}
                 <InfiniteScroll pageStart="1" children=""
                     loadMore={() => props.loadPosts(props.currentPage + 1, 5)}
@@ -78,17 +82,21 @@ const FeedNavbar = () => {
     )
 }
 
-export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, isPopup, ...props }) => {
+export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, isPopup, comments, addComment, ...props }) => {
     var time = moment(props.data, "YYYY-MM-DD-h:mm").format("MMM Do, hh:mm a");
     let [isLoading, disableLoading] = useState(true);
     let [isHide, hideContent] = useState(false);
-    let [isComment, showComment] = useState(false);
+    let [isComments, addComm] = useState(comments && comments.length > 0);
+    let [isComment, showComment] = useState(isComments || false);
     let [isShowEmoji, showEmoji] = useState(false);
     let [isLike, toggleLike] = useState(false);
     let [likesCount, likeAction] = useState(props.likesCount ? props.likesCount : 0);
     let [isShowSet, toggleSet] = useState(false);
     let [isShowSetPop, toggleSetPop] = useState(false);
     let [autoFocus, setFocus] = useState(true);
+    const [sort, setSort] = React.useState("");
+    const comHandle = e => setSort(e.target.value);
+    console.log(comments);
 
     const PostCommentForm = reduxForm({
         form: `${postId}_form`, destroyOnUnmount: false,
@@ -128,12 +136,44 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
                         {isLoading && <div className={s.load_activity}></div>}
                     </div>}
             </div>
-            <ButtonsBlock likePress={likePress} likesCount={likesCount} showComment={showComment} isLike={isLike} />
+            <ButtonsBlock likePress={likePress} likesCount={likesCount} showComment={showComment} isLike={isLike} commentsLength={comments ? comments.length : 0} />
+
+
+            {isComment &&
+                <div className={s.comments_parent}>
+                   {isComments > 0 && 
+                   <label className={s.select}>
+                        <select name="select">
+                            <option value="value1" selected>Newest</option>
+                            <option value="value2">Oldest</option>
+                        </select><RiArrowDownSLine />
+                    </label>}
+                    {comments && comments.map(c => {
+                        let commentData = moment(c.data).startOf('minute').fromNow();
+                        return <div className={s.comment_block}>
+                            <div className={s.comment_cred}>
+                                <div className={s.comment_name}>{c.fullName}</div>
+                                <p className={s.comment_text}>{c.text}</p>
+                                <span className={s.comment_data}>{commentData}</span>
+                            </div>
+                            <div className={s.comment_ava}><img src={c.avatar} alt={c.fullName} title={c.fullName} /></div>
+                            <div className={s.comment_buttons}>
+                                <div className={s.del_btn}><button onClick=""><IoCloseSharp /></button></div>
+                                <div className={s.like_btn}>
+                                    <button onClick=""><i className={`${isLike ? 'fa ' + s.like_pressed : 'fa'} fa-heart`} /></button>
+                                    <span>{c.likes}</span>
+                                </div>
+                            </div>
+                        </div>
+                    })}
+                </div>}
+
+
             <div className={s.control_buttons}>
                 <ActionBlockButton isShowSet={isShowSet} toggleSet={toggleSet} postId={postId}
                     isAuthPost={isAuthPost} hideContent={hideContent} deletePost={deletePost} />
             </div>
-            {isComment && <PostCommentForm emojiTogle={showEmoji} autoFocus={autoFocus} />}
+            {isComment && <PostCommentForm emojiTogle={showEmoji} autoFocus={autoFocus} onSubmit={e => addComment(e, postId)} />}
             {isShowEmoji &&
                 <div onMouseLeave={() => showEmoji(false)} className={`${s.emoji_picker} picker_style`}>
                     <Foco onClickOutside={() => showEmoji(false)}>
@@ -144,7 +184,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
     )
 }
 
-const ButtonsBlock = ({ likePress, likesCount, showComment, isLike }) => {
+const ButtonsBlock = ({ likePress, likesCount, showComment, isLike, commentsLength }) => {
     return (
         <div className={s.block_buttons}>
             <div className={s.like_btn}>
@@ -153,7 +193,7 @@ const ButtonsBlock = ({ likePress, likesCount, showComment, isLike }) => {
             </div>
             <div className={s.comment_btn}>
                 <button onClick={() => showComment(true)} ><i className="far fa-comment-alt"></i></button>
-                <span>0</span>
+                <span>{commentsLength || 0}</span>
             </div>
             <div className={s.share_btn}>
                 <button ><i className="fa fa-share" /></button>
@@ -196,14 +236,14 @@ const PopupFullSizeFeed = ({ isShowSetPop, toggleSetPop, postId, isAuthPost,
     )
 }
 
-const PostCommentsBlock = ({ emojiTogle, ...props }) => {
-    return <form onSubmit={props.handleSubmit} className={s.comment_block}>
+const PostCommentsBlock = ({ emojiTogle, handleSubmit, ...props }) => {
+    return <form onSubmit={handleSubmit} className={s.comment_block_form}>
         <div className={s.comment_field}>
             <Field component="textarea" name="comment" />
             <button className={s.clipFile} type="button"><AiOutlineCamera /></button>
             <button className={s.emoji_btn} type="button" onMouseOver={() => emojiTogle(true)} onClick={() => emojiTogle(true)}><i className="far fa-smile" /></button>
         </div>
-        <ButtonBase class={s.comment_button} children={<RiSendPlaneFill />} />
+        <ButtonBase type="submit" class={s.comment_button} children={<RiSendPlaneFill />} />
     </form>
 }
 

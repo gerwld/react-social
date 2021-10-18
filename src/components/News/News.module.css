@@ -241,17 +241,17 @@
     }
 }
 
-.comment_block {
+.comment_block_form {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     width: 100%;
     flex-direction: row;
-    padding: 20px 0 10px;
+    padding: 14px 0 5px;
 }
 
-.comment_block::before {
+.comment_block_form::before {
     content: "";
     display: block;
     position: absolute;
@@ -286,7 +286,7 @@
     box-sizing: border-box;
 }
 
-.comment_block button {
+.comment_block_form button {
     border: none!important;
     background: transparent!important;
 }
@@ -307,7 +307,7 @@
     transform: translate(-3px, -5px) rotate(45deg);
 }
 
-.comment_block .clipFile {
+.comment_block_form .clipFile {
     font-size: 25px;
     top: calc(50% - 20px);
     right: 6px;
@@ -360,13 +360,18 @@
     margin-bottom: 10px;
 }
 
+.whatsNewSubmit_btn {
+    margin-top: 0!important;
+    align-self: center!important;
+}
+
 .post_image img {
     z-index: 100;
     position: relative;
     max-width:100%;
     max-height: 620px;
     min-height: 330px;
-    transform: 1.2s;
+    transition: 1.2s;
 }
 
 .post_image {
@@ -378,7 +383,7 @@
     justify-content: center;
     object-fit: cover;
     font-size: 0;
-    transform: 1npm i reactjs-popup.2s;
+    transition: 1.2s;
 }
 
 .author_name {
@@ -596,6 +601,20 @@
     right: 15px;
 }
 
+.clipFile {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    border: none;
+    font-size: 19px;
+    color: #c8cdd2;
+    background-color: transparent;
+}
+
+.clipFile:active {
+    color: var(--main-blue-color);
+}
+
 .fullscreen_post_img img {
     z-index: 100;
     position: relative;
@@ -663,3 +682,159 @@
 }
 
 /* News popup ends */
+
+/* Comments block start */
+
+.comments_parent{ 
+    position: relative;
+}
+
+.comments_parent::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #d8dee5;
+}
+
+.comment_block {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5px 5px;
+    margin-bottom: 10px;
+}
+
+.comment_block::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    width: calc(100% - 70px);
+    height: 1px;
+    background-color: #e3e3e3;
+}
+
+.comments_parent div:nth-last-child(1)::after{
+    height: 0px;
+}
+
+.comment_ava {
+    order: -1;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.comment_ava img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+}
+
+.comment_cred {
+    flex: 1;
+    padding-right: 35px;
+    margin-left: 10px;
+}
+
+.comment_name {
+    color:rgb(58, 94, 148);
+    font-size: 13.5px;
+    font-weight: 500;
+}
+
+.comment_buttons {
+    text-align: right;
+    align-self: flex-start;
+}
+
+.comment_buttons button {
+    padding: 0!important;
+    color:rgb(190, 198, 211);
+    border: none;
+    background-color: transparent;
+}
+
+.comment_buttons .del_btn {
+    margin-right: -2px;
+    margin-top: -2px;
+}
+
+.comment_buttons .like_btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 12.5px;
+}
+
+.comment_buttons .like_btn span {
+    color:rgb(96, 103, 114)!important;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.comment_buttons .like_btn i {
+    margin-right: 5px;
+}
+
+.comments_parent .select select {
+    display: inline-block;
+    padding: 5px 15px 5px 0;
+    margin: 0 0 5px 0;
+    border: none;
+    color:rgb(58, 94, 148);
+    font-size: 14px;
+    border:none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -ms-appearance: none;
+    cursor: pointer; 
+    z-index: 10;
+}
+
+
+.comments_parent .select {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    margin-top: 1px;
+    z-index: 10;
+}
+
+.comments_parent select:focus {
+    outline: none;
+}
+
+.comments_parent .select svg {
+    position: absolute;
+    top: 5px;
+    right: -5px;
+
+    font-size: 20px;
+    color: rgb(58, 94, 148);
+    margin-bottom: 3px;
+    z-index: 0;
+    user-select: none;
+}
+
+.comment_data {
+    font-size: 12.5px;
+    color:rgb(96, 103, 114)
+}
+
+.comment_text {
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+
+/* Comments block end */
