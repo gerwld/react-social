@@ -61,7 +61,8 @@ export const loadPostsTC = (nextPage, pageSize) => {
           "url": r.url,
           "urlToImage": r.urlToImage,
           "publishedAt": r.publishedAt,
-          "content": r.description + r.content
+          "content": r.description + r.content,
+          "likesCount": isNaN(r.likesCount) ? (22 + Math.floor(Math.random() * 10)) : r.likesCount
          }});
          
         dispatch(loadPosts(posts));
