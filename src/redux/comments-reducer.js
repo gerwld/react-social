@@ -42,7 +42,6 @@ const commentsReducer = (state = initialState, action) => {
 }
 
 export const addCommentTC = (comment) => {
-    debugger;
     return (dispatch) => {
         if (comment.postId && comment.senderId && comment.id && comment.text) {
             dispatch(addComment(comment));

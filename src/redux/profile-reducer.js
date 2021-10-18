@@ -18,16 +18,15 @@ export const setAuthUser = (profile) => ({ type: SET_AUTH_USER, profile });
 
 let initialState = {
     postData: [
-        { id: 0, publishedAt: '2006-9-4T17:09:15Z', cont: "That site is so cool!", likes: 9 },
+        { postId: "123", publishedAt: '2006-9-4T17:09:15Z', cont: "That site is so cool!", likes: 9 },
         {
-            id: 1,
             postId: '2007-10-17T13:06:15Z',
             publishedAt: '2007-10-17T13:06:15Z',
             cont: "Hi there!! 2015 is rock!",
             likes: 23,
             urlToImage: '/images/post-photo-2.jpg'
         },
-        { id: 2, publishedAt: '2012-10-17T13:06:15Z', cont: "Deez nuts... Today everything is fine, just vibing with my famity🙃 #coolday", likes: 28 },
+        { postId: 2, publishedAt: '2012-10-17T13:06:15Z', cont: "Deez nuts... Today everything is fine, just vibing with my famity🙃 #coolday", likes: 28 },
     ],
     profile: null,
     authProfile: null,

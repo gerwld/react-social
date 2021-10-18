@@ -43,7 +43,6 @@ class NewsContainer extends React.Component {
         data: currentT, 
         likes: 0
         }
-
         this.props.addCommentTC(message);
     }
 
