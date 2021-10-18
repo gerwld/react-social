@@ -39,12 +39,17 @@ class App extends React.Component {
       {!this.props.location.pathname.match('/login') && !this.props.location.pathname.match('/error-404') && <Navbar />}
       <div className="app-content">
         <Switch>
-          <Route path="/users" render={withSuspense(UsersContainer)} />
+          <Route path="/users/filter=:flags" render={withSuspense(UsersContainer)} />
+          <Route path="/users" exact render={withSuspense(UsersContainer)} />
+
           <Route path="/dialogs/id:userId?" render={withSuspense(DialogsContainer)} />
           <Route path="/dialogs" exact render={withSuspense(DialogsContainer)} />
           <Route path="/feed" render={withSuspense(NewsContainer)} />
+
+          <Route path="/profile/id:userId?/filter=:flags?" render={withSuspense(ProfileContainer)} />
           <Route path="/profile/id:userId?" render={withSuspense(ProfileContainer)} />
           <Route path="/profile/status=:status" render={withSuspense(ProfileContainer)} />
+          <Route path="/profile/filter=:flags" render={withSuspense(ProfileContainer)} />
           <Route path="/profile" exact render={withSuspense(ProfileContainer)} />
 
           <Route path="/settings" render={() => <SettingsContainer />} />
@@ -53,11 +58,11 @@ class App extends React.Component {
           <Route path="/login" render={this.props.isAuth ? () => <Redirect to="/profile" /> : withSuspense(LoginContainer)} />
           <Route path="/" exact render={() => { return this.props.isAuth === true ? <Redirect to="/profile" /> : <Redirect to="/login" />; }} />
 
-          <Route path='/error-404' render={() => <NotFound />} />
           <Redirect from='*' to='/error-404' />
         </Switch>
       </div>
     </div>
+    <Route path='/error-404' render={() => <NotFound />} />
     </>);
   }
 }

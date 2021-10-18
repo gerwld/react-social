@@ -33,16 +33,16 @@ class NewsContainer extends React.Component {
                 }
             }
             let profile = this.props.authProfile || this.props.profile;
-
+            let time = moment().format();
             this.props.addNewPostTC({
                 "source": {
                     "id": profile.userId,
-                    "postId": profile.fullName.split(' ')[0] + moment().format() + "_postId",
+                    "postId": profile.fullName.split(' ')[0] + time + "_postId",
                     "name": profile.fullName,
                 },
                 "avatar": profile.photos.small,
                 "title": data.postData,
-                "publishedAt": moment(),
+                "publishedAt": time,
                 "likesCount": 0
             });
         } else alert("Your message is empty, or you provided incorrect data.");
@@ -50,10 +50,12 @@ class NewsContainer extends React.Component {
 
     postsMap = (noAvatar) => {
         return this.props.posts.map(post => {
-            return <div key={post.source.postId}><FeedBlock addValueToMessage={this.addValueToMessage} postId={post.source.postId} id={post.source.id} text={post.title}
+            return <div key={post.source.postId}><FeedBlock content={post.content} addValueToMessage={this.addValueToMessage} 
+                postId={post.source.postId} id={post.source.id} text={post.title}
                 avatar={post.avatar} nv={noAvatar} author={post.source.name} data={post.publishedAt}
                 postLink={post.url} likesCount={post.likesCount} img={post.urlToImage}
-                isAuthPost={post.source.id === this.props.authId} deletePost={this.props.deletePost} /></div>
+                isAuthPost={post.source.id === this.props.authId} deletePost={this.props.deletePost}
+                isPopup={true} /></div>
         })
     }
 

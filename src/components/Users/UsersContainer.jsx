@@ -1,17 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { followUserThunkCreator, getPaginationCurrentIndexesTC, getUsersThunkCreator, loadFriendsToggle, onPageChangeThunkCreator, findUsers } from '../../redux/users-reducer';
 import { getCurrentPage, getIsFetching, getIsFollowing, getPages, getPageSize, getPagLengthWithCreateSelecor, getTotalUsers, getUsers } from '../../redux/users-selectors';
 import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
+import { withRouter } from 'react-router-dom';
 
 class UsersAPIComponent extends React.Component {
     state = {
         searchInput: ''
     }
 
-    getUsers = (boolean) => {
+    getUsers = () => {
         this.props.getUsersThunkCreator(
             this.props.currentPage,
             this.props.pageSize,
@@ -24,9 +26,9 @@ class UsersAPIComponent extends React.Component {
         this.getUsers();
     }
 
-    onFriendsToggle = () => {
-        this.props.loadFriendsToggle();
-        setTimeout(this.getUsers, 250)
+    onFriendsToggle = async () => {
+        await this.props.loadFriendsToggle();
+        this.getUsers();
     }
 
     getPagCurrentIndexes = () => {
@@ -69,8 +71,7 @@ class UsersAPIComponent extends React.Component {
     render() {
         return (
             <>
-                {this.props.isFetching && <Preloader />}
-                {!this.props.isFetching && <Users {...this.props}
+                <Users {...this.props}
                     followUser={this.props.followUserThunkCreator}
                     onPageChanged={this.onPageChanged}
                     getPagCurrentIndexes={this.getPagCurrentIndexes}
@@ -80,7 +81,8 @@ class UsersAPIComponent extends React.Component {
                     onSearchChange={this.onSearchChange}
                     onSearchSubmit={this.onSearchSubmit}
                     title={this.showTitle}
-                />}
+                    isFetching={this.props.isFetching}
+                />
 
             </>
         )
@@ -102,10 +104,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-const UsersContainer = connect(mapStateToProps, {
-    getUsersThunkCreator, followUserThunkCreator,
-    getPaginationCurrentIndexesTC, onPageChangeThunkCreator,
-    loadFriendsToggle, findUsers
-})(UsersAPIComponent);
-
-export default withAuthRedirect(UsersContainer);
+export default compose(
+    connect(mapStateToProps, {
+        getUsersThunkCreator, followUserThunkCreator,
+        getPaginationCurrentIndexesTC, onPageChangeThunkCreator,
+        loadFriendsToggle, findUsers}),
+    withAuthRedirect,
+    withRouter
+)(UsersAPIComponent)

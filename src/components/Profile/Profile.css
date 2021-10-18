@@ -5,6 +5,8 @@
   grid-template-columns: 245px 1fr;
 }
 
+
+
 .main-image img {
   width: 100%;
   object-fit: cover; 
@@ -23,20 +25,16 @@
 
 
 .avatar_block {
-  width: 245px;
-  height: 245px;
-  background-color: #fff;
-  border-radius: var(--border-radius-ui);
+  width: 225px;
+  height: 225px;
   overflow: hidden;
-  box-shadow: var(--page-block-shadow);
+  border-radius: var(--border-radius-ui);
 }
 
 .user-profile__img {
-  width: 235px;
-  margin: 5px;
+  width: 225px;
   height: auto;
   transition: 0.2s ease-in-out;
-  border-radius: var(--border-radius-ui);
 }
 
 .ava_buttons {
@@ -183,7 +181,7 @@
   grid-column-start: 1;
   grid-column-end: 2;
   margin: 0px;
-  grid-row-start: 2;
+  grid-row-start: 1;
   grid-row-end: 4;
   padding: 0!important;
 }
@@ -193,37 +191,141 @@
   flex: 1;
   padding-left: 20px;
   min-height: 270px;
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.subblock_2_title {
+  display: block;
+  padding-top: 7px;
+  padding-left: 7px;
+  font-size: 16px;
+  color: #444;
+  font-weight: bold;
 }
 
 .contact_buttons {
-  padding: 6px;
-  margin-top: 12px;
-  background-color: #ffffff;
-  border-radius: 6px;
-  box-shadow: var(--page-block-shadow);
+  margin-top: 10px;
 }
 
-.contact_buttons a,
+.contact_buttons button,
+.contact_buttons a {
+  margin-bottom: 5px;
+}
+
+.contact_buttons .last {
+  margin-bottom: 0;
+}
+
+.sub_btn_transparent {
+  padding: 7px 5px!important;
+  background-color: transparent!important;
+  color: #8a94a0!important;
+  text-align: left!important;
+  vertical-align: bottom;
+}
+
+button.sub_btn_transparent:hover {
+  color: #747e8a!important;
+}
+
+.sub_btn_transparent svg {
+  font-size: 22px;
+  transform: translateY(-2px);
+  margin-right: 8px;
+}
+
+ul.friends_last {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 10px 0;
+  list-style: none;
+}
+
+.friends_last li {
+  width: 75px;
+  flex: 75px;
+  justify-content: flex-start;
+  font-size: 13.2px;
+  height: 82px;
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 5px;
+  text-align: center;
+}
+.friends_last li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.friends_last .user_ava {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0!important;
+  width: 60px;
+  height: 60px;
+  background-color: lightgrey;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.friends_last a {
+  color: #000!important;
+  text-decoration: none;
+}
+
+.friends_last a:hover {
+  text-decoration: underline;
+}
+.user_name {
+  overflow: hidden;
+  display: block;
+  height: 20px;
+  max-width: 100%;
+  color: #171717;
+  text-transform: capitalize;
+  overflow-wrap: break-word;
+}
+
+.user_ava img {
+  width: 60px;
+  height: auto;
+  min-height: 100%;
+  max-width: 140%;
+}
+
 .contact_buttons button {
   display: block;
   width: 100%;
   padding: var(--padding-buttons-ui);
   color: white;
   text-decoration: none;
-  background-color: var(--main-blue-color);
+  background-color: var(--main-button-color);
   border: none;
   border-radius: var(--button-radius-ui);
   text-align: center;
+  transition: 0.2s;
 }
 
 .contact_buttons a {
-  margin-bottom: 7px;
+  text-decoration: none;
 }
+
 
 .contact_buttons a:hover,
 .contact_buttons button:hover {
-  color: #fff!important;
-  background-color: #3958a8;
+  color: #fff;
+  background-color: #4a63a3;
+  text-decoration: none;
+}
+
+.contact_buttons a:nth-child(1) button {
+  margin-bottom: 7px;
 }
 
 li.user-info__status {
@@ -262,14 +364,14 @@ li.user-info__status {
 }
 
 .profile-info__block_3 {
-  grid-template-columns: repeat(3, auto) 0.8fr;
+  grid-template-columns: repeat(2, auto) 0.8fr;
   margin-bottom: 20px;
   margin-left: 10px;
 }
 
 .profile-info__block_3 .title {
   grid-column-start: 1;
-  grid-column-end: 5;
+  grid-column-end: 4;
 }
 
 .profile-info__block_3 b {
@@ -471,7 +573,8 @@ textarea.lookingForJob_edit::placeholder {
   font-weight: 500;
   font-size: 14.5px;
   border-radius: 5px;
-  background-color: #efefef;
+  border: 2px solid #efefef;
+  background-color: #fbfbfb;
 }
 
 .show-more_btn:active {
@@ -538,4 +641,13 @@ textarea.lookingForJob_edit::placeholder {
 .profile-info__block_2__1 {
   font-size: 14.5px;
   margin-bottom: 25px;
+}
+
+.user_block .subblock_1 {
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.user_block .subblock_2 {
+  padding: 9px 5px;
 }

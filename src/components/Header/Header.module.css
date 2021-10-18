@@ -1,9 +1,10 @@
 .app_header {
+  min-width: 1135px;
+    position: relative;
     grid-column-start: 1;
     grid-column-end: 3;
     padding: 10px 15px;
     background-color: #4c6dc1;
-    /* margin-top: 10px; */
     z-index: 100;
     margin-bottom: 10px;
   }
@@ -19,10 +20,6 @@
   .app_header img {
     width: 120px;
     height: 40px;
-    /* max-width: 34px; */
-    /* height:auto;
-    max-height: 20px; */
-    /* filter: brightness(20); */
   }
   
   .main_nav a,
@@ -32,6 +29,11 @@
     font-weight: 500;
     color: #f1f1f1;
     cursor: pointer;
+  }
+
+  .main_nav svg {
+    font-size: 24px;
+    transform: translateY(-1px);
   }
 
   .main_nav a:hover,
@@ -47,4 +49,5 @@
 
   .main_nav {
     color: #fff;
+    margin-top: 4px;
   }

@@ -100,7 +100,27 @@ let initialState = {
             url: "https://www.youtube.com/watch?v=z3wAjJXbYzA",
             duration: "03:09",
             favorited: false
-          }
+          },
+          {
+            id: 10,
+            name: "Genius ft. Sia, Diplo, Labrinth",
+            artist: "LSD",
+            cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/6.jpg",
+            source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/6.mp3",
+            url: "https://www.youtube.com/watch?v=HhoATZ1Imtw",
+            duration: "03:42",
+            favorited: false
+          },
+          {
+            id: 11,
+            name: "The Comeback Kid",
+            artist: "Lindi Ortega",
+            cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/7.jpg",
+            source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/7.mp3",
+            url: "https://www.youtube.com/watch?v=me6aoX0wCV8",
+            duration: "03:01",
+            favorited: true
+          },
     ],
     isRepeatSameTrack: false,
     currentUrl: null,

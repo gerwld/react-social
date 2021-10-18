@@ -25,7 +25,7 @@ let initialState = {
     users: [
         // { id: 0, followed: true, name: 'Andrew K.', loc: 'Minsk, Belarus', status: 'Im looking for someone...', avaHash: 'm1' }
     ],
-    totalUsers: 3,
+    totalUsers: 1,
     isFetching: true,
     isFollowing: [],
     pageSize: 7,

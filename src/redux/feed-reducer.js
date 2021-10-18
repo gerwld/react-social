@@ -41,8 +41,8 @@ const feedReducer = (state = initialState, action) => {
         case DELETE_POST:
             return {
                 ...state,
-                posts: state.posts.filter(post => post.postId !== action.postId)
-            }
+                posts: state.posts.filter(post => post.source.postId !== action.postId)
+            } 
         default:
             return state;
     }
@@ -61,6 +61,7 @@ export const loadPostsTC = (nextPage, pageSize) => {
           "url": r.url,
           "urlToImage": r.urlToImage,
           "publishedAt": r.publishedAt,
+          "content": r.description + r.content
          }});
          
         dispatch(loadPosts(posts));
