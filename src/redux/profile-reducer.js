@@ -21,8 +21,9 @@ let initialState = {
         { id: 0, publishedAt: '2006-9-4T17:09:15Z', cont: "That site is so cool!", likes: 9 },
         {
             id: 1,
+            postId: '2007-10-17T13:06:15Z',
             publishedAt: '2007-10-17T13:06:15Z',
-            cont: "Hi there!! 2007 is rock!",
+            cont: "Hi there!! 2015 is rock!",
             likes: 23,
             urlToImage: '/images/post-photo-2.jpg'
         },

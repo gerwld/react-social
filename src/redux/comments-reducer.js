@@ -10,7 +10,9 @@ export const editComment = (commentId, newText) => ({ type: EDIT_COMMENT, commen
 
 let initialState = {
     list: [
-        { id: '', postId: "2021-10-18T16:18:45ZThe_postId", senderId: 123, avatar: '/images/avatars/def-avatar.png', fullName:'Salvadore Dali', text: 'Just a comment', data: "2021-10-18T14:00:01Z", likes: 5 }
+        { id: '', postId: "2021-10-18T16:18:45ZThe_postId", senderId: 123, avatar: '/images/avatars/def-avatar.png', fullName: 'Salvadore Dali', text: 'Just a comment', data: "2021-10-18T14:00:01Z", likes: 5 },
+        { id: '', postId: '2007-10-17T13:06:15Z', senderId: 123, avatar: '/images/avatars/def-avatar.png', fullName: 'Edward Gutmann', text: 'Wow, cool dog. Is it yours? 😎', data: "2015-10-18T14:00:01Z", likes: 5 },
+        { id: '', postId: '2007-10-17T13:06:15Z', senderId: 19461, avatar: "https://social-network.samuraijs.com/activecontent/images/users/19461/user-small.jpg?v=7", fullName: "P Jaworski", text: "Edward, yep. Thanks", data: "2015-10-18T20:49:39+02:00", likes: 1 },
     ]
 }
 
@@ -41,7 +43,7 @@ const commentsReducer = (state = initialState, action) => {
 
 export const addCommentTC = (comment) => {
     debugger;
-   return (dispatch) => {
+    return (dispatch) => {
         if (comment.postId && comment.senderId && comment.id && comment.text) {
             dispatch(addComment(comment));
             dispatch(reset(comment.postId + '_form'));

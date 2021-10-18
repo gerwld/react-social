@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
     inputValue: state.profilePage.newPostText,
     profile: state.profilePage.profile,
     authUserId: state.profilePage.authUserId,
+    comments: state.comments.list,
     avatarCheck: avatarCheck
 
   }
