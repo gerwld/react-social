@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import s from "./News.module.css";
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
@@ -22,7 +22,6 @@ import { ImFire } from 'react-icons/im'
 import LazyLoadImageHOC from '../../hoc/LazyLoad';
 import DropDownMenu from '../common/DropDownMenu/DropDownMenu';
 import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
 
 
 
@@ -99,7 +98,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
         form: `${postId}_form`, destroyOnUnmount: false,
         keepDirtyOnReinitialize: true, forceUnregisterOnUnmount: true
     })(PostCommentsBlock);
-
+    debugger;
     let likePress = (e, id) => {
         let buttonIcon = e.currentTarget.children[0];
         //TODO change after to send request with id => get response, then change local state
@@ -132,9 +131,9 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
                 <p>{props.text}</p>
                 {props.img &&
                     <div className={`${s.post_image} ${s.load_wrapper}`}>
-                        {isPopup ? <PopupFullSizeFeed isShowSetPop={isShowSetPop} toggleSetPop={toggleSetPop} postId={postId}
+                        {isPopup ? <PopupFullSizeFeed likesCount={likesCount} isShowSetPop={isShowSetPop} toggleSetPop={toggleSetPop} postId={postId}
                             isAuthPost={isAuthPost} hideContent={hideContent} deletePost={deletePost} likePress={likePress}
-                            likesCount={likesCount} showComment={showComment} disableLoading={disableLoading} time={time} {...props} /> :
+                            showComment={showComment} disableLoading={disableLoading} time={time} {...props} /> :
                             <LazyLoadImageHOC img={props.img} s={s.imageSpanWrap} d={disableLoading} />}
                         {isLoading && <div className={s.load_activity}></div>}
                     </div>}
@@ -174,7 +173,8 @@ const ButtonsBlock = ({ likePress, likesCount, showComment }) => {
 }
 
 const PopupFullSizeFeed = ({ isShowSetPop, toggleSetPop, postId, isAuthPost,
-    hideContent, deletePost, likePress, likesCount, showComment, disableLoading, time, ...props }) => {
+    hideContent, deletePost, likePress, showComment, disableLoading, time, likesCount, ...props }) => {
+
     return (
         <Popup lockScroll={true} modal={true} trigger={<div><LazyLoadImageHOC img={props.img} s={s.imageSpanWrap} d={disableLoading} /></div>} position="right center">
             {close => (
@@ -197,7 +197,7 @@ const PopupFullSizeFeed = ({ isShowSetPop, toggleSetPop, postId, isAuthPost,
 
                         <div className={s.fullscreen_post_content}>{props.content.split("[")[0]}</div>
                         <div className={s.fullscreen_post_img}><img src={props.img} alt="Post" /></div>
-                        <ButtonsBlock likePress={likePress} likesCount={likesCount} showComment={showComment} />
+                        <ButtonsBlock likePress={likePress} likesCount={props.likesCount} showComment={showComment} />
                     </div>
                     <div className={s.news_popup__bg} onClick={close} />
                 </div>
