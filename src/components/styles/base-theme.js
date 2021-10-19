@@ -36,10 +36,12 @@ export const lightTheme = {
     progress_buffer_color: '#D3D9DE',
     music_hover: '#f2f3f5',
     music_shadow: '#e3e7ee',
+    b404_background: '#fff',
   }
   
   export const darkTheme = {
     body: '#222226',
+    b404_background: '#222226',
     field_body: '#29292e',
     text: '#FAFAFA',
     main_text_color: '#ffffff',

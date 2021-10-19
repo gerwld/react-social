@@ -15,7 +15,7 @@
     width: 100vw;
     min-width: 1200px;
     height: calc(100vh - 60px);
-    background-color: var(--body-color);
+    background-color: var(--b404-background);
     margin-top: -25px;
     overflow: hidden;
     transition: 0.2s ease-in;

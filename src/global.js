@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
     --gray-to-light: ${({ theme }) => theme.gray_to_light};
     --body-color: ${({ theme }) => theme.body};
     --subblock-whiteblue: ${({ theme }) => theme.subblock_whiteblue};
+    --b404-background: ${({ theme }) => theme.b404_background};
 
 
     --main-text-color: ${({ theme }) => theme.main_text_color};
