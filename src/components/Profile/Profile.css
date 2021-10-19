@@ -116,7 +116,6 @@
   height: 35px;
   padding: 5px;
   font-size: 13px!important;
-  /* text-transform: capitalize; */
   text-decoration: none;
   background-color: transparent;
   color: #a6abbb!important;
@@ -200,7 +199,6 @@
   padding-top: 7px;
   padding-left: 7px;
   font-size: 16px;
-  /* color: #444; */
   font-weight: bold;
 }
 
@@ -287,7 +285,6 @@ ul.friends_last {
   display: block;
   height: 20px;
   max-width: 100%;
-  /* color: #171717; */
   text-transform: capitalize;
   overflow-wrap: break-word;
 }
@@ -359,7 +356,6 @@ li.user-info__status {
 
 .profile-info__block_1 {
   grid-template-columns: 210px 200px;
-  /* grid-template-columns: 350px 0; */
   margin-bottom: 20px;
 }
 
@@ -574,7 +570,6 @@ textarea.lookingForJob_edit::placeholder {
   font-size: 14.5px;
   border-radius: 5px;
   border: 2px solid #efefef;
-  /* background-color: #fbfbfb; */
 }
 
 .show-more_btn:active {
@@ -611,7 +606,6 @@ textarea.lookingForJob_edit::placeholder {
 
 .about_block:first-child {
   padding-top: 20px;
-  /* border-top: 1px solid #efefef */
 }
 
 .about_block .about_subtitle {
@@ -629,7 +623,6 @@ textarea.lookingForJob_edit::placeholder {
   position: absolute;
   padding-right: 20px;
   left: 250px;
-  /* color: #656565; */
   vertical-align: middle;
   overflow-y: scroll;
 }

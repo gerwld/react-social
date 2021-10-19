@@ -1,8 +1,4 @@
 :root {
-  /* --page-block-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
-  --page-block-shadow-less: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec; */
-  /* --black-important: #000!important; */
-  /* --page-border: 1px solid #e3e3e3; */
   --border-radius-ui: 4px;
   --button-radius-ui: 6px;
   --border-radius-big-ui: 10px;
@@ -10,16 +6,7 @@
   --padding-buttons-ui: 10px 20px;
   --gap-between-blocks-s: 10px;
   --gap-between-blocks: 12px;
-  /* --icons-propr-color: #aeb7c2; */
-  /* --main-blue-color: #4c6dc1; */
-  /* --main-blue-hover: #3f5ba0; */
-  /* --subhead-text: #626d7a; */
-  /* --main-button-color: #6783c9; */
 }
-
-/* html {
-background: linear-gradient(0deg, rgba(76,109,193,1) 4%, rgba(241,241,243,1) 4%, rgba(241,241,243,1) 4%, rgba(241,241,243,1) 100%);
-} */
 
 body {
   min-width: 1200px;

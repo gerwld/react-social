@@ -39,7 +39,6 @@
     display: block;
     position: relative;
     padding: 5px;
-    /* color: #6e7884; */
     color: #4b5b70;
     font-size: 14.5px;
     font-weight: 500;
@@ -57,23 +56,7 @@
     opacity: 0.95;
     color: #808080!important;
   }
-  
-  /* .app_navbar .current::before {
-    display: inline-block;
-}
 
-.app_navbar a::before {
-  content: '';
-  position: absolute;
-  display: none;
-  width: 5px;
-  height: 5px;
-  bottom: 11px;
-  left: -5px;
-  background-color: #e9e9e9;
-  opacity: 34%;
-  border-radius: 50%;
-} */
 
 .app_navbar i {
   color: #808080;

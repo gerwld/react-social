@@ -9,15 +9,6 @@
     margin: 0 0 10px 0;
 }
 
-/* .imageSpanWrap {
-    height: 100%!important;
-}
-
-.imageSpanWrap img {
-    min-height: 300px!important;
-    max-height: 375px!important;
-} */
-
 .emoji_picker {
     position: absolute;
     bottom: 68px;
@@ -118,7 +109,6 @@
     color: var(--main-text-color);
     background-color: var(--subblock-whiteblue);
     font-weight: 600;
-    /* box-shadow: 0 2px 5px 0 #e3e3e3; */
     border-bottom: 1px solid var(--page-border-color);
     border-left: 3px solid #5181b8;
     width: calc(100% + 2px);
@@ -397,7 +387,6 @@
     font-weight: 500;
     text-decoration: none;
     text-transform: capitalize;
-    /* color: var(--main-blue-color-text); */
 }
 
 .author_name:hover {
