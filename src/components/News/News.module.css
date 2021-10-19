@@ -71,7 +71,7 @@
     position: absolute;
     top: 0;
     left: 20px;
-    width: 305px;
+    width: 295px;
     height: 1px;
     background-color: var(--page-border-color);
 }
@@ -217,7 +217,7 @@
     position: relative;
     height: 100%;
     width: 100%;
-    background-color: rgb(211,211,211);
+    background-color: var(--lazy-color-sheme);
     z-index: 44;
     overflow: hidden;
     border-radius: 5px;
@@ -232,6 +232,7 @@
     background-image: -webkit-linear-gradient(0deg, rgba(251,251,251, .05), rgba(251,251,251, .3), rgba(251,251,251, .6), rgba(251,251,251, .3), rgba(251,251,251, .05));
     animation: loading 1s infinite;
     z-index: 45;
+    opacity: var(--lazy-opacity);
 }
 
 @keyframes loading {

@@ -36,7 +36,7 @@ span.title {
     justify-content: space-between;
     padding: 5px 15px;
     align-items: center;
-    box-shadow: 0px 5px 10px -1px #e3e3e3e3;
+    box-shadow: 0px 5px 10px -1px var(--music-shadow);
   }
 
   .music_progress {
@@ -54,7 +54,7 @@ span.title {
 
   .progress_bar {
     width: 100%;
-    border-bottom: 3px solid #E7E8EC;
+    border-bottom: 3px solid var(--body-color);
     border-radius: 10px;
     z-index: 1;
   }
@@ -73,7 +73,7 @@ span.title {
     min-width: 2px;
     width: 2px;
     top: 4px;
-    background-color: #D3D9DE;
+    background-color: var(--progress-buffer-color);
     z-index: 2;
     animation: buffer 0.25s;
   }
@@ -112,7 +112,7 @@ span.title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #f1f1f1;
+    border: 1px solid var(--page-border-color);
     padding: 7px;
     margin-top: -1px;
   }
@@ -191,11 +191,11 @@ span.title {
   }
 
   .music_element:hover {
-    background-color: #f2f3f5;
+    background-color: var(--music-hover);
   }
 
   .music_element__play {
-    background-color: #f2f3f5;
+    background-color: var(--music-hover);
   }
 
   .music_content__control {
@@ -308,7 +308,7 @@ span.title {
 
   .volume_slider_bar {
     width: 100%;
-    background-color: #E7E8EC;
+    background-color: var(--body-color);
     z-index: 1;
   }
 

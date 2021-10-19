@@ -2,6 +2,7 @@ import { BrightnessAltHigh } from "react-bootstrap-icons"
 
 export const lightTheme = {
     body: '#F1F1F3',
+    field_body: '#fff',
     text: '#000000',
     main_text_color: '#000000',
     nav_color: '#4b5b70',
@@ -28,11 +29,18 @@ export const lightTheme = {
     news_popup__dark: '#000000',
     hide_block: 'rgba(255, 255, 255, 0.85)',
     gray_to_light: 'rgb(96, 103, 114)',
-    light_hover_to_dark: '#f5f6f8'
+    light_hover_to_dark: '#f5f6f8',
+    lazy_color_sheme: '#e5e5e5',
+    lazy_opacity: '1',
+    users_links: '#475d97',
+    progress_buffer_color: '#D3D9DE',
+    music_hover: '#f2f3f5',
+    music_shadow: '#e3e7ee',
   }
   
   export const darkTheme = {
     body: '#222226',
+    field_body: '#29292e',
     text: '#FAFAFA',
     main_text_color: '#ffffff',
     subblock_whiteblue: '#484f5c',
@@ -51,6 +59,12 @@ export const lightTheme = {
     preloader_bg: '#333336',
     news_popup__dark: '#000',
     gray_to_light: '#fff',
+    lazy_color_sheme: '#4b4b50',
+    lazy_opacity: '0.1',
+    users_links: '#a3a8b5',
+    progress_buffer_color: '#52565a',
+    music_hover: '#28282a',
+    music_shadow: '#28282a',
 
     tab_hover: 'rgb(159, 169, 184)',
     tab_secondary: 'rgb(140 144 150)',
@@ -78,5 +92,6 @@ export const lightTheme = {
     hide_block: 'rgb(74, 74, 74, 0.85)',
 
     light_hover_to_dark: '#3e3e3e',
+    
 
   }

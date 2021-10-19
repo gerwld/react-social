@@ -13,7 +13,12 @@
 
 .search_block input[type="search"],
 .search_block button {
-    border: 1px solid #d1d1d1;
+    border: 1px solid var(--page-border-color);
+}
+
+.search_block button {
+    background-color: var(--subblock-whiteblue);
+    color: var(--main-text-color)
 }
 
 .search_block input[type="search"] {
@@ -22,7 +27,7 @@
     flex: 1;
     padding: 5px 10px;
     border-right: none;
-    transition: 1s ease-in-out;
+    transition: 0.2s ease-in-out;
 }
 
 .search_block input[type="search"]:focus {
@@ -99,8 +104,8 @@ span.title {
     position: relative;
     border-bottom-left-radius: 0!important;
     border-bottom-right-radius: 0!important;
-    border-bottom: 2px solid rgb(228, 228, 228);
-    box-shadow: 0 0 0 1px #e7e8ec;
+    border-bottom: 2px solid var(--page-border-color);
+    /* box-shadow: 0 0 0 1px #e7e8ec; */
   }
 
   .user_posts_nav {
@@ -129,7 +134,7 @@ span.title {
   }
   
   .user_posts_nav li a.active {
-    color: var(--black-important);
+    color: var(--black-important)!important;
   }
   
   .user_posts_nav .active li a:hover {
@@ -176,7 +181,7 @@ span.title {
     justify-content: flex-start;
     margin: 0 20px 5px;
     padding: 5px 0;
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid var(--page-border-color);
 }
 
 .user_avatar {
@@ -223,7 +228,7 @@ span.title {
 
 .user_name a {
     text-decoration: none;
-    color: #000;
+    color: var(--black-important);
 }
 
 .user_name a:hover {
@@ -244,7 +249,7 @@ span.title {
     display: inline-block;
     padding: 2px 2px;
     letter-spacing: 0.01em;
-    color:rgb(35, 61, 110);
+    color: var(--users-links-color);
     text-decoration: none;
 }
 
@@ -349,10 +354,10 @@ span.title {
     vertical-align: middle;
     text-align: center;
     box-sizing: border-box;
-    border: 1px solid rgb(219, 219, 219);
+    border: 1px solid var(--page-border-color);
     cursor: pointer;
     user-select: none;
-    background-color: #fff;
+    /* background-color: #fff; */
 }
 
 li.currentPage {
@@ -386,7 +391,7 @@ li.pag_arrow:last-child {
 } */
 
 .pagination li:hover {
-    background-color: #f0f0f0;
+    background-color: var(--lazy-color-sheme);
 }
 
 li.pag_arrow:hover {

@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   textarea,
   input {
-    background-color: ${({ theme }) => theme.body};
+    background-color: ${({ theme }) => theme.field_body};
     border-color: ${({ theme }) => theme.main_borders_color};
     color: ${({ theme }) => theme.nav_color}; 
   }
@@ -26,9 +26,11 @@ export const GlobalStyles = createGlobalStyle`
     --body-color: ${({ theme }) => theme.body};
     --subblock-whiteblue: ${({ theme }) => theme.subblock_whiteblue};
 
+
     --main-text-color: ${({ theme }) => theme.main_text_color};
     --main-nav-blue-to-white: ${({ theme }) => theme.main_nav_blue_to_white};
     --main-darkbl-to-white: ${({ theme }) => theme.user_name};
+    --progress-buffer-color: ${({ theme }) => theme.progress_buffer_color};
 
     --main-block-color: ${({ theme }) => theme.main_content_block_color};
     --main-blue-color: #4c6dc1;
@@ -38,11 +40,17 @@ export const GlobalStyles = createGlobalStyle`
     --ava-buttons: ${({ theme }) => theme.ava_buttons};
     --hide-block-bg-color: ${({ theme }) => theme.hide_block};
     --dark-gr-to-li-gray: ${({ theme }) => theme.about_text_color};
+    --music-hover: ${({ theme }) => theme.music_hover};
+    --music-shadow: ${({ theme }) => theme.music_shadow};
+
+    --users-links-color: ${({ theme }) => theme.users_links};
 
     --light-to-dark: ${({ theme }) => theme.light_hover_to_dark};
+    --lazy-color-sheme: ${({ theme }) => theme.lazy_color_sheme};
 
     --main-blue-hover: #3f5ba0;
     --icons-propr-color: #aeb7c2;
+    --lazy-opacity: ${({ theme }) => theme.lazy_opacity};
    
     
     --main-button-color: #6783c9;
