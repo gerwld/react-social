@@ -64,7 +64,7 @@ span.title {
     min-width: 2px;
     width: 2px;
     top: 4px;
-    background-color:#4c6dc1;
+    background-color:var(--main-blue-color);
     z-index: 3;
   }
 
@@ -234,7 +234,7 @@ span.title {
     border-radius: 50%;
     text-align: center;
     color: #ffffff;
-    background-color: #4c6dc1;
+    background-color: var(--main-blue-color);
   }
 
   .action_buttons button:hover {
@@ -292,7 +292,7 @@ span.title {
     line-height: 1px;
     margin: 0;
     padding: 5px;
-    color: #4c6dc1;
+    color: var(--main-blue-color);
     cursor: pointer;
   }
   .music_element_currentplay .music_progress {
@@ -314,7 +314,7 @@ span.title {
 
   .volume_slider_progress {
     width: 50%;
-    background-color: #4c6dc1;
+    background-color: var(--main-blue-color);
     z-index: 2;
     margin-top: -3px;
   }

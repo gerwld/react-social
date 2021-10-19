@@ -1,5 +1,7 @@
 :root {
   --page-block-shadow: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
+  --page-block-shadow-less: 0 1px 0 0 #dce1e6, 0 0 0 1px #e7e8ec;
+  --black-important: #000!important;
   --page-border: 1px solid #e3e3e3;
   --border-radius-ui: 4px;
   --button-radius-ui: 6px;
@@ -21,7 +23,7 @@ background: linear-gradient(0deg, rgba(76,109,193,1) 4%, rgba(241,241,243,1) 4%,
 
 body {
   min-width: 1200px;
-  background-color: #F1F1F3!important;
+  background-color: #F1F1F3;
   margin: 0;
   font-size: 15px!important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -64,3 +66,4 @@ code {
 .popup-content {
   width: 0!important;
 }
+

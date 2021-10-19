@@ -4,7 +4,7 @@
     grid-column-start: 1;
     grid-column-end: 3;
     padding: 10px 15px;
-    background-color: #4c6dc1;
+    background-color: var(--main-blue-color);
     z-index: 100;
     margin-bottom: 10px;
   }
@@ -49,5 +49,34 @@
 
   .main_nav {
     color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+
+  .main_nav span:nth-child(2) {
     margin-top: 4px;
+  }
+
+  .dark_theme {
+    padding: 0;
+    margin: 0;
+    margin-right: 15px;
+    width: 35px;
+    height: 35px;
+    padding: 7px;
+    background-color: var(--main-blue-color);
+    border: none;
+    border-radius: 10px;
+    border: 1px solid rgb(255, 255, 255);
+    text-align: center;
+  }
+
+  .dark_theme:hover {
+    background-color: #4865af;
+  }
+
+  .dark_theme svg {
+    font-size: 15px;
   }

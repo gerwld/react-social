@@ -57,7 +57,7 @@
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 3;
-    color: rgb(58, 94, 148);
+    color: var(--main-blue-color);
     box-sizing: border-box;
 }
 
@@ -199,9 +199,9 @@
 .hide_content_block button {
     margin-top: 15px;
     padding: 10px 15px;
-    border: 1px solid #4c6dc1;
+    border: 1px solid var(--main-blue-color);
     font-size: 17px;
-    background-color: #4c6dc1;
+    background-color: var(--main-blue-color);
     color: #fff;
     border-radius: 6px;
     transition: 0.3s;
@@ -674,7 +674,7 @@
 }
 
 .news_popup_buttons .follow {
-    background-color: #4c6dc1;
+    background-color: var(--main-blue-color);
     padding-right: 14px;
     color: #fff;
     margin-right: 8px;
@@ -745,7 +745,7 @@
 }
 
 .comment_name {
-    color:rgb(58, 94, 148);
+    color:var(--main-blue-color);
     font-size: 13.5px;
     font-weight: 500;
 }
@@ -789,7 +789,7 @@
     padding: 5px 15px 5px 0;
     margin: 0 0 5px 0;
     border: none;
-    color:rgb(58, 94, 148);
+    color:var(--main-blue-color);
     font-size: 14px;
     border:none;
     -webkit-appearance: none;
@@ -798,6 +798,7 @@
     -ms-appearance: none;
     cursor: pointer; 
     z-index: 10;
+    background: inherit;
 }
 
 
@@ -820,7 +821,7 @@
     right: -5px;
 
     font-size: 20px;
-    color: rgb(58, 94, 148);
+    color: var(--main-blue-color);
     margin-bottom: 3px;
     z-index: 0;
     user-select: none;

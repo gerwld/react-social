@@ -39,6 +39,7 @@
     box-sizing: border-box;
     justify-content: space-between;
     align-items: flex-start;
+    transition: 0.2s ease-in!important;
 }
 
 .whats_new_block form {
@@ -57,6 +58,7 @@
     border: none;
     transition: 0.27s ease-in-out;
     resize: none;
+    background-color: inherit;
 }
 
 .whats_new_block textarea:focus {

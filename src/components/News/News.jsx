@@ -111,7 +111,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
     }
 
     return (
-        <div className={`${s.feed__main_block} ${isHide && s.hide_content} main-content-block`}>
+        <div className={`${s.feed__main_block} ${isHide && s.hide_content} main-content-block anim-theme`}>
             {isHide && <div className={s.hide_content_block}>
                 <span>Posts from this source have been removed from the feed.</span>
                 <button onClick={() => hideContent(false)}>Cancel</button>

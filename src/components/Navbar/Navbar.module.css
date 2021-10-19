@@ -11,9 +11,9 @@
   font-family: Helvetica;
   line-height: 15.5px;
   color: #fff;
-  background-color:#4c6dc1;
+  background-color:var(--main-blue-color);
   border-radius: 4px;
-  border: 1.4px solid #4c6dc1;
+  border: 1.4px solid var(--main-blue-color);
   box-sizing: border-box;
 }
 
