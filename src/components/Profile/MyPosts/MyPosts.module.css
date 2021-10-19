@@ -53,11 +53,12 @@
 }
 
 .user_posts_nav li a.active {
-  color: var(--black-important);
+  color: var(--black-important)!important;
 }
 
-.user_posts_nav .active li a:hover {
-  color: var(--black-important);
+.user_posts_nav .active:hover {
+  color: var(--black-important)!important;
+  filter: brightness(1);
 }
 
 .user_posts_active {
