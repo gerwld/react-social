@@ -15,9 +15,10 @@
     width: 100vw;
     min-width: 1200px;
     height: calc(100vh - 60px);
-    background-color: white;
+    background-color: var(--b404-background);
     margin-top: -25px;
     overflow: hidden;
+    transition: 0.2s ease-in;
 }
 
 .notFound_window {
@@ -35,13 +36,13 @@
     display: block;
     font-weight: bold;
     font-size: 125px;
-    color: #4c6dc1;
+    color: var(--main-blue-color-text);
 }
 
 .mainText {
     font-size: 26px;
     text-transform: capitalize;
-    color: #535353;
+    color: var(--gray-to-light);
 }
 
 .mainBlock {

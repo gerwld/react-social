@@ -22,7 +22,7 @@ const MyPosts = (props) => {
     <>
       <MyPostReduxForm onSubmit={props.sendPost} styles={s.whatsNewPost_profile} fullWidth={90} {...props} />
       <div className={`${s.user_posts}`}>
-        <div className={`${s.user_posts_navtitle} main-content-block`}>
+        <div className={`${s.user_posts_navtitle} main-content-block anim-theme`}>
           <ul className={`${s.user_posts_nav} ${currentActive(props.match.params.flags)}`}>
             <li><NavLink to={`/profile${isHasId}`} exact activeClassName={s.active}>All posts</NavLink></li>
             <li><NavLink to={`/profile${isHasId}/filter=my_posts`} activeClassName={s.active}>My posts</NavLink></li>

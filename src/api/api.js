@@ -87,7 +87,7 @@ export const authAPI = {
 
 export const entertaimentAPI = {
     getPosts(currPage, serving = 3) {
-        return axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=1ad6438c671a48ad8c6a0731d8c1eabf`).then(r => r.data.articles);
+        return axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&pageSize=${serving}&page=${currPage}&apiKey=a8cc646b8aab472e8166be569667bd5e`).then(r => r.data.articles);
     }
 }
 // a8cc646b8aab472e8166be569667bd5e

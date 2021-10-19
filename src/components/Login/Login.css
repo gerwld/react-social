@@ -56,7 +56,7 @@
 }
 
 button.btn-login {
-    background-color: #4c6dc1!important;
+    background-color: var(--main-blue-color)!important;
     color: #fff;
 }
 
@@ -90,8 +90,8 @@ button.btn-login:hover {
 }
 
 .form-check-input:checked {
-    background-color: #4c6dc1!important;
-    border-color: #4c6dc1!important;
+    background-color: var(--main-blue-color)!important;
+    border-color: var(--main-blue-color)!important;
 }
 
 .captcha-img {
@@ -105,7 +105,7 @@ button.btn-login:hover {
     object-fit: scale-down;
     border: 1px solid #e3e3e3;
     border-radius: 7px;
-    background-color: #4c6dc1;
+    background-color: var(--main-blue-color);
 }
 
 .captcha-img img {

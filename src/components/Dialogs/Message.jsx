@@ -1,6 +1,8 @@
 import moment from 'moment';
 import { NavLink } from 'react-router-dom';
 import s from './Dialogs.module.css';
+import {BsCheckAll} from 'react-icons/bs'
+
 
 const Message = ({converListUser, authProfile, ...props}) => {
     var time = moment(props.addedAt, "YYYY-MM-DD-h:mm").format("hh:mm A");
@@ -22,7 +24,7 @@ const Message = ({converListUser, authProfile, ...props}) => {
             </NavLink>
                 <span>{props.body}</span>
                 <span className={s.message_data}>{time} <span>{data}</span></span>
-                <span className={`${s.status} ${props.viewed && s.viewed}`}><i className="fa-solid fa-check-double"/></span>
+                <span className={`${s.status} ${props.viewed && s.viewed}`}><BsCheckAll /></span>
             </div>
         </div>
     );

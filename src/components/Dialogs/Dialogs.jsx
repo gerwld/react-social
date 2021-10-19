@@ -10,6 +10,8 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { IoMdSettings, IoIosAdd } from "react-icons/io";
 import {IoSearchSharp, IoStar } from "react-icons/io5";
 import {AiOutlineSend} from "react-icons/ai";
+import {FiPaperclip} from "react-icons/fi";
+
 
 
 
@@ -107,7 +109,7 @@ const maxLength350 = maxLengthCreator(350);
 let MessageForm = ({ handleSubmit }) => {
     return (
         <form onSubmit={handleSubmit} className={s.messageInput}>
-            <span className={s.add_file} title="Add a file..." alt="Add a file..."><i className="fas fa-paperclip" /></span>
+            <span className={s.add_file} title="Add a file..." alt="Add a file..."><FiPaperclip /></span>
             <Field component={Textarea} name="message" placeholder="Enter your message..." validate={[requiredField, maxLength350]} />
             <button type="submit"><AiOutlineSend /></button>
         </form>

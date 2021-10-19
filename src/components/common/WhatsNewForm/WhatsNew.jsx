@@ -9,7 +9,7 @@ const WhatsNew = ({styles = '', button = '', fullWidth, ...props}) => {
     const [fieldHeight, setHeight] = useState("50px");
 
     return (
-        <div className={`${s.whats_new_block} ${styles} main-content-block`}>
+        <div className={`${s.whats_new_block} ${styles} main-content-block main-dark`}>
             <div className={`${s.author_avatar} ${s.whatsnew_avatar}`}><img src={noAvatar} alt="Avatar" /></div>
             <form onSubmit={props.handleSubmit}>
                 <div className={s.whatsnew_field}>

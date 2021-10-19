@@ -14,12 +14,15 @@ import SettingsContainer from './components/Settings/SettingsContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import MusicContainer from './components/Music/MusicContainer';
 import withSuspense from './hoc/withSuspense';
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from './components/styles/base-theme';
 
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 const LoginContainer = React.lazy(() => import('./components/Login/Login'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 const NewsContainer = React.lazy(() => import('./components/News/NewsContainer'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+import { GlobalStyles } from './global';
 
 
 class App extends React.Component {
@@ -34,6 +37,8 @@ class App extends React.Component {
 
     return (
     <>
+    <ThemeProvider theme={this.props.isDark ? darkTheme : lightTheme}>
+    <GlobalStyles />
     <HeaderContainer />
     <div className="app-wrapper">
       {!this.props.location.pathname.match('/login') && !this.props.location.pathname.match('/error-404') && <Navbar />}
@@ -63,6 +68,7 @@ class App extends React.Component {
       </div>
     </div>
     <Route path='/error-404' render={() => <NotFound />} />
+    </ThemeProvider>
     </>);
   }
 }
@@ -71,7 +77,8 @@ class App extends React.Component {
 let mapStateToProps = (state) => {
   return {
     isAuth: state.auth.isAuth,
-    initialized: state.app.initialized
+    initialized: state.app.initialized,
+    isDark: state.app.darkTheme
   }
 }
 

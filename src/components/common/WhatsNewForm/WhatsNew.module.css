@@ -16,7 +16,7 @@
 }
 
 .clipFile:active {
-    color: var(--main-blue-color);
+    color: var(--main-blue-color-text);
 }
 
 .whatsnew_field + .send {
@@ -24,7 +24,7 @@
     height: 40px;
     margin-left: 15px;
     font-size: 20px;
-    color: var(--main-blue-color);
+    color: var(--main-blue-color-text);
     background: transparent;
     border: 0px solid #e3e3e3;
     border-radius: 50%;
@@ -39,6 +39,7 @@
     box-sizing: border-box;
     justify-content: space-between;
     align-items: flex-start;
+    transition: 0.2s ease-in!important;
 }
 
 .whats_new_block form {
@@ -57,6 +58,7 @@
     border: none;
     transition: 0.27s ease-in-out;
     resize: none;
+    background-color: inherit;
 }
 
 .whats_new_block textarea:focus {

@@ -4,11 +4,14 @@ import { setunreadMessagesCountTC } from './auth-reducer';
 
 
 const SET_INITIALIZING = 'soc-net-pjaw/app-reducer/SET_INITIALIZING';
+const TOGGLE_THEME = 'soc-net-pjaw/app-reducer/TOGGLE_THEME';
 export const setInitializingSuccess = () => ({type: SET_INITIALIZING});
+export const toggleTheme = () => ({type: TOGGLE_THEME})
 
 
 let initialState = {
     initialized: false,
+    darkTheme: false
 };
 
 const appReducer = (state = initialState, action) => {
@@ -18,7 +21,11 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 initialized: true
             }
-        
+            case TOGGLE_THEME:
+                return {
+                    ...state,
+                    darkTheme: !state.darkTheme
+                }
         default:
             return state;
     }

@@ -21,26 +21,36 @@ span.title {
     color: #BAC6D6;
 }
 
+.dialogs_userlist_settings,
+.dialogs_frame,
+.current_dialog,
+.dialog_window,
+.userlist li a,
+.messageInput,
+.dialogs_userlist_search {
+background-color: var(--main-block-color);
+}
+
 .dialogs_userlist_settings {
     bottom: 0;
     width: 252px;
     text-align: center;
     vertical-align: middle;
     padding-top: 18px;
-    border: 1px solid #e3e3e3;
+    border: 1px solid var(--page-border-color);
     border-top: 0!important;
     border-bottom-left-radius: 5px;
 }
 
 .dialogs_userlist_settings span {
     margin-right: 20px;
-    color: #41485f;
+    color: var(--subtext-graydark);
 }
 
 .dialogs_userlist_search {
     top: 0;
     padding: 15px 0 15px 10px;
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid var(--page-border-color);
 }
 
 .dialogs_userlist_search input {
@@ -48,6 +58,7 @@ span.title {
     padding: 15px 0 15px 30px;
     height: 30px;
     border: none;
+    background: none!important;
 }
 
 .dialogs_userlist_search input:focus {
@@ -159,7 +170,7 @@ outline: none;
     line-height: 15.5px;
     background-color: rgb(71, 151, 255);
     border-radius: 10px;
-    border: 1.4px solid #4c6dc1;
+    border: 1.4px solid var(--main-blue-color);
     box-sizing: border-box;
 }
 
@@ -230,9 +241,7 @@ outline: none;
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: #fff;
     border: var(--page-border);
-    /* border-left: none; */
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -244,7 +253,6 @@ outline: none;
 
 .end_dial {
     padding-top: 20px;
-    /* border: 1px solid red; */
 }
 
 .user_name {
@@ -263,7 +271,6 @@ outline: none;
     align-items: flex-start;
     height: 85vh;
     min-height: 750px;
-    background-color: #ffffff;
     border-radius: 5px;
 }
 
@@ -274,8 +281,7 @@ outline: none;
     flex: 1;
     height: 100%;
     box-sizing: border-box;
-    background-color: #ffffff;
-    border: 1px solid #e3e3e3;
+    border: 1px solid var(--page-border-color);
     overflow: hidden;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -293,12 +299,11 @@ outline: none;
     font-weight: bold;
     font-size: 18px;
     text-transform: capitalize;
-    background-color: #fff;
-    border-bottom: 1px solid rgb(214, 214, 214);
+    border-bottom: 1px solid var(--page-border-color);
 }
 
 .current_dialog a {
-    color: #535353!important;
+    color: var(--gray-to-light);
     text-decoration: none;
 }
 
@@ -347,16 +352,16 @@ outline: none;
     position: relative;
     padding: 23px 30px;
     padding-left: 65px;
-    color: black;
+    color: var(--main-text-color);
     text-decoration: none;
 }
 
 .userlist li {
-    border-bottom: 1px solid #e3e3e3;
+    border-bottom: 1px solid var(--page-border-color);
 }
 
-.userlist li:hover {
-    background-color: #f7f7f7;
+.userlist li a:hover {
+    background-color: var(--light-to-dark);
 }
 
 img.userlist_avatar {
@@ -379,9 +384,13 @@ img.userlist_avatar {
 }
 
 .message .userAvatar {
-width: 45px;
-height: 45px;
-border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #e3e3e3;
+    display: block;
+    overflow: hidden;
+    font-size: 0;
 }
 
 .message {
@@ -396,9 +405,9 @@ border-radius: 50%;
 
 .status {
     position: absolute;
-    right: 97px;
-    top: 30px;
-    font-size: 13.2px;
+    right: 95px;
+    top: 35px;
+    font-size: 20px;
     color: #b7beca;
 }
 
@@ -422,7 +431,7 @@ border-radius: 50%;
 }
 
 .message a {
-    color: black;
+    color: var(--black-important);
     text-decoration: none;
 }
 
@@ -433,7 +442,6 @@ border-radius: 50%;
 
 .message_content > span {
     display: block;
-    font-size: 14.5;
 }
 
 .messageInput {
@@ -446,10 +454,9 @@ border-radius: 50%;
     left: 0;
     padding: 30px;
     margin-top: auto;
-    background-color: #ffffff;
     box-sizing: border-box;
     border-radius: 0 0 5px 0;
-    border-top: 1px solid #f3f3f3;
+    border-top: 1px solid var(--page-border-color);
     box-shadow: var(--page-block-shadow);
 }
 
@@ -480,7 +487,7 @@ border-radius: 50%;
     min-height: 50px;
     margin-left: 15px;
     color: white;
-    background-color: #4c6dc1;
+    background-color: var(--main-blue-color);
     transition: 0.4s ease-in-out;
     cursor: pointer;
     font-weight: bold;
@@ -495,7 +502,6 @@ border-radius: 50%;
 }
 
 .messageInput textarea:focus {
-    background-color: #ffffff;
     outline: none;
 }
 
@@ -510,8 +516,9 @@ border-radius: 50%;
 .add_file {
     color: #ababab!important;
     font-size: 20px;
-    padding: 10px;
+    padding: 7px;
     margin-right: 5px;
+    margin-top: -5px;
     align-self: flex-start;
     cursor: pointer;
 }

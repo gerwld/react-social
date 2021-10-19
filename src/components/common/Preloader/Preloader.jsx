@@ -36,7 +36,7 @@ export const DialogsPreloader = () => {
 
 export const LoadingSpinner = () => {
     return (
-        <div className={s.spinner} alt="Loading... Please wait"
+        <div className={s.spinner + ' preloader__dark'} alt="Loading... Please wait"
             title="Loading... Please wait">
             <div className={s.spinner_blade} /><div className={s.spinner_blade} />
             <div className={s.spinner_blade} /><div className={s.spinner_blade} />

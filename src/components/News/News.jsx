@@ -111,7 +111,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
     }
 
     return (
-        <div className={`${s.feed__main_block} ${isHide && s.hide_content} main-content-block`}>
+        <div className={`${s.feed__main_block} ${isHide && s.hide_content} main-content-block anim-theme`}>
             {isHide && <div className={s.hide_content_block}>
                 <span>Posts from this source have been removed from the feed.</span>
                 <button onClick={() => hideContent(false)}>Cancel</button>
@@ -121,7 +121,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
                     {props.avatar ? <img src={props.avatar} alt="Author avatar" /> : <img src={props.nv} alt="Author avatar" />}
                 </div>
                 <div className={s.main_info}>
-                    <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
+                    <NavLink to="/" className={s.author_name + ' news_author_name__dark'}>{props.author}</NavLink>
                     <span className={s.post_time}>{isNaN(props.data[0]) ? props.data : time}</span>
                 </div>
             </div>
@@ -218,7 +218,7 @@ const PopupFullSizeFeed = ({ isShowSetPop, toggleSetPop, postId, isAuthPost,
                                 <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
                                 <span className={s.post_time}>{isNaN(props.data[0]) ? props.data : time}</span>
                             </div>
-                            <div className={s.news_popup_buttons}>
+                            <div className={s.news_popup_buttons + ' news_popup__dark'}>
                                 <button className={s.follow}><BiCheck />Following</button>
                                 <ActionBlockButton isShowSet={isShowSetPop} toggleSet={toggleSetPop} postId={postId}
                                     isAuthPost={isAuthPost} hideContent={hideContent} deletePost={deletePost} />
