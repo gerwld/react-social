@@ -1,7 +1,7 @@
 import axios from "axios";
 import { captchaStatus, captchaTry, setUserData, setUserIdAfterLogin, userLoggedIn } from "../redux/auth-reducer";
 import { change, stopSubmit } from 'redux-form';
-
+import { push } from 'react-router-redux';
 
 const instance = axios.create({
     withCredentials: true,
@@ -140,7 +140,7 @@ export const loginUserTC = (fieldForm, captchaTryCount) => {
             dispatch(setUserIdAfterLogin(r.data.data.userId));
             if (r.data.resultCode === 0) {
                 dispatch(captchaStatus(false, ''));
-                alert('Login successful.');
+                // alert('Login successful.');
                 dispatch(userLoggedIn());
             }
             else if (r.data.resultCode === 10) {
@@ -166,6 +166,7 @@ export const logoutUserTC = () => {
         authAPI.logoutInterface().then(r => {
             if(r.data.resultCode === 0) {
                 dispatch(setUserData(null, null, null, false));
+                dispatch(push('/login'));
             } 
         })
     }
