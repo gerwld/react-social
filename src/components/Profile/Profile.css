@@ -478,6 +478,10 @@ textarea.lookingForJob_edit {
   min-height: 100px;
   opacity: 1;
 }
+.profile-info__block_2 input[type="checkbox"] {
+  width: 14px;
+  display: inline;
+}
 
 .lookingAJob_label {
   position: absolute;
