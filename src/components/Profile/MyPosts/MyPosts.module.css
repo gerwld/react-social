@@ -16,7 +16,7 @@
   position: relative;
   border-bottom-left-radius: 0!important;
   border-bottom-right-radius: 0!important;
-  border-bottom: 2px solid rgb(228, 228, 228);
+  border-bottom: 2px solid var(--page-border-color);
   box-shadow: var(--page-block-shadow-less);
 }
 
@@ -43,13 +43,13 @@
   display: block;
   padding: 15px 10px;
   text-decoration: none;
-  color: rgb(159, 169, 184);
+  color: var(--tab-secondary);
   transition: 0.2s;
 }
 
 .user_posts_nav li a:hover {
   text-decoration: none;
-  color: rgb(159, 169, 184)!important;
+  color: var(--tab-hover)!important;
 }
 
 .user_posts_nav li a.active {

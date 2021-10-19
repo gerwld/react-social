@@ -121,7 +121,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
                     {props.avatar ? <img src={props.avatar} alt="Author avatar" /> : <img src={props.nv} alt="Author avatar" />}
                 </div>
                 <div className={s.main_info}>
-                    <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
+                    <NavLink to="/" className={s.author_name + ' news_author_name__dark'}>{props.author}</NavLink>
                     <span className={s.post_time}>{isNaN(props.data[0]) ? props.data : time}</span>
                 </div>
             </div>
@@ -218,7 +218,7 @@ const PopupFullSizeFeed = ({ isShowSetPop, toggleSetPop, postId, isAuthPost,
                                 <NavLink to="/" className={s.author_name}>{props.author}</NavLink>
                                 <span className={s.post_time}>{isNaN(props.data[0]) ? props.data : time}</span>
                             </div>
-                            <div className={s.news_popup_buttons}>
+                            <div className={s.news_popup_buttons + ' news_popup__dark'}>
                                 <button className={s.follow}><BiCheck />Following</button>
                                 <ActionBlockButton isShowSet={isShowSetPop} toggleSet={toggleSetPop} postId={postId}
                                     isAuthPost={isAuthPost} hideContent={hideContent} deletePost={deletePost} />

@@ -8,7 +8,7 @@ class Navbar extends React.Component {
 
     render() {
         return (
-            <nav className={`${s.app_navbar}`}>
+            <nav className={`${s.app_navbar} navbar-dark__main`}>
                 <ul>
                     <li key="0"><NavLink to="/profile" activeClassName={s.current}><IoPersonOutline/> Profile</NavLink></li>
                     <li key="1"><NavLink to="/feed" activeClassName={s.current}><IoNewspaperOutline/> News</NavLink></li>
@@ -20,7 +20,7 @@ class Navbar extends React.Component {
                     <li key="4"><NavLink to="/video" activeClassName={s.current}><IoVideocamOutline /> Videos</NavLink></li>
                     <li key="5"><NavLink to="/settings" activeClassName={s.current}><IoSettingsOutline /> Settings</NavLink></li>
                 </ul>
-                <div className={s.subnav_info}>
+                <div className={s.subnav_info + ' navbar-dark__sub'}>
                     <NavLink to="/profile/id19461">P. Jaworski</NavLink>
                     <a href="#">Blog</a>
                     <a target="_blank" rel="noreferrer" href="https://github.com/gerwld/Social-Network-Project#readme">About p/Jaw network</a>

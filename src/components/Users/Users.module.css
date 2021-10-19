@@ -345,7 +345,7 @@ span.title {
     margin-left: -1px;
     font-size: 14px;
     line-height: 38px;
-    color:var(--main-blue-color);
+    color:var(--main-blue-color-text);
     vertical-align: middle;
     text-align: center;
     box-sizing: border-box;
@@ -357,7 +357,7 @@ span.title {
 
 li.currentPage {
     font-weight: bold;
-    background-color:var(--main-blue-color);
+    background-color:var(--main-blue-color-text);
     color: #fff;
     border: 1px solid var(--main-blue-color);
 }
@@ -396,5 +396,5 @@ li.pag_arrow:hover {
 }
 
 li.currentPage:hover {
-    background-color:var(--main-blue-color);
+    background-color:var(--main-blue-color-text);
 }

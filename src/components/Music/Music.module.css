@@ -64,7 +64,7 @@ span.title {
     min-width: 2px;
     width: 2px;
     top: 4px;
-    background-color:var(--main-blue-color);
+    background-color:var(--main-blue-color-text);
     z-index: 3;
   }
 
@@ -292,7 +292,7 @@ span.title {
     line-height: 1px;
     margin: 0;
     padding: 5px;
-    color: var(--main-blue-color);
+    color: var(--main-blue-color-text);
     cursor: pointer;
   }
   .music_element_currentplay .music_progress {

@@ -1,89 +1,112 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-.anim-theme {
-    // transition: background 0s ease-in, box-shadow 0s ease-in, border-color 0s ease-in, color 0s ease-in!important;
-}
-*{
-    border-color: ${({ theme }) => theme.borderColor}; 
-}
-  :root {
-    --page-block-shadow: ${({ theme }) => theme.main_content_block};
-    --page-block-shadow-less: ${({ theme }) => theme.page_block_shadow_less};
-    --black-important: ${({ theme }) => theme.text};
-    --subhead-text: ${({ theme }) => theme.subhead_var};
-    --main-blue-color: ${({ theme }) => theme.mainBlueColor};
-    transition: 0s ease-in;
-  }
   body {
     background-color: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
-    transition: background 0s ease-in, color 0s ease-in!important;
+    transition: background 0.2s ease-in, color 0.2s ease-in;
   }
-  .main-content-block,
-  .Preloader_loaderAnimation_w100__XmaKr,
-  .Preloader_loaderAnimation__1ryg- {
-    background-color: ${({ theme }) => theme.main_content_block};
-    transition: background 0s ease-in, color 0s ease-in!important;
+  textarea,
+  input {
+    background-color: ${({ theme }) => theme.body};
+    border-color: ${({ theme }) => theme.main_borders_color};
+    color: ${({ theme }) => theme.nav_color}; 
   }
-  .full-name {
-    color: ${({ theme }) => theme.text};
+  :root {
+    --page-block-shadow: ${({ theme }) => theme.page_block_shadow};
+    --page-block-shadow-less: ${({ theme }) => theme.page_block_shadow_less};
+    --black-important: ${({ theme }) => theme.black_important};
+    --page-border: 1px solid ${({ theme }) => theme.main_borders_color};
+    --page-border-color: ${({ theme }) => theme.main_borders_color};
+    --tab-secondary: ${({ theme }) => theme.tab_secondary};
+    --tab-hover: ${({ theme }) => theme.tab_hover};
+    --preloader-bg: ${({ theme }) => theme.preloader_bg};
+    --subtext-graydark: ${({ theme }) => theme.subtext_graydark};
+    --gray-to-light: ${({ theme }) => theme.gray_to_light};
+    --body-color: ${({ theme }) => theme.body};
+    --subblock-whiteblue: ${({ theme }) => theme.subblock_whiteblue};
+
+    --main-text-color: ${({ theme }) => theme.main_text_color};
+    --main-nav-blue-to-white: ${({ theme }) => theme.main_nav_blue_to_white};
+    --main-darkbl-to-white: ${({ theme }) => theme.user_name};
+
+    --main-block-color: ${({ theme }) => theme.main_content_block_color};
+    --main-blue-color: #4c6dc1;
+    --main-blue-color-text: ${({ theme }) => theme.bluetextmaincolor};
+    --main-blue-color-link: ${({ theme }) => theme.bluelinkmaincolor};
+    --subhead-text: ${({ theme }) => theme.subhead_text};
+    --ava-buttons: ${({ theme }) => theme.ava_buttons};
+    --hide-block-bg-color: ${({ theme }) => theme.hide_block};
+    --dark-gr-to-li-gray: ${({ theme }) => theme.about_text_color};
+
+    --light-to-dark: ${({ theme }) => theme.light_hover_to_dark};
+
+    --main-blue-hover: #3f5ba0;
+    --icons-propr-color: #aeb7c2;
+   
+    
+    --main-button-color: #6783c9;
   }
-  .News_col_title_active__38FRh,
-  .News_col_title_active__38FRh {
-      background-color: ${({ theme }) => theme.body};
-      border-bottom: ${({ theme }) => theme.body};
+//   Navbar start
+  .navbar-dark__main li a {
+    color: ${({ theme }) => theme.nav_color}; 
   }
-  .main-info__content {
-    border: ${({ theme }) => theme.border_main};
+  .news_popup__dark{ 
+    color: ${({ theme }) => theme.news_popup__dark};
   }
-  .about_block:first-child {
-      border-top: ${({ theme }) => theme.border_main};
+  .navbar-dark__sub,
+  .navbar-dark__sub > a {
+      border-color: ${({ theme }) => theme.main_borders_color}; 
+      color: ${({ theme }) => theme.nav_color}; 
   }
-  .News_col_title_active__38FRh {
-    border-color: ${({ theme }) => theme.text};
+  .navbar-dark__main li a:hover {
+    color: ${({ theme }) => theme.nav_color_hover}; 
   }
-  .about_block .about_subtitle,
+//Main start
+  .main-content-block {
+    background-color: var(--main-block-color);
+    border-box: ${({ theme }) => theme.page_block_shadow};
+  }
+
+  a.full-name,
   .user_name,
-  .MyPosts_user_posts_nav__1qp4D li a,
-  .Navbar_app_navbar__1ee0e a,
-  .subblock_2_title,
-  .main-content-block a,
-  .News_navbar__Lmkhx li, .News_col_title__2Vwu1,
-  .News_comment_name__2HoQE,
-  .WhatsNew_whatsnew_field__qiMwz + .WhatsNew_send__1JJpN,
-  .css-ahj2mt-MuiTypography-root,
-  .WhatsNew_whats_new_block__2Ud4V textarea,
-  .News_block_buttons__38eZg div > span {
-    color: ${({ theme }) => theme.text};
+  .subblock_2_title {
+    color: ${({ theme }) => theme.subblock_2_title};
   }
   .about_block .about_content {
-    color: ${({ theme }) => theme.subtext}; 
-  }
-  .News_comment_data__156wK {
-    color: ${({ theme }) => theme.subhead_var};
-  }
-  .News_block_buttons__38eZg::before,
-  .News_comment_block__3vFck::after,
-  .News_comment_block_form__1gYIl::before,
-  .News_comments_parent__15X7R::before,
-  .News_block_buttons__38eZg::before {
-    background-color: ${({ theme }) => theme.borderColor}; 
-    transition: 0s ease-in!important;
-  }
-  .News_comment_field__3BN_q textarea {
-      background-color: ${({ theme }) => theme.textarea_background}; 
-      transition: 0s ease-in!important;
+      color: ${({ theme }) => theme.about_text_color};
   }
   .show-more_btn {
-    background-color: ${({ theme }) => theme.showMoreBtn};
-    color: ${({ theme }) => theme.text};
-    transition: 0s ease-in!important;
+      background-color: ${({ theme }) => theme.showMoreBtn};
+      color: ${({ theme }) => theme.text};
+      border-color: ${({ theme }) => theme.main_borders_color}; 
   }
-  .MyPosts_user_posts_nav__1qp4D::after {
-      background-color: ${({ theme }) => theme.text};
+  .user_name {
+    color: ${({ theme }) => theme.user_name};
   }
-  .Header_dark_theme__2vF-r:hover {
-    background-color: ${({ theme }) => theme.showMoreBtn};
+
+  .news_author_name__dark {
+    color: ${({ theme }) => theme.bluetowhite};
+  }
+  .status_editable:hover {
+    color: ${({ theme }) => theme.black_important};
+  }
+//Preloader 
+  .preloader__dark {
+      filter: ${({ theme }) => theme.preloader__dark};
+      -webkit-filter: ${({ theme }) => theme.preloader__dark};
+  }
+//Emojies 
+  .emoji-mart,
+  .emoji-mart-category-label > span {
+    background-color: var(--main-block-color)!important;
+    color: ${({ theme }) => theme.main_text_color};
+    border-color: var(--page-border-color)!important;
+  }
+  .emoji-mart-emoji:hover:before {
+    background-color: var(--page-border-color)!important;
+  }
+  button.emoji-mart-search-icon {
+    filter: brightness(100) drop-shadow(1px -1px 0px #fff);
   }
 `;

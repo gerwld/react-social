@@ -30,7 +30,7 @@ const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId, toggleSet }) 
 const ActionBlockButton = ({ isShowSet, toggleSet, postId, isAuthPost, hideContent, deletePost }) => {
     return (
         <Foco onClickOutside={() => toggleSet(false)}>
-            <ButtonBase children={<span onClick={() => toggleSet(!isShowSet)}><i className="fas fa-ellipsis-h" /></span>} />
+            <ButtonBase onClick={() => toggleSet(!isShowSet)} children={<><i className="fas fa-ellipsis-h" /></>} />
             {isShowSet && <DropDownMenu postId={postId} isAuthor={isAuthPost} hideContent={hideContent} deletePost={deletePost}
                 toggleSet={toggleSet} />}
         </Foco>

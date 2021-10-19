@@ -35,7 +35,7 @@
     display: block;
     font-weight: bold;
     font-size: 125px;
-    color: var(--main-blue-color);
+    color: var(--main-blue-color-text);
 }
 
 .mainText {
