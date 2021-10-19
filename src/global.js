@@ -20,7 +20,9 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }) => theme.text};
     transition: background 0s ease-in, color 0s ease-in!important;
   }
-  .main-content-block {
+  .main-content-block,
+  .Preloader_loaderAnimation_w100__XmaKr,
+  .Preloader_loaderAnimation__1ryg- {
     background-color: ${({ theme }) => theme.main_content_block};
     transition: background 0s ease-in, color 0s ease-in!important;
   }
@@ -51,6 +53,7 @@ export const GlobalStyles = createGlobalStyle`
   .News_comment_name__2HoQE,
   .WhatsNew_whatsnew_field__qiMwz + .WhatsNew_send__1JJpN,
   .css-ahj2mt-MuiTypography-root,
+  .WhatsNew_whats_new_block__2Ud4V textarea,
   .News_block_buttons__38eZg div > span {
     color: ${({ theme }) => theme.text};
   }
