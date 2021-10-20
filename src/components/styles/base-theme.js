@@ -25,7 +25,7 @@ export const lightTheme = {
     main_nav_blue_to_white: '#4c6dc1',
     ava_buttons: 'rgb(39 48 84 / 65%)',
     status_editable_hover: 'rgb(215, 227, 243)',
-    preloader_bg: '#e3e3e3',
+    preloader_bg: '#eaecf1',
     news_popup__dark: '#000000',
     hide_block: 'rgba(255, 255, 255, 0.85)',
     gray_to_light: 'rgb(96, 103, 114)',
