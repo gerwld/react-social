@@ -38,7 +38,7 @@ class Login extends React.Component {
                 </div>
                 <div className="login_blocks">
                     <div className="login_content main-content-block">
-                        <LoginReduxForm {...this.props} onSubmit={this.onSubmit} />
+                        <LoginReduxForm  initialValues={{email: 'pjaworski.dev@gmail.com', password: 'qwerty12345' }} {...this.props} onSubmit={this.onSubmit} />
                     </div>
                     <div className="login_content main-content-block sign-up-block">
                         <span className="sign-up-title">On p/Jaw for the first time?</span>
@@ -59,7 +59,6 @@ const reduiredEmail = requiredFieldText("Please, enter your email.");
 const reduiredPasswd = requiredFieldText("Password is required.");
 
 let LoginForm = (props) => {
-
     var isCaptchaShow = props.isCaptchaShow ? "captcha-visible" : "";
     var isFormGlobalError = props.error ? "form-error-visible" : "";
 
@@ -135,7 +134,7 @@ let SignUpForm = (props) => {
                 <label><input class="form-check-input" type="radio" name="us-gender" />Female</label>
             </div>
             <div className="form-check-buttons form-sign-up">
-                <button type="submit" className="btn btn-sign-up">Continue registration</button>
+                <button disabled={true} className="btn btn-sign-up">Continue registration</button>
             </div>
 
             <span className={`form-error`}><i className="fas fa-exclamation-circle"></i>{props.error}</span>
@@ -143,10 +142,8 @@ let SignUpForm = (props) => {
     )
 }
 
-
-
 let SignUpReduxForm = reduxForm({ form: 'signUpForm' })(SignUpForm);
-let LoginReduxForm = reduxForm({ form: 'login' })(LoginForm);
+let LoginReduxForm = reduxForm({ form: 'login',enableReinitialize : true })(LoginForm);
 
 let mapStateToProps = (state) => {
     return {
