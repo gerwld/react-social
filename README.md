@@ -1,5 +1,7 @@
 # p/Jaw - ReactJs Social Media Project
 
+![logo200](https://user-images.githubusercontent.com/47056812/138187651-fa521de2-6410-4d02-a293-fa8d92d8ec30.png)
+
 p/Jaw is a Social Network created on ReactJs & Redux \
 Link to the project - https://network-project-pjaw.herokuapp.com/music
 
@@ -9,7 +11,8 @@ Link to the project - https://network-project-pjaw.herokuapp.com/music
 - Requests to the server with Axios
 - Module CSS
 - FLUX Architecture principles
-- Created with the idea of a single responsibility,\
+- Created with the idea of a single responsibility,\![logo200](https://user-images.githubusercontent.com/47056812/138187637-082db99d-a0a1-4d59-9aa8-1d22541a43bd.png)
+
 clean functions and other SOLID principles of the code
 
 ## Screencasts:
@@ -23,7 +26,9 @@ Profile screen:
 Login screen:
 <details>
   <summary>Click here to expand</summary>
+  
 https://user-images.githubusercontent.com/47056812/138186203-8407e119-c3df-4ab3-9f3b-1858d6113395.mov
+  
 </details>
 
 
@@ -32,7 +37,9 @@ Dialogs screen:
 
 <details>
   <summary>Click here to expand</summary>
+  
 https://user-images.githubusercontent.com/47056812/138186210-2a8a1e23-d6f6-445a-921a-8f7546c36d57.mov
+  
 </details>
 
 
