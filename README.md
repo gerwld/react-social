@@ -3,7 +3,7 @@
 ![logo200](https://user-images.githubusercontent.com/47056812/138187651-fa521de2-6410-4d02-a293-fa8d92d8ec30.png)
 
 <b>p/Jaw - Social Network created on ReactJs & Redux</b> \
-Link to the project - https://network-project-pjaw.herokuapp.com/music
+Link to the project - https://network-project-pjaw.herokuapp.com/
 
 ### Features
 
@@ -11,8 +11,7 @@ Link to the project - https://network-project-pjaw.herokuapp.com/music
 - Requests to the server with Axios
 - Module CSS
 - FLUX Architecture principles
-- Created with the idea of a single responsibility,\![logo200](https://user-images.githubusercontent.com/47056812/138187637-082db99d-a0a1-4d59-9aa8-1d22541a43bd.png)
-
+- Created with the idea of a single responsibility,\
 clean functions and other SOLID principles of the code
 
 ## Screencasts:
