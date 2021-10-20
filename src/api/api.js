@@ -6,7 +6,7 @@ import { push } from 'react-router-redux';
 const instance = axios.create({
     withCredentials: true,
     headers: {
-        "API-KEY": "781b8b79-ffcd-41da-9a0b-a1374f504632"
+        "API-KEY": "a1c50162-220a-4ef3-84d4-a2080d29f13b"
     },
     baseURL: "https://social-network.samuraijs.com/api/1.0/"
 });

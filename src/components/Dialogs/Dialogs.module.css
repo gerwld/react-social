@@ -231,7 +231,7 @@ outline: none;
 
 .messageInput,
 .current_dialog {
-    z-index: 1000000;
+    z-index: 50;
 }
 
 .select_dialogscreen {
@@ -336,6 +336,7 @@ outline: none;
     list-style: none;
     overflow: hidden;
     overflow-y: scroll;
+    background: var(--main-block-color);
 }
 
 .userlist div {
