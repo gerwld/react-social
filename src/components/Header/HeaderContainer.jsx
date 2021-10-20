@@ -10,7 +10,6 @@ import { toggleTheme } from '../../redux/app-reducer';
 
 const HeaderContainer = ({ isAuth, logoutUserTC, isDarkTh, toggleTheme, ...props }) => {
 
-
     var isLoginPage = props.location.pathname === "/login";
     return (
         <header className={s.app_header}>

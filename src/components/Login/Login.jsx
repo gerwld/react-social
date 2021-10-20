@@ -10,6 +10,7 @@ import './Login.css';
 import {BsNewspaper} from 'react-icons/bs'
 import {FaUserFriends} from 'react-icons/fa'
 import {IoSparklesOutline} from 'react-icons/io5'
+import GitHubButton from 'react-github-btn'
 
 
 class Login extends React.Component {
@@ -45,6 +46,9 @@ class Login extends React.Component {
                         <SignUpReduxForm {...this.props} onSubmit={this.onSubmit} />
                     </div>
                 </div>
+                <span className="sign_credentials">
+                    <GitHubButton href="https://github.com/gerwld" aria-label="Follow @gerwld on GitHub">Follow @gerwld</GitHubButton>
+                </span>
             </div>
         )
     }
