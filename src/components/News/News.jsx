@@ -129,7 +129,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
                 <p>{props.text}</p>
                 {props.img &&
                     <div className={`${s.post_image} ${s.load_wrapper}`}>
-                        {isPopup ? <PopupFullSizeFeed lc={likesCount} isShowSetPop={isShowSetPop} toggleSetPop={toggleSetPop} postId={postId}
+                        {isPopup ? <PopupFullSizeFeed lc={likesCount} cc={comments ? comments.length : 0} isShowSetPop={isShowSetPop} toggleSetPop={toggleSetPop} postId={postId}
                             isAuthPost={isAuthPost} hideContent={hideContent} isLike={isLike} deletePost={deletePost} likePress={likePress}
                             showComment={showComment} disableLoading={disableLoading} time={time} {...props} /> :
                             <LazyLoadImageHOC img={props.img} s={s.imageSpanWrap} d={disableLoading} />}
@@ -141,7 +141,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
 
             {isComment &&
                 <div className={s.comments_parent}>
-                   {isComments > 0 && 
+                   {(comments && comments.length > 1) && 
                    <label className={s.select}>
                         <select name="select">
                             <option value="value1" selected>Newest</option>
@@ -156,7 +156,7 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
                                 <p className={s.comment_text}>{c.text}</p>
                                 <span className={s.comment_data}>{commentData}</span>
                             </div>
-                            <div className={s.comment_ava}><img src={c.avatar} alt={c.fullName} title={c.fullName} /></div>
+                            <div className={s.comment_ava}><img src={c.avatar ? c.avatar : "/images/avatars/def-avatar.png"} alt={c.fullName} title={c.fullName} /></div>
                             <div className={s.comment_buttons}>
                                 <div className={s.del_btn}><button><IoCloseSharp /></button></div>
                                 <div className={s.like_btn}>
@@ -203,7 +203,7 @@ const ButtonsBlock = ({ likePress, likesCount, showComment, isLike, commentsLeng
 }
 
 const PopupFullSizeFeed = ({ isShowSetPop, toggleSetPop, postId, isAuthPost,
-    hideContent, deletePost, likePress, showComment, disableLoading, time, lc, isLike, ...props }) => {
+    hideContent, deletePost, likePress, showComment, disableLoading, time, lc, cc, isLike, ...props }) => {
 
     return (
         <Popup lockScroll={true} modal={true} trigger={<div><LazyLoadImageHOC img={props.img} s={s.imageSpanWrap} d={disableLoading} /></div>} position="right center">
@@ -227,7 +227,7 @@ const PopupFullSizeFeed = ({ isShowSetPop, toggleSetPop, postId, isAuthPost,
 
                         <div className={s.fullscreen_post_content}>{props.content.split("[")[0]}</div>
                         <div className={s.fullscreen_post_img}><img src={props.img} alt="Post" /></div>
-                        <ButtonsBlock likePress={likePress} likesCount={lc} showComment={showComment} isLike={isLike} />
+                        <ButtonsBlock likePress={likePress} commentsLength={cc} likesCount={lc} showComment={showComment} isLike={isLike} />
                     </div>
                     <div className={s.news_popup__bg} onClick={close} />
                 </div>
