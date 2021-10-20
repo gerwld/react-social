@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {compose} from 'redux';
 import { connect } from 'react-redux';
 import { logoutUserTC } from '../../api/api';
@@ -9,6 +9,8 @@ import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import { toggleTheme } from '../../redux/app-reducer';
 
 const HeaderContainer = ({ isAuth, logoutUserTC, isDarkTh, toggleTheme, ...props }) => {
+
+
     var isLoginPage = props.location.pathname === "/login";
     return (
         <header className={s.app_header}>
@@ -18,7 +20,11 @@ const HeaderContainer = ({ isAuth, logoutUserTC, isDarkTh, toggleTheme, ...props
                 </NavLink>
                 <nav className={`${s.main_nav} main_nav`}>
                     {isAuth ?
-                        <><span onClick={toggleTheme} className={s.dark_theme}>{isDarkTh ? <BsFillSunFill /> : <BsFillMoonStarsFill />}</span>
+                        <>
+                        <div className={s.dark_theme_toggle}>
+                            <span onClick={toggleTheme} className={s.dark_theme}>{isDarkTh ? <BsFillSunFill /> : <BsFillMoonStarsFill />}</span>
+                            <span className={s.dark_popper}>{`Turn ${isDarkTh ? 'off' : 'on'} dark mode`}</span>
+                        </div>
                             <span onClick={logoutUserTC}>Log Out <IoLogOutOutline /></span></> :
                        <>{!isLoginPage && <NavLink to='/login'>Login <IoLogInOutline /></NavLink>}</>}
                 </nav>

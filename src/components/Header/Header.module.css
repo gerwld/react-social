@@ -24,7 +24,6 @@
   
   .main_nav a,
   .main_nav span {
-    color: white;
     text-decoration: none;
     font-weight: 500;
     color: #f1f1f1;
@@ -60,6 +59,7 @@
   }
 
   .dark_theme {
+    display: block;
     padding: 0;
     margin: 0;
     margin-right: 15px;
@@ -68,9 +68,13 @@
     padding: 7px;
     background-color: var(--main-blue-color);
     border: none;
-    border-radius: 10px;
+    border-radius: 50%;
     border: 1px solid rgb(255, 255, 255);
     text-align: center;
+  }
+
+  .dark_theme:hover + .dark_popper {
+    opacity: 1;
   }
 
   .dark_theme:hover {
@@ -79,4 +83,44 @@
 
   .dark_theme svg {
     font-size: 15px;
+  }
+
+  .dark_theme_toggle {
+    position: relative;
+    display: block;
+  }
+
+  .dark_popper {
+    position: absolute;
+    display: inline-block;
+    opacity: 0;
+    width: max-content;
+    padding: 5px 8px;
+    top: 40px;
+    left: -50px;
+    font-size: 13.5px;
+    background-color: var(--body-color);
+    color: var(--main-text-color)!important;
+    z-index: 100;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 1px 3px 5px 1px var(--music-shadow);
+    border: 1px solid var(--page-border-color);
+    transition: 0.15s ease-in;
+  }
+
+  .dark_popper::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    right: calc(47%);
+    display: block;
+    height: 14px;
+    width: 14px;
+    background-color: inherit;
+    border: inherit;
+    position: absolute;
+    clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+    transform: rotate(135deg);
+    border-radius: 0 0 0 0.35em;
   }
