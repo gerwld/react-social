@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# p/Jaw - ReactJs Social Media Project
 
-Social network created on React \
+p/Jaw is a Social Network created on ReactJs & Redux \
 Link to the project - https://network-project-pjaw.herokuapp.com/music
 
 ### Features
@@ -9,7 +9,7 @@ Link to the project - https://network-project-pjaw.herokuapp.com/music
 - Requests to the server with Axios
 - Module CSS
 - FLUX Architecture principles
-- Created with the idea of a single responsibility,
+- Created with the idea of a single responsibility,\
 clean functions and other SOLID principles of the code
 
 ## Screencasts:
