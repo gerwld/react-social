@@ -64,7 +64,7 @@ span.title {
     min-width: 2px;
     width: 2px;
     top: 4px;
-    background-color:var(--main-blue-color-text);
+    background-color:var(--main-blue-color);
     z-index: 3;
   }
 

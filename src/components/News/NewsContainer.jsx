@@ -1,4 +1,5 @@
 import React from 'react'
+import { compose } from 'redux';
 import News, { FeedBlock } from './News';
 import { loadPostsTC, deletePost, addNewPostTC } from '../../redux/feed-reducer';
 import { connect } from 'react-redux';
@@ -8,6 +9,7 @@ import { getAuthUserData } from '../../redux/profile-reducer';
 import { change, getFormValues } from 'redux-form';
 import store from '../../redux/redux-store.js'
 import { addCommentTC } from '../../redux/comments-reducer';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 class NewsContainer extends React.Component {
 
@@ -103,5 +105,7 @@ var mapStateToProps = (state) => {
     }
 }
 
-
-export default connect(mapStateToProps, { loadPostsTC, addNewPostTC, getAuthUserData, deletePost, change, getFormValues, addCommentTC })(NewsContainer);
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, { loadPostsTC, addNewPostTC, getAuthUserData, deletePost, change, getFormValues, addCommentTC }),
+)(NewsContainer);

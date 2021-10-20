@@ -48,16 +48,15 @@
 
 .login_content {
     position: relative;
-    width: 400px;
-    background-color: #f0f0f0;
-    padding: 45px 45px 25px;
-    border-radius: 30px;
-    border: 1px solid #e5e5e5;
+    width: 385px;
+    padding: 30px 30px 20px;
 }
 
 button.btn-login {
     background-color: var(--main-blue-color)!important;
     color: #fff;
+    width: 115px;
+    border-radius: 4px;
 }
 
 button.btn-login:hover {
@@ -66,7 +65,7 @@ button.btn-login:hover {
 }
 
 .form-group {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .form-group label {
@@ -80,18 +79,35 @@ button.btn-login:hover {
     margin: 20px 0 15px;
 }
 
-.form-control {
-    padding: 10px 15px!important;
-    border-radius: 7px!important;
+.form-sign-up {
+    margin: 15px 0 5px;
 }
 
-.form-control:focus {
+.form-check {
+    font-size: 13.5px;
+}
+
+.text-muted {
+    font-size: 11.5px;
+}
+
+.form-control {
+    padding: 9px 15px!important;
+    border-radius: 3px!important;
+}
+
+.form-control:focus,
+select,
+input:not([type="radio"]):not([type="checkbox"]) {
     box-shadow: none!important;
 }
 
 .form-check-input:checked {
     background-color: var(--main-blue-color)!important;
     border-color: var(--main-blue-color)!important;
+}
+.form-check-input {
+    border-radius: 2px;
 }
 
 .captcha-img {
@@ -130,6 +146,7 @@ button.btn-login:hover {
 .form-help a {
     color: #3a58a5!important;
     text-decoration: none;
+    font-size: 13.4px;
 }
 
 .form-help a:hover {
@@ -137,24 +154,133 @@ button.btn-login:hover {
     text-decoration: underline;
 }
 
-.form-help a:nth-child(1) {
-    position: relative;
-    margin-right: 20px;
-    margin-left: -10px;
-}
-
-.form-help a:nth-child(1)::after{
-    content: "|";
-    display: block;
-    position: absolute;
-    right: -12px;
-    top: 0;
-    margin-left: 10px;
-    font-weight: normal;
-    color: black;
-}
-
 .form-help a:nth-child(1)::after:hover {
     color: black;
 }
 
+.sign-up-block {
+    margin-top: 15px;
+}
+
+.birthday-selectors {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.birthday-selectors select {
+    font-size: 15px;
+}
+
+.birthday-selectors .form-select {
+    width: 31%;
+    margin-right: 3.5%;
+}
+
+.birthday-selectors .form-select:nth-last-child(1) {
+    margin-right: 0;
+}
+
+.title-sect {
+    display: block;
+    flex: 100%;
+    margin: 10px 0 7px;
+    color: #363636;
+    font-size: 14px;
+}
+
+.gender-selectors input {
+    margin: 0;
+    margin-right: 15px;
+}
+
+.gender-selectors {
+    padding: 3px 0;
+}
+
+.gender-selectors label {
+    display: inline-block;
+    margin-right: 15px;
+    vertical-align: middle;
+    line-height: 14px;
+    font-size: 14px;
+}
+
+.sign-up-title {
+    margin: 0 auto;
+    font-size: 22px;
+    font-weight: 600;
+    /* text-transform: capitalize; */
+}
+
+.sign-up-subtitle {
+    font-size: 15px;
+    margin: 10px 0 25px;
+    color: #363636;
+    text-transform: capitalize;
+}
+
+.sign-up-subtitle,
+.sign-up-title {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-sign-up {
+    width: 100%;
+    background-color: #5fb053;
+    color: #fff;
+}
+
+.btn-sign-up:hover {
+    color: #fff;
+    background-color: #4c8b42;
+}
+
+/* Presblock start */
+
+.present_block {
+    width: 600px;
+    margin-right: auto;
+    margin-bottom: 70px;
+}
+
+.present_block h1 {
+    margin-bottom: 40px;
+    font-size: 47px;
+    line-height: 125%;
+    font-weight: 600;
+}
+
+.present_block p {
+    font-size: 18.8px;
+    line-height: 135%;
+    margin-bottom: 35px;
+    color:#2e2e30;
+}
+
+.present_block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.present_block li {
+    position: relative;
+    width: 90%;
+    padding-left: 30px;
+    font-size: 18px;
+    line-height: 135%;
+    color: #8f91a0;
+    margin-bottom: 30px;
+}
+
+.present_block li svg {
+    font-size: 30px;
+    position: absolute;
+    left: -10px;
+    top: -5px;
+}
+
+/* Presblock end */

@@ -1,9 +1,11 @@
 import React from 'react'
 import Music from './Music';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { setCurrentSongTC, toggleRepeatSong, setProgress } from '../../redux/audio-reducer';
 import s from "./Music.module.css";
 import { MusicAnimation, Preloaderw_100 } from '../common/Preloader/Preloader';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 class MusicContainer extends React.Component {
     state = {
@@ -113,4 +115,7 @@ let mapStateToProps = (state) => ({
     progress: state.audio.progress
 })
 
-export default connect(mapStateToProps, { setCurrentSongTC, toggleRepeatSong, setProgress })(MusicContainer);
+export default compose(
+    connect(mapStateToProps, { setCurrentSongTC, toggleRepeatSong, setProgress }),
+    withAuthRedirect
+    )(MusicContainer);
