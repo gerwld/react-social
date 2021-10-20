@@ -243,14 +243,16 @@ input:not([type="radio"]):not([type="checkbox"]) {
 .present_block {
     width: 600px;
     margin-right: auto;
-    margin-bottom: 70px;
+    margin-bottom: 80px;
+    letter-spacing: 0.02em;
 }
 
 .present_block h1 {
     margin-bottom: 40px;
-    font-size: 47px;
-    line-height: 125%;
+    font-size: 48px;
+    line-height: 128%;
     font-weight: 600;
+    width: 91%;
 }
 
 .present_block p {
@@ -270,8 +272,8 @@ input:not([type="radio"]):not([type="checkbox"]) {
     position: relative;
     width: 90%;
     padding-left: 30px;
-    font-size: 18px;
-    line-height: 135%;
+    font-size: 19px;
+    line-height: 145%;
     color: #8f91a0;
     margin-bottom: 30px;
 }
