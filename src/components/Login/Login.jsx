@@ -65,6 +65,7 @@ let LoginForm = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
+           
             <div className="form-group">
                 <Field component={InputText} validate={[reduiredEmail, isEmailValid]} name="email" type="email" className="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email" autocomplete="email" />
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
@@ -85,10 +86,11 @@ let LoginForm = (props) => {
                 </div>
                 <button type="submit" className="btn btn-login">Log In</button>
             </div>
+            <span className={`form-error ${isFormGlobalError}`}><i className="fas fa-exclamation-circle"/>{props.error}</span>
             <div className="form-help">
                 <a href="#">Forgot your password?</a>
             </div>
-            <span className={`form-error ${isFormGlobalError}`}><i className="fas fa-exclamation-circle"></i>{props.error}</span>
+           
         </form>
     )
 }
