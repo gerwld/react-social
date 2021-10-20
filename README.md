@@ -2,7 +2,7 @@
 
 ![logo200](https://user-images.githubusercontent.com/47056812/138187651-fa521de2-6410-4d02-a293-fa8d92d8ec30.png)
 
-p/Jaw is a Social Network created on ReactJs & Redux \
+<b>p/Jaw - Social Network created on ReactJs & Redux</b> \
 Link to the project - https://network-project-pjaw.herokuapp.com/music
 
 ### Features
