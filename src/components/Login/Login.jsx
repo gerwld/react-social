@@ -10,6 +10,7 @@ import './Login.css';
 import {BsNewspaper} from 'react-icons/bs'
 import {FaUserFriends} from 'react-icons/fa'
 import {IoSparklesOutline} from 'react-icons/io5'
+import GitHubButton from 'react-github-btn'
 
 
 class Login extends React.Component {
@@ -27,12 +28,12 @@ class Login extends React.Component {
         return (
             <div className="login_block">
                 <div className="present_block">
-                    <h1>Общайся со своими друзьями по всему миру на p/Jaw.</h1>
-                    <p>Общение в сети еще никогда не было настолько удобным. Зарегистрируйся прямо сейчас и ты сможешь:</p>
+                    <h1>Connect with your friends all over the world on p/Jaw.</h1>
+                    <p>Online communication has never been so convenient.<br/> Register now and you will be able to:</p>
                     <ul>
-                        <li><BsNewspaper/><b>Просматривать</b> последние новости из первых источников.</li>
-                        <li><FaUserFriends/><b>Узнавать</b> первым о событиях из жизни друзей с помощью умной ленты.</li>
-                        <li><IoSparklesOutline /><b>А так же</b> - скроллить, лайкать, делится мнением и многое другое.</li>
+                        <li><BsNewspaper/><b>Read & Watch</b> all the latest news from<br/> primary sources.</li>
+                        <li><FaUserFriends/><b>Find out</b> first about events from the life of your friends<br/> with a smart feed.</li>
+                        <li><IoSparklesOutline /><b>And also</b> - scroll, like, share opinions,<br/> and much more.</li>
                     </ul>
                 </div>
                 <div className="login_blocks">
@@ -45,6 +46,9 @@ class Login extends React.Component {
                         <SignUpReduxForm {...this.props} onSubmit={this.onSubmit} />
                     </div>
                 </div>
+                <span className="sign_credentials">
+                    <GitHubButton href="https://github.com/gerwld" aria-label="Follow @gerwld on GitHub">Follow @gerwld</GitHubButton>
+                </span>
             </div>
         )
     }

@@ -243,21 +243,24 @@ input:not([type="radio"]):not([type="checkbox"]) {
 .present_block {
     width: 600px;
     margin-right: auto;
-    margin-bottom: 70px;
+    margin-bottom: 80px;
+    letter-spacing: 0.035em;
 }
 
 .present_block h1 {
     margin-bottom: 40px;
-    font-size: 47px;
-    line-height: 125%;
+    font-size: 48px;
+    line-height: 128%;
     font-weight: 600;
+    width: 91%;
 }
 
 .present_block p {
-    font-size: 18.8px;
-    line-height: 135%;
-    margin-bottom: 35px;
-    color:#2e2e30;
+    font-size: 18.5px;
+    line-height: 140%;
+    margin-bottom: 40px;
+    color: #424248;
+    letter-spacing: 0.025em;
 }
 
 .present_block ul {
@@ -271,9 +274,9 @@ input:not([type="radio"]):not([type="checkbox"]) {
     width: 90%;
     padding-left: 30px;
     font-size: 18px;
-    line-height: 135%;
+    line-height: 145%;
     color: #8f91a0;
-    margin-bottom: 30px;
+    margin-bottom: 27px;
 }
 
 .present_block li svg {
@@ -284,3 +287,13 @@ input:not([type="radio"]):not([type="checkbox"]) {
 }
 
 /* Presblock end */
+
+.sign_credentials {
+    position: absolute;
+    bottom: 25px;
+    width: 140px;
+    opacity: 0.6;
+}
+.sign_credentials:hover {
+    opacity: 1;
+}
