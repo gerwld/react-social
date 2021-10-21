@@ -16,13 +16,17 @@ clean functions and other SOLID principles of the code
 
 ## Screencasts:
 
-Profile screen:
+Sreencast with short features presenting:
+
+https://youtu.be/cz5F5odzBdA
+
+Profile screen timelaps:
 
   https://user-images.githubusercontent.com/47056812/138186157-ff099759-0156-4671-bdca-e471456cb1ad.mov
 
 
 
-Login screen:
+Login screen timelaps:
 <details>
   <summary>Click here to expand</summary>
   
@@ -32,7 +36,7 @@ https://user-images.githubusercontent.com/47056812/138186203-8407e119-c3df-4ab3-
 
 
 
-Dialogs screen:
+Dialogs screen timelaps:
 
 <details>
   <summary>Click here to expand</summary>
