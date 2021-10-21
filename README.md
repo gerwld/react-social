@@ -16,9 +16,9 @@ clean functions and other SOLID principles of the code
 
 ## Screencasts:
 
-Sreencast with short features presenting:
+Sreencast with short features presenting(click to play):
 
-https://youtu.be/cz5F5odzBdA
+[![img_tag](https://github.com/gerwld/host-data/blob/master/vid.png?raw=true)](https://youtu.be/cz5F5odzBdA)
 
 Profile screen timelaps:
 
