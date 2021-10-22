@@ -71,7 +71,7 @@ clean functions and other SOLID principles of the code
 
 Screencast with short features presenting(click to play):
 
-[![img_tag](https://user-images.githubusercontent.com/47056812/138457794-5bf8aa9a-3ff0-4858-9f3e-deb52dda6d0d.png)](https://youtu.be/cz5F5odzBdA)
+[![img_tag](https://user-images.githubusercontent.com/47056812/138457794-5bf8aa9a-3ff0-4858-9f3e-deb52dda6d0d.png)](https://youtu.be/zPnj6j8hAQk)
 
 
 ## Timelapses:
