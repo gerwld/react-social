@@ -1,6 +1,6 @@
 # p/Jaw - ReactJs Social Media Project
 
-![logo200](https://user-images.githubusercontent.com/47056812/138187651-fa521de2-6410-4d02-a293-fa8d92d8ec30.png)
+![logo-200](https://raw.githubusercontent.com/gerwld/host-data/377d7665879f1c4115d5f67b86e36d6dfd3eaf8c/pj_logo.svg)
 
 <b>p/Jaw - Social Network created on ReactJs & Redux</b> \
 Link to the project - https://network-project-pjaw.herokuapp.com/
