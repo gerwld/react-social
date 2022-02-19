@@ -167,6 +167,7 @@ export const logoutUserTC = () => {
             if(r.data.resultCode === 0) {
                 dispatch(setUserData(null, null, null, false));
                 dispatch(push('/login'));
+                localStorage.removeItem('theme');
             } 
         })
     }
