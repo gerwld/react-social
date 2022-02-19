@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { logoutUserTC } from '../../api/api';
-import { toggleTheme } from '../../redux/app-reducer';
+import { toggleThemeThunk } from '../../redux/app-reducer';
 import s from './Header.module.css';
 
-const HeaderContainer = ({ isAuth, logoutUserTC, isDarkTh, toggleTheme, ...props }) => {
+const HeaderContainer = ({ isAuth, logoutUserTC, isDarkTh, toggleThemeThunk, ...props }) => {
 
     var isLoginPage = props.location.pathname === "/login";
     return (
@@ -21,7 +21,7 @@ const HeaderContainer = ({ isAuth, logoutUserTC, isDarkTh, toggleTheme, ...props
                     {isAuth ?
                         <>
                         <div className={s.dark_theme_toggle}>
-                            <span onClick={toggleTheme} className={s.dark_theme}>{isDarkTh ? <BsFillSunFill /> : <BsFillMoonStarsFill />}</span>
+                            <span onClick={() => toggleThemeThunk(!isDarkTh)} className={s.dark_theme}>{isDarkTh ? <BsFillSunFill /> : <BsFillMoonStarsFill />}</span>
                             <span className={s.dark_popper}>{`Turn ${isDarkTh ? 'off' : 'on'} dark mode`}</span>
                         </div>
                             <span onClick={logoutUserTC}>Log Out <IoLogOutOutline /></span></> :
@@ -39,6 +39,6 @@ let mapStateToProps = (state) => ({
 
 
 export default compose(
-    connect(mapStateToProps, { logoutUserTC, toggleTheme }),
+    connect(mapStateToProps, { logoutUserTC, toggleThemeThunk }),
     withRouter
 )(HeaderContainer);

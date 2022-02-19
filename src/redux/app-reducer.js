@@ -24,7 +24,7 @@ const appReducer = (state = initialState, action) => {
             case TOGGLE_THEME:
                 return {
                     ...state,
-                    darkTheme: (typeof action.boolean == "boolean") ? action.boolean : !state.darkTheme
+                    darkTheme: action.boolean
                 }
         default:
             return state;
@@ -37,6 +37,13 @@ export const initializeApp = () => {
         await dispatch(setunreadMessagesCountTC());
 
         dispatch(setInitializingSuccess());
+    }
+}
+
+export const toggleThemeThunk = (boolean) => {
+    return (dispatch) => {
+        dispatch(toggleTheme(boolean));
+        localStorage.setItem('theme', boolean);
     }
 }
 

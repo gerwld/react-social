@@ -13,7 +13,7 @@ import SettingsContainer from './components/Settings/SettingsContainer';
 import { darkTheme, lightTheme } from './components/styles/base-theme';
 import { GlobalStyles } from './global';
 import withSuspense from './hoc/withSuspense';
-import { initializeApp } from './redux/app-reducer';
+import { initializeApp, toggleTheme } from './redux/app-reducer';
 import store from './redux/redux-store';
 
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
@@ -26,6 +26,9 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsCo
 class App extends React.Component {
   componentDidMount() {
     this.props.initializeApp();
+    if(localStorage.getItem('theme')) {
+      this.props.toggleTheme(JSON.parse(localStorage.getItem('theme')));
+    }
   }
 
   render() {
@@ -81,7 +84,7 @@ let mapStateToProps = (state) => {
 }
 
 const AppContainer = compose(
-  connect(mapStateToProps, { initializeApp }),
+  connect(mapStateToProps, { initializeApp, toggleTheme }),
   withRouter
 )(App);
 
