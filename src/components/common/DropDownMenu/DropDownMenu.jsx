@@ -1,7 +1,7 @@
-import React from 'react'
-import s from "./Drop.module.css";
+import ButtonBase from '@mui/material/ButtonBase';
+import React from 'react';
 import Foco from 'react-foco';
-import ButtonBase from '@mui/material/ButtonBase'
+import s from "./Drop.module.css";
 
 const DropDownMenu = ({ isAuthor, hideContent, deletePost, postId, toggleSet }) => {
     //Almost all here is hardcoded, so actions road is also simple.

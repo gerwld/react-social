@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {compose} from 'redux';
-import { connect } from 'react-redux';
-import { logoutUserTC } from '../../api/api';
-import { NavLink, withRouter } from 'react-router-dom';
-import s from './Header.module.css';
-import { IoLogOutOutline, IoLogInOutline } from "react-icons/io5";
+import React from 'react';
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
+import { IoLogInOutline, IoLogOutOutline } from "react-icons/io5";
+import { connect } from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import { logoutUserTC } from '../../api/api';
 import { toggleTheme } from '../../redux/app-reducer';
+import s from './Header.module.css';
 
 const HeaderContainer = ({ isAuth, logoutUserTC, isDarkTh, toggleTheme, ...props }) => {
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import s from './Navbar.module.css';
-import { NavLink } from 'react-router-dom';
+import { IoChatbubblesOutline, IoMusicalNotesOutline, IoNewspaperOutline, IoPeopleOutline, IoPersonOutline, IoSettingsOutline, IoVideocamOutline } from "react-icons/io5";
 import { connect } from 'react-redux';
-import { IoSettingsOutline, IoVideocamOutline, IoMusicalNotesOutline, IoPeopleOutline, IoChatbubblesOutline, IoNewspaperOutline, IoPersonOutline} from "react-icons/io5";
+import { NavLink } from 'react-router-dom';
+import s from './Navbar.module.css';
 
 class Navbar extends React.Component {
 

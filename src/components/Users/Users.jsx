@@ -1,8 +1,8 @@
 import { Checkbox } from "@mui/material";
 import React from "react";
 import { NavLink } from 'react-router-dom';
-import s from './Users.module.css';
 import { Preloaderw_100 } from '../common/Preloader/Preloader';
+import s from './Users.module.css';
 
 let Users = (props) => {
     let isUsersAvailable = props.totalUsers >= 1;

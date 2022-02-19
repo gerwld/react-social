@@ -1,11 +1,9 @@
-import s from './MyPosts.module.css';
-import React, { useState } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { Textarea_100 } from '../../common/FormControls/FormControls';
-import { FeedBlock } from '../../News/News';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { moment } from 'moment';
+import { reduxForm } from 'redux-form';
 import WhatsNew from '../../common/WhatsNewForm/WhatsNew';
+import { FeedBlock } from '../../News/News';
+import s from './MyPosts.module.css';
 
 
 const MyPosts = (props) => {

@@ -1,7 +1,7 @@
 
 import { React } from 'react';
-import s from "./FormControls.module.css";
 import { Field } from 'redux-form';
+import s from "./FormControls.module.css";
 
 
 export const Textarea = ({ input, meta, ...props }) => {

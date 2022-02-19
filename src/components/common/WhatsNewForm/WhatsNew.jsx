@@ -1,8 +1,7 @@
-import React from 'react'
-import s from './WhatsNew.module.css'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Field } from 'redux-form';
 import { Textarea_100 } from '../FormControls/FormControls';
+import s from './WhatsNew.module.css';
 
 const WhatsNew = ({styles = '', button = '', fullWidth, ...props}) => {
     var noAvatar = "/images/avatars/def-avatar.png";

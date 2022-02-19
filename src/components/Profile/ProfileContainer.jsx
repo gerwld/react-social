@@ -1,12 +1,12 @@
 import React from 'react';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
-import Profile from './Profile';
-import { getUserInfo, setUserProfile, setUserStatus, setUserAvatar, setCurrentSettingsTC } from '../../redux/profile-reducer';
 import { withRouter } from 'react-router';
-import { getAuthUserDataTC } from '../../api/api';
+import { compose } from 'redux';
 import { change } from 'redux-form';
+import { getAuthUserDataTC } from '../../api/api';
+import { getUserInfo, setCurrentSettingsTC, setUserAvatar, setUserProfile, setUserStatus } from '../../redux/profile-reducer';
 import { getUsersThunkCreator } from '../../redux/users-reducer';
+import Profile from './Profile';
 
 
 class ProfileContainerAPI extends React.Component {

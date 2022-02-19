@@ -1,15 +1,15 @@
-import React from 'react'
-import { compose } from 'redux';
-import News, { FeedBlock } from './News';
-import { loadPostsTC, deletePost, addNewPostTC } from '../../redux/feed-reducer';
-import { connect } from 'react-redux';
-import Preloader from '../common/Preloader/Preloader';
 import moment from 'moment';
-import { getAuthUserData } from '../../redux/profile-reducer';
+import React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { change, getFormValues } from 'redux-form';
-import store from '../../redux/redux-store.js'
-import { addCommentTC } from '../../redux/comments-reducer';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { addCommentTC } from '../../redux/comments-reducer';
+import { addNewPostTC, deletePost, loadPostsTC } from '../../redux/feed-reducer';
+import { getAuthUserData } from '../../redux/profile-reducer';
+import store from '../../redux/redux-store.js';
+import Preloader from '../common/Preloader/Preloader';
+import News, { FeedBlock } from './News';
 
 class NewsContainer extends React.Component {
 

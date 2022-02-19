@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { followUserThunkCreator, getPaginationCurrentIndexesTC, getUsersThunkCreator, loadFriendsToggle, onPageChangeThunkCreator, findUsers } from '../../redux/users-reducer';
+import { findUsers, followUserThunkCreator, getPaginationCurrentIndexesTC, getUsersThunkCreator, loadFriendsToggle, onPageChangeThunkCreator } from '../../redux/users-reducer';
 import { getCurrentPage, getIsFetching, getIsFollowing, getPages, getPageSize, getPagLengthWithCreateSelecor, getTotalUsers, getUsers } from '../../redux/users-selectors';
-import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
-import { withRouter } from 'react-router-dom';
 
 class UsersAPIComponent extends React.Component {
     state = {

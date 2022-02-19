@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import MyPosts from './MyPosts';
-import { getAuthUserData, sendPost } from '../../../redux/profile-reducer';
-import avatarCheck from '../../../utils/validators/avatarCheck';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-import store from '../../../redux/redux-store.js'
-import { getFormValues, change } from 'redux-form';
+import { change, getFormValues } from 'redux-form';
 import { addCommentTC } from '../../../redux/comments-reducer';
+import { getAuthUserData, sendPost } from '../../../redux/profile-reducer';
+import store from '../../../redux/redux-store.js';
+import avatarCheck from '../../../utils/validators/avatarCheck';
+import MyPosts from './MyPosts';
 
 const mapStateToProps = (state) => {
   return {

@@ -1,11 +1,11 @@
-import React from 'react'
-import Music from './Music';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { setCurrentSongTC, toggleRepeatSong, setProgress } from '../../redux/audio-reducer';
-import s from "./Music.module.css";
-import { MusicAnimation, Preloaderw_100 } from '../common/Preloader/Preloader';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { setCurrentSongTC, setProgress, toggleRepeatSong } from '../../redux/audio-reducer';
+import { MusicAnimation, Preloaderw_100 } from '../common/Preloader/Preloader';
+import Music from './Music';
+import s from "./Music.module.css";
 
 class MusicContainer extends React.Component {
     state = {

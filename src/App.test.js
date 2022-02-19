@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; 
+import ReactDOM from 'react-dom';
 import SocialNetworkAppJawo from './App';
 
 it('renders without crashing', () => {

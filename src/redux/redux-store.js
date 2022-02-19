@@ -1,15 +1,15 @@
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { reducer as formReducer } from 'redux-form';
+import thunk from 'redux-thunk';
+import appReducer from "./app-reducer";
+import audioReducer from "./audio-reducer";
+import authReducer from './auth-reducer';
+import commentsReducer from "./comments-reducer";
 import dialogsReducer from "./dialogs-reducer";
+import feedReducer from "./feed-reducer";
 import profileReducer from './profile-reducer';
 import usersReducer from "./users-reducer";
-import authReducer from './auth-reducer';
-import thunk from 'redux-thunk';
-import { reducer as formReducer } from 'redux-form'
-import appReducer from "./app-reducer";
-import feedReducer from "./feed-reducer";
-import { composeWithDevTools } from 'redux-devtools-extension';
-import audioReducer from "./audio-reducer";
-import commentsReducer from "./comments-reducer";
 
 
 let reducers = combineReducers({

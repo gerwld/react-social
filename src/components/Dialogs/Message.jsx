@@ -1,7 +1,7 @@
 import moment from 'moment';
+import { BsCheckAll } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
 import s from './Dialogs.module.css';
-import {BsCheckAll} from 'react-icons/bs'
 
 
 const Message = ({converListUser, authProfile, ...props}) => {

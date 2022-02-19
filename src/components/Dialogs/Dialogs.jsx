@@ -1,16 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { AiOutlineSend } from "react-icons/ai";
+import { FiPaperclip } from "react-icons/fi";
+import { IoIosAdd, IoMdSettings } from "react-icons/io";
+import { IoSearchSharp, IoStar } from "react-icons/io5";
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, requiredField } from '../../utils/validators/validator';
 import { Textarea } from '../common/FormControls/FormControls';
-import s from './Dialogs.module.css';
-import { NavLink } from 'react-router-dom';
 import Preloader, { DialogsPreloader } from '../common/Preloader/Preloader';
+import s from './Dialogs.module.css';
 import Message from './Message';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { IoMdSettings, IoIosAdd } from "react-icons/io";
-import {IoSearchSharp, IoStar } from "react-icons/io5";
-import {AiOutlineSend} from "react-icons/ai";
-import {FiPaperclip} from "react-icons/fi";
 
 
 

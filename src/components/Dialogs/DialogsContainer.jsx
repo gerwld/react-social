@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, getConverstaionWithUser, usersInitialized } from '../../redux/dialogs-reducer';
+import { getConverstaionWithUser, getFriendsTC, messagesInitialized, sendMessageToUser, setCurrentUserTC, usersInitialized } from '../../redux/dialogs-reducer';
 import { getAuthUserData } from '../../redux/profile-reducer';
 import Dialogs from './Dialogs';
 import s from './Dialogs.module.css';

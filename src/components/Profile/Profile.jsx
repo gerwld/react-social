@@ -1,13 +1,13 @@
 import React from 'react';
-import './Profile.css';
-import MyPostsContainer from './MyPosts/MyPostsContainer';
-import Preloader from '../common/Preloader/Preloader';
+import { BiHistory } from "react-icons/bi";
+import { IoMdStats } from "react-icons/io";
 import { NavLink } from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
 import avatarCheck from '../../utils/validators/avatarCheck';
 import { createField, InputText, Textarea } from '../common/FormControls/FormControls';
-import { Field, reduxForm } from 'redux-form';
-import { BiHistory} from "react-icons/bi";
-import { IoMdStats} from "react-icons/io";
+import Preloader from '../common/Preloader/Preloader';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
+import './Profile.css';
 
 class Profile extends React.Component {
 

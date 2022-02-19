@@ -1,8 +1,8 @@
 import moment from "moment";
 import React from "react";
+import { MdOutlineRepeat, MdOutlineRepeatOne } from "react-icons/md";
 import s from "./Music.module.css";
 import { MusicElement, ProgressBar } from "./MusicContainer";
-import { MdOutlineRepeat, MdOutlineRepeatOne} from "react-icons/md";
 
 
 

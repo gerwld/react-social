@@ -1,4 +1,3 @@
-import { BrightnessAltHigh } from "react-bootstrap-icons"
 
 export const lightTheme = {
     body: '#F1F1F3',

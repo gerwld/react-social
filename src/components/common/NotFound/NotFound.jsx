@@ -1,6 +1,6 @@
-import React from 'react'
-import s from './NotFound.module.css';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
+import s from './NotFound.module.css';
 
 export default function NotFound(props) {
     return (
