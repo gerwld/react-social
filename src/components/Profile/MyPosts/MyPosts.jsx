@@ -7,7 +7,7 @@ import s from './MyPosts.module.css';
 
 
 const MyPosts = (props) => {
-  let userPosts = props.postData.map(post => <div key={post.id} className={s.feed_block}><FeedBlock postId={post.postId} addComment={props.addComment} comments={props.comments.filter(c => c.postId === post.postId)} isPopup={false} addValueToMessage={props.addValueToMessage} data={post.publishedAt} author={props.fullName} avatar={props.avatar} likesCount={post.likes} text={post.cont} img={post.urlToImage} /></div>);
+  let userPosts = props.postData.map(post => <div key={post.id + post.postId + "_key"} className={s.feed_block}><FeedBlock postId={post.postId} addComment={props.addComment} comments={props.comments.filter(c => c.postId === post.postId)} isPopup={false} addValueToMessage={props.addValueToMessage} data={post.publishedAt} author={props.fullName} avatar={props.avatar} likesCount={post.likes} text={post.cont} img={post.urlToImage} /></div>);
   let isHasId = (props.match.params.userId && props.match.params.userId.length > 1) ? '/id' + props.match.params.userId : '';
 
   const currentActive = (link) => {

@@ -26,7 +26,7 @@ let Users = (props) => {
                             <li><NavLink to={`/users/filter=online`} activeClassName={s.active}>Users online($ct)</NavLink></li>
                         </ul>
                     </div>
-                    {props.users.map(u => <div key={u.id} className={`${s.user_block} ${u.followed ? s : s.user_unsub}`}>
+                    {props.users.map(u => <div key={u.id + "_key"} className={`${s.user_block} ${u.followed ? s : s.user_unsub}`}>
                         <div className={s.user_avatar}>
                             <NavLink to={`/profile/id${u.id}`}>
                                 <img alt="User Avatar" src={u.photos.small ? (`${u.photos.small}`) : (`/images/avatars/def-avatar.png`)}></img>

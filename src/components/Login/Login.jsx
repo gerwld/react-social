@@ -119,13 +119,13 @@ let SignUpForm = (props) => {
             <div className="birthday-selectors">
                 <span className="title-sect">Your birthday</span>
                 <select class="form-select" name="us-day">
-                    <option selected>Day</option>{getDays()}
+                    <option defaultValue>Day</option>{getDays()}
                 </select>
                 <select class="form-select" name="us-month">
-                    <option selected disabled>Month</option>{months.map(v => <option value={v.indexOf + 1}>{v}</option>)}
+                    <option defaultValue disabled>Month</option>{months.map(v => <option key={v + '_key'} value={v.indexOf + 1}>{v}</option>)}
                 </select>
                 <select class="form-select" name="us-year">
-                    <option selected disabled>Year</option>{getYears()}
+                    <option defaultValue disabled>Year</option>{getYears()}
                 </select>
             </div>
             <div className="gender-selectors">

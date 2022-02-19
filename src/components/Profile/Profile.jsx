@@ -47,7 +47,7 @@ class Profile extends React.Component {
               <span className="subblock_2_title">Friends(72)</span>
               <ul className="friends_last">
                 {this.props.friendsList.map(u => {
-                  return <li><NavLink to={`/profile/id${u.id}`}><div className="user_ava"><img src={avatarCheck(u.photos)} alt={u.name} /></div>
+                  return <li key={u.name + '_key'}><NavLink to={`/profile/id${u.id}`}><div className="user_ava"><img src={avatarCheck(u.photos)} alt={u.name} /></div>
                     <span className="user_name">{u.name.split(' ')[0].split('_')[0].split('-')[0]}</span></NavLink></li>
                 })}
               </ul>
@@ -155,7 +155,7 @@ const ProfileInfo = ({ profile, isCurrent, isShowMore, handleShowClick, postData
         <div className="profile-info__block profile-info__block_3">
           <b className="title">Contacts</b>
           {Object.keys(profile.contacts).map(key => profile.contacts[key] &&
-            <Contact key={key} contactTitle={key === "mainLink" ? "Other" : key} contactInfo={profile.contacts[key]} />)}
+            <Contact key={key + "_key"} contactTitle={key === "mainLink" ? "Other" : key} contactInfo={profile.contacts[key]} />)}
         </div>}
       {!isProfileContactsEmpty && <button onClick={handleShowClick} className="show-more_btn">{isShowMore ? "Hide" : "Show more"}</button>}
     </div>

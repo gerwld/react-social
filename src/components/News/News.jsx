@@ -144,13 +144,13 @@ export const FeedBlock = ({ isAuthPost, postId, deletePost, addValueToMessage, i
                    {(comments && comments.length > 1) && 
                    <label className={s.select}>
                         <select name="select">
-                            <option value="value1" selected>Newest</option>
+                            <option value="value1" defaultValue>Newest</option>
                             <option value="value2">Oldest</option>
                         </select><RiArrowDownSLine />
                     </label>}
                     {comments && comments.map(c => {
                         let commentData = moment(c.data).startOf('minute').fromNow();
-                        return <div key={c.id} className={s.comment_block}>
+                        return <div key={c.id + Math.random() + "_key"} className={s.comment_block}>
                             <div className={s.comment_cred}>
                                 <div className={s.comment_name}>{c.fullName}</div>
                                 <p className={s.comment_text}>{c.text}</p>
