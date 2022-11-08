@@ -1,4 +1,4 @@
-# p/Jaw - ReactJs Social Media Project
+# ReactJs Social Media Project
 
 ![logo-200](https://raw.githubusercontent.com/gerwld/host-data/377d7665879f1c4115d5f67b86e36d6dfd3eaf8c/pj_logo.svg)
 
