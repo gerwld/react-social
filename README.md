@@ -74,29 +74,6 @@ Screencast with short features presenting(click to play):
 [![img_tag](https://user-images.githubusercontent.com/47056812/138457794-5bf8aa9a-3ff0-4858-9f3e-deb52dda6d0d.png)](https://youtu.be/zPnj6j8hAQk)
 
 
-## Timelapses:
-
-<details><summary><b>Profile screen timelaps:</b></summary>
-
-  https://user-images.githubusercontent.com/47056812/138186157-ff099759-0156-4671-bdca-e471456cb1ad.mov
-  
-</details>
-
- 
-<details><summary><b>Login screen timelaps:</b></summary>
-  
-  https://user-images.githubusercontent.com/47056812/138186203-8407e119-c3df-4ab3-9f3b-1858d6113395.mov
-  
-</details>
-
- 
-<details><summary><b>Dialogs screen timelaps:</b></summary>
-  
-  https://user-images.githubusercontent.com/47056812/138186210-2a8a1e23-d6f6-445a-921a-8f7546c36d57.mov
-  
-</details>
-
-  
 
   
 
