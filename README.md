@@ -1,6 +1,6 @@
-# React Social network
+# React social network
 
-Link to the project - https://network-project-pjaw.herokuapp.com/
+Project link - https://network-project-pjaw.herokuapp.com/
 
 ![image](https://user-images.githubusercontent.com/47056812/138449805-28c5e0e3-f31e-418b-87a2-499f40d8d675.png)
 
