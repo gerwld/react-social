@@ -1,8 +1,5 @@
-# ReactJs Social Media Project
+# React Social network
 
-![logo-200](https://raw.githubusercontent.com/gerwld/host-data/377d7665879f1c4115d5f67b86e36d6dfd3eaf8c/pj_logo.svg)
-
-<b>Social Network created on React</b> \
 Link to the project - https://network-project-pjaw.herokuapp.com/
 
 ![image](https://user-images.githubusercontent.com/47056812/138449805-28c5e0e3-f31e-418b-87a2-499f40d8d675.png)
@@ -16,7 +13,7 @@ Link to the project - https://network-project-pjaw.herokuapp.com/
 
 
 ### What currently works
-- Messaging (Not WSS / SSE currently)
+- Messaging
 - Feed with full-post preview
 - Users (Friends / All users section, following & unfollowing action)
 - Search (by users)
@@ -28,9 +25,9 @@ Link to the project - https://network-project-pjaw.herokuapp.com/
 - Dark theme
 
 ### Work-in-progress
-- Likes (works but without back-end support)
-- Comments (also works, but saves only locally)
-- Design for mobile version
+- Likes
+- Comments
+- Adaptive styles
 - Image compression
 
 ==============
