@@ -6,7 +6,7 @@ Link to the project - https://network-project-pjaw.herokuapp.com/
 
 ### Features
 
-- Created on ReactJs & Redux
+- Created on React, Redux
 - FLUX Architecture principles
 
 ==============
